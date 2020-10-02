@@ -1,7 +1,7 @@
 # OgC
 Finance Group
 
-PM's:
+Project Manager:
 James (jflemi9)
 
 Group Members:
