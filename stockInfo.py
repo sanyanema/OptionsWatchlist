@@ -3,7 +3,7 @@
 # import yfinance library
 import yfinance as yf
 
-tickerName = "AMZN"             # example ticker: GOOG
+tickerName = "GOOG"             # example ticker: GOOG
 ticker = yf.Ticker(tickerName)  # create Ticker object
 info = ticker.info              # get info
 
@@ -43,3 +43,8 @@ historical = ticker.history(period='max')
 
 # get closing prices from historical data
 closePrice = historical.Close
+
+def getTickerInfo(tickerName) :
+    ticker = yf.Ticker(tickerName)  # create Ticker object
+    return ticker.info
+
