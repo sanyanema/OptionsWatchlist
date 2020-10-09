@@ -16,7 +16,7 @@ print(applecall.vega())
 # TODO method creating yfinance ticker object and extracting data to feed into Wallstreet for greeks
 
 
-# TODO method converting a YYYY-MM-DD string to seperate variables for year, month, and day
+# TODO method converting a YYYY-MM-DD string to separate variables for year, month, and day
 
 
 # TODO method to get greeks given a option contract symbol
