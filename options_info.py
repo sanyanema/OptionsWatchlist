@@ -26,9 +26,9 @@ def getPuts(ticker, date):
 
 
 # Returns the data that would be presented in a table to the user
-# WORK IN PROGRESS
+# TODO Removing the contract symbol column and adding two columns with the expiry date and option type
 def findRelevantData(optionChain):
-    data = optionChain[['contractSymbol', 'strike', 'impliedVolatility', 'lastPrice']]
+    data = optionChain[['contractSymbol', 'strike', 'lastPrice', 'impliedVolatility']]
     additionalData = pd.DataFrame({"expirationDate": [],
                                    "typeOfOption": []})
 
