@@ -26,20 +26,17 @@ def getPuts(ticker, date):
 
 
 # Returns the data that would be presented in a table to the user
+# WORK IN PROGRESS
 def findRelevantData(optionChain):
     data = optionChain[['contractSymbol', 'strike', 'impliedVolatility', 'lastPrice']]
     additionalData = pd.DataFrame({"expirationDate": [],
                                    "typeOfOption": []})
 
     for contract in optionChain['contractSymbol']:
-        expirationDate = '20'
-        information = parseContractSymbol(str(contract))
-        for x in range(len(information)):
-            if x < 2:
-                expirationDate = expirationDate
+        contract = parseContractSymbol(contract)
 
 
-# Parses the contract symbol down to the form YYMMDD and option type
+# Helper method to parses the contract symbol down to the form YYMMDD + option type
 def parseContractSymbol(contract):
     if (first_digit := re.search(r"\d", contract)) is not None:
         contract = contract[first_digit.start()::]
@@ -48,7 +45,28 @@ def parseContractSymbol(contract):
     return contract
 
 
-#Testing
+# Helper method to get the contract type(Call/Put)
+def getContractType(contract):
+    if contract[len(contract) - 1] == 'C':
+        return 'Call'
+    else:
+        return 'Put'
+
+
+# Helper method to get the expiration date in the form YYYY-MM-DD
+def getContractExpirationDate(contract):
+    expirationDate = '20'
+    counter = 0
+    for character in contract:
+        if counter < 6:
+            if counter % 2 == 0 and counter > 0:
+                expirationDate = expirationDate + "-"
+            expirationDate = expirationDate + character
+        counter += 1
+    return expirationDate
+
+
+# Testing
 print(getExpirationDates(getStock('BRK-B').ticker))
 
 print(findRelevantData(getCalls('AAPL', '2020-10-09')))
