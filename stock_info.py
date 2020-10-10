@@ -132,6 +132,7 @@ class StockInfo:
 
         data = [candle, avg]
 
+        # used FigureWidget to try to implement x-axis autoscale. will revert back to Figure if unable.
         fig = go.FigureWidget(data=data, layout=layout)
 
         # TODO: yaxis autoscale
@@ -143,6 +144,7 @@ class StockInfo:
         #
         # fig.layout.on_change(zoom, 'xaxis.range')
 
+        # necessary to show FigureWidget object
         fig.show(renderer="browser")
 
 # example code
