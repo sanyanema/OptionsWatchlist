@@ -31,11 +31,6 @@ class PriceGraph:
         plt.show()
 
 
-# template to retrieve watchlist tickers from json file
-with open('watchlist.json') as watchlist:
-    tickersDict = json.load(watchlist)
-    tickWatch = [ticker for ticker in tickersDict['tickers']]
-
 # creating a PriceGraph object and plotting its price history
 google = PriceGraph('GOOG')
 google.plotPriceHistory()
