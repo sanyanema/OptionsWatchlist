@@ -25,18 +25,23 @@ def getPuts(ticker, date):
     return yf.Ticker(ticker).option_chain(date).puts
 
 
-# Returns the data that would be presented in the table to the user
-def findRelevantData(optionChain):
+# Returns the data that would be presented in table to the user
+def findGreekData(optionChain):
+    # Creates a dataframe with specific parameters from the entire optionchain
     data = optionChain.loc[:, ('contractSymbol', 'strike', 'lastPrice', 'impliedVolatility')]
-    additionalData = pd.DataFrame({"expirationDate":[],
-                                   "typeOfOption":[]})
+    additionalData = pd.DataFrame({"expirationDate": [],
+                                   "typeOfOption": []})
 
+    # Loops through every contract symbol and creates a row of data with the expiration date and option type
     for contract in optionChain['contractSymbol']:
         contract = parseContractSymbol(contract)
         new_row = {"expirationDate": findContractExpirationDate(contract), "typeOfOption": findContractType(contract)}
+        # Appends the new row to a dataframe with the expiration dates and option types
         additionalData = additionalData.append(new_row, ignore_index=True)
-        data.loc[:, 'expirationDate'] = additionalData['expirationDate']
-        data.loc[:, 'typeOfOption'] = additionalData['typeOfOption']
+
+    # Merges the new dataframe to the dataframe created with specific parameteres
+    data.loc[:, 'expirationDate'] = additionalData['expirationDate']
+    data.loc[:, 'typeOfOption'] = additionalData['typeOfOption']
     return data
 
 
@@ -44,7 +49,12 @@ def findRelevantData(optionChain):
 def parseContractSymbol(contract):
     if (first_digit := re.search(r"\d", contract)) is not None:
         contract = contract[first_digit.start()::]
-    index = contract.index('C')
+        try:
+            index = contract.index('C')
+        except ValueError:
+            index = contract.index('P')
+
+
     contract = contract[0:index + 1]
     return contract
 
@@ -55,6 +65,13 @@ def findContractType(contract):
         return 'Call'
     else:
         return 'Put'
+
+
+# Helper method to find the ticker name from a contrat
+def findTickerName(contract):
+    if (first_digit := re.search(r"\d", contract)) is not None:
+        contract = contract[0:first_digit.start()]
+    return contract
 
 
 # Helper method to get the expiration date in the form YYYY-MM-DD
@@ -68,9 +85,3 @@ def findContractExpirationDate(contract):
             expirationDate = expirationDate + character
         counter += 1
     return expirationDate
-
-
-# Testing
-
-print(findRelevantData(getCalls('AAPL', '2020-10-16')))
-
