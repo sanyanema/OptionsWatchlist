@@ -1,3 +1,4 @@
+import yfinance
 from wallstreet import Call, Put
 import options_info as op
 
@@ -38,3 +39,14 @@ def yFinanceToWallStreet(optionChain, strikePrice):
             op.findTickerName(optionContract.iloc[0]['contractSymbol']),
             d=date[2], m=date[1], y=date[0],
             strike=strikePrice, source='yahoo')
+
+
+# Method to get greeks given a option object from WallStreet
+def getGreeks(option):
+    greeks = {"delta": option.delta(), "gamma": option.gamma(), "rho": option.rho(),
+              "vega": option.vega(), "theta": option.theta()}
+    return greeks
+
+
+# Testing
+print(getGreeks(yFinanceToWallStreet(yfinance.Ticker('AAPL').option_chain("2020-10-16").puts, 100)))
