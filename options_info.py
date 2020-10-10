@@ -27,7 +27,7 @@ def getPuts(ticker, date):
 
 # Returns the data that would be presented in table to the user
 def findGreekData(optionChain):
-    # Creates a dataframe with specific parameters from the entire optionchain
+    # Creates a dataframe with specific parameters from the entire option chain
     data = optionChain.loc[:, ('contractSymbol', 'strike', 'lastPrice', 'impliedVolatility')]
     additionalData = pd.DataFrame({"expirationDate": [],
                                    "typeOfOption": []})
@@ -39,7 +39,7 @@ def findGreekData(optionChain):
         # Appends the new row to a dataframe with the expiration dates and option types
         additionalData = additionalData.append(new_row, ignore_index=True)
 
-    # Merges the new dataframe to the dataframe created with specific parameteres
+    # Merges the new dataframe to the dataframe created with specific parameters
     data.loc[:, 'expirationDate'] = additionalData['expirationDate']
     data.loc[:, 'typeOfOption'] = additionalData['typeOfOption']
     return data
@@ -47,6 +47,7 @@ def findGreekData(optionChain):
 
 # Helper method to parses the contract symbol down to the form YYMMDD + option type
 def parseContractSymbol(contract):
+    index = 0
     if (first_digit := re.search(r"\d", contract)) is not None:
         contract = contract[first_digit.start()::]
         try:
@@ -66,7 +67,7 @@ def findContractType(contract):
         return 'Put'
 
 
-# Helper method to find the ticker name from a contrat
+# Helper method to find the ticker name from a contract
 def findTickerName(contract):
     if (first_digit := re.search(r"\d", contract)) is not None:
         contract = contract[0:first_digit.start()]
