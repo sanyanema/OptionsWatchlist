@@ -71,6 +71,9 @@ class StockInfo:
         # reset index and make Date a column
         historical = historical.reset_index()
 
+        # add 7-day close moving average
+        historical['MA'] = historical.Close.rolling(window=7).mean()
+
         return historical
 
 
@@ -79,5 +82,5 @@ google = StockInfo("goog")
 
 googlehist = google.get_hist("6mo")
 
-print(googlehist.head())
+print(googlehist.head(10))
 
