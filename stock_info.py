@@ -148,6 +148,6 @@ class StockInfo:
         fig.show(renderer="browser")
 
 # example code
-google = StockInfo("goog")
+stock = StockInfo("ZM")
 
-googlehist = google.plot_hist()
+history = stock.plot_hist()
