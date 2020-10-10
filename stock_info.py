@@ -9,6 +9,7 @@
 # import yfinance library
 import yfinance as yf
 
+
 class StockInfo:
     def __init__(self, tickerName):
         """
@@ -48,7 +49,7 @@ class StockInfo:
         # market capital
         self.market_cap = str(info['marketCap'])
 
-    def getHist(self,period):
+    def getHist(self, period):
         """ function retrieves close price history for desired stock
 
         :param period: [string] desired graphing period (1d,5d,1mo,3mo,6mo,1y,2y,5y,10y,ytd,max)
@@ -67,6 +68,7 @@ class StockInfo:
         close_price = historical.Close
 
         return close_price
+
 
 # example code
 google = StockInfo("goog")
