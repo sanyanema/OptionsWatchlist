@@ -1,22 +1,40 @@
-from wallstreet import Stock, Call, Put
-import yfinance
-
-# Wallstreet library can scrap google finance or yahoo
-# Make sure to set source to yahoo for continuity with yfinance library
-apple = Stock('AAPL', source='yahoo')
-applecall = Call('AAPL', d=30, m=10, y=2020, strike=130, source='yahoo')
-
-# All the greek options can be called easily with this
-print(applecall.delta())
-print(applecall.theta())
-print(applecall.gamma())
-print(applecall.rho())
-print(applecall.vega())
-
-# TODO method creating yfinance ticker object and extracting data to feed into Wallstreet for greeks
+from wallstreet import Call, Put
+import options_info as op
 
 
-# TODO method converting a YYYY-MM-DD string to separate variables for year, month, and day
+# WallStreet library can scrap google finance or yahoo
+# Make sure to set source to yahoo for continuity with YFinance library
+
+# Helper method converting a YYYY-MM-DD string to separate variables for year, month, and day
+def dateConverter(date):
+    year = int(date[0:4])
+    month = int(date[5:7])
+    day = int(date[8:10])
+    return [year, month, day]
 
 
-# TODO method to get greeks given a option contract symbol
+# Method inputting relevant data and strike price to extract data to feed into WallStreet for greeks
+def yFinanceToWallStreet(optionChain, strikePrice):
+    # Gets the relevant data to calculate greeks
+    data = op.findGreekData(optionChain)
+    # Gets the specific row with strike price wanted
+    optionContract = data.loc[data['strike'] == strikePrice]
+
+    # Checks if the option contract is a call
+    if optionContract.iloc[0]['typeOfOption'] == 'Call':
+        # Gets the date and converts it to work with WallStreet
+        date = dateConverter(optionContract.iloc[0]['expirationDate'])
+        # Returns the Call object that will be used to find greeks
+        return Call(
+            op.findTickerName(optionContract.iloc[0]['contractSymbol']),
+            d=date[2], m=date[1], y=date[0],
+            strike=strikePrice, source='yahoo')
+    # If not a call option, assumes it is a Put option
+    else:
+        # Gets the date and converts it to work with WallStreet
+        date = dateConverter(optionContract.iloc[0]['expirationDate'])
+        # Returns the Put object that will be used to find greeks
+        return Put(
+            op.findTickerName(optionContract.iloc[0]['contractSymbol']),
+            d=date[2], m=date[1], y=date[0],
+            strike=strikePrice, source='yahoo')
