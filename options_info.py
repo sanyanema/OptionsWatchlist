@@ -25,15 +25,19 @@ def getPuts(ticker, date):
     return yf.Ticker(ticker).option_chain(date).puts
 
 
-# Returns the data that would be presented in a table to the user
-# TODO Removing the contract symbol column and adding two columns with the expiry date and option type
+# Returns the data that would be presented in the table to the user
 def findRelevantData(optionChain):
-    data = optionChain[['contractSymbol', 'strike', 'lastPrice', 'impliedVolatility']]
-    additionalData = pd.DataFrame({"expirationDate": [],
-                                   "typeOfOption": []})
+    data = optionChain.loc[:, ('contractSymbol', 'strike', 'lastPrice', 'impliedVolatility')]
+    additionalData = pd.DataFrame({"expirationDate":[],
+                                   "typeOfOption":[]})
 
     for contract in optionChain['contractSymbol']:
         contract = parseContractSymbol(contract)
+        new_row = {"expirationDate": findContractExpirationDate(contract), "typeOfOption": findContractType(contract)}
+        additionalData = additionalData.append(new_row, ignore_index=True)
+        data.loc[:, 'expirationDate'] = additionalData['expirationDate']
+        data.loc[:, 'typeOfOption'] = additionalData['typeOfOption']
+    return data
 
 
 # Helper method to parses the contract symbol down to the form YYMMDD + option type
@@ -46,7 +50,7 @@ def parseContractSymbol(contract):
 
 
 # Helper method to get the contract type(Call/Put)
-def getContractType(contract):
+def findContractType(contract):
     if contract[len(contract) - 1] == 'C':
         return 'Call'
     else:
@@ -54,7 +58,7 @@ def getContractType(contract):
 
 
 # Helper method to get the expiration date in the form YYYY-MM-DD
-def getContractExpirationDate(contract):
+def findContractExpirationDate(contract):
     expirationDate = '20'
     counter = 0
     for character in contract:
@@ -67,6 +71,6 @@ def getContractExpirationDate(contract):
 
 
 # Testing
-print(getExpirationDates(getStock('BRK-B').ticker))
 
-print(findRelevantData(getCalls('AAPL', '2020-10-09')))
+print(findRelevantData(getCalls('AAPL', '2020-10-16')))
+
