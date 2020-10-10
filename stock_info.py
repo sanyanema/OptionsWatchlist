@@ -65,13 +65,19 @@ class StockInfo:
         # get historical data. available periods: 1d,5d,1mo,3mo,6mo,1y,2y,5y,10y,ytd,max. default = 1mo
         historical = self.ticker.history(period=period)
 
-        # get closing prices from historical data
-        close_price = historical.Close
+        # remove unnecessary columns
+        historical = historical.drop(columns=['Volume', 'Dividends', 'Stock Splits'])
 
-        return close_price
+        # reset index and make Date a column
+        historical = historical.reset_index()
+
+        return historical
 
 
 # example code
 google = StockInfo("goog")
-print(google.sector)
-print(google.get_hist("5mo"))
+
+googlehist = google.get_hist("6mo")
+
+print(googlehist.head())
+
