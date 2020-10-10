@@ -54,7 +54,6 @@ def parseContractSymbol(contract):
         except ValueError:
             index = contract.index('P')
 
-
     contract = contract[0:index + 1]
     return contract
 
