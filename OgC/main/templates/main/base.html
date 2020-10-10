@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <title>
+            OgC
+        </title>
+    </head>
+    <body>
+        {% if user.is_authenticated %}
+            {% block content %}
+            {% endblock %}
+        {% else %}
+            <p><a href="/login">Login Here</a></p>
+        {% endif %}
+        
+    </body>
+</html>
