@@ -49,7 +49,7 @@ class StockInfo:
         # market capital
         self.market_cap = str(info['marketCap'])
 
-    def getHist(self, period):
+    def get_hist(self, period):
         """ function retrieves close price history for desired stock
 
         :param period: [string] desired graphing period (1d,5d,1mo,3mo,6mo,1y,2y,5y,10y,ytd,max)
@@ -59,7 +59,8 @@ class StockInfo:
         # check if period is valid
         periods = ["1d", "5d", "1mo", "3mo", "6mo", "1y", "2y", "5y", "10y", "ytd", "max"]
         if period not in periods:
-            return "chosen period is not available"
+            invalid_period_msg = "getHist: period must be one of: " + ', '.join(periods)
+            raise ValueError(invalid_period_msg)
 
         # get historical data. available periods: 1d,5d,1mo,3mo,6mo,1y,2y,5y,10y,ytd,max. default = 1mo
         historical = self.ticker.history(period=period)
@@ -73,4 +74,4 @@ class StockInfo:
 # example code
 google = StockInfo("goog")
 print(google.sector)
-print(google.getHist("6mo"))
+print(google.get_hist("5mo"))
