@@ -16,7 +16,7 @@ class StockInfo:
     def __init__(self, set_ticker_name):
         """
         class creates object containing relevant info for desired stock
-        :param tickerName: [string] stock ticker
+        :param set_ticker_name: [string] stock ticker
         """
         # store ticker name
         self.ticker_name = set_ticker_name
@@ -111,7 +111,7 @@ class StockInfo:
             y=hist['Lower Band'],
             legendgroup='Bollinger Band',
             name='Bollinger Band',
-            line_color='rgba(200,200,200,1)',
+            line=dict(color='rgba(200,200,200,1)'),
             fill='none'
         )
 
@@ -120,7 +120,7 @@ class StockInfo:
             y=hist['Upper Band'],
             legendgroup='Bollinger Band',
             showlegend=False,
-            line_color='rgba(200,200,200,1)',
+            line=dict(color='rgba(200,200,200,1)'),
             fill='tonexty',
             fillcolor='rgba(200,200,200,0.5)',
         )
