@@ -120,7 +120,7 @@ class StockInfo:
             showlegend=False,
             line_color='rgba(200,200,200,1)',
             fill='tonexty',
-            fillcolor='rgba(220,220,220,1)',
+            fillcolor='rgba(200,200,200,0.5)',
         )
 
         # Add range slider
@@ -128,8 +128,16 @@ class StockInfo:
             title=self.name + ' (' + self.ticker_name + ')',
             yaxis_title='Stock Price (USD)',
 
+            # main y axis
+            yaxis=dict(
+                range=[0, hist[['High', 'Upper Band']].max().max() * 1.1]
+            ),
+
             # second y axis for Bollinger Bands in background
-            yaxis2=dict(overlaying='y'),
+            yaxis2=dict(
+                overlaying='y',
+                range=[0, hist[['High', 'Upper Band']].max().max() * 1.1]
+            ),
 
             # range selection buttons stuff
             xaxis=dict(
@@ -164,26 +172,14 @@ class StockInfo:
         # define trace array to plot
         data = [lower, upper, candle, avg]
 
-        # used FigureWidget to try to implement y-axis autoscale. will revert back to Figure if unable.
-        fig = go.FigureWidget(data=data, layout=layout)
+        # define figure
+        fig = go.Figure(data=data, layout=layout)
 
-        # align both y axes
-        yscale = 1.1
-        fig.update_yaxes(range=[0, hist[['High', 'Upper Band']].max().max() * yscale])
-
-        # TODO: yaxis autoscale
-        # [INOP] autoscale y-axis on x-axis range change
-        # def zoom(layout, xrange):
-        #     in_view = hist.loc[fig.layout.xaxis.range[0]:fig.layout.xaxis.range[1]]
-        #     fig.layout.yaxis.range = [in_view.High.min() - 10, in_view.High.max() + 10]
-        #
-        #
-        # fig.layout.on_change(zoom, 'xaxis.range')
-
-        # necessary to show FigureWidget object
+        # display figure
         fig.show(renderer="browser")
+
 
 # example code
 stock = StockInfo("ZM")
 
-history = stock.plot_hist()
+stock.plot_hist()
