@@ -67,8 +67,15 @@ class StockInfo:
         # reset index and make Date a column
         historical = historical.reset_index()
 
-        # add 7-day close moving average
-        historical['MA'] = historical.Close.rolling(window=7).mean()
+        # add 20-day close moving average
+        historical['20 Day MA'] = historical.Close.rolling(window=20).mean()
+
+        # add 20-day MA STD
+        historical['20 Day STD'] = historical.Close.rolling(window=20).std()
+
+        # add Bollinger upper and lower bands
+        historical['Upper Band'] = historical['20 Day MA'] + (historical['20 Day STD'] * 2)
+        historical['Lower Band'] = historical['20 Day MA'] - (historical['20 Day STD'] * 2)
 
         return historical
 
@@ -86,19 +93,41 @@ class StockInfo:
             high=hist['High'],
             low=hist['Low'],
             close=hist['Close'],
+            yaxis='y2',
             name='Candlestick'
         )
 
         avg = go.Scatter(
             x=hist['Date'],
-            y=hist['MA'],
+            y=hist['20 Day MA'],
+            yaxis='y2',
             name='moving average'
+        )
+
+        lower = go.Scatter(
+            x=hist['Date'],
+            y=hist['Lower Band'],
+            legendgroup='Bollinger Band',
+            name='Bollinger Band',
+            line_color='rgba(200,200,200,1)',
+            fill='none'
+        )
+
+        upper = go.Scatter(
+            x=hist['Date'],
+            y=hist['Upper Band'],
+            legendgroup='Bollinger Band',
+            showlegend=False,
+            line_color='rgba(200,200,200,1)',
+            fill='tonexty',
+            fillcolor='rgba(220,220,220,1)',
         )
 
         # Add range slider
         layout = dict(
             title=self.name + ' (' + self.ticker_name + ')',
             yaxis_title='Stock Price (USD)',
+            yaxis2=dict(overlaying='y'),
 
             # range selection buttons stuff
             xaxis=dict(
@@ -130,7 +159,7 @@ class StockInfo:
             )
         )
 
-        data = [candle, avg]
+        data = [lower, upper, candle, avg]
 
         # used FigureWidget to try to implement x-axis autoscale. will revert back to Figure if unable.
         fig = go.FigureWidget(data=data, layout=layout)
