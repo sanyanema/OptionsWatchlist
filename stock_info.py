@@ -129,7 +129,6 @@ class StockInfo:
             yaxis_title='Stock Price (USD)',
 
             # second y axis for Bollinger Bands in background
-            # TODO: align both y axes
             yaxis2=dict(overlaying='y'),
 
             # range selection buttons stuff
@@ -162,10 +161,15 @@ class StockInfo:
             )
         )
 
+        # define trace array to plot
         data = [lower, upper, candle, avg]
 
         # used FigureWidget to try to implement y-axis autoscale. will revert back to Figure if unable.
         fig = go.FigureWidget(data=data, layout=layout)
+
+        # align both y axes
+        yscale = 1.1
+        fig.update_yaxes(range=[0, hist[['High', 'Upper Band']].max().max() * yscale])
 
         # TODO: yaxis autoscale
         # [INOP] autoscale y-axis on x-axis range change
