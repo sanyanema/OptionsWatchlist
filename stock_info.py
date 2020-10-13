@@ -127,6 +127,9 @@ class StockInfo:
         layout = dict(
             title=self.name + ' (' + self.ticker_name + ')',
             yaxis_title='Stock Price (USD)',
+
+            # second y axis for Bollinger Bands in background
+            # TODO: align both y axes
             yaxis2=dict(overlaying='y'),
 
             # range selection buttons stuff
@@ -161,7 +164,7 @@ class StockInfo:
 
         data = [lower, upper, candle, avg]
 
-        # used FigureWidget to try to implement x-axis autoscale. will revert back to Figure if unable.
+        # used FigureWidget to try to implement y-axis autoscale. will revert back to Figure if unable.
         fig = go.FigureWidget(data=data, layout=layout)
 
         # TODO: yaxis autoscale
