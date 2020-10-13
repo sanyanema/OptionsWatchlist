@@ -3,7 +3,9 @@
     A new instance of StockInfo contains the necessary info about the stock to be
     displayed on the visualization page.
 
-    The instance method getHist returns the close price history for the desired period.
+    The instance method git_hist returns the close price history for the maximum period.
+
+    The instance method plot_hist displays a candlestick plot with moving average and Bollinger Band overlays.
  """
 
 import yfinance as yf  # yfinance library to collect data
