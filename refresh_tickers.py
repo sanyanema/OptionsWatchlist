@@ -19,7 +19,7 @@ def get_tickers(file_name):
         with open(file_name, 'wb') as f1:
             shutil.copyfileobj(r, f1)
 
-    with open('other.txt', 'r') as f2:
+    with open(file_name, 'r') as f2:
         data = f2.read()
 
     return parse_tickers(file_name, data)
@@ -46,3 +46,4 @@ def parse_tickers(file_name, data):
 
 nasdaq = get_tickers(nasdaq_url)
 other = get_tickers(other_url)
+
