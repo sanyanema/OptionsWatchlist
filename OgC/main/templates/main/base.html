@@ -1,16 +1,94 @@
-<html>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
     <head>
+        <!-- Title -- >
         <title>
             OgC
         </title>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="/static/styles.css">
+        <script src="https://kit.fontawesome.com/26600a00d1.js" crossorigin="anonymous"></script>
+
+         <!-- CSS -->
+         <style type="text/css">
+            .hyperlinks {
+                padding: 20px 0;
+                float: right;      
+            }
+            .OGC {
+                padding: 0px 0;
+                float:left;    
+            }        
+            ul#headings a {
+                display: inline; margin-right: 40px;
+            }
+            hr {
+                width: 100%;
+                height: 5px;
+                margin-left: auto;
+                margin-right: auto;
+                background-color: #7C7C7C;
+                border: 0 none;
+            }
+            button {
+                background-color: #4CAF50; /* Green */
+                border: black;
+                color: white;
+                padding: 3px 12px;
+                text-align: center;
+                display: inline-block;
+                font-size: 16px;
+            }
+        </style>
     </head>
-    <body>
-        {% if user.is_authenticated %}
+
+    <body style="background-color:#1F2B4A">
+        <!-- Login Button -->
+<!--         {% if user.is_authenticated %}
             {% block content %}
             {% endblock %}
         {% else %}
             <p><a href="/login">Login Here</a></p>
-        {% endif %}
-        
+        {% endif %} -->
+
+        <!-- List of hyperlinks at top of page -->
+        <ul id="headings">
+          <!-- OgC Logo Button -->
+          <p><<span class="OGC"><a href='http://127.0.0.1:8000/'>
+            <img src="{% static 'images/logo.png' %}" alt="Home" width="150" height="106">
+          </a></span>
+          <!--Home Page Button -->
+          <span class="hyperlinks"><a href='http://127.0.0.1:8000/' style="font-size: 30px">Home</a>
+          <!--Help Page Button -->
+          <a href="help" style="font-size: 30px">Help</a></li>
+          <!--About Us Page Button -->
+          <a href='about_us' style="font-size: 30px">About Us</a>
+          <!--Contact Page Button -->
+          <a href="contact" style="font-size: 30px">Contact</a>
+          <!--Login Page Button -->
+          <a href="login" style="font-size: 30px">Login</a></span></p>
+        </ul>
+
+        <!-- Span is being weird so I had to add break lines. Will fix later -->
+        <br>
+        <br>
+        <hr>
+        <!-- Watchlist Text --> 
+        <h1 class="display-4" style="color:MediumTurquoise"><center><u>{{name}}'s Watchlist:<u/></center></h1>
+
+        <!-- Search Bar -->
+        <div class="search-box">
+            <input class ="search-txt" type="text" name ="" placeholder="Search">
+            <a class="search-btn" href="#">
+                <i class="fas fa-search"></i>
+            </a>
+        </div>
     </body>
 </html>

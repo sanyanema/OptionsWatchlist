@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style type="text/css">
+      .hyperlinks {
+        padding: 20px 0;
+        float: right;      
+      }
+      .OGC {
+        padding: 0px 0;
+        float:left;    
+      }        
+      ul#headings a {
+        display: inline; margin-right: 40px;
+      }
+      hr {
+        width: 100%;
+        height: 5px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: #7C7C7C;
+        border: 0 none;
+      }
+    </style>
+  </head>
+
+
+  <body style="background-color:#1F2B4A">
+      <!-- List of hyperlinks at top of page -->
+        <ul id="headings">
+          <!-- OgC Logo Button -->
+          <p><<span class="OGC"><a href='http://127.0.0.1:8000/'>
+            <img src="{% static 'images/logo.png' %}" alt="Home" width="150" height="106">
+          </a></span>
+          <!--Home Page Button -->
+          <span class="hyperlinks"><a href='http://127.0.0.1:8000/' style="font-size: 30px">Home</a>
+          <!--Help Page Button -->
+          <a href="help" style="font-size: 30px">Help</a></li>
+          <!--About Us Page Button -->
+          <a href='about_us' style="font-size: 30px">About Us</a>
+          <!--Contact Page Button -->
+          <a href="contact" style="font-size: 30px">Contact</a>
+          <!--Login Page Button -->
+          <a href="login" style="font-size: 30px">Login</a></span></p>
+        </ul>
+
+      <!-- Span is being weird so I had to add break lines. Will fix later -->
+      <br>
+      <br>
+      <hr>
+      <h1 class="display-2" style="color:MediumTurquoise"><center><u>Help!!!</u></center></h1>
+      <p style="color:#FAFAFA; font-size: 20px; text-align:center; padding-left: 50px; padding-right: 50px">You have found the help page. I am sorry but Joseph doesn't understand finance either, so the help page currently will be of no use. In the future someone, maybe even Joseph, will add information on what greeks are or how to interpret options. However, until someone smarter than Joseph or when Joseph decides to learn the information himself, this page will be basically useless. </p>
+  </body>
+</html>
+
+
