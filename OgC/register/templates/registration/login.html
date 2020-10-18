@@ -1,3 +1,9 @@
+{% load static %}
+<a href='http://127.0.0.1:8000/'>
+    <img src="{% static 'images/logo.png' %}" alt="Home" width="150" height="106">
+</a>
+<br>
+
 {% block title %}
 Login Here
 {% endblock %}
@@ -5,10 +11,13 @@ Login Here
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <form method="post" class="from-group">
-        {% csrf_token %}
-        {{form|crispy}}
-        <button type="submit" class="btn btn-success">Login</button>
-        <p>Don't have an account? Create one <a href="/register">here</a></p>
-    </form>
+	<body style="background-color:#1F2B4A">
+		<form method="post" class="from-group">
+			{% csrf_token %}
+			{{form|crispy}}
+			<br>
+			<button type="submit" class="btn btn-success">Login</button>
+			<p>Don't have an account? Create one <a href="/register">here</a></p>
+		</form>
+	</body>
 {% endblock %}
