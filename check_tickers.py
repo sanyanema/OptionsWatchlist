@@ -19,16 +19,13 @@ nasdaq_url = 'nasdaqlisted.txt'
 other_url = 'otherlisted.txt'
 
 nasdaq = get_tickers(nasdaq_url)
-
 other = get_tickers(other_url)
 
 
 # ========================================
-count = 0
-length = len(other)
-other_invalid = []
-
-test = ['hi', 'test', 'hello']
+#count = 0
+#length = len(other)
+#other_invalid = []
 
 #for ticker in other:
    #count = count + 1
@@ -57,4 +54,17 @@ print("other invalid: " + str(len(other_invalid)))
 
 available_tickers = len(nasdaq) + len(other) - len(nasdaq_invalid) - len(other_invalid)
 
-print("available: " + str(available_tickers))
+print("theoretical available: " + str(available_tickers))
+
+# list of all tickers
+all_tickers = {*nasdaq, *other}
+
+# remove invalid tickers
+for invalids in (nasdaq_invalid, other_invalid):
+    for invalid in invalids:
+        if invalid in all_tickers:
+            all_tickers.remove(invalid)
+
+# list of available tickers
+print(all_tickers)
+print("final available: " + str(len(all_tickers)))
