@@ -56,7 +56,7 @@ available_tickers = len(nasdaq) + len(other) - len(nasdaq_invalid) - len(other_i
 
 print("theoretical available: " + str(available_tickers))
 
-# list of all tickers
+# set of all tickers
 all_tickers = {*nasdaq, *other}
 
 # remove invalid tickers
@@ -65,6 +65,6 @@ for invalids in (nasdaq_invalid, other_invalid):
         if invalid in all_tickers:
             all_tickers.remove(invalid)
 
-# list of available tickers
+# set of available tickers
 print(all_tickers)
 print("final available: " + str(len(all_tickers)))
