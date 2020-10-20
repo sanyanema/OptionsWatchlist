@@ -19,5 +19,8 @@ def about_us(request):
 
 def contact(request):
 	return render(request, 'main/contact.html', {'name' : "John Smith"})
+
+def visualization(request):
+	return render(request, 'main/visualization.html', {})
     
     
