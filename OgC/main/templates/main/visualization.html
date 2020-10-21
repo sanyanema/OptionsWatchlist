@@ -67,11 +67,11 @@
         text-align: left;
       }*/ 
 
-      /* Box surrounding Implied Volatility Info */
+      /* Box surrounding Implied Volatility Info And Stock Info*/
       #rcorners {
-        border: 3px solid black;
+        border: 3px solid gray;
         border-radius: 25px;
-        background: #1523AF;
+        background:#2179AB;
         padding: 30px; 
         width: 600px;
         height: 500px;  
@@ -263,6 +263,15 @@
       <br>
       <p class="small" style="color:White; font-size: 40px; text-align:center; margin-left: 30px">Stock Price Chart</p>
       <img style="margin-left: 30px" src="{% static 'images/google.png' %}" alt="Stock" width="700" height="555">
+    </div>
+
+    <!-- The Stock Info Box -->
+    <div style="float: left;margin-right:60px">
+      <h1 class="display-5" style="color:White; margin-left: 30px"><center>Stock Data</center></h1>
+      <div id="rcorners">
+        <p class="small" style="color:white; font-size: 40px; text-align:center"> Render Key Stock Data.</p>
+        <p style="color:white; font-size: 15px; text-align:center">Will include: Current Price, Day's Range, 52 Week Range, Volume, EPS, Mkt Cap, Industry</p>
+      </div>
     </div>
 
     </body>
