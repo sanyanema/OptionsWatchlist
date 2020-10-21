@@ -7,22 +7,28 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <style type="text/css">
+      /* Hyperlinks at top */
       .hyperlinks {
         padding: 20px 0;
         float: right;      
       }
+
+      /* OGC LOGO */
       .OGC {
         padding: 0px 0;
         float:left;    
-      }        
+      }   
+
+      /* Headings at top */     
       ul#headings a {
         display: inline; margin-right: 40px;
       }
+
+      /* Break Lines */
       hr {
         width: 100%;
         height: 5px;
@@ -34,41 +40,67 @@
     </style>
   </head>
 
-
   <body style="background-color:#1F2B4A">
-      <!-- List of hyperlinks at top of page -->
-        <ul id="headings">
-          <!-- OgC Logo Button -->
-          <p><<span class="OGC"><a href='http://127.0.0.1:8000/'>
-            <img src="{% static 'images/logo.png' %}" alt="Home" width="150" height="106">
-          </a></span>
-          <!--Home Page Button -->
-          <span class="hyperlinks"><a href='http://127.0.0.1:8000/' style="font-size: 30px">Home</a>
-          <!--Help Page Button -->
-          <a href="help" style="font-size: 30px">Help</a></li>
-          <!--About Us Page Button -->
-          <a href='about_us' style="font-size: 30px">About Us</a>
-          <!--Contact Page Button -->
-          <a href="contact" style="font-size: 30px">Contact</a>
-          <!--Login Page Button -->
-          <a href="login" style="font-size: 30px">Login</a></span></p>
-        </ul>
+    <!-- List of hyperlinks at top of page -->
+    <ul id="headings">
+      <!-- OgC Logo Button -->
+      <p><<span class="OGC"><a href='http://127.0.0.1:8000/'>
+        <img src="{% static 'images/logo.png' %}" alt="Home" width="150" height="106">
+      </a></span>
 
-      <!-- Span is being weird so I had to add break lines. Will fix later -->
-      <br>
-      <br>
-      <hr>
-      <h1 class="display-4" style="color:MediumTurquoise"><center><u>Contact:</u></center></h1>
-      <br>
-      <!-- Emails -->
-      <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px"> James: <a href="mailto:jflemi9@illinois.edu"><u>jflemi9@illinois.edu</u></a></p>
-      <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px"> Anakin: <a href="mailto:anakind2@illinois.edu"><u>anakind2@illinois.edu</u></a></p>
-      <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px"> Brian: <a href="mailto:briancy2@illinois.edu"><u>briancy2@illinois.edu</u></a></p>
-      <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px"> Gabriel: <a href="mailto:gaaron2@illinois.edu"><u>gaaron2@illinois.edu</u></a></p>
-      <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px"> Suyash: <a href="mailto:suyasha2@illinois.edu"><u>suyasha2@illinois.edu</u></a></p>
-      <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px"> Eshaan: <a href="mailto:eshaan2@illinois.edu"><u>eshaan2@illinois.edu</u></a></p>
-      <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px"> Joseph: <a href="mailto:jjkuang2@illinois.edu"><u>jjkuang2@illinois.edu</u></a></p>
-      <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px"> Sanya: <a href="mailto:snema2@illinois.edu"><u>snema2@illinois.edu</u></a></p>
+      <!--Home Page Button -->
+      <span class="hyperlinks"><a href='http://127.0.0.1:8000/' style="font-size: 30px">Home</a>
+
+      <!--Help Page Button -->
+      <a href="help" style="font-size: 30px">Help</a></li>
+      
+      <!--About Us Page Button -->
+      <a href='about_us' style="font-size: 30px">About Us</a>
+     
+      <!--Contact Page Button -->
+      <a href="contact" style="font-size: 30px">Contact</a>
+      
+      <!--Login Page Button -->
+      <a href="login" style="font-size: 30px">Login</a></span></p>
+    </ul>
+
+    <!-- Span is being weird so I had to add break lines. -->
+    <br>
+    <br>
+    <hr>
+
+    <!-- Contact Title Text -->
+    <h1 class="display-4" style="color:MediumTurquoise"><center><u>Contact:</u></center></h1>
+    <br>
+
+    <!-- Emails -->
+    <div class="Emails">
+      <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px"> 
+        James: <a href="mailto:jflemi9@illinois.edu"><u>jflemi9@illinois.edu</u></a>
+      </p>
+      <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px">
+        Anakin: <a href="mailto:anakind2@illinois.edu"><u>anakind2@illinois.edu</u></a>
+      </p>
+      <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px">
+        Brian: <a href="mailto:briancy2@illinois.edu"><u>briancy2@illinois.edu</u></a>
+      </p>
+      <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px">
+        Gabe: <a href="mailto:gaaron2@illinois.edu"><u>gaaron2@illinois.edu</u></a>
+      </p>
+      <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px">
+        Suyash: <a href="mailto:suyasha2@illinois.edu"><u>suyasha2@illinois.edu</u></a>
+      </p>
+      <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px">
+        Eshaan: <a href="mailto:eshaan2@illinois.edu"><u>eshaan2@illinois.edu</u></a>
+      </p>
+      <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px">
+        Joseph: <a href="mailto:jjkuang2@illinois.edu"><u>jjkuang2@illinois.edu</u></a>
+      </p>
+      <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px">
+        Sanya: <a href="mailto:snema2@illinois.edu"><u>snema2@illinois.edu</u></a>
+      </p>
+    </div>
+    
   </body>
 </html>
 
