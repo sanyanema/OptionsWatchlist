@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 # Create your views here.
+stock1 = "Google"
+stock1b = "GOOGL"
 
 def index(response):
     return render(response, "main/index.html", {'name' : "John Smith"})
@@ -9,7 +11,7 @@ def v1(response):
     return HttpResponse("<h1>v1</h1>")
 
 def home(request):
-	return render(request, 'main/home.html', {'name' : "John Smith", 'stock' : "Apple"})
+	return render(request, 'main/home.html', {'name' : "John Smith", 'stock' : stock1})
 
 def help(request):
 	return render(request, 'main/help.html', {'name' : "John Smith"})
@@ -21,6 +23,6 @@ def contact(request):
 	return render(request, 'main/contact.html', {'name' : "John Smith"})
 
 def visualization(request):
-	return render(request, 'main/visualization.html', {'stock' : "Apple"})
+	return render(request, 'main/visualization.html', {'stock' : stock1, 'name' : stock1b})
     
     
