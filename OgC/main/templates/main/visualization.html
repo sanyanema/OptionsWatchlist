@@ -40,8 +40,8 @@
 
       /* Top Row of Table */
       th {
-        background-color: #004BDD;
-        color:black;
+        background-color: #1523AF;
+        color:white;
       }
 
       /* Rows in the Table */
@@ -60,11 +60,28 @@
         border: 2px solid black;
         margin-left: 30px
       }
+
 /*      Possible Bordering in Table
         table, td, th {  
         border: 3px solid #7C7C7C;
         text-align: left;
       }*/ 
+
+      /* Box surrounding Implied Volatility Info */
+      #rcorners {
+        border: 3px solid black;
+        border-radius: 25px;
+        background: #1523AF;
+        padding: 30px; 
+        width: 600px;
+        height: 500px;  
+      }
+
+      /* Change the space between lines */
+      p.small {
+        line-height: 0.3;
+      }
+
     </style>
   </head>
 
@@ -101,97 +118,149 @@
       <h1 class="display-4" style="color:MediumTurquoise"><center><u>{{stock}} ({{name}})</u></center></h1>
       <br>
 
-      <!-- Options Text -->
-      <h1 class="display-5" style="color:White; margin-left: 30px"><u><left>Options:</left></u></h1>
-      
-      <!-- Options Table -->
-      <table class="table-striped table-dark">
-        <!-- Categories of Options Table (Top Row)-->
-        <thead class="categories">
-          <tr>
-            <th>Type of Option</th>
-            <th>Expiration Date</th>
-            <th>Strike Price</th>
-            <th>Last Price</th>
-            <th>Implied Volatility</th>
-          </tr>
-        </thead>
+      <!-- Options -->
+      <div style="float: left;margin-right:60px">
+        <!-- Options Text -->
+        <h1 class="display-5" style="color:White; margin-left: 30px"><center>Options</center></h1>
 
-        <!-- Information of Options Table -->
-        <tbody>
-          <!-- Row 1 -->
-          <tr>
-            <td>Call</td>
-            <td>2020-10-21</td>
-            <td>115</td>
-            <td>0.80</td>
-            <td>0.80</td>
-          </tr>
-
-          <!-- Row 2 -->
-          <tr>
-            <td>Call</td>
-            <td>2020-10-21</td>
-            <td>112</td>
-            <td>0.05</td>
-            <td>0.05</td>
-          </tr>
-
-          <!-- Row 3 -->
-          <tr>
-            <td>Call</td>
-            <td>2020-10-21</td>
-            <td>120</td>
-            <td>0.40</td>
-            <td>0.40</td>
-          </tr>
-
-          <!-- Row 4 -->
-          <tr>
-            <td>Call</td>
-            <td>2020-10-21</td>
-            <td>95</td>
-            <td>0.20</td>
-            <td>0.20</td>
-          </tr>
-
-          <!-- Row 5 -->
+        <!-- Options Table -->
+        <table class="table-striped table-dark">
+          <!-- Categories of Options Table (Top Row)-->
+          <thead class="categories">
             <tr>
-            <td>Put</td>
-            <td>2020-10-21</td>
-            <td>115</td>
-            <td>0.80</td>
-            <td>0.80</td>
-          </tr>
+              <th>Type of Option</th>
+              <th>Expiration Date</th>
+              <th>Strike Price</th>
+              <th>Last Price</th>
+              <th>Implied Volatility</th>
+            </tr>
+          </thead>
 
-          <!-- Row 6 -->
-          <tr>
-            <td>Put</td>
-            <td>2020-10-21</td>
-            <td>112</td>
-            <td>0.05</td>
-            <td>0.05</td>
-          </tr>
+          <!-- Information of Options Table -->
+          <tbody>
+            <!-- Row 1 -->
+            <tr>
+              <td>Call</td>
+              <td>2020-10-21</td>
+              <td>115</td>
+              <td>0.80</td>
+              <td>0.80</td>
+            </tr>
 
-          <!-- Row 7 -->
-          <tr>
-            <td>Put</td>
-            <td>2020-10-21</td>
-            <td>120</td>
-            <td>0.40</td>
-            <td>0.40</td>
-          </tr>
-          
-          <!-- Row 8 -->
-          <tr>
-            <td>Put</td>
-            <td>2020-10-21</td>
-            <td>95</td>
-            <td>0.20</td>
-            <td>0.20</td>
-          </tr>
-        </tbody>
-      </table>
+            <!-- Row 2 -->
+            <tr>
+              <td>Call</td>
+              <td>2020-10-21</td>
+              <td>112</td>
+              <td>0.05</td>
+              <td>0.05</td>
+            </tr>
+
+            <!-- Row 3 -->
+            <tr>
+              <td>Call</td>
+              <td>2020-10-21</td>
+              <td>120</td>
+              <td>0.40</td>
+              <td>0.40</td>
+            </tr>
+
+            <!-- Row 4 -->
+            <tr>
+              <td>Call</td>
+              <td>2020-10-21</td>
+              <td>95</td>
+              <td>0.20</td>
+              <td>0.20</td>
+            </tr>
+
+            <!-- Row 5 -->
+              <tr>
+              <td>Put</td>
+              <td>2020-10-21</td>
+              <td>115</td>
+              <td>0.80</td>
+              <td>0.80</td>
+            </tr>
+
+            <!-- Row 6 -->
+            <tr>
+              <td>Put</td>
+              <td>2020-10-21</td>
+              <td>112</td>
+              <td>0.05</td>
+              <td>0.05</td>
+            </tr>
+
+            <!-- Row 7 -->
+            <tr>
+              <td>Put</td>
+              <td>2020-10-21</td>
+              <td>120</td>
+              <td>0.40</td>
+              <td>0.40</td>
+            </tr>
+
+            <!-- Row 8 -->
+            <tr>
+              <td>Put</td>
+              <td>2020-10-21</td>
+              <td>95</td>
+              <td>0.20</td>
+              <td>0.20</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+
+    <!-- Implied Volatility -->
+    <div style="float: left">
+      <!-- Implied Volatility Text -->
+      <h1 class="display-5" style="color:White; margin-left: 30px"><center>Implied Volatility</center></h1>
+      <div id="rcorners">
+        <!-- Implied Volatility Value and Description -->
+        <p class="small" style="color:#DD1616; font-size: 40px; text-align:center">0.80</p>
+        <p style="color:#DD1616; font-size: 15px; text-align:center">I bet you can't guess who is writing this text. I'll give you a hint I don't really know what implied volatility is.</p>
+        <br>
+
+        <!-- Delta -->
+        <div style="float: left;margin-right:166">
+          <p class="small" style="color:white; font-size: 40px; text-align:center; margin-left: 122px">δ</p>
+          <p style="color:#C8C8C8; font-size: 40px; text-align:center; margin-left: 122px">0</p>
+        </div>
+
+        <!-- Rho -->
+        <div style="float: left">
+          <p class="small" style="color:white; font-size: 40px; text-align:center; margin-left: 255px">ρ</p>     
+          <p style="color:#C8C8C8; font-size: 40px; text-align:center; margin-left: 255px">0</p>
+        </div>
+
+        <!-- Theta -->
+        <div style="float: left;margin-right:166px">
+          <br>
+          <p class="small" style="color:white; font-size: 40px; text-align:center; margin-left: 122px">θ</p>
+          <p style="color:#C8C8C8; font-size: 40px; text-align:center; margin-left: 122px">0</p>
+        </div>
+
+        <!-- Vega -->
+        <div style="float: left">
+          <br>
+          <p class="small" style="color:white; font-size: 40px; text-align:center; margin-left: 90px">ν</p>  
+          <p style="color:#C8C8C8; font-size: 40px; text-align:center; margin-left: 90px">0</p>   
+        </div> 
+
+        <!-- Gamma -->
+        <div style="float: left;margin-right:280px">
+          <br>
+          <p class="small" style="color:white; font-size: 40px; text-align:center; margin-left: 255px">γ</p>
+          <p style="color:#C8C8C8; font-size: 40px; text-align:center; margin-left: 255px">0</p>
+        </div>
+
+      </div>
+    </div>
+
+
+
     </body>
 </html>
 
