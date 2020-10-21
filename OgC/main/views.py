@@ -9,7 +9,7 @@ def v1(response):
     return HttpResponse("<h1>v1</h1>")
 
 def home(request):
-	return render(request, 'main/home.html', {'name' : "John Smith"})
+	return render(request, 'main/home.html', {'name' : "John Smith", 'stock' : "Apple"})
 
 def help(request):
 	return render(request, 'main/help.html', {'name' : "John Smith"})
@@ -21,6 +21,6 @@ def contact(request):
 	return render(request, 'main/contact.html', {'name' : "John Smith"})
 
 def visualization(request):
-	return render(request, 'main/visualization.html', {})
+	return render(request, 'main/visualization.html', {'stock' : "Apple"})
     
     
