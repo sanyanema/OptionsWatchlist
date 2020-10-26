@@ -24,5 +24,3 @@ def contact(request):
 
 def visualization(request):
 	return render(request, 'main/visualization.html', {'stock' : stock1, 'name' : stock1b})
-    
-    

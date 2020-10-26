@@ -13,19 +13,19 @@
     <style type="text/css">
       /* Hyperlinks at top */
       .hyperlinks {
-        padding: 20px 0;
-        float: right;      
+        float: right; 
+        margin-top: 20px;     
       }
 
       /* OGC LOGO */
       .OGC {
-        padding: 0px 0;
         float:left;    
       }   
 
       /* Headings at top */     
       ul#headings a {
-        display: inline; margin-right: 40px;
+        display: inline; 
+        margin-right: 40px;
       }
 
       /* Break Lines */
@@ -44,30 +44,22 @@
     <!-- List of hyperlinks at top of page -->
     <ul id="headings">
       <!-- OgC Logo Button -->
-      <p><<span class="OGC"><a href='http://127.0.0.1:8000/'>
+      <a class = "OGC" href='http://127.0.0.1:8000/'>
         <img src="{% static 'images/logo.png' %}" alt="Home" width="150" height="106">
-      </a></span>
+      </a>
 
-      <!--Home Page Button -->
-      <span class="hyperlinks"><a href='http://127.0.0.1:8000/' style="font-size: 30px">Home</a>
-
-      <!--Help Page Button -->
-      <a href="help" style="font-size: 30px">Help</a></li>
-      
-      <!--About Us Page Button -->
-      <a href='about_us' style="font-size: 30px">About Us</a>
-     
-      <!--Contact Page Button -->
-      <a href="contact" style="font-size: 30px">Contact</a>
-      
-      <!--Login Page Button -->
-      <a href="login" style="font-size: 30px">Login</a></span></p>
+      <!--Hyperlinks-->
+      <div class="hyperlinks">
+        <a href='http://127.0.0.1:8000/' style="font-size: 30px">Home</a>
+        <a href="help" style="font-size: 30px">Help</a></li>
+        <a href='about_us' style="font-size: 30px">About Us</a>
+        <a href="contact" style="font-size: 30px">Contact</a>
+        <a href="login" style="font-size: 30px">Login</a></span></p>
+      </div>
     </ul>
 
-    <!-- Span is being weird so I had to add break lines. -->
-    <br>
-    <br>
-    <hr>
+    <!-- Dividing Line --> 
+    <hr style="clear:both"/>
 
     <!-- Contact Title Text -->
     <h1 class="display-4" style="color:MediumTurquoise"><center><u>Contact:</u></center></h1>
