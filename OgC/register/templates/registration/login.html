@@ -1,8 +1,4 @@
 {% load static %}
-<a href='http://127.0.0.1:8000/'>
-    <img src="{% static 'images/logo.png' %}" alt="Home" width="150" height="106">
-</a>
-<br>
 
 {% block title %}
 Login Here
@@ -12,6 +8,10 @@ Login Here
 
 {% block content %}
 	<body style="background-color:#1F2B4A">
+		<a style="float: right; margin-right: 2%" href='http://127.0.0.1:8000/'>
+		    <img src="{% static 'images/logo.png' %}" alt="Home" width="150" height="106">
+		</a>
+		<br>
 		<form method="post" class="from-group">
 			{% csrf_token %}
 			{{form|crispy}}
