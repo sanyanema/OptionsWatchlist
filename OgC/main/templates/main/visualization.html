@@ -13,19 +13,19 @@
     <style type="text/css">
       /* Hyperlinks at top */
       .hyperlinks {
-        padding: 20px 0;
-        float: right;      
+        float: right; 
+        margin-top: 20px;     
       }
 
       /* OGC LOGO */
       .OGC {
-        padding: 0px 0;
         float:left;    
       }   
 
       /* Headings at top */     
       ul#headings a {
-        display: inline; margin-right: 40px;
+        display: inline; 
+        margin-right: 40px;
       }
 
       /* Break Lines */
@@ -40,17 +40,13 @@
 
       /* Top Row of Table */
       th {
-        background-color: #1523AF;
+        background-color: #2179AB;
         color:white;
       }
 
       /* Rows in the Table */
-      td {
-        text-align: center;
-      }
-
-      /* Text in the Table */
       th, td {
+        text-align: center;
         border: 1px solid black;
         padding: 15px;
       }
@@ -58,36 +54,54 @@
       /* Table */
       table {
         border: 2px solid black;
-        margin-left: 30px
+        width: 44%;
+        float: left;
+        margin-left: 3%;
       }
 
-/*      Possible Bordering in Table
-        table, td, th {  
-        border: 3px solid #7C7C7C;
-        text-align: left;
-      }*/ 
+      /* Less Space between lines of text */
+      p.small {
+        font-size: 40px;
+        line-height: 0.3;
+      }
+      p.box_titles {
+        line-height: 1;
+        color: white; 
+        font-size: 40px; 
+        text-align: center;
+      }
 
-      /* Box surrounding Implied Volatility Info And Stock Info*/
-      #rcorners {
+      /* Implied Volatility Box */
+      #volatility {
         border: 3px solid gray;
         border-radius: 25px;
         background:#2179AB;
-        padding: 30px; 
-        width: 600px;
-        height: 500px;  
+        width: 44%;
+        float: right;
+        margin-right: 3%;
+        padding: 20px;
       }
 
-      /* Change the space between lines */
-      p.small {
-        line-height: 0.3;
+      /* Stock Info Box */
+      #stock_info {
+        border: 3px solid gray;
+        border-radius: 25px;
+        background:#2179AB;
+        width: 44%;
+        float: left;
+        margin-left: 3%;
+        padding: 30px;
       }
-      
-      .gauge {
-        width: 100%;
-        max-width: 250px;
-        font-family: "Roboto", sans-serif;
-        font-size: 32px;
-        color: #004033;
+
+      /* Evaulate Opportunities Box */
+      #eval_opp {
+        border: 3px solid gray;
+        border-radius: 25px;
+        background:#2179AB;
+        width: 44%;
+        float: right;
+        margin-right: 3%;
+        padding: 20px;
       }
 
       .gauge__body {
@@ -100,7 +114,6 @@
         border-top-right-radius: 100% 200%;
         overflow: hidden;
       }
-
       .gauge__fill {
         position: absolute;
         top: 100%;
@@ -112,7 +125,6 @@
         transform: rotate(0.25turn);
         transition: transform 0.2s ease-out;
     }
-
       .gauge__cover {
         width: 75%;
         height: 150%;
@@ -122,228 +134,179 @@
         top: 25%;
         left: 50%;
         transform: translateX(-50%);
-
       /* Text */
         display: flex;
         align-items: center;
         justify-content: center;
         padding-bottom: 25%;
         box-sizing: border-box;
-}
-
-
-
-
-      
+      }
     </style>
   </head>
 
   <body style="background-color:#1F2B4A">
-      <!-- List of hyperlinks at top of page -->
-        <ul id="headings">
-          <!-- OgC Logo Button -->
-          <p><<span class="OGC"><a href='http://127.0.0.1:8000/'>
-            <img src="{% static 'images/logo.png' %}" alt="Home" width="150" height="106">
-          </a></span>
+    <!-- List of hyperlinks at top of page -->
+    <ul id="headings">
+      <!-- OgC Logo Button -->
+      <a class = "OGC" href='http://127.0.0.1:8000/'>
+        <img src="{% static 'images/logo.png' %}" alt="Home" width="150" height="106">
+      </a>
 
-          <!--Home Page Button -->
-          <span class="hyperlinks"><a href='http://127.0.0.1:8000/' style="font-size: 30px">Home</a>
+      <!--Hyperlinks-->
+      <div class="hyperlinks">
+        <a href='http://127.0.0.1:8000/' style="font-size: 30px">Home</a>
+        <a href="help" style="font-size: 30px">Help</a></li>
+        <a href='about_us' style="font-size: 30px">About Us</a>
+        <a href="contact" style="font-size: 30px">Contact</a>
+        <a href="login" style="font-size: 30px">Login</a></span></p>
+      </div>
+    </ul>
 
-          <!--Help Page Button -->
-          <a href="help" style="font-size: 30px">Help</a></li>
-          
-          <!--About Us Page Button -->
-          <a href='about_us' style="font-size: 30px">About Us</a>
-         
-          <!--Contact Page Button -->
-          <a href="contact" style="font-size: 30px">Contact</a>
-          
-          <!--Login Page Button -->
-          <a href="login" style="font-size: 30px">Login</a></span></p>
-        </ul>
+    <!-- Dividing Line --> 
+    <hr style="clear:both"/>
 
-      <!-- Span is being weird so I had to add break lines. -->
-      <br>
-      <br>
-      <hr>
-     
-      <!-- Stock Name --> 
-      <h1 class="display-4" style="color:MediumTurquoise"><center><u>{{stock}} ({{name}})</u></center></h1>
-      <br>
+    <!-- Stock Name --> 
+    <h1 class="display-4" style="color:MediumTurquoise"><center><u>{{stock}} ({{name}})</u></center></h1>
+    <br>
 
-      <!-- Options -->
-      <div style="float: left;margin-right:60px">
-        <!-- Options Text -->
-        <h1 class="display-5" style="color:White; margin-left: 30px"><center>Options</center></h1>
+    <!-- Options Table -->
+    <table class="table-striped table-dark">
+      <!-- Categories of Options Table (Top Row)-->
+      <thead class="categories">
+        <tr>
+          <th>Type of Option</th>
+          <th>Expiration Date</th>
+          <th>Strike Price</th>
+          <th>Last Price</th>
+          <th>Implied Volatility</th>
+        </tr>
+      </thead>
 
-        <!-- Options Table -->
-        <table class="table-striped table-dark">
-          <!-- Categories of Options Table (Top Row)-->
-          <thead class="categories">
-            <tr>
-              <th>Type of Option</th>
-              <th>Expiration Date</th>
-              <th>Strike Price</th>
-              <th>Last Price</th>
-              <th>Implied Volatility</th>
-            </tr>
-          </thead>
-
-          <!-- Information of Options Table -->
-          <tbody>
-            <!-- Row 1 -->
-            <tr>
-              <td>Call</td>
-              <td>2020-10-21</td>
-              <td>115</td>
-              <td>0.80</td>
-              <td>0.80</td>
-            </tr>
-
-            <!-- Row 2 -->
-            <tr>
-              <td>Call</td>
-              <td>2020-10-21</td>
-              <td>112</td>
-              <td>0.05</td>
-              <td>0.05</td>
-            </tr>
-
-            <!-- Row 3 -->
-            <tr>
-              <td>Call</td>
-              <td>2020-10-21</td>
-              <td>120</td>
-              <td>0.40</td>
-              <td>0.40</td>
-            </tr>
-
-            <!-- Row 4 -->
-            <tr>
-              <td>Call</td>
-              <td>2020-10-21</td>
-              <td>95</td>
-              <td>0.20</td>
-              <td>0.20</td>
-            </tr>
-
-            <!-- Row 5 -->
-              <tr>
-              <td>Put</td>
-              <td>2020-10-21</td>
-              <td>115</td>
-              <td>0.80</td>
-              <td>0.80</td>
-            </tr>
-
-            <!-- Row 6 -->
-            <tr>
-              <td>Put</td>
-              <td>2020-10-21</td>
-              <td>112</td>
-              <td>0.05</td>
-              <td>0.05</td>
-            </tr>
-
-            <!-- Row 7 -->
-            <tr>
-              <td>Put</td>
-              <td>2020-10-21</td>
-              <td>120</td>
-              <td>0.40</td>
-              <td>0.40</td>
-            </tr>
-
-            <!-- Row 8 -->
-            <tr>
-              <td>Put</td>
-              <td>2020-10-21</td>
-              <td>95</td>
-              <td>0.20</td>
-              <td>0.20</td>
-            </tr>
-          </tbody>
-        </table>
-    </div>
+      <!-- Information of Options Table -->
+      <tbody>
+        <!-- Row 1 -->
+        <tr>
+          <td>Call</td>
+          <td>2020-10-21</td>
+          <td>115</td>
+          <td>0.80</td>
+          <td>0.80</td>
+        </tr>
+        <!-- Row 2 -->
+          <tr>
+            <td>Call</td>
+            <td>2020-10-21</td>
+            <td>112</td>
+            <td>0.05</td>
+            <td>0.05</td>
+          </tr>
+        <!-- Row 3 -->
+        <tr>
+          <td>Call</td>
+          <td>2020-10-21</td>
+          <td>120</td>
+          <td>0.40</td>
+          <td>0.40</td>
+        </tr>
+        <!-- Row 4 -->
+        <tr>
+          <td>Call</td>
+          <td>2020-10-21</td>
+          <td>95</td>
+          <td>0.20</td>
+          <td>0.20</td>
+        </tr>
+        <!-- Row 5 -->
+          <tr>
+          <td>Put</td>
+          <td>2020-10-21</td>
+          <td>115</td>
+          <td>0.80</td>
+          <td>0.80</td>
+        </tr>
+        <!-- Row 6 -->
+        <tr>
+          <td>Put</td>
+          <td>2020-10-21</td>
+          <td>112</td>
+          <td>0.05</td>
+          <td>0.05</td>
+        </tr>
+        <!-- Row 7 -->
+        <tr>
+          <td>Put</td>
+          <td>2020-10-21</td>
+          <td>120</td>
+          <td>0.40</td>
+          <td>0.40</td>
+        </tr>
+      </tbody>
+    </table>
 
     <!-- Implied Volatility -->
-    <div style="float: left">
-      <!-- Implied Volatility Text -->
-      <h1 class="display-5" style="color:White; margin-left: 30px"><center>Implied Volatility</center></h1>
-      <div id="rcorners">
-        <!-- Implied Volatility Value and Description -->
-        <p class="small" style="color:#DD1616; font-size: 40px; text-align:center">0.80</p>
-        <p style="color:#DD1616; font-size: 15px; text-align:center">I bet you can't guess who is writing this text. I'll give you a hint I don't really know what implied volatility is.</p>
-        <br>
+    <div id="volatility">
+      <!-- Implied Volatility Value and Description -->
+      <p class = "small" style="color: white; font-size: 40px; text-align:center">0.80</p>
+      <p style="color: white; font-size: 15px; text-align:center">The implied volatility is very high for this stock, and one might not want to invest in it.</p>
+      <br>
 
-        <!-- Delta -->
-        <div style="float: left;margin-right:166">
-          <p class="small" style="color:white; font-size: 40px; text-align:center; margin-left: 122px">δ</p>
-          <p style="color:#C8C8C8; font-size: 40px; text-align:center; margin-left: 122px">0</p>
+      <!-- Delta and Theta-->
+        <div style="font-size: 40px; float:left; margin-left: 20%; margin-right: 20%; text-align:center">
+          <p class="small" style="color:white">δ</p>
+          <p style="color:#C8C8C8">0.7</p> 
+          <p class="small" style="color:white">ν</p>
+          <p style="color:#C8C8C8">1.0</p> 
         </div>
 
-        <!-- Rho -->
-        <div style="float: left">
-          <p class="small" style="color:white; font-size: 40px; text-align:center; margin-left: 255px">ρ</p>     
-          <p style="color:#C8C8C8; font-size: 40px; text-align:center; margin-left: 255px">0</p>
-        </div>
+      <!-- Rho and Vega -->
+      <div style="font-size: 40px; float:right; margin-right: 20%; text-align:center">   
+        <p class="small" style="color:white">ρ</p> 
+        <p style="color:#C8C8C8">0</p> 
+        <p class="small" style="color:white">ν</p>
+        <p style="color:#C8C8C8">0.4</p> 
+      </div>
 
-        <!-- Theta -->
-        <div style="float: left;margin-right:166px">
-          <br>
-          <p class="small" style="color:white; font-size: 40px; text-align:center; margin-left: 122px">θ</p>
-          <p style="color:#C8C8C8; font-size: 40px; text-align:center; margin-left: 122px">0</p>
-        </div>
+      <br><br><br><br><br><br><br><br><br>
 
-        <!-- Vega -->
-        <div style="float: left">
-          <br>
-          <p class="small" style="color:white; font-size: 40px; text-align:center; margin-left: 90px">ν</p>  
-          <p style="color:#C8C8C8; font-size: 40px; text-align:center; margin-left: 90px">0</p>   
-        </div> 
-
-        <!-- Gamma -->
-        <div style="float: left;margin-right:280px">
-          <br>
-          <p class="small" style="color:white; font-size: 40px; text-align:center; margin-left: 255px">γ</p>
-          <p style="color:#C8C8C8; font-size: 40px; text-align:center; margin-left: 255px">0</p>
-        </div>
+      <!-- Gamma -->
+      <div style="font-size: 40px">   
+        <center><p class="small" style="color:white">γ</p></center>
+        <center><p style="color:#C8C8C8">0.2</p></center>
       </div>
     </div>
 
+    <br style="clear:both"/><br>
     <!-- Stock Price Chart -->
-    <div style="float: left;margin-right:60px">
-      <br>
-      <p class="small" style="color:White; font-size: 40px; text-align:center; margin-left: 30px">Stock Price Chart</p>
-      <img style="margin-left: 30px" src="{% static 'images/google.png' %}" alt="Stock" width="700" height="555">
+    <div id="price_chart" style="text-align:center">
+      <img src="{% static 'images/google.png' %}" alt="Stock" width=70%>
     </div>
+
+    <br>
 
     <!-- The Stock Info Box -->
-    <div style="float: left;margin-right:60px; margin-left:30px">
-      <h1 class="display-5" style="color:White; margin-left: 30px"><center>Stock Data</center></h1>
-      <div id="rcorners">
-        <p class="small" style="color:white; font-size: 40px; text-align:center"> Render Key Stock Data.</p>
-        <p style="color:white; font-size: 15px; text-align:center">Will include: Current Price, Day's Range, 52 Week Range, Volume, EPS, Mkt Cap, Industry</p>
-      </div>
+    <div id="stock_info">
+      <p class="box_titles">Render Key Stock Data.</p>
+      <p style="color:white; font-size: 30px">Current Price</p>
+      <p style="color:white; font-size: 30px">Day's Range</p>
+      <p style="color:white; font-size: 30px">52 Week Range</p>
+      <p style="color:white; font-size: 30px">Volume</p>
+      <p style="color:white; font-size: 30px">EPS</p>
+      <p style="color:white; font-size: 30px">Market Cap</p>
+      <p style="color:white; font-size: 30px">Industry</p>
     </div>
 
     <!-- Technical Analysis Box -->
-    <div style="float: left">
-      <h1 class="display-5" style="color:White; margin-left: 30px"><center>Technical Indicators</center></h1>
-      <div id="rcorners">
-        <p class="small" style="color:white; font-size: 30px; text-align:center">Evaluate opportunities for {{stock}} </p>
-        <p style="color:white; font-size: 15px; text-align:center">Based on these indicators -- RSI, Money Flow Index, Put-Call Ratio</p>
-        <p style="color: white; font-size: 15px; text-align:center">RSI value > 70 = overbought, < 30 = oversold <br /> MFI > 80 = overbought, < 20 = oversold <br /> PCR > 1 (more puts than calls), PCR < 1 (more calls than puts)  </p>
-        <p style="color: white; font-size: 10px; text-align:center">Info from Investopedia</p>
-        <div class="gauge">
-          <div class="gauge__body">
-            <div class="gauge__fill"></div>
-            <div class="gauge__cover"></div>
-          </div>
+    <div id="eval_opp">
+      <p class="box_titles">Evaluate Opportunities for {{stock}} </p>
+      <p style="color:white; font-size: 15px; text-align:center">Based on these indicators -- RSI, Money Flow Index, Put-Call Ratio</p>
+      <p style="color: white; font-size: 15px; text-align:center">RSI value > 70 = overbought, < 30 = oversold <br /> MFI > 80 = overbought, < 20 = oversold <br /> PCR > 1 (more puts than calls), PCR < 1 (more calls than puts)  </p>
+      <p style="color: white; font-size: 10px; text-align:center">Info from Investopedia</p>
+      <div class="gauge">
+        <div class="gauge__body">
+          <div class="gauge__fill"></div>
+          <div class="gauge__cover"></div>
         </div>
-
-      </div>
-    
+    </div>
 
     </body>
 </html>

@@ -1,16 +1,81 @@
 {% load static %}
-<a href='http://127.0.0.1:8000/'>
-    <img src="{% static 'images/logo.png' %}" alt="Home" width="150" height="106">
-</a>
-<br>
-{% block title %}Create an Account{% endblock %}
+{% block title %}
+{% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <body style="background-color:#1F2B4A">
-	    <form method="POST" class="form-group">
-	        {% csrf_token %}
-	        {{form|crispy}}
-	        <button type="submit" class="btn btn-success">Register</button>
-	    </form>
-	</body>
+<style type="text/css">
+  /* Hyperlinks at top */
+  .hyperlinks {
+    float: right; 
+    margin-top: 20px;     
+  }
+
+  /* OGC LOGO */
+  .OGC {
+    float:left;    
+  }   
+
+  /* Headings at top */     
+  ul#headings a {
+    display: inline; 
+    margin-right: 40px;
+    color:green;
+  }
+
+  /* Break Lines */
+  hr {
+    width: 100%;
+    height: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #7C7C7C;
+    border: 0 none;
+  }
+
+  .form-group {
+  	color:green;
+  	font-size:30px;
+  	margin-left: 2%;
+  }
+  .block {
+	  display: block;
+	  width: 150px;
+	  border: none;
+	  background-color: green;
+	  color: white;
+	  padding: 7px 20px;
+	  font-size: 30px;
+	  cursor: pointer;
+	  text-align: center;
+	  margin-left: 2%;
+	}
+</style>
+<body style="background-color:#1F2B4A">
+	<!-- List of hyperlinks at top of page -->
+    <ul id="headings">
+      <!-- OgC Logo Button -->
+      <a class = "OGC" href='http://127.0.0.1:8000/'>
+        <img src="{% static 'images/logo.png' %}" alt="Home" width="150" height="106">
+      </a>
+
+      <!--Hyperlinks-->
+      <div class="hyperlinks">
+        <a href='http://127.0.0.1:8000/' style="font-size: 30px">Home</a>
+        <a href="http://127.0.0.1:8000/help" style="font-size: 30px">Help</a></li>
+        <a href='http://127.0.0.1:8000/about_us' style="font-size: 30px">About Us</a>
+        <a href="http://127.0.0.1:8000/contact" style="font-size: 30px">Contact</a>
+        <a href="http://127.0.0.1:8000/login" style="font-size: 30px">Login</a></span></p>
+      </div>
+    </ul>
+
+    <!-- Dividing Line --> 
+    <hr style="clear:both"/>
+
+    <form method="POST" class="form-group">
+        {% csrf_token %}
+        {{form|crispy}}
+        <br>
+        <button class="block" type="submit" class="btn btn-success">Register</button>
+    </form>
+</body>
 {% endblock %}
