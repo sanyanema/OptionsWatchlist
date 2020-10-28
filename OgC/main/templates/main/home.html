@@ -39,13 +39,53 @@
         border: 0 none;
       }
 
+      .search-box{
+        position: fixed;
+        top: 35%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        height: 50px;
+        border-radius: 40px;
+        padding: 10px;
+      }
+      .search-box:hover > .search-txt{
+        width: 600px;
+        padding: 0 6px;
+      }
+      .search-box:hover > .search-btn{
+        background-color: #1f2b4a;
+      }
+      .search-btn{
+        color: mediumturquoise;
+        float: right;
+        width: 40px;
+        height: 30px;
+        border-radius: 50%;
+        background:white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .search-txt{
+        border: none;
+        background: none;
+        outline: none;
+        float: left;
+        padding: 0;
+        color: black;
+        font-size: 20px;
+        transition: 0.4s;
+        width: 240px;
+      }
+
       #google_visual{
-        border: 3px red;
-        border-style: solid;
+        border: 30px red;
         border-width: thick;
+        border-style: solid;
         border-radius: 25px;
         background:white;
-        width: 30%;
+        width: 29.3%;
         float: left;
         margin-left: 3%;
         padding: 30px;
@@ -110,9 +150,10 @@
       <br>
       <br>
       <br>
+      <br>
       
       <!-- Visualization Page Button -->
-      <a href="http://127.0.0.1:8000/visualization"</a>
+      <a href="http://127.0.0.1:8000/visualization">
         <div id="google_visual">
           <center><p style="color:black; font-size: 30px">{{stock}}</p></center>
           <center><p style="color:black; font-size: 50px">GOOGL</p></center>
@@ -120,20 +161,28 @@
       <center><p style="color:black; font-size: 30px">Last Quote: 10am</p></center>
           <center><p style="color:red; font-size: 30px">-0.37(-0.31%)</p></center>
         </div>
+      </a>
+
+      <a href="http://127.0.0.1:8000/visualization">
         <div id="visual">
-          <center><p style="color:black; font-size: 30px">Apple</p></center>
-          <center><p style="color:black; font-size: 50px">AAPL</p></center>
+          <center><p style="color:black; font-size: 30px">{{stock}}</p></center>
+          <center><p style="color:black; font-size: 50px">GOOGL</p></center>
         <center><p style="color:black; font-size: 40px">$107.61</p></center>
       <center><p style="color:black; font-size: 30px">Last Quote: 10am</p></center>
-          <center><p style="color:red; font-size: 30px">-0.41(-0.51%)</p></center>
+          <center><p style="color:green; font-size: 30px">+0.37(+0.31%)</p></center>
         </div>
+      </a>
+
+      <a href="http://127.0.0.1:8000/visualization">
         <div id="visual2">
-          <center><p style="color:black; font-size: 30px">Amazon.com, Inc.</p></center>
-          <center><p style="color:black; font-size: 50px">AMZN</p></center>
+          <center><p style="color:black; font-size: 30px">{{stock}}</p></center>
+          <center><p style="color:black; font-size: 50px">GOOGL</p></center>
         <center><p style="color:black; font-size: 40px">$107.61</p></center>
       <center><p style="color:black; font-size: 30px">Last Quote: 10am</p></center>
-          <center><p style="color:green; font-size: 30px">+0.32(+0.25%)</p></center>
+          <center><p style="color:red; font-size: 30px">-0.37(-0.31%)</p></center>
         </div>
+      </a>
+        
       
   </body>
 </html>
