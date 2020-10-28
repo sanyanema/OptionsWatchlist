@@ -40,7 +40,7 @@
         border: 0 none;
       }
         .search-box{
-        position: fixed;
+        position: absolute;
         top: 35%;
         left: 50%;
         transform: translate(-50%, -50%);
@@ -132,6 +132,9 @@
       <br>
       
       <!-- Visualization Page Button -->
+      <!--
+
+      
       <a href="http://127.0.0.1:8000/visualization">
         <div id="google_visual">
           <center><p style="color:black; font-size: 30px">{{stock}}</p></center>
@@ -161,15 +164,46 @@
           <center><p style="color:red; font-size: 30px">-0.37(-0.31%)</p></center>
         </div>
       </a>
-
-        
+        -->
         <a href="visualization">
-          <div data-role="tile" data-size="large" data-effect="hover-slide-down" style="background-color: blanchedalmond; border-radius: 25px; border: 30px turquoise;">
+          <div data-role="tile" data-size="large" data-effect="hover-slide-down" style="background-color: blanchedalmond;float: left;padding: 30px; margin-left: 12.5%;border-radius: 25px; border: 30px turquoise; border-width: thick; border-style: solid;">
             <div class="slide-front">
                 <img src="/static/images/GoogleLogo.png" class="h-100 w-100">
             </div>
             <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve">
-                <center><p style="color: black; font-size: 30px;">Stock Price: $1510.80</p></center>
+                <center><p style="color: black; font-size: 30px;">
+                  Stock Price: $1510.80
+                </p></center>
+                <center><p style="color: red; font-size: 15px;">-88.08 (5.51%)</p></center>
+            </div>
+            <span class="branding-bar fg-dark">GOOGL</span>
+         </div>
+        </a>
+
+        <a href="visualization">
+          <div data-role="tile" data-size="large" data-effect="hover-slide-down" style="background-color: blanchedalmond;float: left;padding: 30px;margin-left: 12.5%;border-radius: 25px; border: 30px turquoise; border-width: thick; border-style: solid;">
+            <div class="slide-front">
+                <img src="/static/images/GoogleLogo.png" class="h-100 w-100">
+            </div>
+            <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve">
+                <center><p style="color: black; font-size: 30px;">
+                  Stock Price: $1510.80
+                </p></center>
+                <center><p style="color: red; font-size: 15px;">-88.08 (5.51%)</p></center>
+            </div>
+            <span class="branding-bar fg-dark">GOOGL</span>
+         </div>
+        </a>
+
+        <a href="visualization">
+          <div data-role="tile" data-size="large" data-effect="hover-slide-down" style="background-color: blanchedalmond;float: left;padding: 30px;margin-left: 12.5%;border-radius: 25px; border: 30px turquoise; border-width: thick; border-style: solid;">
+            <div class="slide-front">
+                <img src="/static/images/GoogleLogo.png" class="h-100 w-100">
+            </div>
+            <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve">
+                <center><p style="color: black; font-size: 30px;">
+                  Stock Price: $1510.80
+                </p></center>
                 <center><p style="color: red; font-size: 15px;">-88.08 (5.51%)</p></center>
             </div>
             <span class="branding-bar fg-dark">GOOGL</span>
