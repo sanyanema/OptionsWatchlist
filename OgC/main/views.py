@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import WatchList, Item
 # Create your views here.
@@ -61,3 +61,14 @@ def create(response):
 def view(response):
 	return render(response, "main/view.html", {}) 
 
+def add_watchlist(request):
+	user = request.user
+	if request.method == 'POST':
+		watchlist_id = request.POST.get('watchlist_id')
+		watchlist_obj = Post.object.get(id=watchlist_id)
+
+		if user in watchlist_obj.liked.all():
+			watchlist.obj.remove(user)
+		else:
+			post_obj.liked.add
+	return redirect('watchlist:stock-list')

@@ -169,6 +169,14 @@
     <h1 class="display-4" style="color:MediumTurquoise"><center><u>{{stock}} ({{name}})</u></center></h1>
     <br>
 
+    <!-- Add, Remove from watch list --> 
+    <form action="{% url 'watchlist:add'%}" methods='POST' class="ui form">
+      {% csrf_token %}
+      <input type='hidden' name='watchlist_id' value="{{ obj.id}}">
+      <center><button class="ui button add" type='submit'>Add</button><button class="ui button remove" type='submit'>Remove</button></center>
+    </form>
+    <br>
+
     <!-- Options Table -->
     <table class="table-striped table-dark">
       <!-- Categories of Options Table (Top Row)-->
