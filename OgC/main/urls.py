@@ -9,4 +9,6 @@ urlpatterns = [
 	path('about_us', views.about_us, name = 'about_us'),
 	path('contact', views.contact, name = 'contact'),
 	path('visualization', views.visualization, name = 'visualization'),
+	path('view', views.view, name="index"),
+	path("<int:id>", views.index, name="index"),
 ]
