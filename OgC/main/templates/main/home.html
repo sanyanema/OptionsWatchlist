@@ -38,6 +38,17 @@
         background-color: #7C7C7C;
         border: 0 none;
       }
+
+      #google_visual{
+        border: 3px red;
+        border-width: thick;
+        border-radius: 25px;
+        background:white;
+        width: 30%;
+        float: left;
+        margin-left: 3%;
+        padding: 30px;
+      }
     </style>
   </head>
 
@@ -78,7 +89,15 @@
       <br>
       
       <!-- Visualization Page Button -->
-      <a href="visualization" style="font-size: 50px"><left>{{stock}} Visualization Page</a>
+      <a href="http://127.0.0.1:8000/visualization"</a>
+        <div id="google_visual">
+          <center><p style="color:black; font-size: 30px">{{stock}}</p></center>
+          <center><p style="color:black; font-size: 50px">GOOGL</p></center>
+        <center><p style="color:black; font-size: 40px">$107.61</p></center>
+      <center><p style="color:black; font-size: 30px">Last Quote: 10am</p></center>
+          <center><p style="color:red; font-size: 30px">-0.37(-0.31%)</p></center>
+        </div>
+        
       
   </body>
 </html>
