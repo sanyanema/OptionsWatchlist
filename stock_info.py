@@ -103,7 +103,7 @@ class StockInfo:
             x=hist['Date'],
             y=hist['20 Day MA'],
             yaxis='y2',
-            name='moving average'
+            name='Moving Average'
         )
 
         lower = go.Scatter(
