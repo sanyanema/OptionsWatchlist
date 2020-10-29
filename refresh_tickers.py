@@ -42,8 +42,3 @@ def parse_tickers(file_name, data):
 
     # return ticker symbols
     return tickers
-
-
-nasdaq = get_tickers(nasdaq_url)
-other = get_tickers(other_url)
-
