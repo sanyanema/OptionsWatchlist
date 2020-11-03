@@ -1,6 +1,5 @@
 {% load static %}
 <!DOCTYPE html>
-
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -9,6 +8,9 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+    <script src="https://kit.fontawesome.com/26600a00d1.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
 
     <style type="text/css">
       /* Hyperlinks at top */
@@ -26,6 +28,7 @@
       ul#headings a {
         display: inline; 
         margin-right: 40px;
+        color:#004BDD;
       }
 
       /* Break Lines */
@@ -34,14 +37,13 @@
         height: 5px;
         margin-left: auto;
         margin-right: auto;
-        background-color: #7C7C7C;
+        background-color:#464866;
         border: 0 none;
       }
     </style>
   </head>
 
-
-  <body style="background-color:#1F2B4A">
+  <body style="background-color:#25274D">
     <!-- List of hyperlinks at top of page -->
     <ul id="headings">
       <!-- OgC Logo Button -->
@@ -55,7 +57,7 @@
         <a href="help" style="font-size: 30px">Help</a></li>
         <a href='about_us' style="font-size: 30px">About Us</a>
         <a href="contact" style="font-size: 30px">Contact</a>
-        <a href="view" style="font-size: 30px">Watchlist</a>
+        <a href="watchlist" style="font-size: 30px">Watchlist</a>
         <a href="login" style="font-size: 30px">Login</a></span></p>
       </div>
     </ul>
@@ -63,11 +65,9 @@
     <!-- Dividing Line --> 
     <hr style="clear:both"/>
 
-    <!-- Help Title Text -->
-    <h1 class="display-2" style="color:MediumTurquoise"><center><u>Help!!!</u></center></h1>
+    <!-- Watchlist Text --> 
+    <h1 class="display-4" style="color:#2E9CCA"><center><u>{{name}}'s Watchlist:<u/></center></h1>
 
-    <!-- Help Paragraph Information Text -->
-    <p style="color:#FAFAFA; font-size: 20px; text-align:center; padding-left: 50px; padding-right: 50px">You have found the help page. I am sorry but Joseph doesn't understand finance either, so the help page currently will be of no use. In the future someone, maybe even Joseph, will add information on what greeks are or how to interpret options. However, until someone smarter than Joseph or when Joseph decides to learn the information himself, this page will be basically useless. </p>
   </body>
 </html>
 
