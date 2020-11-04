@@ -32,5 +32,5 @@ class PriceGraph:
 
 
 # creating a PriceGraph object and plotting its price history
-google = PriceGraph('GOOG')
+google = PriceGraph('AMZN')
 google.plotPriceHistory()

@@ -1,8 +1,9 @@
 import yfinance as yf
 from numpy import sqrt,mean,log,diff
 from datetime import date
+from tabulate import tabulate
 
-#input: ticker, date (YYYY-MM-DD), type {all strings}
+#input: 'ticker', date 'YYYY-MM-DD', type 'calls' or 'puts'
 def overorunder(ticker, expiration_date, type):
     """
     :param ticker: String from the following markets:
@@ -44,6 +45,8 @@ def overorunder(ticker, expiration_date, type):
     std = sqrt(sum(diff_square) * (1.0 / (len(r) - 1)))
     historical_vol = std * sqrt(difference)
 
+    print(historical_vol)
+
     #determine puts or calls
     if type == 'puts':
         options = chain.puts
@@ -57,14 +60,14 @@ def overorunder(ticker, expiration_date, type):
     implied_vol = options["impliedVolatility"]
 
     for i in range(0, len(options.index)):
-        if int(implied_vol[i]) >= historical_vol:
+        if float(implied_vol[i]) >= historical_vol:
             valued[i] = "over"
-        elif int(implied_vol[i]) < historical_vol:
+        elif float(implied_vol[i]) < historical_vol:
             valued[i] = "under"
 
     options['valued'] = valued #add list to options dataframe
 
-    contracts_and_valued = options[['contractSymbol', 'valued']].copy() #create dataframe of contracts and valued
+    toReturn = options[['contractSymbol','strike', 'lastPrice', 'bid', 'ask', 'impliedVolatility', 'valued']].copy() #create dataframe of contracts and other information
 
     #test code for printing just over or undervalued contracts
     #for i in range(0, len(contracts_and_valued.index)):
@@ -72,6 +75,7 @@ def overorunder(ticker, expiration_date, type):
     #        tuple = (contracts_and_valued['contractSymbol'][i], contracts_and_valued['valued'][i])
     #        print(tuple)
 
-    print(contracts_and_valued)
+    print(tabulate(toReturn, headers='keys', tablefmt='psql'))
 
-overorunder('AMZN', '2020-11-05', 'calls')
+
+overorunder('TSLA', '2020-11-20 ', 'calls')
