@@ -39,6 +39,7 @@
         background-color: #7C7C7C;
         border: 0 none;
       }
+      /* Search box */
         .search-box{
         position: absolute;
         top: 35%;
@@ -49,13 +50,16 @@
         border-radius: 40px;
         padding: 10px;
       }
+      /* Search text when hovering so it expands*/
       .search-box:hover > .search-txt{
         width: 600px;
         padding: 0 6px;
       }
+      /* Search button when hovering so it expands*/
       .search-box:hover > .search-btn{
         background-color: #1f2b4a;
       }
+      /* Search button */
       .search-btn{
         color: #65CCB8;
         float: right;
@@ -67,6 +71,7 @@
         justify-content: center;
         align-items: center;
       }
+      /* Search button */
       .search-txt{
         border: none;
         background: none;
@@ -78,8 +83,8 @@
         transition: 0.4s;
         width: 240px;
       }
-
-      #google_visual{
+      /* Google Visualization Ticker Button */
+/*      #google_visual{
         border: 30px green;
         border-width: thick;
         border-style: solid;
@@ -89,7 +94,7 @@
         float: left;
         margin-left: 3%;
         padding: 30px;
-      }
+      }*/
       
     </style>
   </head>
@@ -132,10 +137,8 @@
     <br>
     <br>
       
-      <!-- Visualization Page Button -->
+      <!-- Old Visualization Page Button may switch back to later-->
       <!--
-
-      
       <a href="http://127.0.0.1:8000/visualization">
         <div id="google_visual">
           <center><p style="color:black; font-size: 30px">{{stock}}</p></center>
@@ -165,11 +168,12 @@
           <center><p style="color:red; font-size: 30px">-0.37(-0.31%)</p></center>
         </div>
       </a> -->
-      <!-- Ticker Buttons -->
+
+      <!-- Ticker Buttons for example Google Stock-->
         <a href="visualization">
-          <div data-role="tile" data-size="large" data-effect="hover-slide-down" style="background-color: blanchedalmond;float: left;padding: 30px; margin-left: 12.5%;border-radius: 25px; border: 30px #65CCB8; border-width: thick; border-style: solid;">
+          <div data-role="tile" data-size="large" data-effect="hover-slide-down" style="background-color: blanchedalmond;float: left;padding: 30px; margin-left: 7%;border-radius: 25px; border: 30px #65CCB8; border-width: thick; border-style: solid; width: 24%">
             <div class="slide-front">
-                <img src="/static/images/GoogleLogo.png" class="h-100 w-100">
+                <center><img src="/static/images/GoogleLogo.png" width = 300></center>
             </div>
             <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve">
                 <center><p style="color: black; font-size: 30px;">
@@ -182,9 +186,9 @@
         </a>
 
         <a href="visualization">
-          <div data-role="tile" data-size="large" data-effect="hover-slide-down" style="background-color: blanchedalmond;float: left;padding: 30px;margin-left: 12.5%;border-radius: 25px; border: 30px #65CCB8; border-width: thick; border-style: solid;">
+          <div data-role="tile" data-size="large" data-effect="hover-slide-down" style="background-color: blanchedalmond;float: left;padding: 30px;margin-left: 7%;border-radius: 25px; border: 30px #65CCB8; border-width: thick; border-style: solid; width: 24%">
             <div class="slide-front">
-                <img src="/static/images/GoogleLogo.png" class="h-100 w-100">
+                <center><img src="/static/images/GoogleLogo.png" width = 300></center>
             </div>
             <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve">
                 <center><p style="color: black; font-size: 30px;">
@@ -197,9 +201,9 @@
         </a>
 
         <a href="visualization">
-          <div data-role="tile" data-size="large" data-effect="hover-slide-down" style="background-color: blanchedalmond;float: left;padding: 30px;margin-left: 12.5%;border-radius: 25px; border: 30px #65CCB8; border-width: thick; border-style: solid;">
+          <div data-role="tile" data-size="large" data-effect="hover-slide-down" style="background-color: blanchedalmond;float: left;padding: 30px;margin-left: 7%;border-radius: 25px; border: 30px #65CCB8; border-width: thick; border-style: solid; width: 24%">
             <div class="slide-front">
-                <img src="/static/images/GoogleLogo.png" class="h-100 w-100">
+                <center><img src="/static/images/GoogleLogo.png" width = 300></center>
             </div>
             <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve">
                 <center><p style="color: black; font-size: 30px;">

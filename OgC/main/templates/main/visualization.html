@@ -308,15 +308,17 @@
         </div>
     </div>
 
+    <!-- JavaScript to make judgements about the value of a stock in tech analysis box-->
     <script>
       const gaugeElement = document.querySelector(".gauge");
 
       function setGaugeValue(gauge, value) {
+          // Making sure it is in range
           if (value < 0 || value > 1) {
               return;
           }
-          //hypothetical good value --> <=0.5
-          //hypothetical bad value --> >=0.6
+          //hypothetical good value -> <=0.5
+          //hypothetical bad value -> >=0.6
           if (value <= 0.5) {
             gauge.querySelector(".gauge__cover").textContent = `${Math.round(value * 100)}% is a good value for this option`;
           } else if (value >= 0.6) {
@@ -328,9 +330,8 @@
       }
 
       setGaugeValue(gaugeElement, 0.9); //instead of setting as a constant number, pull in from backend
-
-
     </script>
+
     </body>
 </html>
 
