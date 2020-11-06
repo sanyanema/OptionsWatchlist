@@ -3,7 +3,6 @@ Team 13
 Finance Group
 
 
-PM's:
 James (jflemi9)
 
 Group Members:
