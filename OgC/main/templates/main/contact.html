@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style type="text/css">
+      /* Hyperlinks at top */
+      .hyperlinks {
+        float: right; 
+        margin-top: 20px;     
+      }
+
+      /* OGC LOGO */
+      .OGC {
+        float:left;    
+      }   
+
+      /* Headings at top */     
+      ul#headings a {
+        display: inline; 
+        margin-right: 40px;
+      }
+
+      /* Break Lines */
+      hr {
+        width: 100%;
+        height: 5px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: #7C7C7C;
+        border: 0 none;
+      }
+    </style>
+  </head>
+
+  <body style="background-color:#1F2B4A">
+    <!-- List of hyperlinks at top of page -->
+    <ul id="headings">
+      <!-- OgC Logo Button -->
+      <a class = "OGC" href='http://127.0.0.1:8000/'>
+        <img src="{% static 'images/logo.png' %}" alt="Home" width="150" height="106">
+      </a>
+
+      <!--Hyperlinks-->
+      <div class="hyperlinks">
+        <a href='http://127.0.0.1:8000/' style="font-size: 30px">Home</a>
+        <a href="help" style="font-size: 30px">Help</a></li>
+        <a href='about_us' style="font-size: 30px">About Us</a>
+        <a href="contact" style="font-size: 30px">Contact</a>
+        <a href="view" style="font-size: 30px">Watchlist</a>
+        <a href="login" style="font-size: 30px">Login</a></span></p>
+      </div>
+    </ul>
+
+    <!-- Dividing Line --> 
+    <hr style="clear:both"/>
+
+    <!-- Contact Title Text -->
+    <h1 class="display-4" style="color:#65CCB8"><center><u>Contact:</u></center></h1>
+    <br>
+
+    <!-- Emails -->
+    <div class="Emails">
+      <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px">
+        Gabe Aaron: <a href="mailto:gaaron2@illinois.edu"><u>gaaron2@illinois.edu</u></a>
+      </p>
+      <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px">
+        Suyash Agrawal: <a href="mailto:suyasha2@illinois.edu"><u>suyasha2@illinois.edu</u></a>
+      </p>
+      <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px">
+        Eshaan Bhattad: <a href="mailto:eshaan2@illinois.edu"><u>eshaan2@illinois.edu</u></a>
+      </p>
+      <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px">
+        Anakin Dey: <a href="mailto:anakind2@illinois.edu"><u>anakind2@illinois.edu</u></a>
+      </p>
+      <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px"> 
+        James Fleming: <a href="mailto:jflemi9@illinois.edu"><u>jflemi9@illinois.edu</u></a>
+      </p>
+      <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px">
+        Joseph Kuang: <a href="mailto:jjkuang2@illinois.edu"><u>jjkuang2@illinois.edu</u></a>
+      </p>
+      <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px">
+        Sanya Nema: <a href="mailto:snema2@illinois.edu"><u>snema2@illinois.edu</u></a>
+      </p>
+      <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px">
+        Brian Yoon: <a href="mailto:briancy2@illinois.edu"><u>briancy2@illinois.edu</u></a>
+      </p>
+    </div>
+    
+  </body>
+</html>
+
+

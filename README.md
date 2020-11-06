@@ -1,7 +1,8 @@
 # OgC
+Team 13
 Finance Group
 
-Project Manager:
+
 James (jflemi9)
 
 Group Members:
