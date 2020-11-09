@@ -178,7 +178,7 @@ class StockInfo:
         fig = go.Figure(data=data, layout=layout)
 
         # display figure
-        fig.show(renderer="browser")
+        fig.show()
 
 
 # example code
