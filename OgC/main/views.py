@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import WatchList, Item
+from .models import WatchList
+from . import stock_info
+
 # Create your views here.
 stock1 = "Google"
 stock1b = "GOOGL"
@@ -41,7 +43,9 @@ def contact(request):
 	return render(request, 'main/contact.html', {'name' : "John Smith"})
 
 def visualization(request):
-	return render(request, 'main/visualization.html', {'stock' : stock1, 'name' : stock1b})
+	stock = stock_info.StockInfo(stock1b)
+	plot_html = stock.plot_hist()
+	return render(request, 'main/visualization.html', {'stock': stock1, 'name': stock1b, 'plot_html': plot_html})
 
 def create(response):
 	if response.method == "POST":

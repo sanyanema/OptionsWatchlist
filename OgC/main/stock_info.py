@@ -177,11 +177,14 @@ class StockInfo:
         # define figure
         fig = go.Figure(data=data, layout=layout)
 
-        # display figure
-        fig.show()
+        # get html
+        plot_html = fig.to_html(full_html=False, include_plotlyjs=False)
+
+        return plot_html
 
 
 # example code
-stock = StockInfo("ZM")
+# stock = StockInfo("ZM")
 
-stock.plot_hist()
+# html = stock.plot_hist()
+# print(len(html))

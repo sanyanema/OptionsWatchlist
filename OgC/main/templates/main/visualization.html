@@ -10,6 +10,9 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    <!-- Include Plotly.js for graph -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
     <style type="text/css">
       /* Hyperlinks at top */
       .hyperlinks {
@@ -80,6 +83,12 @@
         float: right;
         margin-right: 3%;
         padding: 20px;
+      }
+
+      #price_graph {
+          margin-left: 3%;
+          margin-right: 3%;
+        padding: 30px;
       }
 
       /* Stock Info Box */
@@ -276,9 +285,12 @@
     </div>
 
     <br style="clear:both"/><br>
+
     <!-- Stock Price Chart -->
-    <div id="price_chart" style="text-align:center">
-      <img src="{% static 'images/google.png' %}" alt="Stock" width=70%>
+    <div id="price_graph">
+    {% autoescape off %}
+    {{ plot_html }}
+    {% endautoescape %}
     </div>
 
     <br>
