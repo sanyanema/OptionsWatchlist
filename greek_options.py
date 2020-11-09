@@ -49,4 +49,4 @@ def getGreeks(option):
 
 
 # Testing
-print(getGreeks(yFinanceToWallStreet(yfinance.Ticker('TSLA').option_chain("2020-10-23").calls, 1800)))
+print(getGreeks(yFinanceToWallStreet(yfinance.Ticker('TSLA').option_chain("2020-11-13").calls, 500)))
