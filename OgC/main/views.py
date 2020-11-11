@@ -4,6 +4,7 @@ import yfinance
 from wallstreet import Call, Put
 from .models import WatchList
 from . import stock_info, options_info, greek_options
+import json
 
 # Create your views here.
 stock1 = "Google"
@@ -50,14 +51,27 @@ def visualization(request):
 	# Stock Price Chart
 	stock = stock_info.StockInfo(stock1b)
 	plot_html = stock.plot_hist()
+
 	# Options Information
 	options = options_info.getCalls('GOOGL', '2020-11-13')
 	options_html = options.to_html()
+
 	# Greeks 
 	# greeks = greek_options.getGreeks(greek_options.yFinanceToWallStreet(yfinance.Ticker('GOOGL').option_chain("2020-11-13").calls, 500))
 	# greeks_html = greeks.to_html()
-	return render(request, 'main/visualization.html', {'stock1' : stock1, 'stock1b' : stock1b, 
-			'plot_html': plot_html, 'options' : options_html})
+	return render(request, 'main/visualization.html', {
+		'stock1' : stock1,				# stock name
+		'stock1b' : stock1b, 			# stock ticker
+		'plot_html': plot_html,			# graph html
+		'options' : options_html,		# options html
+		'price' : stock.current_price,	# serialized stock info
+		'day_range' : stock.day_range,
+		'52wk_range' : stock.yr_range,
+		'volume' : stock.avg_volume,
+		'eps' : stock.eps_trail,
+		'market_cap' : stock.market_cap,
+		'industry' : stock.sector,
+	})
 
 def create(response):
 	if response.method == "POST":
