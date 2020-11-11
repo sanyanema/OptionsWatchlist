@@ -11,4 +11,5 @@ urlpatterns = [
 	path('visualization', views.visualization, name = 'visualization'),
 	path('view', views.view, name="index"),
 	path("<int:id>", views.index, name="index"),
+	path('options', views.testing_options, name="testing_options")
 ]

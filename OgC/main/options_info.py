@@ -89,3 +89,6 @@ def findContractExpirationDate(contract):
 stock = getStock('TSLA')
 calls = getCalls('TSLA', '2020-11-13')
 print(calls)
+print()
+print()
+print(type(calls))

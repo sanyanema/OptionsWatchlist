@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import WatchList
-from . import stock_info
+from . import stock_info, options_info
 
 # Create your views here.
 stock1 = "Google"
@@ -43,9 +43,13 @@ def contact(request):
 	return render(request, 'main/contact.html', {'name' : "John Smith"})
 
 def visualization(request):
+	# Stock Price Chart
 	stock = stock_info.StockInfo(stock1b)
 	plot_html = stock.plot_hist()
-	return render(request, 'main/visualization.html', {'stock': stock1, 'name': stock1b, 'plot_html': plot_html})
+	# Options Information
+	options = options_info.getCalls('GOOGL', '2020-11-13')
+	return render(request, 'main/visualization.html', {'stock' : stock1, 'name' : stock1b, 
+			'plot_html': plot_html, 'options' : options})
 
 def create(response):
 	if response.method == "POST":
@@ -76,3 +80,9 @@ def add_watchlist(request):
 		else:
 			post_obj.liked.add
 	return redirect('watchlist:stock-list')
+
+def testing_options(request):
+	# Options Information
+	options = options_info.getCalls('GOOGL', '2020-11-13')
+	html = options.to_html()
+	return render(request, 'main/testing_options.html', {'options' : html})
