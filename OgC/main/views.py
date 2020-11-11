@@ -48,8 +48,9 @@ def visualization(request):
 	plot_html = stock.plot_hist()
 	# Options Information
 	options = options_info.getCalls('GOOGL', '2020-11-13')
+	html_options = options.to_html()
 	return render(request, 'main/visualization.html', {'stock' : stock1, 'name' : stock1b, 
-			'plot_html': plot_html, 'options' : options})
+			'plot_html': plot_html, 'options' : html_options})
 
 def create(response):
 	if response.method == "POST":
@@ -84,5 +85,5 @@ def add_watchlist(request):
 def testing_options(request):
 	# Options Information
 	options = options_info.getCalls('GOOGL', '2020-11-13')
-	html = options.to_html()
-	return render(request, 'main/testing_options.html', {'options' : html})
+	html_options = options.to_html()
+	return render(request, 'main/testing_options.html', {'options' : html_options, 'testing' : options})

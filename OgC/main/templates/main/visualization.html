@@ -47,19 +47,26 @@
         color:white;
       }
 
-      /* Rows in the Table */
+      /* All Rows in the Table */
       th, td {
         text-align: center;
         border: 1px solid black;
         padding: 15px;
       }
 
+      /* All but top row of table */
+      td {
+        background-color: #202020; /* I don't like this number */
+      }
+
       /* Table */
-      table {
+      #options {
         border: 2px solid black;
         width: 44%;
+        height: 460px;
         float: left;
         margin-left: 3%;
+        overflow:auto
       }
 
       /* Less Space between lines of text */
@@ -80,6 +87,7 @@
         border-radius: 25px;
         background:#2179AB;
         width: 44%;
+        height: 460px;
         float: right;
         margin-right: 3%;
         padding: 20px;
@@ -178,79 +186,10 @@
     <h1 class="display-4" style="color:MediumTurquoise"><center><u>{{stock}} ({{name}})</u></center></h1>
     <br>
 
-    <!-- Options Table -->
-    <table id = "options" class="table-striped table-dark">
-      <!-- Categories of Options Table (Top Row)-->
-      <thead class="categories">
-        <tr>
-          <th>Type of Option</th>
-          <th>Expiration Date</th>
-          <th>Strike Price</th>
-          <th>Last Price</th>
-          <th>Implied Volatility</th>
-        </tr>
-      </thead>
-
-      <!-- Information of Options Table -->
-      <tbody>
-        <!-- Row 1 -->
-        <tr>
-          <td>Call</td>
-          <td>2020-10-21</td>
-          <td>115</td>
-          <td>0.80</td>
-          <td>0.80</td>
-        </tr>
-        <!-- Row 2 -->
-          <tr>
-            <td>Call</td>
-            <td>2020-10-21</td>
-            <td>112</td>
-            <td>0.05</td>
-            <td>0.05</td>
-          </tr>
-        <!-- Row 3 -->
-        <tr>
-          <td>Call</td>
-          <td>2020-10-21</td>
-          <td>120</td>
-          <td>0.40</td>
-          <td>0.40</td>
-        </tr>
-        <!-- Row 4 -->
-        <tr>
-          <td>Call</td>
-          <td>2020-10-21</td>
-          <td>95</td>
-          <td>0.20</td>
-          <td>0.20</td>
-        </tr>
-        <!-- Row 5 -->
-          <tr>
-          <td>Put</td>
-          <td>2020-10-21</td>
-          <td>115</td>
-          <td>0.80</td>
-          <td>0.80</td>
-        </tr>
-        <!-- Row 6 -->
-        <tr>
-          <td>Put</td>
-          <td>2020-10-21</td>
-          <td>112</td>
-          <td>0.05</td>
-          <td>0.05</td>
-        </tr>
-        <!-- Row 7 -->
-        <tr>
-          <td>Put</td>
-          <td>2020-10-21</td>
-          <td>120</td>
-          <td>0.40</td>
-          <td>0.40</td>
-        </tr>
-      </tbody>
-    </table>
+    <!-- Options Tabled --> 
+    <div id = "options" style="color:white;">
+      {{options | safe}}
+    </div>
 
     <!-- Implied Volatility -->
     <div id="volatility">
@@ -292,7 +231,6 @@
       {{ plot_html }}
       {% endautoescape %}
     </div> -->
-
     <br>
 
     <!-- The Stock Info Box -->
