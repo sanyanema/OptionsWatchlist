@@ -75,7 +75,7 @@ def create(response):
 	return render(response, "main/create.html", {"form":form})
 
 def view(response):
-	return render(response, "main/view.html", {}) 
+	return render(response, "main/view.html", {'name' : "John Smith"}) 
 
 def add_watchlist(request):
 	user = request.user
