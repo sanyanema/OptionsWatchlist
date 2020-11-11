@@ -11,60 +11,56 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <style type="text/css">
-      /* Hyperlinks at top */
+/* Hyperlinks at top */
       .hyperlinks {
         float: right; 
-        margin-top: 20px;     
+        margin-top: 28px;     
       }
-
-      /* OGC LOGO */
-      .OGC {
-        float:left;    
-      }   
-
       /* Headings at top */     
       ul#headings a {
         display: inline; 
-        margin-right: 40px;
+        margin-right: 20px;
+        color: #5FB2FF;
       }
-
       /* Break Lines */
       hr {
         width: 100%;
-        height: 5px;
+        height: 3px;
         margin-left: auto;
         margin-right: auto;
-        background-color: #7C7C7C;
+        margin-top: -20px;
+        background-color: #151515;
         border: 0 none;
       }
     </style>
   </head>
 
 
-  <body style="background-color:#1F2B4A">
-    <!-- List of hyperlinks at top of page -->
-    <ul id="headings">
-      <!-- OgC Logo Button -->
-      <a class = "OGC" href='http://127.0.0.1:8000/'>
-        <img src="{% static 'images/logo.png' %}" alt="Home" width="150" height="106">
-      </a>
+  <body style="background-color:#001444; font-family: Montserrat">
+    <div class ="header">
+      <!-- List of hyperlinks at top of page -->
+      <ul id="headings">
+        <!-- OgC Logo Button -->
+        <a class = "OGC" href='http://127.0.0.1:8000/'>
+          <img src="{% static 'images/logo.png' %}" alt="Home" width="140" height="100">
+        </a>
 
-      <!--Hyperlinks-->
-      <div class="hyperlinks">
-        <a href='http://127.0.0.1:8000/' style="font-size: 30px">Home</a>
-        <a href="help" style="font-size: 30px">Help</a></li>
-        <a href='about_us' style="font-size: 30px">About Us</a>
-        <a href="contact" style="font-size: 30px">Contact</a>
-        <a href="view" style="font-size: 30px">Watchlist</a>
-        <a href="login" style="font-size: 30px">Login</a></span></p>
-      </div>
-    </ul>
-
-    <!-- Dividing Line --> 
-    <hr style="clear:both"/>
+        <!--Hyperlinks-->
+        <div class="hyperlinks" style="font-size: 25px">
+          <a href='http://127.0.0.1:8000/'>Home</a>
+          <a href="help">Help</a></li>
+          <a href='about_us'>About Us</a>
+          <a href="contact">Contact</a>
+          <a href="view">Watchlist</a>
+          <a href="login">Login</a></span></p>
+        </div>
+      </ul>
+      <!-- Dividing Line --> 
+      <hr style="clear:both"/>
+    </div>
 
     <!-- Help Title Text -->
-    <h1 class="display-2" style="color:#65CCB8"><center><u>Help!!!</u></center></h1>
+    <h1 class="display-2" style="color:#0072DC"><center><u>Help!!!</u></center></h1>
 
     <!-- Help Paragraph Information Text -->
     <p style="color:#FAFAFA; font-size: 20px; text-align:center; padding-left: 50px; padding-right: 50px">You have found the help page. I am sorry but Joseph doesn't understand finance either, so the help page currently will be of no use. In the future someone, maybe even Joseph, will add information on what greeks are or how to interpret options. However, until someone smarter than Joseph or when Joseph decides to learn the information himself, this page will be basically useless. </p>

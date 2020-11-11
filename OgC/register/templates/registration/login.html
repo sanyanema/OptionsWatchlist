@@ -10,31 +10,24 @@
   /* Hyperlinks at top */
   .hyperlinks {
     float: right; 
-    margin-top: 20px;     
+    margin-top: 28px;     
   }
-
-  /* OGC LOGO */
-  .OGC {
-    float:left;    
-  }   
-
   /* Headings at top */     
   ul#headings a {
     display: inline; 
-    margin-right: 40px;
-    color:#004BDD;
+    margin-right: 20px;
+    color: #5FB2FF;
   }
-
   /* Break Lines */
   hr {
     width: 100%;
-    height: 5px;
+    height: 2px;
     margin-left: auto;
     margin-right: auto;
-    background-color: #7C7C7C;
+    margin-top: -20px;
+    background-color: #151515;
     border: 0 none;
   }
-
   .from-group {
   	color:green;
   	font-size: 30px;
@@ -53,27 +46,28 @@
 	  text-align: center;
 	}
 </style>
-<body style="background-color:#1F2B4A">
-	<!-- List of hyperlinks at top of page -->
-    <ul id="headings">
-      <!-- OgC Logo Button -->
-      <a class = "OGC" href='http://127.0.0.1:8000/'>
-        <img src="{% static 'images/logo.png' %}" alt="Home" width="150" height="106">
-      </a>
+<body style="background-color:#001444; font-family: Montserrat">
+  <div class ="header">
+  	<!-- List of hyperlinks at top of page -->
+      <ul id="headings">
+        <!-- OgC Logo Button -->
+        <a class = "OGC" href='http://127.0.0.1:8000/'>
+          <img src="{% static 'images/logo.png' %}" alt="Home" width="140" height="100">
+        </a>
 
-      <!--Hyperlinks-->
-      <div class="hyperlinks">
-        <a href='http://127.0.0.1:8000/' style="font-size: 30px">Home</a>
-        <a href="http://127.0.0.1:8000/help" style="font-size: 30px">Help</a></li>
-        <a href='http://127.0.0.1:8000/about_us' style="font-size: 30px">About Us</a>
-        <a href="http://127.0.0.1:8000/contact" style="font-size: 30px">Contact</a>
-        <a href="http://127.0.0.1:8000/view" style="font-size: 30px">Watchlist</a>
-        <a href="http://127.0.0.1:8000/login" style="font-size: 30px">Login</a></span></p>
-      </div>
-    </ul>
-
-    <!-- Dividing Line --> 
-    <hr style="clear:both"/>
+        <!--Hyperlinks-->
+        <div class="hyperlinks" style="font-size: 25px">
+          <a href='http://127.0.0.1:8000/'>Home</a>
+          <a href="http://127.0.0.1:8000/help">Help</a></li>
+          <a href='http://127.0.0.1:8000/about_us'>About Us</a>
+          <a href="http://127.0.0.1:8000/contact">Contact</a>
+          <a href="http://127.0.0.1:8000/view">Watchlist</a>
+          <a href="http://127.0.0.1:8000/login">Login</a></span></p>
+        </div>
+      </ul>
+      <!-- Dividing Line --> 
+      <hr style="clear:both"/>
+    </div>
 
 	<form method="post" class="from-group">
 		{% csrf_token %}

@@ -1,7 +1,7 @@
 import yfinance
 from wallstreet import Call, Put
-import options_info as op
-
+from . import options_info as op # Use this line when running the file through views.py
+# import options_info as op # Use this line when trying to run this file directly
 
 # WallStreet library can scrap google finance or yahoo
 # Make sure to set source to yahoo for continuity with YFinance library

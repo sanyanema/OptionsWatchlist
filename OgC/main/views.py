@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+import yfinance
+from wallstreet import Call, Put
 from .models import WatchList
-from . import stock_info, options_info
+from . import stock_info, options_info, greek_options
 
 # Create your views here.
 stock1 = "Google"
@@ -48,9 +50,12 @@ def visualization(request):
 	plot_html = stock.plot_hist()
 	# Options Information
 	options = options_info.getCalls('GOOGL', '2020-11-13')
-	html_options = options.to_html()
+	options_html = options.to_html()
+	# Greeks 
+	# greeks = greek_options.getGreeks(greek_options.yFinanceToWallStreet(yfinance.Ticker('GOOGL').option_chain("2020-11-13").calls, 500))
+	# greeks_html = greeks.to_html()
 	return render(request, 'main/visualization.html', {'stock' : stock1, 'name' : stock1b, 
-			'plot_html': plot_html, 'options' : html_options})
+			'plot_html': plot_html, 'options' : options_html})
 
 def create(response):
 	if response.method == "POST":
@@ -81,9 +86,3 @@ def add_watchlist(request):
 		else:
 			post_obj.liked.add
 	return redirect('watchlist:stock-list')
-
-def testing_options(request):
-	# Options Information
-	options = options_info.getCalls('GOOGL', '2020-11-13')
-	html_options = options.to_html()
-	return render(request, 'main/testing_options.html', {'options' : html_options, 'testing' : options})

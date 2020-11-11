@@ -10,39 +10,33 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/static/styles.css">
     <script src="https://kit.fontawesome.com/26600a00d1.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
 
     <style type="text/css">
       /* Hyperlinks at top */
       .hyperlinks {
         float: right; 
-        margin-top: 20px;     
+        margin-top: 28px;     
       }
-
-      /* OGC LOGO */
-      .OGC {
-        float:left;    
-      }   
-
       /* Headings at top */     
       ul#headings a {
         display: inline; 
-        margin-right: 40px;
+        margin-right: 20px;
+        color: #5FB2FF;
       }
-
       /* Break Lines */
       hr {
         width: 100%;
-        height: 5px;
+        height: 3px;
         margin-left: auto;
         margin-right: auto;
-        background-color: #7C7C7C;
+        margin-top: -20px;
+        background-color: #151515;
         border: 0 none;
       }
       /* Search box */
         .search-box{
         position: absolute;
-        top: 35%;
+        top: 30%;
         left: 50%;
         transform: translate(-50%, -50%);
         background: white;
@@ -61,7 +55,7 @@
       }
       /* Search button */
       .search-btn{
-        color: #65CCB8;
+        color: #5FB2FF;
         float: right;
         width: 40px;
         height: 30px;
@@ -82,47 +76,35 @@
         font-size: 20px;
         transition: 0.4s;
         width: 240px;
-      }
-      /* Google Visualization Ticker Button */
-/*      #google_visual{
-        border: 30px green;
-        border-width: thick;
-        border-style: solid;
-        border-radius: 25px;
-        background:white;
-        width: 29.3%;
-        float: left;
-        margin-left: 3%;
-        padding: 30px;
-      }*/
-      
+      }      
     </style>
   </head>
 
-  <body style="background-color:#1F2B4A">
-    <!-- List of hyperlinks at top of page -->
-    <ul id="headings">
-      <!-- OgC Logo Button -->
-      <a class = "OGC" href='http://127.0.0.1:8000/'>
-        <img src="{% static 'images/logo.png' %}" alt="Home" width="150" height="106">
-      </a>
+  <body style="background-color:#001444; font-family: Montserrat">
+    <div class ="header">
+      <!-- List of hyperlinks at top of page -->
+      <ul id="headings">
+        <!-- OgC Logo Button -->
+        <a class = "OGC" href='http://127.0.0.1:8000/'>
+          <img src="{% static 'images/logo.png' %}" alt="Home" width="140" height="100">
+        </a>
 
-      <!--Hyperlinks-->
-      <div class="hyperlinks">
-        <a href='http://127.0.0.1:8000/' style="font-size: 30px">Home</a>
-        <a href="help" style="font-size: 30px">Help</a></li>
-        <a href='about_us' style="font-size: 30px">About Us</a>
-        <a href="contact" style="font-size: 30px">Contact</a>
-        <a href="view" style="font-size: 30px">Watchlist</a>
-        <a href="login" style="font-size: 30px">Login</a></span></p>
-      </div>
-    </ul>
-
-    <!-- Dividing Line --> 
-    <hr style="clear:both"/>
+        <!--Hyperlinks-->
+        <div class="hyperlinks" style="font-size: 25px">
+          <a href='http://127.0.0.1:8000/'>Home</a>
+          <a href="help">Help</a></li>
+          <a href='about_us'>About Us</a>
+          <a href="contact">Contact</a>
+          <a href="view">Watchlist</a>
+          <a href="login">Login</a></span></p>
+        </div>
+      </ul>
+      <!-- Dividing Line --> 
+      <hr style="clear:both"/>
+    </div>
 
     <!-- Watchlist Text --> 
-    <h1 class="display-4" style="color:#65CCB8"><center><u>{{name}}'s Watchlist:<u/></center></h1>
+    <h1 class="display-4" style="color: #0072DC"><center><u>{{name}}'s Watchlist:<u/></center></h1>
 
     <!-- Search Bar -->
     <div class="search-box">
@@ -132,46 +114,11 @@
       </a>
     </div>
 
-    <br>
-    <br>
-    <br>
-    <br>
-      
-      <!-- Old Visualization Page Button may switch back to later-->
-      <!--
-      <a href="http://127.0.0.1:8000/visualization">
-        <div id="google_visual">
-          <center><p style="color:black; font-size: 30px">{{stock}}</p></center>
-          <center><p style="color:black; font-size: 50px">GOOGL</p></center>
-        <center><p style="color:black; font-size: 40px">$107.61</p></center>
-      <center><p style="color:black; font-size: 30px">Last Quote: 10am</p></center>
-          <center><p style="color:red; font-size: 30px">-0.37(-0.31%)</p></center>
-        </div>
-      </a>
-
-      <a href="http://127.0.0.1:8000/visualization">
-        <div id="google_visual">
-          <center><p style="color:black; font-size: 30px">{{stock}}</p></center>
-          <center><p style="color:black; font-size: 50px">GOOGL</p></center>
-        <center><p style="color:black; font-size: 40px">$107.61</p></center>
-      <center><p style="color:black; font-size: 30px">Last Quote: 10am</p></center>
-          <center><p style="color:green; font-size: 30px">+0.37(+0.31%)</p></center>
-        </div>
-      </a>
-
-      <a href="http://127.0.0.1:8000/visualization">
-        <div id="google_visual">
-          <center><p style="color:black; font-size: 30px">{{stock}}</p></center>
-          <center><p style="color:black; font-size: 50px">GOOGL</p></center>
-        <center><p style="color:black; font-size: 40px">$107.61</p></center>
-      <center><p style="color:black; font-size: 30px">Last Quote: 10am</p></center>
-          <center><p style="color:red; font-size: 30px">-0.37(-0.31%)</p></center>
-        </div>
-      </a> -->
+    <br><br><br>
 
       <!-- Ticker Buttons for example Google Stock-->
         <a href="visualization">
-          <div data-role="tile" data-size="large" data-effect="hover-slide-down" style="background-color: blanchedalmond;float: left;padding: 30px; margin-left: 7%;border-radius: 25px; border: 30px #65CCB8; border-width: thick; border-style: solid; width: 24%">
+          <div data-role="tile" data-size="large" data-effect="hover-slide-down" style="background-color: blanchedalmond;float: left;padding: 30px; margin-left: 7%;border-radius: 25px; border: 30px #202020; border-width: thick; border-style: solid; width: 24%">
             <div class="slide-front">
                 <center><img src="/static/images/GoogleLogo.png" width = 300></center>
             </div>
@@ -186,7 +133,7 @@
         </a>
 
         <a href="visualization">
-          <div data-role="tile" data-size="large" data-effect="hover-slide-down" style="background-color: blanchedalmond;float: left;padding: 30px;margin-left: 7%;border-radius: 25px; border: 30px #65CCB8; border-width: thick; border-style: solid; width: 24%">
+          <div data-role="tile" data-size="large" data-effect="hover-slide-down" style="background-color: blanchedalmond;float: left;padding: 30px;margin-left: 7%;border-radius: 25px; border: 30px #202020; border-width: thick; border-style: solid; width: 24%">
             <div class="slide-front">
                 <center><img src="/static/images/GoogleLogo.png" width = 300></center>
             </div>
@@ -201,7 +148,7 @@
         </a>
 
         <a href="visualization">
-          <div data-role="tile" data-size="large" data-effect="hover-slide-down" style="background-color: blanchedalmond;float: left;padding: 30px;margin-left: 7%;border-radius: 25px; border: 30px #65CCB8; border-width: thick; border-style: solid; width: 24%">
+          <div data-role="tile" data-size="large" data-effect="hover-slide-down" style="background-color: blanchedalmond;float: left;padding: 30px;margin-left: 7%;border-radius: 25px; border: 30px #202020; border-width: thick; border-style: solid; width: 24%">
             <div class="slide-front">
                 <center><img src="/static/images/GoogleLogo.png" width = 300></center>
             </div>
@@ -215,8 +162,6 @@
          </div>
         </a>
 
-  <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+    <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
   </body>
 </html>
-
-
