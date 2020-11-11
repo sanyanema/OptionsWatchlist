@@ -16,7 +16,7 @@
       /* Hyperlinks at top */
       .hyperlinks {
         float: right; 
-        margin-top: 33px;
+        margin-top: 23px;
         margin-right: -16px;     
       }
       /* Headings at top */     
@@ -38,7 +38,7 @@
       /* Search box */
         .search-box{
         position: absolute;
-        top: 28.5%;
+        top: 26.5%;
         left: 50%;
         transform: translate(-50%, -50%);
         background: white;
@@ -82,13 +82,13 @@
     </style>
   </head>
 
-  <body style="background-color:#001444; font-family: Montserrat; margin-top: -16px">
+  <body style="background-color:#001444; font-family: Montserrat; margin-top: -11px">
     <div class ="header">
       <!-- List of hyperlinks at top of page -->
       <ul id="headings">
         <!-- OgC Logo Button -->
-        <a class = "OGC" href='http://127.0.0.1:8000/' style="margin-top:-10px">
-          <img src="{% static 'images/logo.png' %}" alt="Home" width="140" height="100">
+        <a class = "OGC" href='http://127.0.0.1:8000/'>
+          <img src="{% static 'images/logo.png' %}" alt="Home" width="140" height="80">
         </a>
 
         <!--Hyperlinks-->
@@ -130,14 +130,14 @@
                 </p></center>
                 <center><p style="color: red; font-size: 30px;">-88.08 (5.51%)</p></center>
             </div>
-            <span class="branding-bar fg-dark" style="color:#0072DC">GOOGL</span>
+            <span class="branding-bar fg-dark" style="color:#0072DC">{{stock1}}</span>
          </div>
         </a>
 
         <a href="visualization">
           <div data-role="tile" data-size="large" data-effect="hover-slide-down" style="background-color: blanchedalmond;float: left;padding: 30px;margin-left: 4%;border-radius: 25px; border: 30px #202020; border-width: thick; border-style: solid; width: 28%">
             <div class="slide-front">
-                <center><img src="/static/images/GoogleLogo.png" width = 75%></center>
+                <center><img src="//logo.clearbit.com/{{stock2 | safe}}.com" width = 75%></center>
             </div>
             <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve">
                 <center><p style="color: black; font-size: 30px;">
@@ -145,14 +145,14 @@
                 </p></center>
                 <center><p style="color: red; font-size: 30px;">-88.08 (5.51%)</p></center>
             </div>
-            <span class="branding-bar fg-dark" style="color:#0072DC">GOOGL</span>
+            <span class="branding-bar fg-dark" style="color:#0072DC">{{stock2}}</span>
          </div>
         </a>
 
         <a href="visualization">
           <div data-role="tile" data-size="large" data-effect="hover-slide-down" style="background-color: blanchedalmond;float: left;padding: 30px; margin-left: 4%;border-radius: 25px; border: 30px #202020; border-width: thick; border-style: solid; width: 28%">
             <div class="slide-front">
-                <center><img src="/static/images/GoogleLogo.png" width = 75%></center>
+                <center><img src="//logo.clearbit.com/{{stock3 | safe}}.com" width = 75%></center>
             </div>
             <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve">
                 <center><p style="color: black; font-size: 30px;">
@@ -160,9 +160,13 @@
                 </p></center>
                 <center><p style="color: red; font-size: 30px;">-88.08 (5.51%)</p></center>
             </div>
-            <span class="branding-bar fg-dark" style="color:#0072DC">GOOGL</span>
+            <span class="branding-bar fg-dark" style="color:#0072DC">{{stock3}}</span>
          </div>
         </a>
+
+        
+
+        
 
     <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
   </body>

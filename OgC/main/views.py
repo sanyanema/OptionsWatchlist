@@ -7,6 +7,8 @@ from . import stock_info, options_info, greek_options
 
 # Create your views here.
 stock1 = "Google"
+stock2 = "Chipotle"
+stock3 = "Spotify"
 stock1b = "GOOGL"
 
 def index(response, id):
@@ -33,7 +35,7 @@ def v1(response):
     return HttpResponse("<h1>v1</h1>")
 
 def home(request):
-	return render(request, 'main/home.html', {'name' : "John Smith", 'stock' : stock1})
+	return render(request, 'main/home.html', {'name' : "John Smith", 'stock1' : stock1, 'stock2' : stock2, 'stock3' : stock3})
 
 def help(request):
 	return render(request, 'main/help.html', {'name' : "John Smith"})
@@ -54,7 +56,7 @@ def visualization(request):
 	# Greeks 
 	# greeks = greek_options.getGreeks(greek_options.yFinanceToWallStreet(yfinance.Ticker('GOOGL').option_chain("2020-11-13").calls, 500))
 	# greeks_html = greeks.to_html()
-	return render(request, 'main/visualization.html', {'stock' : stock1, 'name' : stock1b, 
+	return render(request, 'main/visualization.html', {'stock1' : stock1, 'stock1b' : stock1b, 
 			'plot_html': plot_html, 'options' : options_html})
 
 def create(response):
