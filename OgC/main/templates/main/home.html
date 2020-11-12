@@ -9,6 +9,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
     <link rel="stylesheet" type="text/css" href="/static/styles.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Mono' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/26600a00d1.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
 
@@ -23,7 +24,8 @@
       ul#headings a {
         display: inline; 
         margin-right: 20px;
-        color: #5FB2FF;
+        font-weight: bold;
+        color: #ef8354;
       }
       /* Break Lines */
       hr {
@@ -53,11 +55,11 @@
       }
       /* Search button when hovering so it expands*/
       .search-box:hover > .search-btn{
-        background-color: #1f2b4a;
+        background-color: #086788;
       }
       /* Search button */
       .search-btn{
-        color: #5FB2FF;
+        color: #06aed5;
         float: right;
         width: 40px;
         height: 30px;
@@ -78,11 +80,11 @@
         font-size: 20px;
         transition: 0.4s;
         width: 400px;
-      }      
+      }    
     </style>
   </head>
 
-  <body style="background-color:#001444; font-family: Montserrat; margin-top: -11px">
+  <body style="background-color:#086788; font-family:'Courier'; margin-top: -11px">
     <div class ="header">
       <!-- List of hyperlinks at top of page -->
       <ul id="headings">
@@ -107,7 +109,7 @@
 
     <!-- Watchlist Text --> 
     <a href="view">
-      <h1 class="display-4" style="color: #0072DC"><center><u>{{name}}'s Watchlist:<u/></center></h1>
+      <h1 class="display-4" style="color: #06aed5"><center><u>{{name}}'s Watchlist<u/></center></h1>
     </a>
 
     <!-- Search Bar -->
@@ -122,47 +124,47 @@
 
       <!-- Ticker Buttons for example Google Stock-->
         <a href="visualization">
-          <div data-role="tile" data-size="large" data-effect="hover-slide-down" style="background-color: blanchedalmond;float: left;padding: 30px; margin-left: 4%;border-radius: 25px; border: 30px #202020; border-width: thick; border-style: solid; width: 28%">
+          <div data-role="tile" data-size="large" data-effect="hover-slide-down" style="background-color: #ef8354;float: left;padding: 30px; margin-left: 4%;border-radius: 25px; border: 30px #fffafb; border-width: thick; border-style: solid; width: 28%">
             <div class="slide-front">
                 <center><img src="/static/images/GoogleLogo.png" width = 75%></center>
             </div>
             <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve">
-                <center><p style="color: black; font-size: 30px;">
+                <center><p style="color: #fffafb; font-size: 30px;">
                   Stock Price: $1510.80
                 </p></center>
-                <center><p style="color: red; font-size: 30px;">-88.08 (5.51%)</p></center>
+                <center><p style="color: #d62839; font-size: 30px;">-88.08 (5.51%)</p></center>
             </div>
-            <span class="branding-bar fg-dark" style="color:#0072DC">{{stock1}}</span>
+            <span class="branding-bar fg-dark" style="color:#fffafb">{{stock1}}</span>
          </div>
         </a>
 
         <a href="visualization">
-          <div data-role="tile" data-size="large" data-effect="hover-slide-down" style="background-color: blanchedalmond;float: left;padding: 30px;margin-left: 4%;border-radius: 25px; border: 30px #202020; border-width: thick; border-style: solid; width: 28%">
+          <div data-role="tile" data-size="large" data-effect="hover-slide-down" style="background-color: #ef8354;float: left;padding: 30px;margin-left: 4%;border-radius: 25px; border: 30px #fffafb; border-width: thick; border-style: solid; width: 28%">
             <div class="slide-front">
-                <center><img src="//logo.clearbit.com/{{stock2 | safe}}.com" width = 75%></center>
+                <center><img src="//logo.clearbit.com/{{stock2 | safe}}.com?size=500" width = 75%></center> <!--size=500 makes it clear image-->
             </div>
             <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve">
-                <center><p style="color: black; font-size: 30px;">
+                <center><p style="color: #fffafb; font-size: 30px;">
                   Stock Price: $1510.80
                 </p></center>
-                <center><p style="color: red; font-size: 30px;">-88.08 (5.51%)</p></center>
+                <center><p style="color: #d62839; font-size: 30px;">-88.08 (5.51%)</p></center>
             </div>
-            <span class="branding-bar fg-dark" style="color:#0072DC">{{stock2}}</span>
+            <span class="branding-bar fg-dark" style="color:#fffafb">{{stock2}}</span>
          </div>
         </a>
 
         <a href="visualization">
-          <div data-role="tile" data-size="large" data-effect="hover-slide-down" style="background-color: blanchedalmond;float: left;padding: 30px; margin-left: 4%;border-radius: 25px; border: 30px #202020; border-width: thick; border-style: solid; width: 28%">
+          <div data-role="tile" data-size="large" data-effect="hover-slide-down" style="background-color: #ef8354;float: left;padding: 30px; margin-left: 4%;border-radius: 25px; border: 30px #fffafb; border-width: thick; border-style: solid; width: 28%">
             <div class="slide-front">
-                <center><img src="//logo.clearbit.com/{{stock3 | safe}}.com" width = 75%></center>
+                <center><img src="//logo.clearbit.com/{{stock3 | safe}}.com?size=500" width = 75%></center> 
             </div>
             <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve">
-                <center><p style="color: black; font-size: 30px;">
+                <center><p style="color: #fffafb; font-size: 30px;">
                   Stock Price: $1510.80
                 </p></center>
-                <center><p style="color: red; font-size: 30px;">-88.08 (5.51%)</p></center>
+                <center><p style="color: #d62839; font-size: 30px;">-88.08 (5.51%)</p></center>
             </div>
-            <span class="branding-bar fg-dark" style="color:#0072DC">{{stock3}}</span>
+            <span class="branding-bar fg-dark" style="color:#fffafb">{{stock3}}</span>
          </div>
         </a>
 
