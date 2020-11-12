@@ -43,8 +43,9 @@ def yFinanceToWallStreet(optionChain, strikePrice):
 
 # Method to get greeks given a option object from WallStreet
 def getGreeks(option):
-    greeks = {"delta": option.delta(), "gamma": option.gamma(), "rho": option.rho(),
-              "vega": option.vega(), "theta": option.theta()}
+    # greeks = {"delta": option.delta(), "gamma": option.gamma(), "rho": option.rho(),
+    #           "vega": option.vega(), "theta": option.theta()}
+    greeks = (option.delta(), option.gamma(), option.rho(), option.vega(), option.theta())
     return greeks
 
 

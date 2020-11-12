@@ -58,7 +58,7 @@
       #options {
         border: 2px solid black;
         width: 58%;
-        height: 460px;
+        height: 500px;
         float: left;
         margin-left: 3%;
         overflow:auto
@@ -75,13 +75,13 @@
         font-size: 40px; 
         text-align: center;
       }
-      /* Implied Volatility Box */
-      #volatility {
+      /* Greeks Box */
+      #greeks {
         border: 3px solid gray;
         border-radius: 25px;
         background:#0072DC;
         width: 33%;
-        height: 460px;
+        height: 500px;
         float: right;
         margin-right: 3%;
         padding: 20px;
@@ -198,37 +198,31 @@
       {{options | safe}}
     </div>
 
-    <!-- Implied Volatility -->
-    <!-- {{greeks}}  This doesn't work yet!-->
-    <div id="volatility">
-      <!-- Implied Volatility Value and Description -->
-      <p class = "small" style="color: white; font-size: 40px; text-align:center">0.80</p>
-      <p style="color: white; font-size: 15px; text-align:center">The implied volatility is very high for this stock, and one might not want to invest in it.</p>
-      <br>
-
-      <!-- Delta and Theta-->
-        <div style="font-size: 40px; float:left; margin-left: 20%; margin-right: 20%; text-align:center">
-          <p class="small" style="color:white">δ</p>
-          <p style="color:#C8C8C8">0.7</p> 
-          <p class="small" style="color:white">ν</p>
-          <p style="color:#C8C8C8">1.0</p> 
-        </div>
-
-      <!-- Rho and Vega -->
-      <div style="font-size: 40px; float:right; margin-right: 20%; text-align:center">   
-        <p class="small" style="color:white">ρ</p> 
-        <p style="color:#C8C8C8">0</p> 
-        <p class="small" style="color:white">ν</p>
-        <p style="color:#C8C8C8">0.4</p> 
-      </div>
-
-      <br><br><br><br><br><br><br><br><br>
-
-      <!-- Gamma -->
-      <div style="font-size: 40px">   
-        <center><p class="small" style="color:white">γ</p></center>
-        <center><p style="color:#C8C8C8">0.2</p></center>
-      </div>
+    <!-- Greeks Table -->
+    <div id="greeks">
+        <p class="box_titles">The Greeks!</p>
+        <table style="width: 100%" id="info_table">
+            <tr>
+                <td>δ</td>
+                <td>{{delta | safe}}</td>
+            </tr>
+            <tr>
+                <td>ρ</td>
+                <td>{{rho | safe}}</td>
+            </tr>
+            <tr>
+                <td>θ</td>
+                <td>{{theta | safe}}</td>
+            </tr>
+            <tr>
+                <td>ν</td>
+                <td>{{vega | safe}}</td>
+            </tr>
+            <tr>
+                <td>γ</td>
+                <td>{{gamma | safe}}</td>
+            </tr>
+        </table>
     </div>
 
     <br style="clear:both"/><br>

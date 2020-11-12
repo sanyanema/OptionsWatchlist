@@ -5,6 +5,7 @@ from wallstreet import Call, Put
 from .models import WatchList
 from . import stock_info, options_info, greek_options
 import json
+import pandas as pd
 
 # Create your views here.
 stock1 = "Google"
@@ -53,12 +54,11 @@ def visualization(request):
 	plot_html = stock.plot_hist()
 
 	# Options Information
-	options = options_info.getCalls('GOOGL', '2020-11-13')
+	options = data = options_info.getCalls('GOOGL', '2020-11-13')
 	options_html = options.to_html()
 
 	# Greeks 
-	# greeks = greek_options.getGreeks(greek_options.yFinanceToWallStreet(yfinance.Ticker('GOOGL').option_chain("2020-11-13").calls, 500))
-	# greeks_html = greeks.to_html()
+	delta, gamma, rho, vega, theta = greek_options.getGreeks(greek_options.yFinanceToWallStreet(yfinance.Ticker('GOOGL').option_chain("2020-11-13").calls, 2000))
 	return render(request, 'main/visualization.html', {
 		'stock1' : stock1,				# stock name
 		'stock1b' : stock1b, 			# stock ticker
@@ -71,6 +71,11 @@ def visualization(request):
 		'eps' : stock.eps_trail,
 		'market_cap' : stock.market_cap,
 		'industry' : stock.sector,
+		'delta' : delta,
+		'gamma' : gamma,
+		'rho' : rho,
+		'vega' : vega,
+		'theta' : theta,
 	})
 
 def create(response):
