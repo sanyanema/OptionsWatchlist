@@ -54,7 +54,7 @@ def visualization(request):
 	plot_html = stock.plot_hist()
 
 	# Options Information
-	options = data = options_info.getCalls('GOOGL', '2020-11-13')
+	options = options_info.findGreekData(options_info.getCalls('GOOGL', '2020-11-13'))
 	options_html = options.to_html()
 
 	# Greeks 
