@@ -40,8 +40,8 @@ def pages(request):
         html_template = loader.get_template( 'error-500.html' )
         return HttpResponse(html_template.render(context, request))
 
-@login_required(login_url="/ui-tables.html/")
-def pages(request):
+@login_required(login_url="/login/")
+def tables(request):
     # Options Information
     options = options_info.findGreekData(options_info.getCalls('GOOGL', '2020-11-20'))
     options_html = options.to_html()
