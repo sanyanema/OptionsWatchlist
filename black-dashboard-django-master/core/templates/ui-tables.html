@@ -6,7 +6,6 @@
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
-
 <div class="row">
   <div class="col-md-12">
     <div class="card ">
@@ -15,6 +14,73 @@
       </div>
       <div class="card-body">
         <div class="table-responsive">
+
+
+          <!-- Options -->
+          <div id = "options" class="table tablesorter " id="" style="color:white; overflow:auto; height:650px; width:60%; float:left;">
+            {{options | safe}}
+          </div>
+
+
+          <!-- Stock Info-->
+          <div id="stock_info">
+            <table class="table tablesorter " id="" style = "overflow:auto; height:650px; width:35%; padding-left: 5%; float:right;">
+              <thead class=" text-primary">
+                <tr><th>Key Stock Data.</th></tr>
+              </thead>
+              <tr>
+                  <td>Current Price</td>
+                  <td>{{ price }}</td>
+              </tr>
+              <tr>
+                  <td>Day's Range</td>
+                  <td>{{ day_range }}</td>
+              </tr>
+              <tr>
+                  <td>52 Week Range</td>
+                  <td>{{ 52wk_range }}</td>
+              </tr>
+              <tr>
+                  <td>Volume</td>
+                  <td>{{ volume }}</td>
+              </tr>
+              <tr>
+                  <td>EPS</td>
+                  <td>{{ eps }}</td>
+              </tr>
+              <tr>
+                  <td>Market Cap</td>
+                  <td>{{ market_cap }}</td>
+              </tr>
+              <tr>
+                  <td>Industry</td>
+                  <td>{{ industry }}</td>
+              </tr>
+              <tr>
+                  <td>δ</td>
+                  <td>{{delta | safe}}</td>
+              </tr>
+              <tr>
+                  <td>ρ</td>
+                  <td>{{rho | safe}}</td>
+              </tr>
+              <tr>
+                  <td>θ</td>
+                  <td>{{theta | safe}}</td>
+              </tr>
+              <tr>
+                  <td>ν</td>
+                  <td>{{vega | safe}}</td>
+              </tr>
+              <tr>
+                  <td>γ</td>
+                  <td>{{gamma | safe}}</td>
+              </tr>
+          </table>
+        </div>
+
+
+          <!-- Everything Below is Preexisting Template Stuff-->
           <table class="table tablesorter " id="">
             <thead class=" text-primary">
               <tr>
