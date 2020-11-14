@@ -1,6 +1,6 @@
 {% extends 'layouts/base.html' %}
 
-{% block title %} UI Tables {% endblock %} 
+{% block title %} UI Tables {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -9,371 +9,410 @@
 <!-- For Stock Image -->
 <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
 
-<!-- Stock Name --> 
-<div id = "stock" style="text-align:center; display:inline;">
-    <a href='https://{{stock1 |safe}}.com/'> 
-      <h1>
-        <img src="//logo.clearbit.com/{{name | safe}}.com" width = 58px>
-        <u>{{name}} ({{ticker}})</u>
-        <img src="//logo.clearbit.com/{{name | safe}}.com" width = 58px>
-      </h1>
+<!-- Stock Name -->
+<div id="stock" style="text-align:center; display:inline;">
+    <a href='https://{{stock1 |safe}}.com/'>
+        <h1>
+            <img src="//logo.clearbit.com/{{name | safe}}.com" width=58px>
+            <u>{{name}} ({{ticker}})</u>
+            <img src="//logo.clearbit.com/{{name | safe}}.com" width=58px>
+        </h1>
     </a>
-  <br>
+    <br>
 </div>
 
+<!-- Form to Choose Ticker, Expiration Date, and Type of Option -->
+<container class="mx-auto">
+    <form>
+        <div class="form-row ">
+            <div class="form-group col-md-4">
+                <input type="ticker" class="form-control" id="ticker" placeholder="Ticker Symbol">
+            </div>
+            <div class="form-group col-md-4">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Expiration Date
+                    </button>
+                    <div class="dropdown-menu mx-auto" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+                <div class="dropdown mx-auto">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Type of Option
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Call</a>
+                        <a class="dropdown-item" href="#">Put</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</container>
 <!-- Options -->
 <div class="row" style="overflow:auto; height:650px; width:60%; float:left;">
-  <div class="col-md-12">
-    <div class="card ">
-      <div class="card-header">
-        <h4 class="card-title"></h4>
-      </div>
-      <div class="card-body">
-        <div class="table-responsive">
-          <div id = "options" class="table tablesorter " id="" style="color:white;">
-            <thead class=" text-primary">
-              <tr><th>Options</th></tr>
-            </thead>
-            {{options | safe}}
-          </div>
+    <div class="col-md-12">
+        <div class="card ">
+            <div class="card-header">
+                <h4 class="card-title"></h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <div id="options" class="table tablesorter " id="" style="color:white;">
+                        <thead class=" text-primary">
+                        <tr>
+                            <th>Options</th>
+                        </tr>
+                        </thead>
+                        {{options | safe}}
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 
 <!-- Stock Info-->
-<div class="row" style = "overflow:auto; height:650px; width:40%; float:right;">
-  <div class="col-md-12">
-    <div class="card ">
-      <div class="card-header">
-        <h4 class="card-title"></h4>
-      </div>
-      <div class="card-body">
-        <div class="table-responsive">
-          <div id="stock_info">
-            <table class="table tablesorter " id="">
-              <thead class=" text-primary">
-                <tr><th>Key Stock Data</th></tr>
-              </thead>
-              <tr>
-                  <td>Current Price</td>
-                  <td>{{ price }}</td>
-              </tr>
-              <tr>
-                  <td>Day's Range</td>
-                  <td>{{ day_range }}</td>
-              </tr>
-              <tr>
-                  <td>52 Week Range</td>
-                  <td>{{ 52wk_range }}</td>
-              </tr>
-              <tr>
-                  <td>Volume</td>
-                  <td>{{ volume }}</td>
-              </tr>
-              <tr>
-                  <td>EPS</td>
-                  <td>{{ eps }}</td>
-              </tr>
-              <tr>
-                  <td>Market Cap</td>
-                  <td>{{ market_cap }}</td>
-              </tr>
-              <tr>
-                  <td>Industry</td>
-                  <td>{{ industry }}</td>
-              </tr>
-              <tr>
-                  <td>δ</td>
-                  <td>{{delta | safe}}</td>
-              </tr>
-              <tr>
-                  <td>ρ</td>
-                  <td>{{rho | safe}}</td>
-              </tr>
-              <tr>
-                  <td>θ</td>
-                  <td>{{theta | safe}}</td>
-              </tr>
-              <tr>
-                  <td>ν</td>
-                  <td>{{vega | safe}}</td>
-              </tr>
-              <tr>
-                  <td>γ</td>
-                  <td>{{gamma | safe}}</td>
-              </tr>
-            </table>
-          </div>
+<div class="row" style="overflow:auto; height:650px; width:40%; float:right;">
+    <div class="col-md-12">
+        <div class="card ">
+            <div class="card-header">
+                <h4 class="card-title"></h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <div id="stock_info">
+                        <table class="table tablesorter " id="">
+                            <thead class=" text-primary">
+                            <tr>
+                                <th>Key Stock Data</th>
+                            </tr>
+                            </thead>
+                            <tr>
+                                <td>Current Price</td>
+                                <td>{{ price }}</td>
+                            </tr>
+                            <tr>
+                                <td>Day's Range</td>
+                                <td>{{ day_range }}</td>
+                            </tr>
+                            <tr>
+                                <td>52 Week Range</td>
+                                <td>{{ 52wk_range }}</td>
+                            </tr>
+                            <tr>
+                                <td>Volume</td>
+                                <td>{{ volume }}</td>
+                            </tr>
+                            <tr>
+                                <td>EPS</td>
+                                <td>{{ eps }}</td>
+                            </tr>
+                            <tr>
+                                <td>Market Cap</td>
+                                <td>{{ market_cap }}</td>
+                            </tr>
+                            <tr>
+                                <td>Industry</td>
+                                <td>{{ industry }}</td>
+                            </tr>
+                            <tr>
+                                <td>δ</td>
+                                <td>{{delta | safe}}</td>
+                            </tr>
+                            <tr>
+                                <td>ρ</td>
+                                <td>{{rho | safe}}</td>
+                            </tr>
+                            <tr>
+                                <td>θ</td>
+                                <td>{{theta | safe}}</td>
+                            </tr>
+                            <tr>
+                                <td>ν</td>
+                                <td>{{vega | safe}}</td>
+                            </tr>
+                            <tr>
+                                <td>γ</td>
+                                <td>{{gamma | safe}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 
 <br style="clear:both"/><br>
 <!-- Everything Below is Preexisting Template Stuff-->
 <div class="row">
-  <div class="col-md-12">
-    <div class="card ">
-      <div class="card-header">
-        <h4 class="card-title"></h4>
-      </div>
-      <div class="card-body">
-        <div class="table-responsive">
-          <table class="table tablesorter " id="">
-            <thead class=" text-primary">
-              <tr>
-                <th>
-                  Name
-                </th>
-                <th>
-                  Country
-                </th>
-                <th>
-                  City
-                </th>
-                <th class="text-center">
-                  Salary
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  Dakota Rice
-                </td>
-                <td>
-                  Niger
-                </td>
-                <td>
-                  Oud-Turnhout
-                </td>
-                <td class="text-center">
-                  $36,738
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Minerva Hooper
-                </td>
-                <td>
-                  Curaçao
-                </td>
-                <td>
-                  Sinaai-Waas
-                </td>
-                <td class="text-center">
-                  $23,789
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Sage Rodriguez
-                </td>
-                <td>
-                  Netherlands
-                </td>
-                <td>
-                  Baileux
-                </td>
-                <td class="text-center">
-                  $56,142
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Philip Chaney
-                </td>
-                <td>
-                  Korea, South
-                </td>
-                <td>
-                  Overland Park
-                </td>
-                <td class="text-center">
-                  $38,735
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Doris Greene
-                </td>
-                <td>
-                  Malawi
-                </td>
-                <td>
-                  Feldkirchen in Kärnten
-                </td>
-                <td class="text-center">
-                  $63,542
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Mason Porter
-                </td>
-                <td>
-                  Chile
-                </td>
-                <td>
-                  Gloucester
-                </td>
-                <td class="text-center">
-                  $78,615
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Jon Porter
-                </td>
-                <td>
-                  Portugal
-                </td>
-                <td>
-                  Gloucester
-                </td>
-                <td class="text-center">
-                  $98,615
-                </td>
-              </tr>
-            </tbody>
-          </table>
+    <div class="col-md-12">
+        <div class="card ">
+            <div class="card-header">
+                <h4 class="card-title"></h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table tablesorter " id="">
+                        <thead class=" text-primary">
+                        <tr>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Country
+                            </th>
+                            <th>
+                                City
+                            </th>
+                            <th class="text-center">
+                                Salary
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                Dakota Rice
+                            </td>
+                            <td>
+                                Niger
+                            </td>
+                            <td>
+                                Oud-Turnhout
+                            </td>
+                            <td class="text-center">
+                                $36,738
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Minerva Hooper
+                            </td>
+                            <td>
+                                Curaçao
+                            </td>
+                            <td>
+                                Sinaai-Waas
+                            </td>
+                            <td class="text-center">
+                                $23,789
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Sage Rodriguez
+                            </td>
+                            <td>
+                                Netherlands
+                            </td>
+                            <td>
+                                Baileux
+                            </td>
+                            <td class="text-center">
+                                $56,142
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Philip Chaney
+                            </td>
+                            <td>
+                                Korea, South
+                            </td>
+                            <td>
+                                Overland Park
+                            </td>
+                            <td class="text-center">
+                                $38,735
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Doris Greene
+                            </td>
+                            <td>
+                                Malawi
+                            </td>
+                            <td>
+                                Feldkirchen in Kärnten
+                            </td>
+                            <td class="text-center">
+                                $63,542
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Mason Porter
+                            </td>
+                            <td>
+                                Chile
+                            </td>
+                            <td>
+                                Gloucester
+                            </td>
+                            <td class="text-center">
+                                $78,615
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Jon Porter
+                            </td>
+                            <td>
+                                Portugal
+                            </td>
+                            <td>
+                                Gloucester
+                            </td>
+                            <td class="text-center">
+                                $98,615
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  <div class="col-md-12">
-    <div class="card  card-plain">
-      <div class="card-header">
-        <h4 class="card-title"> Table on Plain Background</h4>
-        <p class="category"> Here is a subtitle for this table</p>
-      </div>
-      <div class="card-body">
-        <div class="table-responsive">
-          <table class="table tablesorter " id="">
-            <thead class=" text-primary">
-              <tr>
-                <th>
-                  Name
-                </th>
-                <th>
-                  Country
-                </th>
-                <th>
-                  City
-                </th>
-                <th class="text-center">
-                  Salary
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  Dakota Rice
-                </td>
-                <td>
-                  Niger
-                </td>
-                <td>
-                  Oud-Turnhout
-                </td>
-                <td class="text-center">
-                  $36,738
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Minerva Hooper
-                </td>
-                <td>
-                  Curaçao
-                </td>
-                <td>
-                  Sinaai-Waas
-                </td>
-                <td class="text-center">
-                  $23,789
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Sage Rodriguez
-                </td>
-                <td>
-                  Netherlands
-                </td>
-                <td>
-                  Baileux
-                </td>
-                <td class="text-center">
-                  $56,142
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Philip Chaney
-                </td>
-                <td>
-                  Korea, South
-                </td>
-                <td>
-                  Overland Park
-                </td>
-                <td class="text-center">
-                  $38,735
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Doris Greene
-                </td>
-                <td>
-                  Malawi
-                </td>
-                <td>
-                  Feldkirchen in Kärnten
-                </td>
-                <td class="text-center">
-                  $63,542
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Mason Porter
-                </td>
-                <td>
-                  Chile
-                </td>
-                <td>
-                  Gloucester
-                </td>
-                <td class="text-center">
-                  $78,615
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Jon Porter
-                </td>
-                <td>
-                  Portugal
-                </td>
-                <td>
-                  Gloucester
-                </td>
-                <td class="text-center">
-                  $98,615
-                </td>
-              </tr>
-            </tbody>
-          </table>
+    <div class="col-md-12">
+        <div class="card  card-plain">
+            <div class="card-header">
+                <h4 class="card-title"> Table on Plain Background</h4>
+                <p class="category"> Here is a subtitle for this table</p>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table tablesorter " id="">
+                        <thead class=" text-primary">
+                        <tr>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Country
+                            </th>
+                            <th>
+                                City
+                            </th>
+                            <th class="text-center">
+                                Salary
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                Dakota Rice
+                            </td>
+                            <td>
+                                Niger
+                            </td>
+                            <td>
+                                Oud-Turnhout
+                            </td>
+                            <td class="text-center">
+                                $36,738
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Minerva Hooper
+                            </td>
+                            <td>
+                                Curaçao
+                            </td>
+                            <td>
+                                Sinaai-Waas
+                            </td>
+                            <td class="text-center">
+                                $23,789
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Sage Rodriguez
+                            </td>
+                            <td>
+                                Netherlands
+                            </td>
+                            <td>
+                                Baileux
+                            </td>
+                            <td class="text-center">
+                                $56,142
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Philip Chaney
+                            </td>
+                            <td>
+                                Korea, South
+                            </td>
+                            <td>
+                                Overland Park
+                            </td>
+                            <td class="text-center">
+                                $38,735
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Doris Greene
+                            </td>
+                            <td>
+                                Malawi
+                            </td>
+                            <td>
+                                Feldkirchen in Kärnten
+                            </td>
+                            <td class="text-center">
+                                $63,542
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Mason Porter
+                            </td>
+                            <td>
+                                Chile
+                            </td>
+                            <td>
+                                Gloucester
+                            </td>
+                            <td class="text-center">
+                                $78,615
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Jon Porter
+                            </td>
+                            <td>
+                                Portugal
+                            </td>
+                            <td>
+                                Gloucester
+                            </td>
+                            <td class="text-center">
+                                $98,615
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 
 {% endblock content %}

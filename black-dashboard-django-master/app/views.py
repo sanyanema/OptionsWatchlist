@@ -48,6 +48,9 @@ def pages(request):
 def tables(request):
     name = "Google"
     ticker = "GOOGL"
+
+    # Expiration Dates
+    dates = json.dumps(options_info.getExpirationDates(ticker))
     # Options Information
     options = options_info.findGreekData(options_info.getCalls(ticker, '2020-11-20'))
     options_html = options.to_html()
@@ -71,6 +74,7 @@ def tables(request):
         'rho' : rho,
         'vega' : vega,
         'theta' : theta,
+        'dates' : dates
         })
 
 def maps(request):
