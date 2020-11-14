@@ -6,7 +6,23 @@
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
-<div class="row">
+<!-- For Stock Image -->
+<script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+
+<!-- Stock Name --> 
+<div id = "stock" style="text-align:center; display:inline;">
+    <a href='https://{{stock1 |safe}}.com/'> 
+      <h1>
+        <img src="//logo.clearbit.com/{{name | safe}}.com" width = 58px>
+        <u>{{name}} ({{ticker}})</u>
+        <img src="//logo.clearbit.com/{{name | safe}}.com" width = 58px>
+      </h1>
+    </a>
+  <br>
+</div>
+
+<!-- Options -->
+<div class="row" style="overflow:auto; height:650px; width:60%; float:left;">
   <div class="col-md-12">
     <div class="card ">
       <div class="card-header">
@@ -14,18 +30,31 @@
       </div>
       <div class="card-body">
         <div class="table-responsive">
-
-
-          <!-- Options -->
-          <div id = "options" class="table tablesorter " id="" style="color:white; overflow:auto; height:650px; width:60%; float:left;">
+          <div id = "options" class="table tablesorter " id="" style="color:white;">
+            <thead class=" text-primary">
+              <tr><th>Options</th></tr>
+            </thead>
             {{options | safe}}
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-          <!-- Stock Info-->
+<!-- Stock Info-->
+<div class="row" style = "overflow:auto; height:650px; width:40%; float:right;">
+  <div class="col-md-12">
+    <div class="card ">
+      <div class="card-header">
+        <h4 class="card-title"></h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
           <div id="stock_info">
-            <table class="table tablesorter " id="" style = "overflow:auto; height:650px; width:35%; padding-left: 5%; float:right;">
+            <table class="table tablesorter " id="">
               <thead class=" text-primary">
-                <tr><th>Key Stock Data.</th></tr>
+                <tr><th>Key Stock Data</th></tr>
               </thead>
               <tr>
                   <td>Current Price</td>
@@ -75,11 +104,24 @@
                   <td>γ</td>
                   <td>{{gamma | safe}}</td>
               </tr>
-          </table>
+            </table>
+          </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-
-          <!-- Everything Below is Preexisting Template Stuff-->
+<br style="clear:both"/><br>
+<!-- Everything Below is Preexisting Template Stuff-->
+<div class="row">
+  <div class="col-md-12">
+    <div class="card ">
+      <div class="card-header">
+        <h4 class="card-title"></h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
           <table class="table tablesorter " id="">
             <thead class=" text-primary">
               <tr>

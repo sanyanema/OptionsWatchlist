@@ -42,18 +42,21 @@ def pages(request):
 
 @login_required(login_url="/login/")
 def tables(request):
+    name = "Google"
+    ticker = "GOOGL"
     # Options Information
-    options = options_info.findGreekData(options_info.getCalls('GOOGL', '2020-11-20'))
+    options = options_info.findGreekData(options_info.getCalls(ticker, '2020-11-20'))
     options_html = options.to_html()
 
-    # Stock Price Chart
-    stock = stock_info.StockInfo('GOOGL')
-    plot_html = stock.plot_hist()
+    # Stock
+    stock = stock_info.StockInfo(ticker)
 
     # Greeks 
-    delta, gamma, rho, vega, theta = greek_options.getGreeks(greek_options.yFinanceToWallStreet(yfinance.Ticker('GOOGL').option_chain("2020-11-20").calls, 2000))
+    delta, gamma, rho, vega, theta = greek_options.getGreeks(greek_options.yFinanceToWallStreet(yfinance.Ticker(ticker).option_chain("2020-11-20").calls, 2000))
 
     return render(request, "ui-tables.html", {
+        'name' : name,
+        'ticker' : ticker,
         'options' : options_html,
         'price' : stock.current_price,
         'day_range' : stock.day_range,
