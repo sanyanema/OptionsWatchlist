@@ -15,6 +15,10 @@ from . import stock_info, options_info, greek_options
 import json
 import pandas as pd
 
+name = "Google"
+ticker = "GOOGL"
+stock = stock_info.StockInfo(ticker)
+
 @login_required(login_url="/login/")
 def index(request):
     return render(request, "index.html")
@@ -48,9 +52,6 @@ def tables(request):
     options = options_info.findGreekData(options_info.getCalls(ticker, '2020-11-20'))
     options_html = options.to_html()
 
-    # Stock
-    stock = stock_info.StockInfo(ticker)
-
     # Greeks 
     delta, gamma, rho, vega, theta = greek_options.getGreeks(greek_options.yFinanceToWallStreet(yfinance.Ticker(ticker).option_chain("2020-11-20").calls, 2000))
 
@@ -70,4 +71,12 @@ def tables(request):
         'rho' : rho,
         'vega' : vega,
         'theta' : theta,
+        })
+
+def maps(request):
+    # Stock Price Chart
+    plot_html = stock.plot_hist()
+
+    return render(request, "ui-maps.html", {
+        'plot_html' : plot_html,
         })
