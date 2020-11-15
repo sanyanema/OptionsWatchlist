@@ -1,0 +1,187 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} UI Tables {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<!-- For Stock Image -->
+<script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+
+<!-- Stock Name -->
+<div id="stock" style="text-align:center; display:inline;">
+    <a target="_blank" href='https://{{image |safe}}.com/'>
+        <h1>
+            <img src="//logo.clearbit.com/{{image | safe}}.com" width=58px>
+            <u>{{name}} {{ticker}}</u> 
+            <img src="//logo.clearbit.com/{{image | safe}}.com" width=58px>
+        </h1>
+    </a>
+    <br>
+</div>
+
+<!-- Searchbar to Choose Ticker -->
+<form role="search" id="form">
+  <input class="form-control" type="search" id="query" name="q" placeholder="Search Ticker Symbol..." aria-label="Search through site content" style="width:90%; float:left;">
+  <button class="btn btn-primary btn-round" onclick="loadDoc()" style="float:left; margin-left:1%">
+    <i class="tim-icons icon-zoom-split"></i>
+      <path class="path1" d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z">
+      </path>
+  </button>
+</form>
+
+<br style="clear:both"/><br>
+
+<!-- Form to Choose Expiration Date and Type of Option -->
+<container class="mx-auto">
+    <form>
+        <div class="form-row ">
+            <div class="form-group col-md-4">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Expiration Date
+                    </button>
+                    <div class="dropdown-menu mx-auto" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+                <div class="dropdown mx-auto">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Type of Option
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Call</a>
+                        <a class="dropdown-item" href="#">Put</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</container>
+<!-- Options -->
+<div class="row" style="overflow:auto; height:650px; width:60%; float:left;">
+    <div class="col-md-12">
+        <div class="card ">
+            <div class="card-header">
+                <h4 class="card-title"></h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <div id="options" class="table tablesorter " id="" style="color:white;">
+                        <thead class=" text-primary">
+                        <tr>
+                            <th>Options</th>
+                        </tr>
+                        </thead>
+                        {{options | safe}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Stock Info-->
+<div class="row" style="overflow:auto; height:650px; width:40%; float:right;">
+    <div class="col-md-12">
+        <div class="card ">
+            <div class="card-header">
+                <h4 class="card-title"></h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <div id="stock_info">
+                        <table class="table tablesorter " id="">
+                            <thead class=" text-primary">
+                            <tr>
+                                <th>Key Stock Data</th>
+                            </tr>
+                            </thead>
+                            <tr>
+                                <td>Current Price</td>
+                                <td>{{ price }}</td>
+                            </tr>
+                            <tr>
+                                <td>Day's Range</td>
+                                <td>{{ day_range }}</td>
+                            </tr>
+                            <tr>
+                                <td>52 Week Range</td>
+                                <td>{{ 52wk_range }}</td>
+                            </tr>
+                            <tr>
+                                <td>Volume</td>
+                                <td>{{ volume }}</td>
+                            </tr>
+                            <tr>
+                                <td>EPS</td>
+                                <td>{{ eps }}</td>
+                            </tr>
+                            <tr>
+                                <td>Market Cap</td>
+                                <td>{{ market_cap }}</td>
+                            </tr>
+                            <tr>
+                                <td>Industry</td>
+                                <td>{{ industry }}</td>
+                            </tr>
+                            <tr>
+                                <td>δ</td>
+                                <td>{{delta | safe}}</td>
+                            </tr>
+                            <tr>
+                                <td>ρ</td>
+                                <td>{{rho | safe}}</td>
+                            </tr>
+                            <tr>
+                                <td>θ</td>
+                                <td>{{theta | safe}}</td>
+                            </tr>
+                            <tr>
+                                <td>ν</td>
+                                <td>{{vega | safe}}</td>
+                            </tr>
+                            <tr>
+                                <td>γ</td>
+                                <td>{{gamma | safe}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br style="clear:both"/><br>
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script>
+  const f = document.getElementById('form');
+  const q = document.getElementById('query')
+  const google = 'https://www.google.com/search?q=site%3A+';
+  const site = 'http://127.0.0.1:8000/ui-tables.html/';
+  // document.getElementById("test").innerHTML = typeof q + " " + q;
+
+  function submitted(event) {
+    event.preventDefault();
+    const url = site + q.value; // const url = google + site + '+' + q.value;
+    const win = window.open(url, '_self');
+    win.focus();
+    // $route.reload();
+  }
+
+  f.addEventListener('submit', submitted);
+</script>
+{% endblock javascripts %}

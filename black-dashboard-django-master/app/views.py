@@ -62,7 +62,7 @@ def tables(request, ticker):
     except:
         delta, gamma, rho, vega, theta = ["NA", "NA", "NA", "NA", "NA"]
 
-    return render(request, "ui-tables.html", {
+    return render(request, "ui-tables_tickers.html", {
         'name' : name,
         'ticker' : ticker.upper(),
         'options' : options_html,
@@ -90,7 +90,7 @@ def maps(request, ticker):
     image_draft = name.split()
     image = image_draft[0].split(".")
 
-    return render(request, "ui-maps.html", {
+    return render(request, "ui-maps_tickers.html", {
         'name' : name,
         'ticker' : ticker.upper(),
         'plot_html' : plot_html,

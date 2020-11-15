@@ -1,14 +1,26 @@
 {% extends 'layouts/base.html' %}
 
-{% block title %} UI Tables {% endblock %}
+{% block title %} Maps {% endblock %} 
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
-{% load static %}
+<!-- For Stock Image -->
+<script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
 
-<h1>Please Search a Stock First to see the Price Chart Graph:</h1>
+<!-- Stock Name -->
+<div id="stock" style="text-align:center; display:inline;">
+    <a target="_blank" href='https://{{image |safe}}.com/'>
+        <h1>
+            <img src="//logo.clearbit.com/{{image | safe}}.com" width=58px>
+            <u>{{name}} {{ticker}}</u> 
+            <img src="//logo.clearbit.com/{{image | safe}}.com" width=58px>
+            <!-- <img src="https://eodhistoricaldata.com/img/logos/US/{{ticker | safe}}.png" width=58px> -->
+        </h1>
+    </a>
+    <br>
+</div>
 
 <!-- Searchbar to Choose Ticker -->
 <form role="search" id="form">
@@ -19,15 +31,14 @@
       </path>
   </button>
 </form>
-
 <br style="clear:both"/><br>
 
-<div class="logo">
-  <a href="/" class="simple-text logo-normal">
-    <center>
-      <center><img src="{% static 'assets/img/choose.gif' %}" alt="Home" width=80% height=23%></center>
-    </center>
-  </a>
+<!-- Include Plotly.js for graph -->
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<div id="price_graph">
+  {% autoescape off %}
+  {{ plot_html }}
+  {% endautoescape %}
 </div>
 
 {% endblock content %}

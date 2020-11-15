@@ -6,20 +6,9 @@
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
-<!-- For Stock Image -->
-<script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+{% load static %}
 
-<!-- Stock Name -->
-<div id="stock" style="text-align:center; display:inline;">
-    <a target="_blank" href='https://{{image |safe}}.com/'>
-        <h1>
-            <img src="//logo.clearbit.com/{{image | safe}}.com" width=58px>
-            <u>{{name}} {{ticker}}</u> 
-            <img src="//logo.clearbit.com/{{image | safe}}.com" width=58px>
-        </h1>
-    </a>
-    <br>
-</div>
+<h1>Please Search a Stock First to see the Options:</h1>
 
 <!-- Searchbar to Choose Ticker -->
 <form role="search" id="form">
@@ -33,135 +22,13 @@
 
 <br style="clear:both"/><br>
 
-<!-- Form to Choose Expiration Date and Type of Option -->
-<container class="mx-auto">
-    <form>
-        <div class="form-row ">
-            <div class="form-group col-md-4">
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Expiration Date
-                    </button>
-                    <div class="dropdown-menu mx-auto" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group col-md-4">
-                <div class="dropdown mx-auto">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Type of Option
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Call</a>
-                        <a class="dropdown-item" href="#">Put</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-</container>
-<!-- Options -->
-<div class="row" style="overflow:auto; height:650px; width:60%; float:left;">
-    <div class="col-md-12">
-        <div class="card ">
-            <div class="card-header">
-                <h4 class="card-title"></h4>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <div id="options" class="table tablesorter " id="" style="color:white;">
-                        <thead class=" text-primary">
-                        <tr>
-                            <th>Options</th>
-                        </tr>
-                        </thead>
-                        {{options | safe}}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="logo">
+    <a href="/" class="simple-text logo-normal">
+      <center>
+        <center><img src="{% static 'assets/img/choose.gif' %}" alt="Home" width=80% height=23%></center>
+      </center>
+    </a>
 </div>
-
-<!-- Stock Info-->
-<div class="row" style="overflow:auto; height:650px; width:40%; float:right;">
-    <div class="col-md-12">
-        <div class="card ">
-            <div class="card-header">
-                <h4 class="card-title"></h4>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <div id="stock_info">
-                        <table class="table tablesorter " id="">
-                            <thead class=" text-primary">
-                            <tr>
-                                <th>Key Stock Data</th>
-                            </tr>
-                            </thead>
-                            <tr>
-                                <td>Current Price</td>
-                                <td>{{ price }}</td>
-                            </tr>
-                            <tr>
-                                <td>Day's Range</td>
-                                <td>{{ day_range }}</td>
-                            </tr>
-                            <tr>
-                                <td>52 Week Range</td>
-                                <td>{{ 52wk_range }}</td>
-                            </tr>
-                            <tr>
-                                <td>Volume</td>
-                                <td>{{ volume }}</td>
-                            </tr>
-                            <tr>
-                                <td>EPS</td>
-                                <td>{{ eps }}</td>
-                            </tr>
-                            <tr>
-                                <td>Market Cap</td>
-                                <td>{{ market_cap }}</td>
-                            </tr>
-                            <tr>
-                                <td>Industry</td>
-                                <td>{{ industry }}</td>
-                            </tr>
-                            <tr>
-                                <td>δ</td>
-                                <td>{{delta | safe}}</td>
-                            </tr>
-                            <tr>
-                                <td>ρ</td>
-                                <td>{{rho | safe}}</td>
-                            </tr>
-                            <tr>
-                                <td>θ</td>
-                                <td>{{theta | safe}}</td>
-                            </tr>
-                            <tr>
-                                <td>ν</td>
-                                <td>{{vega | safe}}</td>
-                            </tr>
-                            <tr>
-                                <td>γ</td>
-                                <td>{{gamma | safe}}</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<br style="clear:both"/><br>
-
 
 {% endblock content %}
 
