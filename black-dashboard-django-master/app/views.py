@@ -76,12 +76,15 @@ def tables(request):
 
 def maps(request, ticker):
     # Stock Price Chart
-    stock = stock_info.StockInfo(ticker)
+    stock = stock_info.StockInfo(ticker.upper())
     plot_html = stock.plot_hist()
     name = stock.name
+    image_draft = name.split()
+    image = image_draft[0].split(".")
 
     return render(request, "ui-maps.html", {
         'name' : name,
-        'ticker' : ticker,
+        'ticker' : ticker.upper(),
         'plot_html' : plot_html,
+        'image' : image[0]
         })

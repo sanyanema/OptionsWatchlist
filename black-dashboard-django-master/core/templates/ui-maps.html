@@ -6,18 +6,17 @@
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
-
 <!-- For Stock Image -->
 <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
 
 <!-- Stock Name -->
 <div id="stock" style="text-align:center; display:inline;">
-    <a target="_blank" href='https://{{name |safe}}.com/'>
+    <a target="_blank" href='https://{{image |safe}}.com/'>
         <h1>
-            <img src="//logo.clearbit.com/{{name | safe}}.com" width=58px>
+            <img src="//logo.clearbit.com/{{image | safe}}.com" width=58px>
             <u>{{name}} {{ticker}}</u> 
-            <img src="//logo.clearbit.com/{{name | safe}}.com" width=58px>
-            <!-- <p id="test"></p> -->
+            <img src="//logo.clearbit.com/{{image | safe}}.com" width=58px>
+            <!-- <img src="https://eodhistoricaldata.com/img/logos/US/{{ticker | safe}}.png" width=58px> -->
         </h1>
     </a>
     <br>
@@ -48,7 +47,7 @@
 {% block javascripts %}
 <script>
   const f = document.getElementById('form');
-  const q = document.getElementById('query');
+  const q = document.getElementById('query')
   const google = 'https://www.google.com/search?q=site%3A+';
   const site = 'http://127.0.0.1:8000/ui-maps.html/';
   // document.getElementById("test").innerHTML = typeof q + " " + q;
@@ -56,7 +55,7 @@
   function submitted(event) {
     event.preventDefault();
     const url = site + q.value; // const url = google + site + '+' + q.value;
-    const win = window.open(url, '_blank');
+    const win = window.open(url, '_self');
     win.focus();
     // $route.reload();
   }
