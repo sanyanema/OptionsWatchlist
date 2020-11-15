@@ -7,6 +7,25 @@
 
 {% block content %}
 
+<!-- Form to Choose Ticker, Expiration Date, and Type of Option -->
+<container class="mx-auto">
+    <form>
+        <div class="form-row ">
+            <div class="form-group col-md-4">
+                <input type="ticker" class="form-control" id="ticker" placeholder="Ticker Symbol">
+            </div>
+        </div>
+    </form>
+</container>
+
+<!-- Include Plotly.js for graph -->
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<div id="price_graph">
+  {% autoescape off %}
+  {{ plot_html }}
+  {% endautoescape %}
+</div>
+
 <div class="row">
   <div class="col-md-12">
     <div class="card card-plain">
