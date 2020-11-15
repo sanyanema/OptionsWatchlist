@@ -10,55 +10,70 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    <!-- Include Plotly.js for graph -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
     <style type="text/css">
       /* Hyperlinks at top */
       .hyperlinks {
         float: right; 
-        margin-top: 20px;     
+        margin-top: 18px;     
       }
-
-      /* OGC LOGO */
-      .OGC {
-        float:left;    
-      }   
-
       /* Headings at top */     
       ul#headings a {
         display: inline; 
-        margin-right: 40px;
+        margin-right: 20px;
+        color: #5FB2FF;
       }
-
       /* Break Lines */
       hr {
         width: 100%;
-        height: 5px;
+        height: 3px;
         margin-left: auto;
         margin-right: auto;
-        background-color: #7C7C7C;
+        margin-top: -20px;
+        background-color: #151515;
         border: 0 none;
       }
-
+      #stock {
+         text-align:center; 
+         display:inline;
+      }
       /* Top Row of Table */
       th {
-        background-color: #2179AB;
+        background-color: #0072DC;
         color:white;
       }
-
-      /* Rows in the Table */
+      /* All Rows in the Table */
       th, td {
         text-align: center;
         border: 1px solid black;
         padding: 15px;
       }
-
-      /* Table */
-      table {
-        border: 2px solid black;
-        width: 44%;
-        float: left;
-        margin-left: 3%;
+      /* All but top row of table */
+      td {
+        background-color: #202020; /* I don't like this number */
       }
-
+      /* Table */
+      #options {
+        border: 2px solid black;
+        width: 55%;
+        height: 500px;
+        float: left;
+        margin-left: 4%;
+        overflow:auto
+      }
+      /* Greeks Box */
+      #greeks {
+        border: 3px solid gray;
+        border-radius: 25px;
+        background:#0072DC;
+        width: 33%;
+        height: 500px;
+        float: right;
+        margin-right: 4%;
+        padding: 20px;
+      }
       /* Less Space between lines of text */
       p.small {
         font-size: 40px;
@@ -70,40 +85,39 @@
         font-size: 40px; 
         text-align: center;
       }
+      /* Price Graph */
+      #price_graph {
+        margin-left: 4%;
+        margin-right: 4%;
+        padding: 30px;
+      }
 
-      /* Implied Volatility Box */
-      #volatility {
-        border: 3px solid gray;
-        border-radius: 25px;
-        background:#2179AB;
-        width: 44%;
-        float: right;
-        margin-right: 3%;
-        padding: 20px;
+      /* Stock Info Table */
+      #info_table {
+          color: white;
+          font-size: 30px;
       }
 
       /* Stock Info Box */
       #stock_info {
         border: 3px solid gray;
         border-radius: 25px;
-        background:#2179AB;
-        width: 44%;
+        background:#0072DC;
+        width: 44;
         float: left;
-        margin-left: 3%;
+        margin-left: 4%;
         padding: 30px;
       }
-
       /* Evaulate Opportunities Box */
       #eval_opp {
         border: 3px solid gray;
         border-radius: 25px;
-        background:#2179AB;
+        background:#0072DC;
         width: 44%;
         float: right;
-        margin-right: 3%;
+        margin-right: 4%;
         padding: 20px;
       }
-
       .gauge__body {
         width: 100%;
         height: 0;
@@ -120,11 +134,11 @@
         left: 0;
         width: inherit;
         height: 100%;
-        background: mediumturquoise;
+        background: #5FB2FF;
         transform-origin: center top;
         transform: rotate(0.25turn);
         transition: transform 0.2s ease-out;
-    }
+      }
       .gauge__cover {
         width: 75%;
         height: 150%;
@@ -134,7 +148,6 @@
         top: 25%;
         left: 50%;
         transform: translateX(-50%);
-      /* Text */
         display: flex;
         align-items: center;
         justify-content: center;
@@ -144,160 +157,121 @@
     </style>
   </head>
 
-  <body style="background-color:#1F2B4A">
-    <!-- List of hyperlinks at top of page -->
-    <ul id="headings">
-      <!-- OgC Logo Button -->
-      <a class = "OGC" href='http://127.0.0.1:8000/'>
-        <img src="{% static 'images/logo.png' %}" alt="Home" width="150" height="106">
-      </a>
+  <body style="background-color:#001444; font-family: 'Courier'; margin-left: -24px; margin-top: 5px">
+    <div class ="header">
+      <!-- List of hyperlinks at top of page -->
+      <ul id="headings">
+        <!-- OgC Logo Button -->
+        <a class = "OGC" href='http://127.0.0.1:8000/'>
+          <img src="{% static 'images/logo.png' %}" alt="Home" width="140" height="75">
+        </a>
 
-      <!--Hyperlinks-->
-      <div class="hyperlinks">
-        <a href='http://127.0.0.1:8000/' style="font-size: 30px">Home</a>
-        <a href="help" style="font-size: 30px">Help</a></li>
-        <a href='about_us' style="font-size: 30px">About Us</a>
-        <a href="contact" style="font-size: 30px">Contact</a>
-        <a href="login" style="font-size: 30px">Login</a></span></p>
-      </div>
-    </ul>
-
-    <!-- Dividing Line --> 
-    <hr style="clear:both"/>
+        <!--Hyperlinks-->
+        <div class="hyperlinks" style="font-size: 25px">
+          <a href='http://127.0.0.1:8000/'>Home</a>
+          <a href="help">Help</a></li>
+          <a href='about_us'>About Us</a>
+          <a href="contact">Contact</a>
+          <a href="view">Watchlist</a>
+          <a href="login">Login</a></span></p>
+        </div>
+      </ul>
+      <!-- Dividing Line --> 
+      <hr style="clear:both"/>
+    </div>
 
     <!-- Stock Name --> 
-    <h1 class="display-4" style="color:MediumTurquoise"><center><u>{{stock}} ({{name}})</u></center></h1>
-    <br>
-
-    <!-- Options Table -->
-    <table class="table-striped table-dark">
-      <!-- Categories of Options Table (Top Row)-->
-      <thead class="categories">
-        <tr>
-          <th>Type of Option</th>
-          <th>Expiration Date</th>
-          <th>Strike Price</th>
-          <th>Last Price</th>
-          <th>Implied Volatility</th>
-        </tr>
-      </thead>
-
-      <!-- Information of Options Table -->
-      <tbody>
-        <!-- Row 1 -->
-        <tr>
-          <td>Call</td>
-          <td>2020-10-21</td>
-          <td>115</td>
-          <td>0.80</td>
-          <td>0.80</td>
-        </tr>
-        <!-- Row 2 -->
-          <tr>
-            <td>Call</td>
-            <td>2020-10-21</td>
-            <td>112</td>
-            <td>0.05</td>
-            <td>0.05</td>
-          </tr>
-        <!-- Row 3 -->
-        <tr>
-          <td>Call</td>
-          <td>2020-10-21</td>
-          <td>120</td>
-          <td>0.40</td>
-          <td>0.40</td>
-        </tr>
-        <!-- Row 4 -->
-        <tr>
-          <td>Call</td>
-          <td>2020-10-21</td>
-          <td>95</td>
-          <td>0.20</td>
-          <td>0.20</td>
-        </tr>
-        <!-- Row 5 -->
-          <tr>
-          <td>Put</td>
-          <td>2020-10-21</td>
-          <td>115</td>
-          <td>0.80</td>
-          <td>0.80</td>
-        </tr>
-        <!-- Row 6 -->
-        <tr>
-          <td>Put</td>
-          <td>2020-10-21</td>
-          <td>112</td>
-          <td>0.05</td>
-          <td>0.05</td>
-        </tr>
-        <!-- Row 7 -->
-        <tr>
-          <td>Put</td>
-          <td>2020-10-21</td>
-          <td>120</td>
-          <td>0.40</td>
-          <td>0.40</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <!-- Implied Volatility -->
-    <div id="volatility">
-      <!-- Implied Volatility Value and Description -->
-      <p class = "small" style="color: white; font-size: 40px; text-align:center">0.80</p>
-      <p style="color: white; font-size: 15px; text-align:center">The implied volatility is very high for this stock, and one might not want to invest in it.</p>
+    <div id = "stock">
+        <a href='https://{{stock1 |safe}}.com/'> 
+          <h1 class="display-4" style="color: #0072DC">
+            <img src="//logo.clearbit.com/{{stock1 | safe}}.com" width = 58px>
+            <u>{{stock1}} ({{stock1b}})</u>
+            <img src="//logo.clearbit.com/{{stock1 | safe}}.com" width = 58px>
+          </h1>
+        </a>
       <br>
+    </div>
 
-      <!-- Delta and Theta-->
-        <div style="font-size: 40px; float:left; margin-left: 20%; margin-right: 20%; text-align:center">
-          <p class="small" style="color:white">δ</p>
-          <p style="color:#C8C8C8">0.7</p> 
-          <p class="small" style="color:white">ν</p>
-          <p style="color:#C8C8C8">1.0</p> 
-        </div>
+    <!-- Options Table --> 
+    <div id = "options" style="color:white;">
+      {{options | safe}}
+    </div>
 
-      <!-- Rho and Vega -->
-      <div style="font-size: 40px; float:right; margin-right: 20%; text-align:center">   
-        <p class="small" style="color:white">ρ</p> 
-        <p style="color:#C8C8C8">0</p> 
-        <p class="small" style="color:white">ν</p>
-        <p style="color:#C8C8C8">0.4</p> 
-      </div>
-
-      <br><br><br><br><br><br><br><br><br>
-
-      <!-- Gamma -->
-      <div style="font-size: 40px">   
-        <center><p class="small" style="color:white">γ</p></center>
-        <center><p style="color:#C8C8C8">0.2</p></center>
-      </div>
+    <!-- Greeks Table -->
+    <div id="greeks">
+        <p class="box_titles">The Greeks!</p>
+        <table style="width: 100%" id="info_table">
+            <tr>
+                <td>δ</td>
+                <td>{{delta | safe}}</td>
+            </tr>
+            <tr>
+                <td>ρ</td>
+                <td>{{rho | safe}}</td>
+            </tr>
+            <tr>
+                <td>θ</td>
+                <td>{{theta | safe}}</td>
+            </tr>
+            <tr>
+                <td>ν</td>
+                <td>{{vega | safe}}</td>
+            </tr>
+            <tr>
+                <td>γ</td>
+                <td>{{gamma | safe}}</td>
+            </tr>
+        </table>
     </div>
 
     <br style="clear:both"/><br>
-    <!-- Stock Price Chart -->
-    <div id="price_chart" style="text-align:center">
-      <img src="{% static 'images/google.png' %}" alt="Stock" width=70%>
-    </div>
 
+    <!-- Stock Price Chart -->
+    <div id="price_graph">
+      {% autoescape off %}
+      {{ plot_html }}
+      {% endautoescape %}
+    </div>
     <br>
 
     <!-- The Stock Info Box -->
     <div id="stock_info">
-      <p class="box_titles">Render Key Stock Data.</p>
-      <p style="color:white; font-size: 30px">Current Price</p>
-      <p style="color:white; font-size: 30px">Day's Range</p>
-      <p style="color:white; font-size: 30px">52 Week Range</p>
-      <p style="color:white; font-size: 30px">Volume</p>
-      <p style="color:white; font-size: 30px">EPS</p>
-      <p style="color:white; font-size: 30px">Market Cap</p>
-      <p style="color:white; font-size: 30px">Industry</p>
+        <p class="box_titles">Render Key Stock Data.</p>
+        <table style="width: 100%" id="info_table">
+            <tr>
+                <td>Current Price</td>
+                <td>{{ price }}</td>
+            </tr>
+            <tr>
+                <td>Day's Range</td>
+                <td>{{ day_range }}</td>
+            </tr>
+            <tr>
+                <td>52 Week Range</td>
+                <td>{{ 52wk_range }}</td>
+            </tr>
+            <tr>
+                <td>Volume</td>
+                <td>{{ volume }}</td>
+            </tr>
+            <tr>
+                <td>EPS</td>
+                <td>{{ eps }}</td>
+            </tr>
+            <tr>
+                <td>Market Cap</td>
+                <td>{{ market_cap }}</td>
+            </tr>
+            <tr>
+                <td>Industry</td>
+                <td>{{ industry }}</td>
+            </tr>
+        </table>
     </div>
 
     <!-- Technical Analysis Box -->
     <div id="eval_opp">
-      <p class="box_titles">Evaluate Opportunities for {{stock}} </p>
+      <p class="box_titles">Evaluate Opportunities for {{stock1}} </p>
       <p style="color:white; font-size: 15px; text-align:center">Based on these indicators -- RSI, Money Flow Index, Put-Call Ratio</p>
       <p style="color: white; font-size: 15px; text-align:center">RSI value > 70 = overbought, < 30 = oversold <br /> MFI > 80 = overbought, < 20 = oversold <br /> PCR > 1 (more puts than calls), PCR < 1 (more calls than puts)  </p>
       <p style="color: white; font-size: 10px; text-align:center">Info from Investopedia</p>
@@ -306,12 +280,11 @@
           <div class="gauge__fill"></div>
           <div class="gauge__cover"></div>
         </div>
-    </div>
+    </div>    
 
-    <!-- JavaScript to make judgements about the value of a stock in tech analysis box-->
     <script>
+      // JavaScript to make judgements about the value of a stock in tech analysis box-->
       const gaugeElement = document.querySelector(".gauge");
-
       function setGaugeValue(gauge, value) {
           // Making sure it is in range
           if (value < 0 || value > 1) {
@@ -328,11 +301,8 @@
           gauge.querySelector(".gauge__fill").style.transform = `rotate(${value / 2}turn)`;
           //gauge.querySelector(".gauge__cover").textContent = `${Math.round(value * 100)}%`;
       }
-
+      
       setGaugeValue(gaugeElement, 0.9); //instead of setting as a constant number, pull in from backend
     </script>
-
-    </body>
+  </body>
 </html>
-
-

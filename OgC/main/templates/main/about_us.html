@@ -14,59 +14,59 @@
       /* Hyperlinks at top */
       .hyperlinks {
         float: right; 
-        margin-top: 20px;     
+        margin-top: 18px;     
       }
-
-      /* OGC LOGO */
-      .OGC {
-        float:left;    
-      }   
-
       /* Headings at top */     
       ul#headings a {
         display: inline; 
-        margin-right: 40px;
+        margin-right: 20px;
+        color: #5FB2FF;
       }
-
       /* Break Lines */
       hr {
         width: 100%;
-        height: 5px;
+        height: 3px;
         margin-left: auto;
         margin-right: auto;
-        background-color: #7C7C7C;
+        margin-top: -20px;
+        background-color: #151515;
         border: 0 none;
       }
     </style>
   </head>
 
-  <body style="background-color:#1F2B4A">
-    <!-- List of hyperlinks at top of page -->
-    <ul id="headings">
-      <!-- OgC Logo Button -->
-      <a class = "OGC" href='http://127.0.0.1:8000/'>
-        <img src="{% static 'images/logo.png' %}" alt="Home" width="150" height="106">
-      </a>
+  <body style="background-color:#001444; font-family: Montserrat; margin-left: -24px; margin-top: 5px">
+    <div class ="header">
+      <!-- List of hyperlinks at top of page -->
+      <ul id="headings">
+        <!-- OgC Logo Button -->
+        <a class = "OGC" href='http://127.0.0.1:8000/'>
+          <img src="{% static 'images/logo.png' %}" alt="Home" width="140" height="75">
+        </a>
 
-      <!--Hyperlinks-->
-      <div class="hyperlinks">
-        <a href='http://127.0.0.1:8000/' style="font-size: 30px">Home</a>
-        <a href="help" style="font-size: 30px">Help</a></li>
-        <a href='about_us' style="font-size: 30px">About Us</a>
-        <a href="contact" style="font-size: 30px">Contact</a>
-        <a href="view" style="font-size: 30px">Watchlist</a>
-        <a href="login" style="font-size: 30px">Login</a></span></p>
-      </div>
-    </ul>
-
-    <!-- Dividing Line --> 
-    <hr style="clear:both"/>
+        <!--Hyperlinks-->
+        <div class="hyperlinks" style="font-size: 25px">
+          <a href='http://127.0.0.1:8000/'>Home</a>
+          <a href="help">Help</a></li>
+          <a href='about_us'>About Us</a>
+          <a href="contact">Contact</a>
+          <a href="view">Watchlist</a>
+          <a href="login">Login</a></span></p>
+        </div>
+      </ul>
+      <!-- Dividing Line --> 
+      <hr style="clear:both"/>
+    </div>
 
     <!-- About US Title -->
-    <h1 class="display-4" style="color:#65CCB8"><center><u>About Us:</u></center></h1>
+    <h1 class="display-4" style="color:#0072DC"><center><u>About Us:</u></center></h1>
 
     <!-- About Us Paragraph -->
-    <p style="color:#FAFAFA; font-size: 20px; text-align:center; padding-left: 50px; padding-right: 50px">We are a group of aspiring computer scientists from the Univeristy of Illinois at Urbana-Champaign (UIUC) with an interest in finance. This website was developed by Anakin, Brian, Gabe, Suyash, Eshaan, Joseph, and Sanya. We also had the help of the best project manager JAMES! Our reason for creating OgC was because we had to have some project for our CS 196 class, but more importantly because we wanted an easier way to access and interperet the different options for a given stock.</p>
+    <p style="color:#FAFAFA; font-size: 20px; text-align:center; padding-left: 50px; padding-right: 50px">We are a group of aspiring computer scientists from the <a href='https://illinois.edu/'>Univeristy of Illinois at Urbana-Champaign (UIUC)</a> with an interest in finance. This website was developed by Anakin, Brian, Gabe, Suyash, Eshaan, Joseph, and Sanya. We also had the help of the best project manager JAMES! Our reason for creating OgC was because we had to have some project for our <a href='http://cs196.cs.illinois.edu/'>CS 196 class</a>, but more importantly because we wanted an easier way to access and interperet the different options for a given stock.</p>
+
+    <a href='http://cs196.cs.illinois.edu/'>
+      <center><img src="{% static 'images/CS_196.png' %}" alt="Home" width=80% height=23%></center>
+    </a>
 
   </body>
 </html>

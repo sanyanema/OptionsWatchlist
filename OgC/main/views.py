@@ -1,8 +1,16 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import WatchList, Item
+import yfinance
+from wallstreet import Call, Put
+from .models import WatchList
+from . import stock_info, options_info, greek_options
+import json
+import pandas as pd
+
 # Create your views here.
 stock1 = "Google"
+stock2 = "Chipotle"
+stock3 = "Spotify"
 stock1b = "GOOGL"
 
 def index(response, id):
@@ -29,7 +37,7 @@ def v1(response):
     return HttpResponse("<h1>v1</h1>")
 
 def home(request):
-	return render(request, 'main/home.html', {'name' : "John Smith", 'stock' : stock1})
+	return render(request, 'main/home.html', {'name' : "John Smith", 'stock1' : stock1, 'stock2' : stock2, 'stock3' : stock3})
 
 def help(request):
 	return render(request, 'main/help.html', {'name' : "John Smith"})
@@ -41,7 +49,34 @@ def contact(request):
 	return render(request, 'main/contact.html', {'name' : "John Smith"})
 
 def visualization(request):
-	return render(request, 'main/visualization.html', {'stock' : stock1, 'name' : stock1b})
+	# Stock Price Chart
+	stock = stock_info.StockInfo(stock1b)
+	plot_html = stock.plot_hist()
+
+	# Options Information
+	options = options_info.findGreekData(options_info.getCalls('GOOGL', '2020-11-13'))
+	options_html = options.to_html()
+
+	# Greeks 
+	delta, gamma, rho, vega, theta = greek_options.getGreeks(greek_options.yFinanceToWallStreet(yfinance.Ticker('GOOGL').option_chain("2020-11-13").calls, 2000))
+	return render(request, 'main/visualization.html', {
+		'stock1' : stock1,				# stock name
+		'stock1b' : stock1b, 			# stock ticker
+		'plot_html': plot_html,			# graph html
+		'options' : options_html,		# options html
+		'price' : stock.current_price,	# serialized stock info
+		'day_range' : stock.day_range,
+		'52wk_range' : stock.yr_range,
+		'volume' : stock.avg_volume,
+		'eps' : stock.eps_trail,
+		'market_cap' : stock.market_cap,
+		'industry' : stock.sector,
+		'delta' : delta,
+		'gamma' : gamma,
+		'rho' : rho,
+		'vega' : vega,
+		'theta' : theta,
+	})
 
 def create(response):
 	if response.method == "POST":
@@ -59,7 +94,7 @@ def create(response):
 	return render(response, "main/create.html", {"form":form})
 
 def view(response):
-	return render(response, "main/view.html", {}) 
+	return render(response, "main/view.html", {'name' : "John Smith"}) 
 
 def add_watchlist(request):
 	user = request.user
