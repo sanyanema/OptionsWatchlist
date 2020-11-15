@@ -12,12 +12,12 @@
 
 <!-- Stock Name -->
 <div id="stock" style="text-align:center; display:inline;">
-    <a href='https://{{name |safe}}.com/'>
+    <a target="_blank" href='https://{{name |safe}}.com/'>
         <h1>
             <img src="//logo.clearbit.com/{{name | safe}}.com" width=58px>
             <u>{{name}} ({{ticker}})</u> 
             <img src="//logo.clearbit.com/{{name | safe}}.com" width=58px>
-            <p id="test"></p>
+<!--             <p id="test"></p> -->
         </h1>
     </a>
     <br>
@@ -64,7 +64,7 @@
     const url = site + q.value;
     const win = window.open(url, '_blank');
     win.focus();
-    $route.reload();
+    // $route.reload();
   }
 
   f.addEventListener('submit', submitted);
