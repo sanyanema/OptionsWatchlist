@@ -1,3 +1,4 @@
+
 {% extends 'layouts/base.html' %}
 
 {% block title %} UI Notifications {% endblock %} 
@@ -6,121 +7,69 @@
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
+{% load static %}
+
+<center><h1> About Us </h1></center>
 
 <div class="row">
-  <div class="col-md-6">
-    <div class="card">
-      <div class="card-header">
-        <h4 class="card-title">Notifications Style</h4>
-      </div>
-      <div class="card-body">
-        <div class="alert alert-info">
-          <span>This is a plain notification</span>
-        </div>
-        <div class="alert alert-info">
-          <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
-            <i class="tim-icons icon-simple-remove"></i>
-          </button>
-          <span>This is a notification with close button.</span>
-        </div>
-        <div class="alert alert-info alert-with-icon" data-notify="container">
-          <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
-            <i class="tim-icons icon-simple-remove"></i>
-          </button>
-          <span data-notify="icon" class="tim-icons icon-bell-55"></span>
-          <span data-notify="message">This is a notification with close button and icon.</span>
-        </div>
-        <div class="alert alert-info alert-with-icon" data-notify="container">
-          <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
-            <i class="tim-icons icon-simple-remove"></i>
-          </button>
-          <span data-notify="icon" class="tim-icons icon-bell-55"></span>
-          <span data-notify="message">This is a notification with close button and icon and have many lines. You can see that the icon and the close button are always vertically aligned. This is a beautiful notification. So you don't have to worry about the style.</span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="card">
-      <div class="card-header">
-        <h4 class="card-title">Notification states</h4>
-      </div>
-      <div class="card-body">
-        <div class="alert alert-primary">
-          <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
-            <i class="tim-icons icon-simple-remove"></i>
-          </button>
-          <span><b> Primary - </b> This is a regular notification made with ".alert-primary"</span>
-        </div>
-        <div class="alert alert-info">
-          <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
-            <i class="tim-icons icon-simple-remove"></i>
-          </button>
-          <span><b> Info - </b> This is a regular notification made with ".alert-info"</span>
-        </div>
-        <div class="alert alert-success">
-          <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
-            <i class="tim-icons icon-simple-remove"></i>
-          </button>
-          <span><b> Success - </b> This is a regular notification made with ".alert-success"</span>
-        </div>
-        <div class="alert alert-warning">
-          <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
-            <i class="tim-icons icon-simple-remove"></i>
-          </button>
-          <span><b> Warning - </b> This is a regular notification made with ".alert-warning"</span>
-        </div>
-        <div class="alert alert-danger">
-          <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
-            <i class="tim-icons icon-simple-remove"></i>
-          </button>
-          <span><b> Danger - </b> This is a regular notification made with ".alert-danger"</span>
-        </div>
-      </div>
-    </div>
-  </div>
   <div class="col-md-12">
     <div class="card">
       <div class="card-body">
-        <div class="places-buttons">
-          <div class="row">
-            <div class="col-md-6 ml-auto mr-auto text-center">
-              <h4 class="card-title">
-                Notifications Places
-                <p class="category">Click to view notifications</p>
-              </h4>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-8 ml-auto mr-auto">
-              <div class="row">
-                <div class="col-md-4">
-                  <button class="btn btn-primary btn-block" onclick="demo.showNotification('top','left')">Top Left</button>
-                </div>
-                <div class="col-md-4">
-                  <button class="btn btn-primary btn-block" onclick="demo.showNotification('top','center')">Top Center</button>
-                </div>
-                <div class="col-md-4">
-                  <button class="btn btn-primary btn-block" onclick="demo.showNotification('top','right')">Top Right</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-8 ml-auto mr-auto">
-              <div class="row">
-                <div class="col-md-4">
-                  <button class="btn btn-primary btn-block" onclick="demo.showNotification('bottom','left')">Bottom Left</button>
-                </div>
-                <div class="col-md-4">
-                  <button class="btn btn-primary btn-block" onclick="demo.showNotification('bottom','center')">Bottom Center</button>
-                </div>
-                <div class="col-md-4">
-                  <button class="btn btn-primary btn-block" onclick="demo.showNotification('bottom','right')">Bottom Right</button>
-                </div>
-              </div>
-            </div>
-          </div>
+        <h3>
+          We are a group of aspiring computer scientists from the <a href='https://illinois.edu/'>Univeristy of Illinois at Urbana-Champaign (UIUC)</a> with an interest in finance. This website was developed by Anakin, Brian, Gabe, Suyash, Eshaan, Joseph, and Sanya. We also had the help of the best project manager JAMES! Our reason for creating OgC was because we had to have some project for our <a href='http://cs196.cs.illinois.edu/'>CS 196 class</a>, but more importantly because we wanted an easier way to access and interperet the different options for a given stock.
+        </h3>
+      </div>
+      <div class="logo">
+        <a href="/" class="simple-text logo-normal">
+          <center>
+            <center><img src="{% static 'assets/img/CS_196.png' %}" alt="Home" width=80% height=23%></center>
+          </center>
+        </a>
+      </div>
+      <br><br>
+    </div>
+  </div>
+</div>
+
+<center><h1> Contact </h1></center>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="Emails">
+          <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px">
+            Gabe Aaron: <a href="mailto:gaaron2@illinois.edu"><u>Gaaron2@illinois.edu</u></a>
+          </p>
+          <br>
+          <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px">
+            Suyash Agrawal: <a href="mailto:suyasha2@illinois.edu"><u>Suyasha2@illinois.edu</u></a>
+          </p>
+          <br>
+          <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px">
+            Eshaan Bhattad: <a href="mailto:eshaan2@illinois.edu"><u>Eshaan2@illinois.edu</u></a>
+          </p>
+          <br>
+          <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px">
+            Anakin Dey: <a href="mailto:anakind2@illinois.edu"><u>Anakind2@illinois.edu</u></a>
+          </p>
+          <br>
+          <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px"> 
+            James Fleming: <a href="mailto:jflemi9@illinois.edu"><u>Jflemi9@illinois.edu</u></a>
+          </p>
+          <br>
+          <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px">
+            Joseph Kuang: <a href="mailto:jjkuang2@illinois.edu"><u>Jjkuang2@illinois.edu</u></a>
+          </p>
+          <br>
+          <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px">
+            Sanya Nema: <a href="mailto:snema2@illinois.edu"><u>Snema2@illinois.edu</u></a>
+          </p>
+          <br>
+          <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px">
+            Brian Yoon: <a href="mailto:briancy2@illinois.edu"><u>Briancy2@illinois.edu</u></a>
+          </p>
+          <br>
         </div>
       </div>
     </div>
