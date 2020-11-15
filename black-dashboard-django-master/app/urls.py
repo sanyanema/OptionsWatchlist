@@ -9,7 +9,7 @@ from app import views
 
 urlpatterns = [
     # Table List File 
-    path('ui-tables.html', views.tables, name='ui-tables.html'),
+    path('ui-tables.html/<slug:ticker>', views.tables, name='ui-tables.html'),
 
     # Maps (Price Chart) File 
     path('ui-maps.html/<slug:ticker>', views.maps, name='ui-maps.html'),

@@ -41,23 +41,30 @@ def pages(request):
         return HttpResponse(html_template.render(context, request))
 
 @login_required(login_url="/login/")
-def tables(request):
-    name = "Google"
-    ticker = "GOOGL"
-    stock = stock_info.StockInfo(ticker)
+def tables(request, ticker):
+    stock = stock_info.StockInfo(ticker.upper())
+    name = stock.name
+    image_draft = name.split()
+    image = image_draft[0].split(".")
 
     # Expiration Dates
     dates = json.dumps(options_info.getExpirationDates(ticker))
+
     # Options Information
     options = options_info.findGreekData(options_info.getCalls(ticker, '2020-11-20'))
     options_html = options.to_html()
+    option_price_draft = stock.current_price.split()
+    option_price = float(option_price_draft[0])
 
     # Greeks 
-    delta, gamma, rho, vega, theta = greek_options.getGreeks(greek_options.yFinanceToWallStreet(yfinance.Ticker(ticker).option_chain("2020-11-20").calls, 2000))
+    try:
+        delta, gamma, rho, vega, theta = greek_options.getGreeks(greek_options.yFinanceToWallStreet(yfinance.Ticker(ticker).option_chain("2020-11-20").calls, option_price))
+    except:
+        delta, gamma, rho, vega, theta = ["NA", "NA", "NA", "NA", "NA"]
 
     return render(request, "ui-tables.html", {
         'name' : name,
-        'ticker' : ticker,
+        'ticker' : ticker.upper(),
         'options' : options_html,
         'price' : stock.current_price,
         'day_range' : stock.day_range,
@@ -71,7 +78,8 @@ def tables(request):
         'rho' : rho,
         'vega' : vega,
         'theta' : theta,
-        'dates' : dates
+        'dates' : dates,
+        'image' : image[0],
         })
 
 def maps(request, ticker):
@@ -86,5 +94,5 @@ def maps(request, ticker):
         'name' : name,
         'ticker' : ticker.upper(),
         'plot_html' : plot_html,
-        'image' : image[0]
+        'image' : image[0],
         })
