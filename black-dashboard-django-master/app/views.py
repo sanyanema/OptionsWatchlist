@@ -82,5 +82,7 @@ def maps(request):
     plot_html = stock.plot_hist()
 
     return render(request, "ui-maps.html", {
+        'name' : name,
+        'ticker' : ticker,
         'plot_html' : plot_html,
         })

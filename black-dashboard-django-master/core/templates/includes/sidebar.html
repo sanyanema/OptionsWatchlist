@@ -2,17 +2,17 @@
 <div class="sidebar">
   <div class="sidebar-wrapper">
     
+
+
+    {% if user.is_authenticated %}
     <div class="logo">
-      <a target="_blank" 
-         href="https://www.creative-tim.com/product/black-dashboard-django" class="simple-text logo-normal">
+      <a href="/" class="simple-text logo-normal">
         <center>
           <img src="{% static 'assets/img/logo.png' %}" alt="Home" width="70" height="37.5">
           
         </center>
       </a>
     </div>
-
-    {% if user.is_authenticated %}
     <ul class="nav">
       <li class="active ">
         <a href="/">
@@ -39,9 +39,9 @@
         </a>
       </li>
       <li>
-        <a href="/ui-notifications.html">
+        <a href="/ui-about-us.html">
           <i class="tim-icons icon-bell-55"></i>
-          <p>Notifications</p>
+          <p>About Us</p>
         </a>
       </li>
 
@@ -51,13 +51,12 @@
           <p>Helpful Text Visual</p>
         </a>
       </li>
-
-      <li>
+<!--       <li>
         <a href="/page-rtl-support.html">
           <i class="tim-icons icon-world"></i>
           <p>Don't Click</p>
         </a>
-      </li>
+      </li> -->
       <li>
         <a href="/page-user.html">
           <i class="tim-icons icon-single-02"></i>

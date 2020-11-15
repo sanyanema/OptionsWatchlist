@@ -7,7 +7,22 @@
 
 {% block content %}
 
-<!-- Form to Choose Ticker, Expiration Date, and Type of Option -->
+<!-- For Stock Image -->
+<script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+
+<!-- Stock Name -->
+<div id="stock" style="text-align:center; display:inline;">
+    <a href='https://{{name |safe}}.com/'>
+        <h1>
+            <img src="//logo.clearbit.com/{{name | safe}}.com" width=58px>
+            <u>{{name}} ({{ticker}})</u>
+            <img src="//logo.clearbit.com/{{name | safe}}.com" width=58px>
+        </h1>
+    </a>
+    <br>
+</div>
+
+<!-- Form to Choose Ticker -->
 <container class="mx-auto">
     <form>
         <div class="form-row ">
