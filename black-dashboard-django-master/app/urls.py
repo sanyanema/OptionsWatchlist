@@ -12,7 +12,7 @@ urlpatterns = [
     path('ui-tables.html', views.tables, name='ui-tables.html'),
 
     # Maps (Price Chart) File 
-    path('ui-maps.html', views.maps, name='ui-maps.html'),
+    path('ui-maps.html/<slug:ticker>', views.maps, name='ui-maps.html'),
 
     # Matches any html file 
     re_path(r'^.*\.html', views.pages, name='pages'),

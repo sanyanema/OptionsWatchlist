@@ -15,10 +15,6 @@ from . import stock_info, options_info, greek_options
 import json
 import pandas as pd
 
-name = "Google"
-ticker = "GOOGL"
-stock = stock_info.StockInfo(ticker)
-
 @login_required(login_url="/login/")
 def index(request):
     return render(request, "index.html")
@@ -48,6 +44,7 @@ def pages(request):
 def tables(request):
     name = "Google"
     ticker = "GOOGL"
+    stock = stock_info.StockInfo(ticker)
 
     # Expiration Dates
     dates = json.dumps(options_info.getExpirationDates(ticker))
@@ -77,9 +74,11 @@ def tables(request):
         'dates' : dates
         })
 
-def maps(request):
+def maps(request, ticker):
     # Stock Price Chart
+    stock = stock_info.StockInfo(ticker)
     plot_html = stock.plot_hist()
+    name = stock.name
 
     return render(request, "ui-maps.html", {
         'name' : name,
