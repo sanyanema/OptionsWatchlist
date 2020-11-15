@@ -116,7 +116,7 @@ class StockInfo:
             "shooting_star": candlestick.shooting_star(dates, target="output")
         }
         
-        candles_df = patternDict["hammer"]
+        candles_df = patternDict["hammer"] #TODO: MAKE THIS CHOOSEABLE
 
         #create list of indicies of True dates
 
