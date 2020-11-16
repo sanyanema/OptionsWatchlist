@@ -10,6 +10,7 @@
 
 import yfinance as yf  # yfinance library to collect data
 import plotly.graph_objects as go  # plotly for graphing
+from candlestick import candlestick #import pattern recognition
 
 
 class StockInfo:
@@ -18,6 +19,7 @@ class StockInfo:
         class creates object containing relevant info for desired stock
         :param set_ticker_name: [string] stock ticker
         """
+
         # store ticker name
         self.ticker_name = set_ticker_name
 
@@ -81,6 +83,53 @@ class StockInfo:
 
         return historical
 
+    def pattern(self):
+
+        # get historical data. available periods: 1d,5d,1mo,3mo,6mo,1y,2y,5y,10y,ytd,max. default = 1mo
+        history = self.ticker.history(period="max")
+
+        # remove unnessessary columns
+        dates = history[['Open','High','Low','Close']]
+
+        # rename columns for use with candlestick pattern library
+        dates.rename(columns = {"Open":"open","High":"high","Low":"low","Close":"close"}, inplace = True)
+
+        # dictionary of patterns. TODO: make it so that different patterns are selectable
+        patternDict = {
+            "inverted_hammer": candlestick.inverted_hammer(dates, target="output"),
+            "doji_star": candlestick.doji_star(dates, target="output"),
+            "bearish_harami": candlestick.bearish_harami(dates, target="output"),
+            "bullish_harami": candlestick.bullish_harami(dates, target="output"),
+            "dark_cloud_cover": candlestick.dark_cloud_cover(dates, target="output"),
+            "doji": candlestick.doji(dates, target="output"),
+            "dragonfly_doji": candlestick.dragonfly_doji(dates, target="output"),
+            "hanging_man": candlestick.hanging_man(dates, target="output"),
+            "gravestone_doji": candlestick.gravestone_doji(dates, target="output"),
+            "bearish_engulfing": candlestick.bearish_engulfing(dates, target="output"),
+            "bullish_engulfing": candlestick.bullish_engulfing(dates, target="output"),
+            "hammer": candlestick.hammer(dates, target="output"),
+            "morning_star_doji": candlestick.morning_star_doji(dates, target="output"),
+            "piercing_pattern": candlestick.piercing_pattern(dates, target="output"),
+            "rain_drop": candlestick.rain_drop(dates, target="output"),
+            "rain_drop_doji": candlestick.rain_drop_doji(dates, target="output"),
+            "star": candlestick.star(dates, target="output"),
+            "shooting_star": candlestick.shooting_star(dates, target="output")
+        }
+        
+        candles_df = patternDict["hammer"] #TODO: MAKE THIS CHOOSEABLE
+
+        #create list of indicies of True dates
+
+        true_index = candles_df.index[candles_df['output'] == True].tolist()
+        false_index = candles_df.index[candles_df['output'] == False].tolist()
+
+        for_highlight = candles_df.copy(deep=True)
+
+        for_highlight = for_highlight[~for_highlight.index.isin(false_index)]
+
+        return for_highlight
+
+
     def plot_hist(self):
         """
         function creates FigureWidget showing candlestick and moving average plots of desired stock
@@ -123,6 +172,19 @@ class StockInfo:
             line=dict(color='rgba(200,200,200,1)'),
             fill='tonexty',
             fillcolor='rgba(200,200,200,0.5)',
+        )
+
+        for_highlight = self.pattern()
+
+        highlighted_pattern = go.Candlestick(
+        x=for_highlight.index,
+            open=for_highlight['open'],
+            high=for_highlight['high'],
+            low=for_highlight['low'],
+            close=for_highlight['close'],
+            increasing={'line': {'color': '#0DF9FF'}},
+            decreasing={'line': {'color': '#511CFB'}},
+            name='highlight'
         )
 
         # Add range slider
@@ -172,7 +234,7 @@ class StockInfo:
         )
 
         # define trace array to plot
-        data = [lower, upper, candle, avg]
+        data = [lower, upper, candle, avg, highlighted_pattern]
 
         # define figure
         fig = go.Figure(data=data, layout=layout)
