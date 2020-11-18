@@ -11,7 +11,7 @@ from django.http import HttpResponse
 from django import template
 import yfinance
 from wallstreet import Call, Put
-from . import stock_info, options_info, greek_options
+from . import stock_info, options_info, greek_options, converter
 import json
 import pandas as pd
 
@@ -42,7 +42,11 @@ def pages(request):
 
 @login_required(login_url="/login/")
 def tables(request, ticker):
-    stock = stock_info.StockInfo(ticker.upper())
+    try: 
+        stock = stock_info.StockInfo(ticker.upper())
+    except: 
+        ticker = converter.convert(ticker)
+        stock = stock_info.StockInfo(ticker.upper())
     name = stock.name
     image_draft = name.split()
     image = image_draft[0].split(".")
@@ -83,10 +87,14 @@ def tables(request, ticker):
         })
 
 def maps(request, ticker):
+    try: 
+        stock = stock_info.StockInfo(ticker.upper())
+    except: 
+        ticker = converter.convert(ticker)
+        stock = stock_info.StockInfo(ticker.upper())
     # Stock Price Chart
-    stock = stock_info.StockInfo(ticker.upper())
-    plot_html = stock.plot_hist()
     name = stock.name
+    plot_html = stock.plot_hist()
     image_draft = name.split()
     image = image_draft[0].split(".")
 
