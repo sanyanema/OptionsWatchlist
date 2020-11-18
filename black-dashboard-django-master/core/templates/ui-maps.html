@@ -36,17 +36,14 @@
 {% block javascripts %}
 <script>
   const f = document.getElementById('form');
-  const q = document.getElementById('query')
-  const google = 'https://www.google.com/search?q=site%3A+';
+  const q = document.getElementById('query');
   const site = 'http://127.0.0.1:8000/ui-maps.html/';
-  // document.getElementById("test").innerHTML = typeof q + " " + q;
 
   function submitted(event) {
     event.preventDefault();
-    const url = site + q.value.replace(/\s+/g, '');; // const url = google + site + '+' + q.value;
+    const url = site + q.value.replace(/\s+/g, '');
     const win = window.open(url, '_self');
     win.focus();
-    // $route.reload();
   }
 
   f.addEventListener('submit', submitted);
