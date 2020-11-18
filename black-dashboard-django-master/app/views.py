@@ -45,8 +45,13 @@ def tables(request, ticker):
     try: 
         stock = stock_info.StockInfo(ticker.upper())
     except: 
-        ticker = converter.convert(ticker)
-        stock = stock_info.StockInfo(ticker.upper())
+        try: 
+            ticker = converter.convert(ticker)
+            stock = stock_info.StockInfo(ticker.upper())
+        except: 
+            context = {}
+            html_template = loader.get_template( 'error-404.html' )
+            return HttpResponse(html_template.render(context, request))
     name = stock.name
     image_draft = name.split()
     image = image_draft[0].split(".")
@@ -87,11 +92,16 @@ def tables(request, ticker):
         })
 
 def maps(request, ticker):
-    try: 
+    try:
         stock = stock_info.StockInfo(ticker.upper())
-    except: 
-        ticker = converter.convert(ticker)
-        stock = stock_info.StockInfo(ticker.upper())
+    except:
+        try: 
+            ticker = converter.convert(ticker)
+            stock = stock_info.StockInfo(ticker.upper())
+        except: 
+            context = {}
+            html_template = loader.get_template( 'error-404.html' )
+            return HttpResponse(html_template.render(context, request))
     # Stock Price Chart
     name = stock.name
     plot_html = stock.plot_hist()

@@ -176,7 +176,7 @@
 
   function submitted(event) {
     event.preventDefault();
-    const url = site + q.value; // const url = google + site + '+' + q.value;
+    const url = site + q.value.replace(/\s+/g, ''); // const url = google + site + '+' + q.value;
     const win = window.open(url, '_self');
     win.focus();
     // $route.reload();
