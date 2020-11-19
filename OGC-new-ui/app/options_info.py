@@ -86,9 +86,9 @@ def findContractExpirationDate(contract):
         counter += 1
     return expirationDate
 
-stock = getStock('TSLA')
-calls = getCalls('TSLA', '2020-11-20')
-print(calls)
-print()
-print()
-print(type(calls))
+# stock = getStock('TSLA')
+# calls = getCalls('TSLA', '2020-11-20')
+# print(calls)
+# print()
+# print()
+# print(type(calls))
