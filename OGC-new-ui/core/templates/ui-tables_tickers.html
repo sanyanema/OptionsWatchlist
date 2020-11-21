@@ -66,7 +66,7 @@
     </form>
 </container>
 <!-- Options -->
-<div class="row" style="overflow:auto; height:650px; width:60%; float:left;">
+<div class="row" style="overflow:auto; height:1050px; width:60%; float:left;">
     <div class="col-md-12">
         <div class="card ">
             <div class="card-header">
@@ -88,21 +88,58 @@
     </div>
 </div>
 
-<!-- Stock Info-->
-<div class="row" style="overflow:auto; height:650px; width:40%; float:right;">
+<!--Greek Info-->
+<div class="row" style="overflow:hidden; height:400px; width:40%; float:right;">
     <div class="col-md-12">
         <div class="card ">
             <div class="card-header">
-                <h4 class="card-title"></h4>
+                <h4 class="card-title text-center">Greeks</h4>
+            </div>
+            <div class="card-body text-center text-white">
+                <div class="table-responsive">
+                    <div id="greeks">
+                        <table class="table tablesorter " id="">
+                            <thead class=" text-primary">
+                            <tr>
+                                <td>δ</td>
+                                <td>{{delta | safe}}</td>
+                            </tr>
+                            <tr>
+                                <td>ρ</td>
+                                <td>{{rho | safe}}</td>
+                            </tr>
+                            <tr>
+                                <td>θ</td>
+                                <td>{{theta | safe}}</td>
+                            </tr>
+                            <tr>
+                                <td>ν</td>
+                                <td>{{vega | safe}}</td>
+                            </tr>
+                            <tr>
+                                <td>γ</td>
+                                <td>{{gamma | safe}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Stock Info-->
+<div class="row" style="overflow:hidden; height:500px; width:40%; float:right;">
+    <div class="col-md-12">
+        <div class="card ">
+            <div class="card-header">
+                <h4 class="card-title text-center text-justify">Key Stock Data</h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <div id="stock_info">
-                        <table class="table tablesorter " id="">
+                        <table class="table tablesorter text-center" id="">
                             <thead class=" text-primary">
-                            <tr>
-                                <th>Key Stock Data</th>
-                            </tr>
                             </thead>
                             <tr>
                                 <td>Current Price</td>
@@ -140,47 +177,7 @@
     </div>
 </div>
 
-<div class="row" style="overflow:auto; height:650px; width:40%; float:right;">
-    <div class="col-md-12">
-        <div class="card ">
-            <div class="card-header">
-                <h4 class="card-title"></h4>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <div id="stock_info">
-                        <table class="table tablesorter " id="">
-                            <thead class=" text-primary">
-                            <tr>
-                                <td>δ</td>
-                                <td>{{delta | safe}}</td>
-                            </tr>
-                            <tr>
-                                <td>ρ</td>
-                                <td>{{rho | safe}}</td>
-                            </tr>
-                            <tr>
-                                <td>θ</td>
-                                <td>{{theta | safe}}</td>
-                            </tr>
-                            <tr>
-                                <td>ν</td>
-                                <td>{{vega | safe}}</td>
-                            </tr>
-                            <tr>
-                                <td>γ</td>
-                                <td>{{gamma | safe}}</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <br style="clear:both"/><br>
-
 
 {% endblock content %}
 
