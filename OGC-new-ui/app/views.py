@@ -11,13 +11,15 @@ from django.http import HttpResponse
 from django import template
 import yfinance
 from wallstreet import Call, Put
-from . import stock_info, options_info, greek_options, converter
+from . import stock_info, options_info, greek_options, converter, trendingtickers
 import json
 import pandas as pd
 
 @login_required(login_url="/login/")
 def index(request):
-    return render(request, "index.html")
+    trending = trendingtickers.getTrendingTickers();
+
+    return render(request, "index.html", {'trending' : trending})
 
 @login_required(login_url="/login/")
 def pages(request):

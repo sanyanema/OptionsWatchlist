@@ -34,4 +34,4 @@ def getTrendingTickers():
     return trending
 
 
-print(getTrendingTickers())
+# print(getTrendingTickers())
