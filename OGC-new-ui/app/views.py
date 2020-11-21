@@ -60,7 +60,7 @@ def tables(request, ticker):
     dates = json.dumps(options_info.getExpirationDates(ticker))
 
     # Options Information
-    options = options_info.findGreekData(options_info.getCalls(ticker, '2020-11-20'))
+    options = options_info.findGreekData(options_info.getCalls(ticker, '2020-11-27'))
     options_html = options.to_html()
     option_price_draft = stock.current_price.split()
     option_price = float(option_price_draft[0])
