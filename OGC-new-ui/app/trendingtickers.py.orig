@@ -1,7 +1,5 @@
 import urllib3
 from bs4 import BeautifulSoup
-import re
-from collections import namedtuple
 
 def getTrendingTickers():
     req = urllib3.PoolManager()
@@ -35,25 +33,7 @@ def getTrendingTickers():
 
     return trending
 
-def getColor(num):
-    if num > 0:
-        return "green"
-    elif num < 0:
-        return "red"
-#print(getTrendingTickers())
-ticker_values = dict()
-#store returned dict into ticker_values
-ticker_values = getTrendingTickers()
-#remove + and % for easy float conversion
-ticker_values = {key: re.sub('[\+%]', '', val) for key, val in ticker_values.items()}
-ticker_values = {key: float(val) for key, val in ticker_values.items()}
 
-tickers_full = dict()
-#format of each element
-#Apple : (-0.9, red)
-tickers_full = {key: (ticker_values[key], getColor(ticker_values[key])) for key in ticker_values.keys()}
-
-#print(tickers_full)
 
 
 
