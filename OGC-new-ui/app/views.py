@@ -54,6 +54,7 @@ def pages(request):
 @csrf_protect
 @login_required(login_url="/login/")
 def tables(request, ticker):
+
     try:
         stock = stock_info.StockInfo(ticker.upper())
     except:
