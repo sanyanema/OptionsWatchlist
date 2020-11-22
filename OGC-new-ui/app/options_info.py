@@ -48,12 +48,12 @@ def findGreekData(optionChain):
 # Helper method to parses the contract symbol down to the form YYMMDD + option type
 def parseContractSymbol(contract):
     index = 0
-    if (first_digit := re.search(r"\d", contract)) is not None:
-        contract = contract[first_digit.start()::]
-        try:
-            index = contract.index('C')
-        except ValueError:
-            index = contract.index('P')
+    first_digit = re.search(r"\d", contract)
+    contract = contract[first_digit.start()::]
+    try:
+        index = contract.index('C')
+    except ValueError:
+        index = contract.index('P')
 
     contract = contract[0:index + 1]
     return contract
@@ -69,8 +69,8 @@ def findContractType(contract):
 
 # Helper method to find the ticker name from a contract
 def findTickerName(contract):
-    if (first_digit := re.search(r"\d", contract)) is not None:
-        contract = contract[0:first_digit.start()]
+    first_digit = re.search(r"\d", contract)
+    contract = contract[0:first_digit.start()]
     return contract
 
 
@@ -87,7 +87,7 @@ def findContractExpirationDate(contract):
     return expirationDate
 
 # stock = getStock('TSLA')
-# calls = getCalls('TSLA', '2020-11-20')
+print(findGreekData(getCalls('TSLA', '2020-11-27')))
 # print(calls)
 # print()
 # print()
