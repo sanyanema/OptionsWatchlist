@@ -70,19 +70,21 @@ def tables(request, ticker):
     image = image_draft[0].split(".")
 
     # Expiration Dates
-    dates = json.dumps(options_info.getExpirationDates(ticker))
+    dates = options_info.getExpirationDates(ticker)
 
     # Options Information
-
+    expirationDate = ""
     # Blank table
     options = pd.DataFrame(
         columns=['Contract', 'Strike', 'Last Price', 'Implied Volatility', 'Expiration Date', 'Type Of Option'])
 
     # Differentiate based on radio input
+    expirationDate = request.GET.get('expirationDates','')
+
     if request.GET.get('type', "") == "Puts":
-        options = options_info.findGreekData(options_info.getPuts(ticker, '2020-11-27'))
+        options = options_info.findGreekData(options_info.getPuts(ticker, expirationDate))
     elif request.GET.get('type', "") == "Calls":
-        options = options_info.findGreekData(options_info.getCalls(ticker, '2020-11-27'))
+        options = options_info.findGreekData(options_info.getCalls(ticker, expirationDate))
     else:
         pass
 

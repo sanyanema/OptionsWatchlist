@@ -56,6 +56,22 @@
                     <label><input type="radio" name="type" value="Puts" style="margin-left:41.5px"/>
                         <h4 style="margin-left:30px">Puts</h4>
                     </label>
+<!--                    <div class="dropdown">-->
+<!--                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"-->
+<!--                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--                            Dropdown button-->
+<!--                        </button>-->
+<!--                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
+<!--                            {% for key in dates %}-->
+<!--                        <a class="dropdown-item" value="{{ value }}">{{ key }}</a>-->
+<!--                        {% endfor %}-->
+<!--                        </div>-->
+<!--                    </div>-->
+                    <select class="custom-select-sm" name="expirationDates" id="expirationDates" style="margin-left: 30px">
+                        {% for key in dates %}
+                        <option value="{{ value }}">{{ key }}</option>
+                        {% endfor %}
+                    </select>
                     <button class="btn btn-primary btn-round" type="submit" style="float: right" name="getVal">
                         <i class="tim-icons icon-double-right"></i>
                     </button>
@@ -108,7 +124,7 @@
             <div class="card-body text-center text-white">
                 <div class="table-responsive table-striped">
                     <div id="greeks">
-                        <table class="table tablesorter text-white" id="">
+                        <table class="table tablesorter text-white">
                             <thead>
                             <tr>
                                 <td>δ</td>

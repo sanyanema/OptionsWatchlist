@@ -14,8 +14,10 @@ def getStock(ticker):
 def getExpirationDates(ticker):
     stock = yf.Ticker(ticker)
     expirations = stock.options
-    return expirations
-
+    dates = dict()
+    for x in expirations:
+        dates[x] = x
+    return dates
 
 # Returns the call options at a certain expiration date and ticker
 def getCalls(ticker, date):
@@ -89,8 +91,6 @@ def findContractExpirationDate(contract):
         counter += 1
     return expirationDate
 
-# stock = getStock('TSLA')
-# result = findGreekData(getCalls('TSLA', '2020-11-27')).to_dict(orient="records")
-# print(result)
+print(getExpirationDates("TSLA"))
 
 
