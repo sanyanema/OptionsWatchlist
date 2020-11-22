@@ -11,7 +11,6 @@
 {% block content %}
 
 <div class="row">
-
     <div class="col-12">
         <div class="card card-chart">
             <div class="card-header ">
@@ -60,14 +59,14 @@
     <div class="col-lg-4" style="overflow:scroll; height: 350px;">
         <div class="card card-chart">
             <div class="card-header">
-                <h3>Biggest Gainers</h3>
+                <h3 class="text-sm-center" style="padding-top: 30px>Biggest Gainers</h3>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table tablesorter" id="gainers">
                         <thead class=" text-primary">
                         <td><h6>Name</h6></td>
-                        <td><h6>% Change</h6></td>
+                        <td><h6>Change</h6></td>
                         {% for key, value in gainers.items %}
                         <tr>
                             <td class="text-success">{{ key }}</td>
@@ -83,14 +82,14 @@
     <div class="col-lg-4" style="overflow:scroll; height: 350px;">
         <div class="card card-chart">
             <div class="card-header">
-                <h3>Biggest Losers</h3>
+                <h3 class="text-sm-center" style="padding-top: 30px">Biggest Losers</h3>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table tablesorter" id="losers">
                         <thead class=" text-primary">
                         <td><h6>Name</h6></td>
-                        <td><h6>% Change</h6></td>
+                        <td><h6>Change</h6></td>
                         {% for key, value in losers.items %}
                         <tr>
                             <td class="text-danger">{{ key }}</td>
@@ -106,14 +105,14 @@
     <div class="col-lg-4" style="overflow:scroll; height: 350px;">
         <div class="card card-chart">
             <div class="card-header">
-                <h3>Trending</h3>
+                <h3 class="text-sm-center" style="padding-top: 30px">Trending</h3>
             </div>
             <div class="card-body text-left">
                 <div class="table-responsive">
                     <table class="table tablesorter" id="">
                         <thead class=" text-primary">
                         <td><h6>Name</h6></td>
-                        <td><h6>% Change</h6></td>
+                        <td><h6>Change</h6></td>
                         {% for key, value in trending.items %}
                         {% if value.change < 0 %}
                         <tr class="text-danger">
@@ -133,7 +132,7 @@
         </div>
     </div>
 </div>
-<div class="row" style="overflow:scroll">
+<div class="row" style="overflow:scroll; margin-top: 2rem;>
     <div class="col-lg-6 col-md-12">
         <div class="card card-tasks">
             <div class="card-header ">
