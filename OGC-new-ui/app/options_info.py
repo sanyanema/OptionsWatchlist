@@ -42,6 +42,8 @@ def findGreekData(optionChain):
     # Merges the new dataframe to the dataframe created with specific parameters
     data.loc[:, 'expirationDate'] = additionalData['expirationDate']
     data.loc[:, 'typeOfOption'] = additionalData['typeOfOption']
+
+    data = data.rename(columns={'contractSymbol': 'Contract','strike': 'Strike','lastPrice': 'Last Price','impliedVolatility': 'Implied Volatility', 'expirationDate': 'Expiration Date', 'typeOfOption':'Type Of Option'})
     return data
 
 
@@ -87,8 +89,4 @@ def findContractExpirationDate(contract):
     return expirationDate
 
 # stock = getStock('TSLA')
-print(findGreekData(getCalls('TSLA', '2020-11-27')))
-# print(calls)
-# print()
-# print()
-# print(type(calls))
+# print(findGreekData(getCalls('TSLA', '2020-11-27')))
