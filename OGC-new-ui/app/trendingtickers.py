@@ -34,7 +34,7 @@ def getTrendingTickers():
         for x in range(0, len(companies)):
             trending[companies[x]] = amounts[x]
 
-    return trending
+    return AddColor(trending)
 
 
 def getColor(num):
@@ -43,11 +43,7 @@ def getColor(num):
     elif num < 0:
         return "red"
 
-def color(ticker_values):
-    # print(getTrendingTickers())
-    ticker_values = dict()
-    # store returned dict into ticker_values
-    ticker_values = getTrendingTickers()
+def AddColor(ticker_values):
     # remove + and % for easy float conversion
     ticker_values = {key: re.sub('[\+%]', '', val) for key, val in ticker_values.items()}
     ticker_values = {key: float(val) for key, val in ticker_values.items()}
@@ -55,7 +51,9 @@ def color(ticker_values):
     tickers_full = dict()
     # format of each element
     # Apple : (-0.9, red)
-    tickers_full = {key: (ticker_values[key], getColor(ticker_values[key])) for key in ticker_values.keys()}
+    for key in ticker_values.keys():
+        tickers_full[key] = {'change': ticker_values[key],
+                             'color': getColor(ticker_values[key])}
     return tickers_full
 
 
@@ -139,6 +137,6 @@ def getBiggestLosers():
 
 # print(getBiggestLosers())
 # print(getBiggestGainers())
-# print(getTrendingTickers())
+print(getTrendingTickers())
 
 # print(tickers_full)

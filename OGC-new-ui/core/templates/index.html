@@ -57,21 +57,21 @@
 
 </div>
 <div class="row">
-    <div class="col-lg-4" style="overflow:scroll; height: 400px;">
+    <div class="col-lg-4" style="overflow:scroll; height: 350px;">
         <div class="card card-chart">
             <div class="card-header">
-               <h3>Biggest Gainers</h3>
+                <h3>Biggest Gainers</h3>
             </div>
             <div class="card-body">
-                <div class="table-responsive" >
+                <div class="table-responsive">
                     <table class="table tablesorter" id="gainers">
                         <thead class=" text-primary">
-                          <td><h6>Name</h6></td>
-                          <td><h6>% Change</h6></td>
+                        <td><h6>Name</h6></td>
+                        <td><h6>% Change</h6></td>
                         {% for key, value in gainers.items %}
                         <tr>
-                            <td class = "text-success">{{ key }} </td>
-                            <td class = "text-success">{{ value }}</td>
+                            <td class="text-success">{{ key }}</td>
+                            <td class="text-success">{{ value }}</td>
                             {% endfor %}
                         </tr>
                         </thead>
@@ -80,21 +80,21 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-4" style="overflow:scroll; height: 400px;">
+    <div class="col-lg-4" style="overflow:scroll; height: 350px;">
         <div class="card card-chart">
             <div class="card-header">
                 <h3>Biggest Losers</h3>
             </div>
             <div class="card-body">
-                <div class="table-responsive" >
-                    <table class="table tablesorter" id="losers" >
+                <div class="table-responsive">
+                    <table class="table tablesorter" id="losers">
                         <thead class=" text-primary">
-                          <td><h6>Name</h6></td>
-                          <td><h6>% Change</h6></td>
+                        <td><h6>Name</h6></td>
+                        <td><h6>% Change</h6></td>
                         {% for key, value in losers.items %}
                         <tr>
-                            <td class = "text-danger">{{ key }} </td>
-                            <td class = "text-danger">{{ value }}</td>
+                            <td class="text-danger">{{ key }}</td>
+                            <td class="text-danger">{{ value }}</td>
                             {% endfor %}
                         </tr>
                         </thead>
@@ -103,21 +103,27 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-4" style="overflow:scroll; height: 400px;">
+    <div class="col-lg-4" style="overflow:scroll; height: 350px;">
         <div class="card card-chart">
             <div class="card-header">
                 <h3>Trending</h3>
             </div>
-            <div class="card-body">
-                <div class="table-responsive" >
-                    <table class="table tablesorter" id="" >
+            <div class="card-body text-left">
+                <div class="table-responsive">
+                    <table class="table tablesorter" id="">
                         <thead class=" text-primary">
-                          <td><h6>Name</h6></td>
-                          <td><h6>% Change</h6></td>
+                        <td><h6>Name</h6></td>
+                        <td><h6>% Change</h6></td>
                         {% for key, value in trending.items %}
-                        <tr>
-                            <td class = "text-info">{{ key }} </td>
-                            <td class = "text-white">{{ value }}</td>
+                        {% if value.change < 0 %}
+                        <tr class="text-danger">
+                            <td>{{ key }}</td>
+                            <td>{{ value.change }}%</td>
+                            {% else %}
+                        <tr class="text-success">
+                            <td>{{ key }}</td>
+                            <td>+{{ value.change }}%</td>
+                            {% endif %}
                             {% endfor %}
                         </tr>
                         </thead>
@@ -291,42 +297,42 @@
         </div>
     </div>
     <!--    Trending Tickers -->
-<!--    <div class="col-lg-6 col-md-12">-->
-<!--        <div class="card ">-->
-<!--            <div class="card-header">-->
-<!--                <h4 class="card-title text-center">Trending Tickers</h4>-->
-<!--            </div>-->
-<!--            <div class="card-body">-->
-<!--                <div class="table-responsive">-->
-<!--                    <table class="table tablesorter " id="">-->
-<!--                        <thead class=" text-primary">-->
-<!--                          <td><h6>Name</h6></td>-->
-<!--                          <td><h6>% Change</h6></td>-->
-<!--                        {% for key, value in trending.items %}-->
-<!--                        <tr>-->
-<!--                            <td class = "text-info">{{ key }} </td>-->
-<!--                            <td class = "text-white">{{ value }}</td>-->
-<!--                            {% endfor %}-->
-<!--                        </tr>-->
-<!--                        </thead>-->
-<!--                    </table>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
+    <!--    <div class="col-lg-6 col-md-12">-->
+    <!--        <div class="card ">-->
+    <!--            <div class="card-header">-->
+    <!--                <h4 class="card-title text-center">Trending Tickers</h4>-->
+    <!--            </div>-->
+    <!--            <div class="card-body">-->
+    <!--                <div class="table-responsive">-->
+    <!--                    <table class="table tablesorter " id="">-->
+    <!--                        <thead class=" text-primary">-->
+    <!--                          <td><h6>Name</h6></td>-->
+    <!--                          <td><h6>% Change</h6></td>-->
+    <!--                        {% for key, value in trending.items %}-->
+    <!--                        <tr>-->
+    <!--                            <td class = "text-info">{{ key }} </td>-->
+    <!--                            <td class = "text-white">{{ value }}</td>-->
+    <!--                            {% endfor %}-->
+    <!--                        </tr>-->
+    <!--                        </thead>-->
+    <!--                    </table>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--</div>-->
 
-{% endblock %}
+    {% endblock %}
 
-<!-- Specific Page JS goes HERE  -->
-{% block javascripts %}
+    <!-- Specific Page JS goes HERE  -->
+    {% block javascripts %}
 
-<script>
-    $(document).ready(function () {
-        // Javascript method's body can be found in assets/js/demos.js
-        demo.initDashboardPageCharts();
+    <script>
+        $(document).ready(function () {
+            // Javascript method's body can be found in assets/js/demos.js
+            demo.initDashboardPageCharts();
 
-    });
-</script>
+        });
+    </script>
 
-{% endblock javascripts %}
+    {% endblock javascripts %}

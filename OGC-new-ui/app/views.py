@@ -25,8 +25,8 @@ def index(request):
     gainers = trendingtickers.getBiggestGainers()
     losers = trendingtickers.getBiggestLosers()
     return render(request, "index.html", {'trending': trending,
-                                          'gainers' : gainers,
-                                          'losers' : losers})
+                                          'gainers': gainers,
+                                          'losers': losers})
 
 
 @login_required(login_url="/login/")
