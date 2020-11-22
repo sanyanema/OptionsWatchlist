@@ -86,6 +86,8 @@ def tables(request, ticker):
         pass
 
     # Format dataframe for html
+    optionsData = options.to_dict(orient="records")
+
     options_html = options.to_html()
     option_price_draft = stock.current_price.split()
     option_price = float(option_price_draft[0])
@@ -100,7 +102,7 @@ def tables(request, ticker):
     return render(request, "ui-tables_tickers.html", {
         'name': name,
         'ticker': ticker.upper(),
-        'options': options_html,
+        'options': optionsData,
         'price': stock.current_price,
         'day_range': stock.day_range,
         '52wk_range': stock.yr_range,

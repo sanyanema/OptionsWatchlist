@@ -1,3 +1,5 @@
+import json
+
 import yfinance as yf
 import pandas as pd
 import re
@@ -43,7 +45,6 @@ def findGreekData(optionChain):
     data.loc[:, 'expirationDate'] = additionalData['expirationDate']
     data.loc[:, 'typeOfOption'] = additionalData['typeOfOption']
 
-    data = data.rename(columns={'contractSymbol': 'Contract','strike': 'Strike','lastPrice': 'Last Price','impliedVolatility': 'Implied Volatility', 'expirationDate': 'Expiration Date', 'typeOfOption':'Type Of Option'})
     return data
 
 
@@ -71,7 +72,6 @@ def findContractType(contract):
 
 # Helper method to find the ticker name from a contract
 def findTickerName(contract):
-
     first_digit = re.search(r"\d", contract)
     contract = contract[0:first_digit.start()]
     return contract
@@ -80,5 +80,17 @@ def findTickerName(contract):
 # Helper method to get the expiration date in the form YYYY-MM-DD
 def findContractExpirationDate(contract):
     expirationDate = '20'
+    counter = 0
+    for character in contract:
+        if counter < 6:
+            if counter % 2 == 0 and counter > 0:
+                expirationDate = expirationDate + "-"
+            expirationDate = expirationDate + character
+        counter += 1
+    return expirationDate
+
 # stock = getStock('TSLA')
-# print(findGreekData(getCalls('TSLA', '2020-11-27')))
+# result = findGreekData(getCalls('TSLA', '2020-11-27')).to_dict(orient="records")
+# print(result)
+
+

@@ -137,6 +137,6 @@ def getBiggestLosers():
 
 # print(getBiggestLosers())
 # print(getBiggestGainers())
-print(getTrendingTickers())
+# print(getTrendingTickers())
 
 # print(tickers_full)

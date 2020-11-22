@@ -54,12 +54,28 @@
                 </form>
             </div>
             <div class="card-body">
-                <div class="table-responsive table-hover table-borderless text-center">
-                    <div id="options" class="table tablesorter " style="color:white;">
-                        <thead class="text-primary">
+                <div class="text-center">
+                    <table id="options" class="table tablesorter table-hover " style="color:white;">
+                        <thead class=" text-primary">
+                        <td><h6>Contract</h6></td>
+                        <td><h6>Strike</h6></td>
+                        <td><h6>Last Price</h6></td>
+                        <td><h6>Implied Volatility</h6></td>
+                        <td><h6>Expiration Date</h6></td>
+                        <td><h6>Type of Option</h6></td>
+                        {% for i in options %}
+                        <tr class="text-white shadow--hover">
+                            <td>{{ i.contractSymbol }}</td>
+                            <td>{{ i.strike }}</td>
+                            <td>{{ i.lastPrice }}</td>
+                            <td>{{ i.impliedVolatility }}</td>
+                            <td>{{ i.expirationDate }}</td>
+                            <td>{{ i.typeOfOption }}</td>
+                            {% endfor %}
+                        </tr>
+
                         </thead>
-                        {{options | safe}}
-                    </div>
+                    </table>
                 </div>
             </div>
         </div>
