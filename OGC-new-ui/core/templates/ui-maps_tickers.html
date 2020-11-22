@@ -35,10 +35,59 @@
 
 <!-- Include Plotly.js for graph -->
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-<div id="price_graph">
+
+<div id="price_graph" style="width:70%; float:left; height: 500px;">
   {% autoescape off %}
   {{ plot_html }}
   {% endautoescape %}
+</div>
+<!-- Stock Info-->
+<div class="row" style="overflow:hidden; height:500px; width:30%; float:right;">
+    <div class="col-md-12">
+        <div class="card ">
+            <div class="card-header">
+                <h4 class="card-title text-center text-justify">Key Stock Data</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <div id="stock_info">
+                        <table class="table tablesorter text-center" id="">
+                            <thead class=" text-primary">
+                            </thead>
+                            <tr>
+                                <td>Current Price</td>
+                                <td>{{ price }}</td>
+                            </tr>
+                            <tr>
+                                <td>Day's Range</td>
+                                <td>{{ day_range }}</td>
+                            </tr>
+                            <tr>
+                                <td>52 Week Range</td>
+                                <td>{{ 52wk_range }}</td>
+                            </tr>
+                            <tr>
+                                <td>Volume</td>
+                                <td>{{ volume }}</td>
+                            </tr>
+                            <tr>
+                                <td>EPS</td>
+                                <td>{{ eps }}</td>
+                            </tr>
+                            <tr>
+                                <td>Market Cap</td>
+                                <td>{{ market_cap }}</td>
+                            </tr>
+                            <tr>
+                                <td>Industry</td>
+                                <td>{{ industry }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 {% endblock content %}

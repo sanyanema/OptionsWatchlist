@@ -65,6 +65,7 @@ def tables(request, ticker):
             context = {}
             html_template = loader.get_template('error-404.html')
             return HttpResponse(html_template.render(context, request))
+
     name = stock.name
     image_draft = name.split()
     image = image_draft[0].split(".")
@@ -95,7 +96,7 @@ def tables(request, ticker):
     option_price_draft = stock.current_price.split()
     option_price = float(option_price_draft[0])
 
-    # Greeks 
+    # Greeks
     try:
         delta, gamma, rho, vega, theta = greek_options.getGreeks(
             greek_options.yFinanceToWallStreet(yfinance.Ticker(ticker).option_chain("2020-11-20").calls, option_price))
@@ -150,6 +151,13 @@ def maps(request, ticker):
         stock.full_clean()
     return render(request, "ui-maps_tickers.html", {
         'name': name,
+        'price': stock.current_price,
+        'day_range': stock.day_range,
+        '52wk_range': stock.yr_range,
+        'volume': stock.avg_volume,
+        'eps': stock.eps_trail,
+        'market_cap': stock.market_cap,
+        'industry': stock.sector,
         'ticker': ticker.upper(),
         'plot_html': plot_html,
         'image': image[0],

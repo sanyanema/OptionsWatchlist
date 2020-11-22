@@ -3,7 +3,7 @@
 
 {% block title %} UI Tables {% endblock %}
 
-<!-- Specific Page CSS goes HERE  -->
+<-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}
 <style type="text/css">
     .selected {
@@ -56,23 +56,13 @@
                     <label><input type="radio" name="type" value="Puts" style="margin-left:41.5px"/>
                         <h4 style="margin-left:30px">Puts</h4>
                     </label>
-<!--                    <div class="dropdown">-->
-<!--                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"-->
-<!--                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--                            Dropdown button-->
-<!--                        </button>-->
-<!--                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
-<!--                            {% for key in dates %}-->
-<!--                        <a class="dropdown-item" value="{{ value }}">{{ key }}</a>-->
-<!--                        {% endfor %}-->
-<!--                        </div>-->
-<!--                    </div>-->
-                    <select class="custom-select-sm" name="expirationDates" id="expirationDates" style="margin-left: 30px">
+                    <select class="custom-select-sm" name="expirationDates" id="expirationDates"
+                            style="margin-left: 30px">
                         {% for key in dates %}
-                        <option value="{{ value }}">{{ key }}</option>
+                        <option value="{{ key }}">{{ key }}</option>
                         {% endfor %}
                     </select>
-                    <button class="btn btn-primary btn-round" type="submit" style="float: right" name="getVal">
+                    <button class="btn btn-primary btn-round" type="submit" style="float: right">
                         <i class="tim-icons icon-double-right"></i>
                     </button>
                 </form>
@@ -100,13 +90,6 @@
                             <td>{{ i.typeOfOption }}</td>
                             {% endfor %}
                         </tr>
-                        <script>
-                            $("#options tr").click(function () {
-                                $(this).addClass('selected').siblings().removeClass('selected');
-                                var value = $(this).find('td:first').html();
-                                alert(value);
-                            });
-                        </script>
                     </table>
                 </div>
             </div>
@@ -157,47 +140,15 @@
 <!-- Stock Info-->
 <div class="row" style="overflow:hidden; height:500px; width:40%; float:right;">
     <div class="col-md-12">
-        <div class="card ">
+        <div class="card text-center">
             <div class="card-header">
-                <h4 class="card-title text-center text-justify">Key Stock Data</h4>
+                <h4 class="card-title text-center text-justify">Find Greeks For</h4>
             </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <div id="stock_info">
-                        <table class="table tablesorter text-center" id="">
-                            <thead class=" text-primary">
-                            </thead>
-                            <tr>
-                                <td>Current Price</td>
-                                <td>{{ price }}</td>
-                            </tr>
-                            <tr>
-                                <td>Day's Range</td>
-                                <td>{{ day_range }}</td>
-                            </tr>
-                            <tr>
-                                <td>52 Week Range</td>
-                                <td>{{ 52wk_range }}</td>
-                            </tr>
-                            <tr>
-                                <td>Volume</td>
-                                <td>{{ volume }}</td>
-                            </tr>
-                            <tr>
-                                <td>EPS</td>
-                                <td>{{ eps }}</td>
-                            </tr>
-                            <tr>
-                                <td>Market Cap</td>
-                                <td>{{ market_cap }}</td>
-                            </tr>
-                            <tr>
-                                <td>Industry</td>
-                                <td>{{ industry }}</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
+            <div class="card-body" onload="contractName()">
+                <form action="#" method="get" class="form-control-success" id="greekForm">
+                    <button id="contractButton" name="greeks" type="submit" class="btn btn-outline-default"><h3
+                            id="contractID"></h3></button>
+                </form>
             </div>
         </div>
     </div>
@@ -225,30 +176,18 @@
         // $route.reload();
     }
 
-    function getRadioVal(form, name) {
-        var val;
-        // get list of radio buttons with specified name
-        var radios = form.elements[name];
-
-        // loop through list of radio buttons
-        for (var i = 0, len = radios.length; i < len; i++) {
-            if (radios[i].checked) { // radio checked?
-                val = radios[i].value; // if so, hold its value in val
-                break; // and break out of for loop
-            }
-        }
-        return val; // return value of checked radio or undefined if none checked
-    }
-
-    document.getElementById('demoForm').onsubmit = function () {
-        // this (keyword) refers to form to which onsubmit attached
-        // 'ship' is name of radio button group
-        let val = getRadioVal(this, 'ship');
-        // display value obtained
-        alert(val);
-        // more code here ...
-    }
     f.addEventListener('submit', submitted);
+
+    var contract = ""
+    // Highlights Rows
+    $("#options tr").click(function () {
+        $(this).addClass('selected').siblings().removeClass('selected');
+        contract = $(this).find('td:first').html();
+        document.getElementById("contractID").innerHTML = contract;
+        document.getElementById("contractButton").value = contract;
+    });
+
+
 </script>
 {% endblock javascripts %}
 -->
