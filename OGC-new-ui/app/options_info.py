@@ -42,18 +42,20 @@ def findGreekData(optionChain):
     # Merges the new dataframe to the dataframe created with specific parameters
     data.loc[:, 'expirationDate'] = additionalData['expirationDate']
     data.loc[:, 'typeOfOption'] = additionalData['typeOfOption']
+
+    data = data.rename(columns={'contractSymbol': 'Contract','strike': 'Strike','lastPrice': 'Last Price','impliedVolatility': 'Implied Volatility', 'expirationDate': 'Expiration Date', 'typeOfOption':'Type Of Option'})
     return data
 
 
 # Helper method to parses the contract symbol down to the form YYMMDD + option type
 def parseContractSymbol(contract):
     index = 0
-    if (first_digit := re.search(r"\d", contract)) is not None:
-        contract = contract[first_digit.start()::]
-        try:
-            index = contract.index('C')
-        except ValueError:
-            index = contract.index('P')
+    first_digit = re.search(r"\d", contract)
+    contract = contract[first_digit.start()::]
+    try:
+        index = contract.index('C')
+    except ValueError:
+        index = contract.index('P')
 
     contract = contract[0:index + 1]
     return contract
@@ -69,26 +71,14 @@ def findContractType(contract):
 
 # Helper method to find the ticker name from a contract
 def findTickerName(contract):
-    if (first_digit := re.search(r"\d", contract)) is not None:
-        contract = contract[0:first_digit.start()]
+
+    first_digit = re.search(r"\d", contract)
+    contract = contract[0:first_digit.start()]
     return contract
 
 
 # Helper method to get the expiration date in the form YYYY-MM-DD
 def findContractExpirationDate(contract):
     expirationDate = '20'
-    counter = 0
-    for character in contract:
-        if counter < 6:
-            if counter % 2 == 0 and counter > 0:
-                expirationDate = expirationDate + "-"
-            expirationDate = expirationDate + character
-        counter += 1
-    return expirationDate
-
 # stock = getStock('TSLA')
-# calls = getCalls('TSLA', '2020-11-20')
-# print(calls)
-# print()
-# print()
-# print(type(calls))
+# print(findGreekData(getCalls('TSLA', '2020-11-27')))
