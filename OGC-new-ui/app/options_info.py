@@ -46,17 +46,17 @@ def findGreekData(optionChain):
 
 
 # Helper method to parses the contract symbol down to the form YYMMDD + option type
-# def parseContractSymbol(contract):
-#     index = 0
-#     if (first_digit := re.search(r"\d", contract)) is not None:
-#         contract = contract[first_digit.start()::]
-#         try:
-#             index = contract.index('C')
-#         except ValueError:
-#             index = contract.index('P')
+def parseContractSymbol(contract):
+    index = 0
+    if (first_digit = re.search(r"\d", contract)) is not None:
+        contract = contract[first_digit.start()::]
+        try:
+            index = contract.index('C')
+        except ValueError:
+            index = contract.index('P')
 
-#     contract = contract[0:index + 1]
-#     return contract
+    contract = contract[0:index + 1]
+    return contract
 
 
 # Helper method to get the contract type(Call/Put)
@@ -68,10 +68,10 @@ def findContractType(contract):
 
 
 # Helper method to find the ticker name from a contract
-# def findTickerName(contract):
-#     if (first_digit := re.search(r"\d", contract)) is not None:
-#         contract = contract[0:first_digit.start()]
-#     return contract
+def findTickerName(contract):
+    if (first_digit = re.search(r"\d", contract)) is not None:
+        contract = contract[0:first_digit.start()]
+    return contract
 
 
 # Helper method to get the expiration date in the form YYYY-MM-DD
