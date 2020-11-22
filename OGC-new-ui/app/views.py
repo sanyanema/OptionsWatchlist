@@ -21,9 +21,12 @@ import pandas as pd
 
 @login_required(login_url="/login/")
 def index(request):
-    trending = trendingtickers.getTrendingTickers();
-
-    return render(request, "index.html", {'trending': trending})
+    trending = trendingtickers.getTrendingTickers()
+    gainers = trendingtickers.getBiggestGainers()
+    losers = trendingtickers.getBiggestLosers()
+    return render(request, "index.html", {'trending': trending,
+                                          'gainers' : gainers,
+                                          'losers' : losers})
 
 
 @login_required(login_url="/login/")
