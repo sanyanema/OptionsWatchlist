@@ -43,19 +43,21 @@ def getColor(num):
     elif num < 0:
         return "red"
 
+def color(ticker_values):
+    # print(getTrendingTickers())
+    ticker_values = dict()
+    # store returned dict into ticker_values
+    ticker_values = getTrendingTickers()
+    # remove + and % for easy float conversion
+    ticker_values = {key: re.sub('[\+%]', '', val) for key, val in ticker_values.items()}
+    ticker_values = {key: float(val) for key, val in ticker_values.items()}
 
-# print(getTrendingTickers())
-ticker_values = dict()
-# store returned dict into ticker_values
-ticker_values = getTrendingTickers()
-# remove + and % for easy float conversion
-ticker_values = {key: re.sub('[\+%]', '', val) for key, val in ticker_values.items()}
-ticker_values = {key: float(val) for key, val in ticker_values.items()}
+    tickers_full = dict()
+    # format of each element
+    # Apple : (-0.9, red)
+    tickers_full = {key: (ticker_values[key], getColor(ticker_values[key])) for key in ticker_values.keys()}
+    return tickers_full
 
-tickers_full = dict()
-# format of each element
-# Apple : (-0.9, red)
-tickers_full = {key: (ticker_values[key], getColor(ticker_values[key])) for key in ticker_values.keys()}
 
 
 def getBiggestGainers():
