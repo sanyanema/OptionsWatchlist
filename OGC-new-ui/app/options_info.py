@@ -71,6 +71,7 @@ def findContractType(contract):
 
 # Helper method to find the ticker name from a contract
 def findTickerName(contract):
+
     first_digit = re.search(r"\d", contract)
     contract = contract[0:first_digit.start()]
     return contract
@@ -79,14 +80,5 @@ def findTickerName(contract):
 # Helper method to get the expiration date in the form YYYY-MM-DD
 def findContractExpirationDate(contract):
     expirationDate = '20'
-    counter = 0
-    for character in contract:
-        if counter < 6:
-            if counter % 2 == 0 and counter > 0:
-                expirationDate = expirationDate + "-"
-            expirationDate = expirationDate + character
-        counter += 1
-    return expirationDate
-
 # stock = getStock('TSLA')
 # print(findGreekData(getCalls('TSLA', '2020-11-27')))

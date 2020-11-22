@@ -13,6 +13,8 @@ import yfinance
 from django.views.decorators.csrf import csrf_protect
 from wallstreet import Call, Put
 from . import stock_info, options_info, greek_options, converter, trendingtickers
+from django.contrib.auth.models import User
+from .models import Stock, Transaction, Account
 import json
 import pandas as pd
 
@@ -129,7 +131,15 @@ def maps(request, ticker):
     plot_html = stock.plot_hist()
     image_draft = name.split()
     image = image_draft[0].split(".")
+    current_user = request.user
 
+	# Hard-coded adding stock to watchlist functionality
+    if request.method == "POST":
+        stock = Stock(name='WWW')
+        stock.save(force_insert=True)
+        stock.users.add(current_user)
+        stock.save(force_insert=True)
+        stock.full_clean()
     return render(request, "ui-maps_tickers.html", {
         'name': name,
         'ticker': ticker.upper(),
