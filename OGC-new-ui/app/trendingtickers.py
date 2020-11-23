@@ -38,16 +38,13 @@ def getTrendingTickers():
 
 
 def getColor(num):
-    if num > 0:
-        return "green"
-    elif num < 0:
+    if '-' in num:
         return "red"
+    elif "+" in num:
+        return "green"
 
 def AddColor(ticker_values):
     # remove + and % for easy float conversion
-    ticker_values = {key: re.sub('[\+%]', '', val) for key, val in ticker_values.items()}
-    ticker_values = {key: float(val) for key, val in ticker_values.items()}
-
     tickers_full = dict()
     # format of each element
     # Apple : (-0.9, red)
@@ -137,6 +134,6 @@ def getBiggestLosers():
 
 # print(getBiggestLosers())
 # print(getBiggestGainers())
-# print(getTrendingTickers())
+print(getTrendingTickers())
 
 # print(tickers_full)

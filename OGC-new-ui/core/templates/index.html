@@ -114,14 +114,14 @@
                         <td><h6>Name</h6></td>
                         <td><h6>Change</h6></td>
                         {% for key, value in trending.items %}
-                        {% if value.change < 0 %}
+                        {% if value.color == "red"%}
                         <tr class="text-danger">
                             <td>{{ key }}</td>
-                            <td>{{ value.change }}%</td>
+                            <td>{{ value.change }}</td>
                             {% else %}
                         <tr class="text-success">
                             <td>{{ key }}</td>
-                            <td>+{{ value.change }}%</td>
+                            <td>{{ value.change }}</td>
                             {% endif %}
                             {% endfor %}
                         </tr>
