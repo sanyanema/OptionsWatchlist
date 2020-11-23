@@ -19,6 +19,7 @@ def getExpirationDates(ticker):
         dates[x] = x
     return dates
 
+
 # Returns the call options at a certain expiration date and ticker
 def getCalls(ticker, date):
     return yf.Ticker(ticker).option_chain(date).calls
@@ -91,6 +92,15 @@ def findContractExpirationDate(contract):
         counter += 1
     return expirationDate
 
-print(getExpirationDates("TSLA"))
 
-
+def getOptionInfoFromContract(contract):
+    option = dict()
+    option['ticker'] = findTickerName(contract)
+    option['expirationDate'] = findContractExpirationDate(parseContractSymbol(contract))
+    option['type'] = findContractType(parseContractSymbol(contract))
+    type = option['type'][0]
+    index = contract.find(type)
+    contract = contract[index + 1:len(contract)]
+    contract = float(contract) / 1000
+    option['strike'] = contract
+    return option
