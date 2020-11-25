@@ -96,11 +96,15 @@ def findContractExpirationDate(contract):
 def getOptionInfoFromContract(contract):
     option = dict()
     option['ticker'] = findTickerName(contract)
+    contractWithoutTicker = contract[contract.find(option['ticker'])+len(option['ticker'])+1:len(contract)]
     option['expirationDate'] = findContractExpirationDate(parseContractSymbol(contract))
     option['type'] = findContractType(parseContractSymbol(contract))
     type = option['type'][0]
-    index = contract.find(type)
-    contract = contract[index + 1:len(contract)]
-    contract = float(contract) / 1000
-    option['strike'] = contract
+    index = contractWithoutTicker.find(type)
+    contractWithoutTicker = contractWithoutTicker[index + 1:len(contract)]
+    contractWithoutTicker = float(contractWithoutTicker) / 1000
+    option['strike'] = contractWithoutTicker
     return option
+
+
+# print(getOptionInfoFromContract("CMG201127C00980000"))
