@@ -151,6 +151,16 @@ def maps(request, ticker):
     if request.method == "POST":
         watchlistTicker = ticker
         # TODO: Brian, just add the watchlistTicker variable into the database for watchlist
+        account = Account.objects.get(user_id=request.user.get_username())
+        if watchlistTicker not in account.watchlist:
+            ticker_list = account.watchlist.split(',')
+            ticker_list.append(watchlistTicker)
+            watchlist = ','.join(ticker_list)
+            setattr(account, 'watchlist', watchlist)
+            account.save()
+
+    account = Account.objects.get(user_id=request.user.get_username())
+    watchlist = account.watchlist.split(',')
     return render(request, "ui-maps_tickers.html", {
         'name': name,
         'price': stock.current_price,
@@ -163,6 +173,7 @@ def maps(request, ticker):
         'ticker': ticker.upper(),
         'plot_html': plot_html,
         'image': image[0],
+        'watchlist': watchlist,
     })
 
 def contract(request, contract):
