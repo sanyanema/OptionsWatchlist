@@ -10,7 +10,9 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Transaction(models.Model):
     transaction_ID = models.IntegerField()
+    # expiration date, ticker. I can maybe get rid of stock ticker field.
     expiration_date = models.DateField()
+    contract_symbol = models.CharField(default="",max_length=200,unique=True)
     stock = models.CharField(default="",max_length=200,unique=True)
     purchase_price = models.IntegerField(default=-999)
     quantity = models.IntegerField(default=100)
