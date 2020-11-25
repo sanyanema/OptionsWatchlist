@@ -148,12 +148,8 @@ def maps(request, ticker):
 
 	# Hard-coded adding stock to watchlist functionality
     if request.method == "POST":
-        stock = Stock(name='WWW')
-        stock.save(force_insert=True)
-        stock.users.add(current_user)
-        stock.save(force_insert=True)
-        stock.full_clean()
-    
+        watchlistTicker = ticker
+        # TODO: Brian, just add the watchlistTicker variable into the database for watchlist
     return render(request, "ui-maps_tickers.html", {
         'name': name,
         'price': stock.current_price,
