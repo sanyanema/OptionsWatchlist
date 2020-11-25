@@ -24,9 +24,9 @@ def index(request):
     trending = trendingtickers.getTrendingTickers()
     gainers = trendingtickers.getBiggestGainers()
     losers = trendingtickers.getBiggestLosers()
-    if request.user
     account = Account.objects.get(user_id=request.user.get_username())
     watchlist = account.watchlist.split(',')
+    
     return render(request, "index.html", {'trending': trending,
                                           'gainers': gainers,
                                           'losers': losers,
