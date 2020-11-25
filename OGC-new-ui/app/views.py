@@ -191,4 +191,5 @@ def contract(request, contract):
         'theta': round(theta,5),
         'IV' : ticker,
         'name' : name,
+        'option':option
     })
