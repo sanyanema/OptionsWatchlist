@@ -44,7 +44,7 @@
 
 <!-- Form to Choose Expiration Date and Type of Option -->
 <!-- Options -->
-<div class="row" style="overflow:auto; height:850px; width:60%; float:left;">
+<div class="row" style="overflow:auto; height:850px; width:80%; margin: auto">
     <div class="col-md-12">
         <div class="card ">
             <div class="card-header">
@@ -97,65 +97,6 @@
     </div>
 </div>
 
-<!--Greek Info-->
-<!-- <div class="row" style="overflow:hidden; height:400px; width:40%; float:right;">
-    <div class="col-md-12">
-        <div class="card ">
-            <div class="card-header">
-                <h4 class="card-title text-center">Greeks</h4>
-            </div>
-            <div class="card-body text-center text-white">
-                <div class="table-responsive table-striped">
-                    <div id="greeks">
-                        <table class="table tablesorter text-white">
-                            <thead>
-                            <tr>
-                                <td>δ</td>
-                                <td>{{delta | safe}}</td>
-                            </tr>
-                            <tr>
-                                <td>ρ</td>
-                                <td>{{rho | safe}}</td>
-                            </tr>
-                            <tr>
-                                <td>θ</td>
-                                <td>{{theta | safe}}</td>
-                            </tr>
-                            <tr>
-                                <td>ν</td>
-                                <td>{{vega | safe}}</td>
-                            </tr>
-                            <tr>
-                                <td>γ</td>
-                                <td>{{gamma | safe}}</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
-
-<!-- Get GreeksButton -->
-<div class="row" style="overflow:hidden; height:500px; width:40%; float:right;">
-    <div class="col-md-12">
-        <div class="card text-center">
-            <div class="card-header">
-                <h4 class="card-title text-center text-justify">Find Greeks For</h4>
-            </div>
-            <div class="card-body" onload="contractName()">
-<!--                 <form action="#" method="get" class="form-control-success" id="greekForm"> -->
-                    <button id="contractButton" name="greeks" type="submit" class="btn btn-outline-default" 
-                    onclick="getGreeks()">
-                        <h3 id="contractID"></h3>
-                    </button>
-<!--                 </form> -->
-            </div>
-        </div>
-    </div>
-</div>
-
 <br style="clear:both"/><br>
 
 {% endblock content %}
@@ -185,8 +126,7 @@
     $("#options tr").click(function () {
         $(this).addClass('selected').siblings().removeClass('selected');
         contract = $(this).find('td:first').html();
-        document.getElementById("contractID").innerHTML = contract;
-        document.getElementById("contractButton").value = contract;
+        getGreeks();
     });
 
     function getGreeks() {
