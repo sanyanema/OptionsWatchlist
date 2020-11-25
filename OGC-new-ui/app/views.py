@@ -147,10 +147,13 @@ def maps(request, ticker):
     image = image_draft[0].split(".")
     current_user = request.user
 
-	# Hard-coded adding stock to watchlist functionality
-    if request.method == "POST":
+    account = Account.objects.get(user_id=request.user.get_username())
+    startingwatchlist = account.watchlist.split(',')
+    isInWatchlist = ticker in startingwatchlist
+
+	# Adding stock to watchlist functionality
+    if request.method == "GET":
         watchlistTicker = ticker
-        # TODO: Brian, just add the watchlistTicker variable into the database for watchlist
         account = Account.objects.get(user_id=request.user.get_username())
         if watchlistTicker not in account.watchlist:
             ticker_list = account.watchlist.split(',')
@@ -158,10 +161,17 @@ def maps(request, ticker):
             watchlist = ','.join(ticker_list)
             setattr(account, 'watchlist', watchlist)
             account.save()
-    
+        else:
+            ticker_list = account.watchlist.split(',')
+            ticker_list.remove(watchlistTicker)
+            watchlist = ','.join(ticker_list)
+            setattr(account, 'watchlist', watchlist)
+            account.save()
 
     account = Account.objects.get(user_id=request.user.get_username())
-    watchlist = account.watchlist.split(',')
+    endingwatchlist = account.watchlist.split(',')
+    isInWatchlist = ticker in endingwatchlist
+
     return render(request, "ui-maps_tickers.html", {
         'name': name,
         'price': stock.current_price,
@@ -175,6 +185,7 @@ def maps(request, ticker):
         'plot_html': plot_html,
         'image': image[0],
         'watchlist': watchlist,
+        'inWatchlist': isInWatchlist
     })
 
 def contract(request, contract):
