@@ -158,8 +158,6 @@
 
 <br style="clear:both"/><br>
 
-<p id="demo"></p>
-
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
@@ -169,7 +167,6 @@
     const q = document.getElementById('query');
     const google = 'https://www.google.com/search?q=site%3A+';
     const site = 'http://127.0.0.1:8000/ui-tables.html/';
-    const contractID = document.getElementById('contractID');
 
     // document.getElementById("test").innerHTML = typeof q + " " + q;
 
@@ -193,8 +190,6 @@
     });
 
     function getGreeks() {
-        document.getElementById("demo").innerHTML = contract;
-
         const site = 'http://127.0.0.1:8000/contract/';
         url = site + contract
         const win = window.open(url, '_blank');

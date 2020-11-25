@@ -36,24 +36,24 @@
                                 <td>{{IV | safe}}: This will be fixed later</td>
                             </tr>
                             <tr>
-                                <td>δ</td>
-                                <td>{{delta | safe}}</td>
+                                <td class="text-primary">δ</td>
+                                <td class="text-primary">{{delta | safe}}</td>
                             </tr>
                             <tr>
-                                <td>ρ</td>
-                                <td>{{rho | safe}}</td>
+                                <td class="text-info">ρ</td>
+                                <td class="text-info">{{rho | safe}}</td>
                             </tr>
                             <tr>
-                                <td>θ</td>
-                                <td>{{theta | safe}}</td>
+                                <td class="text-success">θ</td>
+                                <td class="text-success">{{theta | safe}}</td>
                             </tr>
                             <tr>
-                                <td>ν</td>
-                                <td>{{vega | safe}}</td>
+                                <td class="text-warning">ν</td>
+                                <td class="text-warning">{{vega | safe}}</td>
                             </tr>
                             <tr>
-                                <td>γ</td>
-                                <td>{{gamma | safe}}</td>
+                                <td class="text-danger">γ</td>
+                                <td class="text-danger">{{gamma | safe}}</td>
                             </tr>
                         </table>
                     </div>
@@ -61,6 +61,36 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <h4>
+          Greeks in the options market are a term for characterizing the amount of risk involved with taking a certain option. None of these variabeles are perfect. These values can be used to assess options risk and manage option portfolio.
+        </h4>
+        <h4 class="text-primary">
+          Delta (δ) is the rate of change between the option's price and a $1 change in the asset's price. Additionally, delta represents a hedge ratio for creating a delta-neutral position or the probability that it will expire in the money. 
+        </h4>
+        <h4 class="text-info">
+          Rho (ρ) is the rate of change between the option's value and 1% change in the interest rate. In other words it measures the sensitivity to the interest rate. Rho is greatest for at-the-money options with long times until expiration.
+        </h4>
+        <h4 class="text-success">
+          Theta (θ) is the rate of change between the option price and time, or time sensitivity. It indicates the amount an option's price would decrease as the expiration date draws nearer. Theta increases when options are at the money and decreases when options are in and out of the money. 
+        </h4>
+        <h4 class="text-warning">
+          Vega (ν) is the rate of change between an option's value and the underlying asset's implied volatility, the option's sensitivity to volatility. Vega indicates the amount an option's price changes given a 1% change in implied volatility. 
+        </h4>
+        <h4 class="text-danger">
+          Gamma (γ) is the rate of change between an option's delta and the underlying asset's price, second-order price sensitivity. Gamma indicates the amount the delta would change given a $1 move in the underlying security. Options traders may opt to not only hedge delta but also gamma in order to be delta-gamma neutral, meaning that as the underlying price moves, the delta will remain close to zero.
+        </h4>
+        <h4>
+          For more information visit <a target="_blank" href='https://www.investopedia.com/terms/g/greeks.asp'>Investopedia</a>
+        </h4>
+      </div>
+    </div>
+  </div>
 </div>
 
 {% endblock content %}
