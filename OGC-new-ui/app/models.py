@@ -8,25 +8,22 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
-class Stock(models.Model):
-    users = models.ManyToManyField(User, related_name="users")
-    name = models.CharField(max_length=200,unique=True)
-    transactions = models.ManyToManyField(User, related_name="transactions")
-
-    def __str__(self):
-        return self.name
-
 class Transaction(models.Model):
     transaction_ID = models.IntegerField()
-    date = models.DateField()
+    expiration_date = models.DateField()
+    stock = models.CharField(default="",max_length=200,unique=True)
+    purchase_price = models.IntegerField(default=-999)
+    quantity = models.IntegerField(default=100)
     closed = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.name
+        return self.transaction_ID
 class Account(models.Model):
     user_id = models.CharField(max_length=200,unique=True,null=True)
     balance = models.IntegerField(default=10000)
-    transaction = models.ManyToManyField(Transaction, related_name="transaction", null=True)
+    transaction = models.ManyToManyField(Transaction, related_name="transaction", null=True, blank=True)
+    watchlist = models.TextField(default="", blank=True)
+    # needs fixes
 
     def __str__(self):
         return self.user_id

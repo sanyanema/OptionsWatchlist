@@ -14,7 +14,7 @@ from django.views.decorators.csrf import csrf_protect
 from wallstreet import Call, Put
 from . import stock_info, options_info, greek_options, converter, trendingtickers
 from django.contrib.auth.models import User
-from .models import Stock, Transaction, Account
+from .models import Transaction, Account
 import json
 import pandas as pd
 
@@ -24,9 +24,13 @@ def index(request):
     trending = trendingtickers.getTrendingTickers()
     gainers = trendingtickers.getBiggestGainers()
     losers = trendingtickers.getBiggestLosers()
+    if request.user
+    account = Account.objects.get(user_id=request.user.get_username())
+    watchlist = account.watchlist.split(',')
     return render(request, "index.html", {'trending': trending,
                                           'gainers': gainers,
-                                          'losers': losers})
+                                          'losers': losers,
+                                          'watchlist': watchlist})
 
 
 @login_required(login_url="/login/")
@@ -149,6 +153,7 @@ def maps(request, ticker):
         stock.users.add(current_user)
         stock.save(force_insert=True)
         stock.full_clean()
+    
     return render(request, "ui-maps_tickers.html", {
         'name': name,
         'price': stock.current_price,
