@@ -98,7 +98,7 @@
 </div>
 
 <!--Greek Info-->
-<div class="row" style="overflow:hidden; height:400px; width:40%; float:right;">
+<!-- <div class="row" style="overflow:hidden; height:400px; width:40%; float:right;">
     <div class="col-md-12">
         <div class="card ">
             <div class="card-header">
@@ -135,9 +135,9 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
-<!-- Stock Info-->
+<!-- Get GreeksButton -->
 <div class="row" style="overflow:hidden; height:500px; width:40%; float:right;">
     <div class="col-md-12">
         <div class="card text-center">
@@ -145,10 +145,12 @@
                 <h4 class="card-title text-center text-justify">Find Greeks For</h4>
             </div>
             <div class="card-body" onload="contractName()">
-                <form action="#" method="get" class="form-control-success" id="greekForm">
-                    <button id="contractButton" name="greeks" type="submit" class="btn btn-outline-default"><h3
-                            id="contractID"></h3></button>
-                </form>
+<!--                 <form action="#" method="get" class="form-control-success" id="greekForm"> -->
+                    <button id="contractButton" name="greeks" type="submit" class="btn btn-outline-default" 
+                    onclick="getGreeks()">
+                        <h3 id="contractID"></h3>
+                    </button>
+<!--                 </form> -->
             </div>
         </div>
     </div>
@@ -156,15 +158,18 @@
 
 <br style="clear:both"/><br>
 
+<p id="demo"></p>
+
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
 <script>
     const f = document.getElementById('form');
-    const q = document.getElementById('query')
+    const q = document.getElementById('query');
     const google = 'https://www.google.com/search?q=site%3A+';
     const site = 'http://127.0.0.1:8000/ui-tables.html/';
+    const contractID = document.getElementById('contractID');
 
     // document.getElementById("test").innerHTML = typeof q + " " + q;
 
@@ -187,6 +192,14 @@
         document.getElementById("contractButton").value = contract;
     });
 
+    function getGreeks() {
+        document.getElementById("demo").innerHTML = contract;
+
+        const site = 'http://127.0.0.1:8000/contract/';
+        url = site + contract
+        const win = window.open(url, '_blank');
+        win.focus();
+    }
 
 </script>
 {% endblock javascripts %}

@@ -1,0 +1,70 @@
+<!--
+{% extends 'layouts/base.html' %}
+
+{% block title %} UI Tables {% endblock %}
+
+<-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<style type="text/css">
+    .selected {
+        background-color: #00cca4;
+    }
+</style>
+{% endblock stylesheets %}
+
+{% block content %}
+<!-- For Stock Image -->
+<script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+
+<!-- Contract Name -->
+<h1><center> {{contract}} </center></h1>
+
+<!--Greek Info-->
+<div class="row" style="overflow:hidden;">
+    <div class="col-md-12">
+        <div class="card ">
+            <div class="card-header">
+                <h4 class="card-title text-center">Greeks</h4>
+            </div>
+            <div class="card-body text-center text-white">
+                <div class="table-responsive table-striped">
+                    <div id="greeks">
+                        <table class="table tablesorter text-white">
+                            <thead style="text-align:left">
+                            <tr>
+                                <td>IV</td>
+                                <td>{{IV | safe}}: This will be fixed later</td>
+                            </tr>
+                            <tr>
+                                <td>δ</td>
+                                <td>{{delta | safe}}</td>
+                            </tr>
+                            <tr>
+                                <td>ρ</td>
+                                <td>{{rho | safe}}</td>
+                            </tr>
+                            <tr>
+                                <td>θ</td>
+                                <td>{{theta | safe}}</td>
+                            </tr>
+                            <tr>
+                                <td>ν</td>
+                                <td>{{vega | safe}}</td>
+                            </tr>
+                            <tr>
+                                <td>γ</td>
+                                <td>{{gamma | safe}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+{% endblock javascripts %}

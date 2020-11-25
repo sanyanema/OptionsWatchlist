@@ -17,6 +17,7 @@ from django.contrib.auth.models import User
 from .models import Transaction, Account
 import json
 import pandas as pd
+import re
 
 
 @login_required(login_url="/login/")
@@ -166,4 +167,32 @@ def maps(request, ticker):
         'ticker': ticker.upper(),
         'plot_html': plot_html,
         'image': image[0],
+    })
+
+def contract(request, contract):
+    option = options_info.getOptionInfoFromContract(contract)
+    ticker = option['ticker']
+    date = option['expirationDate']
+    optionType = option['type']
+    strike = option['strike']
+
+    index_number = re.search(r"\d", contract)
+    ticker = contract[0 : index_number.start()]
+    stock = stock_info.StockInfo(ticker)
+    name = stock.name
+
+
+    if optionType is "Call":
+        delta, gamma, rho, vega, theta = greek_options.getGreeks(greek_options.yFinanceToWallStreet(yfinance.Ticker(ticker).option_chain(date).calls, strike))
+    else: 
+        delta, gamma, rho, vega, theta = greek_options.getGreeks(greek_options.yFinanceToWallStreet(yfinance.Ticker(ticker).option_chain(date).puts, strike))
+    return render(request, "contract.html", {
+        'contract' : contract,
+        'delta': delta,
+        'gamma': gamma,
+        'rho': rho,
+        'vega': vega,
+        'theta': theta,
+        'IV' : ticker,
+        'name' : name,
     })

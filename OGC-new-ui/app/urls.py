@@ -20,6 +20,9 @@ urlpatterns = [
     # Maps (Price Chart) File 
     path('ui-maps.html/<slug:ticker>', views.maps, name='ui-maps.html'),
 
+    # Get the Greeks for a Contract
+    path('contract/<slug:contract>', views.contract, name='contract.html'),
+
     # Matches any html file 
     re_path(r'^.*\.html', views.pages, name='pages'),
 
