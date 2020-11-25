@@ -158,6 +158,7 @@ def maps(request, ticker):
             watchlist = ','.join(ticker_list)
             setattr(account, 'watchlist', watchlist)
             account.save()
+    
 
     account = Account.objects.get(user_id=request.user.get_username())
     watchlist = account.watchlist.split(',')
@@ -197,6 +198,18 @@ def contract(request, contract):
         context = {}
         html_template = loader.get_template('error-404.html')
         return HttpResponse(html_template.render(context, request))
+    
+    if 'Buy' in request.POST:
+        
+    elif 'Sell' in request.POST:
+
+    transaction = Transaction(transaction_ID=,expiration_date=,contract_symbol=,stock=,purchase_price=,quantity=100)
+    transaction.save(force_insert=True)
+    transaction.full_clean()
+    account = Account.objects.get(user_id=request.user.get_username())
+    account.transaction.add(transaction)
+    account.save()
+    account.full_clean()
 
     return render(request, "contract.html", {
         'contract' : contract,
