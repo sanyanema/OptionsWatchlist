@@ -16,8 +16,8 @@
             <div class="card-header ">
                 <div class="row">
                     <div class="col-sm-6 text-left">
-                        <h5 class="card-category">Total Shipments</h5>
-                        <h2 class="card-title">Performance</h2>
+                        <h5 class="card-category">{{user}}</h5>
+                        <h2 class="card-title">Watchlist</h2>
                     </div>
                     <div class="col-sm-6">
                         <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
@@ -46,14 +46,22 @@
                     </div>
                 </div>
             </div>
-            <div class="card-body">
-                <div class="chart-area">
-                    <canvas id="chartBig1"></canvas>
-                </div>
+        </div>
+       <div class="card-body text-left">
+            <div class="table-responsive">
+                <table class="table tablesorter" id="">
+                    <thead class=" text-primary">
+                    <td><h6>Name</h6></td>
+                    {% for key in watchlist%}
+                    <tr class="text-success">
+                        <td>{{ key }}</td>
+                        {% endfor %}
+                    </tr>
+                    </thead>
+                </table>
             </div>
         </div>
     </div>
-
 </div>
 <div class="row">
     <div class="col-lg-4" style="overflow:scroll; height: 350px;">
@@ -164,17 +172,16 @@
     </div>
 </div>
 
-    {% endblock %}
+{% endblock %}
 
-    <!-- Specific Page JS goes HERE  -->
-    {% block javascripts %}
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
 
-    <script>
-        $(document).ready(function () {
-            // Javascript method's body can be found in assets/js/demos.js
-            demo.initDashboardPageCharts();
+<script>
+    $(document).ready(function () {
+        // Javascript method's body can be found in assets/js/demos.js
+        demo.initDashboardPageCharts();
+    });
+</script>
 
-        });
-    </script>
-
-    {% endblock javascripts %}
+{% endblock javascripts %}
