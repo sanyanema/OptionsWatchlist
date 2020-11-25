@@ -184,11 +184,11 @@ def contract(request, contract):
         delta, gamma, rho, vega, theta = greek_options.getGreeks(greek_options.yFinanceToWallStreet(yfinance.Ticker(ticker).option_chain(date).puts, strike))
     return render(request, "contract.html", {
         'contract' : contract,
-        'delta': delta,
-        'gamma': gamma,
-        'rho': rho,
-        'vega': vega,
-        'theta': theta,
+        'delta': round(delta,5),
+        'gamma': round(gamma,5),
+        'rho': round(rho,5),
+        'vega': round(vega,5),
+        'theta': round(theta,5),
         'IV' : ticker,
         'name' : name,
     })
