@@ -22,13 +22,23 @@
         </a>
         <br>
     </div>
+    {% if inWatchlist %}
     <div class="col" style="text-align: right">
         <form>
-            {% csrf_token %}
-            <input type="submit" id="addtowatch" class="btn btn-success" formmethod="post" value="Add to Watchlist" style="color: black">
+            <input type="submit" id="removeFromWatch" class="btn btn-success" formmethod="GET" value="Remove from Watchlist"
+                   style="color: black">
         </form>
     </div>
+    {% else %}
+    <div class="col" style="text-align: right">
+        <form>
+            <input type="submit" id="addtowatch" class="btn btn-success" formmethod="GET" value="Add to Watchlist"
+                   style="color: black">
+        </form>
+    </div>
+    {% endif %}
 </div>
+
 
 <!-- Searchbar to Choose Ticker -->
 <form role="search" id="form">
@@ -99,8 +109,6 @@
         </div>
     </div>
 </div>
-
-
 
 
 {% endblock content %}
