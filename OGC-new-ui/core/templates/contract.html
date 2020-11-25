@@ -118,6 +118,19 @@
         </div>
     </div>
 </div>
+<div class="button-container text-center" style="margin:auto;">
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="submit" id="buy" class="btn btn-success bg-success" formmethod="post" value="Buy"
+               style="color: black">
+    </form>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="submit" id="sell" class="btn btn-success bg-danger" formmethod="post" value="Sell"
+               style="color: black">
+    </form>
+</div>
 
 {% endblock content %}
 
