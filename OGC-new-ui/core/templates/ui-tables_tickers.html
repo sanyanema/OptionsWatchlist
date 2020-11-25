@@ -32,7 +32,7 @@
 <form role="search" id="form">
     <input class="form-control" type="search" id="query" name="q" placeholder="Search Ticker Symbol..."
            aria-label="Search through site content" style="width:90%; float:left;">
-    <button class="btn btn-primary btn-round" onclick="loadDoc()" style="float:left; margin-left:1%">
+    <button class="btn btn-primary btn-round" onclick="loadDoc()" style="float:left; margin-left:1%; margin-top:-1.5px">
         <i class="tim-icons icon-zoom-split"></i>
         <path class="path1"
               d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z">
@@ -44,25 +44,25 @@
 
 <!-- Form to Choose Expiration Date and Type of Option -->
 <!-- Options -->
-<div class="row" style="overflow:auto; height:850px; width:60%; float:left;">
+<div class="row" style="overflow:auto; height:850px; width:80%; margin: auto">
     <div class="col-md-12">
         <div class="card ">
             <div class="card-header">
                 <h2 class="card-title text-center align-content-center">Options Contracts</h2>
                 <br>
                 <form action="#" method="get" class="demoForm" id="demoForm">
-                    <label><input type="radio" name="type" value="Calls" style="margin-left:13px"/><h4>Calls</h4>
+                    <label><input type="radio" name="type" value="Calls" style="margin-left:25px"/><h4 style="margin-left:12px">Calls</h4>
                     </label>
                     <label><input type="radio" name="type" value="Puts" style="margin-left:41.5px"/>
                         <h4 style="margin-left:30px">Puts</h4>
                     </label>
-                    <select class="custom-select-sm" name="expirationDates" id="expirationDates"
-                            style="margin-left: 30px">
+                    <select class="btn btn-secondary dropdown-toggle" name="expirationDates" id="expirationDates"
+                            style="margin-left: 50px; margin-top: -30px;">
                         {% for key in dates %}
                         <option value="{{ key }}">{{ key }}</option>
                         {% endfor %}
                     </select>
-                    <button class="btn btn-primary btn-round" type="submit" style="float: right">
+                    <button class="btn btn-primary btn-round" type="submit" style="float: right; margin-top: -3px">
                         <i class="tim-icons icon-double-right"></i>
                     </button>
                 </form>
@@ -97,63 +97,6 @@
     </div>
 </div>
 
-<!--Greek Info-->
-<div class="row" style="overflow:hidden; height:400px; width:40%; float:right;">
-    <div class="col-md-12">
-        <div class="card ">
-            <div class="card-header">
-                <h4 class="card-title text-center">Greeks</h4>
-            </div>
-            <div class="card-body text-center text-white">
-                <div class="table-responsive table-striped">
-                    <div id="greeks">
-                        <table class="table tablesorter text-white">
-                            <thead>
-                            <tr>
-                                <td>δ</td>
-                                <td>{{delta | safe}}</td>
-                            </tr>
-                            <tr>
-                                <td>ρ</td>
-                                <td>{{rho | safe}}</td>
-                            </tr>
-                            <tr>
-                                <td>θ</td>
-                                <td>{{theta | safe}}</td>
-                            </tr>
-                            <tr>
-                                <td>ν</td>
-                                <td>{{vega | safe}}</td>
-                            </tr>
-                            <tr>
-                                <td>γ</td>
-                                <td>{{gamma | safe}}</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Stock Info-->
-<div class="row" style="overflow:hidden; height:500px; width:40%; float:right;">
-    <div class="col-md-12">
-        <div class="card text-center">
-            <div class="card-header">
-                <h4 class="card-title text-center text-justify">Find Greeks For</h4>
-            </div>
-            <div class="card-body" onload="contractName()">
-                <form action="#" method="get" class="form-control-success" id="greekForm">
-                    <button id="contractButton" name="greeks" type="submit" class="btn btn-outline-default"><h3
-                            id="contractID"></h3></button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
 <br style="clear:both"/><br>
 
 {% endblock content %}
@@ -162,7 +105,7 @@
 {% block javascripts %}
 <script>
     const f = document.getElementById('form');
-    const q = document.getElementById('query')
+    const q = document.getElementById('query');
     const google = 'https://www.google.com/search?q=site%3A+';
     const site = 'http://127.0.0.1:8000/ui-tables.html/';
 
@@ -183,10 +126,15 @@
     $("#options tr").click(function () {
         $(this).addClass('selected').siblings().removeClass('selected');
         contract = $(this).find('td:first').html();
-        document.getElementById("contractID").innerHTML = contract;
-        document.getElementById("contractButton").value = contract;
+        getGreeks();
     });
 
+    function getGreeks() {
+        const site = 'http://127.0.0.1:8000/contract/';
+        url = site + contract
+        const win = window.open(url, '_blank');
+        win.focus();
+    }
 
 </script>
 {% endblock javascripts %}

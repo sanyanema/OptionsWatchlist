@@ -1,6 +1,6 @@
 {% extends 'layouts/base.html' %}
 
-{% block title %} Maps {% endblock %} 
+{% block title %} Maps {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -10,26 +10,36 @@
 <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
 
 <!-- Stock Name -->
-<div id="stock" style="text-align:center; display:inline;">
-    <a target="_blank" href='https://{{image |safe}}.com/'>
-        <h1>
-            <img src="//logo.clearbit.com/{{image | safe}}.com" width=58px>
-            <u>{{name}} {{ticker}}</u> 
-            <img src="//logo.clearbit.com/{{image | safe}}.com" width=58px>
-            <!-- <img src="https://eodhistoricaldata.com/img/logos/US/{{ticker | safe}}.png" width=58px> -->
-        </h1>
-    </a>
-    <br>
+<div class="row">
+    <div class="col" id="stock" style="text-align:left; display:inline;">
+        <a target="_blank" href='https://{{image |safe}}.com/'>
+            <h1>
+                <img src="//logo.clearbit.com/{{image | safe}}.com" width=58px>
+                <u>{{name}} {{ticker}}</u>
+                <img src="//logo.clearbit.com/{{image | safe}}.com" width=58px>
+                <!-- <img src="https://eodhistoricaldata.com/img/logos/US/{{ticker | safe}}.png" width=58px> -->
+            </h1>
+        </a>
+        <br>
+    </div>
+    <div class="col" style="text-align: right">
+        <form>
+            {% csrf_token %}
+            <input type="submit" id="addtowatch" class="btn btn-success" formmethod="post" value="Add to Watchlist" style="color: black">
+        </form>
+    </div>
 </div>
 
 <!-- Searchbar to Choose Ticker -->
 <form role="search" id="form">
-  <input class="form-control" type="search" id="query" name="q" placeholder="Search Ticker Symbol..." aria-label="Search through site content" style="width:90%; float:left;">
-  <button class="btn btn-primary btn-round" onclick="loadDoc()" style="float:left; margin-left:1%">
-    <i class="tim-icons icon-zoom-split"></i>
-      <path class="path1" d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z">
-      </path>
-  </button>
+    <input class="form-control" type="search" id="query" name="q" placeholder="Search Ticker Symbol..."
+           aria-label="Search through site content" style="width:90%; float:left;">
+    <button class="btn btn-primary btn-round" onclick="loadDoc()" style="float:left; margin-left:1%; margin-top:-1.5px">
+        <i class="tim-icons icon-zoom-split"></i>
+        <path class="path1"
+              d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z">
+        </path>
+    </button>
 </form>
 <br style="clear:both"/><br>
 
@@ -37,9 +47,9 @@
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
 <div id="price_graph" style="width:70%; float:left; height: 500px;">
-  {% autoescape off %}
-  {{ plot_html }}
-  {% endautoescape %}
+    {% autoescape off %}
+    {{ plot_html }}
+    {% endautoescape %}
 </div>
 <!-- Stock Info-->
 <div class="row" style="overflow:hidden; height:500px; width:30%; float:right;">
@@ -90,26 +100,29 @@
     </div>
 </div>
 
+
+
+
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
 <script>
-  const f = document.getElementById('form');
-  const q = document.getElementById('query')
-  const google = 'https://www.google.com/search?q=site%3A+';
-  const site = 'http://127.0.0.1:8000/ui-maps.html/';
-  // String q = q.value.replace(/\s+/g, '');
-  // document.getElementById("test").innerHTML = typeof q + " " + q;
+    const f = document.getElementById('form');
+    const q = document.getElementById('query')
+    const google = 'https://www.google.com/search?q=site%3A+';
+    const site = 'http://127.0.0.1:8000/ui-maps.html/';
+    // String q = q.value.replace(/\s+/g, '');
+    // document.getElementById("test").innerHTML = typeof q + " " + q;
 
-  function submitted(event) {
-    event.preventDefault();
-    const url = site + q.value.replace(/\s+/g, ''); // const url = google + site + '+' + q.value;
-    const win = window.open(url, '_self');
-    win.focus();
-    // $route.reload();
-  }
+    function submitted(event) {
+        event.preventDefault();
+        const url = site + q.value.replace(/\s+/g, ''); // const url = google + site + '+' + q.value;
+        const win = window.open(url, '_self');
+        win.focus();
+        // $route.reload();
+    }
 
-  f.addEventListener('submit', submitted);
+    f.addEventListener('submit', submitted);
 </script>
 {% endblock javascripts %}

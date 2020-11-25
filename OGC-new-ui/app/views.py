@@ -17,6 +17,7 @@ from django.contrib.auth.models import User
 from .models import Transaction, Account
 import json
 import pandas as pd
+import re
 
 
 @login_required(login_url="/login/")
@@ -148,12 +149,8 @@ def maps(request, ticker):
 
 	# Hard-coded adding stock to watchlist functionality
     if request.method == "POST":
-        stock = Stock(name='WWW')
-        stock.save(force_insert=True)
-        stock.users.add(current_user)
-        stock.save(force_insert=True)
-        stock.full_clean()
-    
+        watchlistTicker = ticker
+        # TODO: Brian, just add the watchlistTicker variable into the database for watchlist
     return render(request, "ui-maps_tickers.html", {
         'name': name,
         'price': stock.current_price,
@@ -166,4 +163,38 @@ def maps(request, ticker):
         'ticker': ticker.upper(),
         'plot_html': plot_html,
         'image': image[0],
+    })
+
+def contract(request, contract):
+    try: 
+        option = options_info.getOptionInfoFromContract(contract)
+        ticker = option['ticker']
+        date = option['expirationDate']
+        optionType = option['type']
+        strike = option['strike']
+
+        index_number = re.search(r"\d", contract)
+        ticker = contract[0 : index_number.start()]
+        stock = stock_info.StockInfo(ticker)
+        name = stock.name
+
+        if optionType is "Call":
+            delta, gamma, rho, vega, theta = greek_options.getGreeks(greek_options.yFinanceToWallStreet(yfinance.Ticker(ticker).option_chain(date).calls, strike))
+        else: 
+            delta, gamma, rho, vega, theta = greek_options.getGreeks(greek_options.yFinanceToWallStreet(yfinance.Ticker(ticker).option_chain(date).puts, strike))
+    except: 
+        context = {}
+        html_template = loader.get_template('error-404.html')
+        return HttpResponse(html_template.render(context, request))
+
+    return render(request, "contract.html", {
+        'contract' : contract,
+        'delta': round(delta,5),
+        'gamma': round(gamma,5),
+        'rho': round(rho,5),
+        'vega': round(vega,5),
+        'theta': round(theta,5),
+        'IV' : ticker,
+        'name' : name,
+        'option':option
     })

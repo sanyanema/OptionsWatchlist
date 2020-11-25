@@ -1,0 +1,126 @@
+<!--
+{% extends 'layouts/base.html' %}
+
+{% block title %} UI Tables {% endblock %}
+
+<-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<style type="text/css">
+    .selected {
+        background-color: #00cca4;
+    }
+</style>
+{% endblock stylesheets %}
+
+{% block content %}
+<!-- For Stock Image -->
+<script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+
+<!-- Option Info -->
+
+<div class="container">
+    <h1 class="text-muted">
+        <center>{{contract|safe}}</center>
+    </h1>
+    <div class="card-deck">
+        <div class="card mb-4 bg-success mb-3">
+            <div class="card-body text-center text-dark">
+                <h4 class="text-dark">Ticker</h4>
+                <h4 class="card-text text-darker"><b>{{option.ticker}}</b></h4>
+            </div>
+        </div>
+        <div class="w-100 d-none d-sm-block d-md-none">
+            <!-- wrap every 2 on sm-->
+        </div>
+        <div class="card mb-4 bg-success mb-3">
+            <div class="card-body text-center text-dark">
+                <h4 class="text-dark">Strike Price</h4>
+                <h4 class="card-text text-darker"><b>{{option.strike}}</b></h4>
+            </div>
+        </div>
+        <div class="w-100 d-none d-md-block d-lg-none">
+            <!-- wrap every 3 on md-->
+        </div>
+        <div class="card mb-4 bg-success mb-3">
+            <div class="card-body text-center text-dark">
+                <h4 class="text-dark">Expiration Date</h4>
+                <h4 class="card-text text-darker"><b>{{option.expirationDate}}</b></h4>
+            </div>
+        </div>
+        <div class="w-100 d-none d-sm-block d-md-none">
+            <!-- wrap every 2 on sm-->
+        </div>
+        <div class="w-100 d-none d-lg-block d-xl-none">
+            <!-- wrap every 4 on lg-->
+        </div>
+        <div class="card mb-4 bg-success mb-3">
+            <div class="card-body text-center text-dark ">
+                <h4 class="text-dark">Type</h4>
+                <h4 class="card-text text-darker"><b>{{option.type}}</b></h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Greek Info-->
+<div class="container" style="margin-top: 7rem">
+    <div class="card-deck">
+        <div class="card mb-4">
+            <img class="card-img-top img-fluid" src="/static/assets/img/greeks/delta.png" alt="Card image cap">
+            <div class="card-body text-center text-white">
+                <b class="text-white">{{delta|safe}}</b>
+                <p class="card-text"><small class="text-muted">Delta (δ) is the rate of change between the option's
+                    price and a $1 change in the asset's price. Additionally, delta represents a hedge ratio for
+                    creating a delta-neutral position or the probability that it will expire in the money.</small></p>
+            </div>
+        </div>
+        <div class="card mb-4">
+            <img class="card-img-top img-fluid" src="/static/assets/img/greeks/rho.png" alt="Card image cap">
+            <div class="card-body text-center text-white">
+                <b class="text-white">{{rho|safe}}</b>
+                <p class="card-text"><small class="text-muted">Rho (ρ) is the rate of change between the option's value
+                    and 1% change in the interest rate. In other words it measures the sensitivity to the interest rate.
+                    Rho is greatest for at-the-money options with long times until expiration.</small></p>
+            </div>
+        </div>
+        <div class="w-100 d-none d-sm-block d-md-none"><!-- wrap every 2 on sm--></div>
+        <div class="card mb-4">
+            <img class="card-img-top img-fluid" src="/static/assets/img/greeks/theta.png" alt="Card image cap">
+            <div class="card-body text-center text-white">
+                <b class="text-white">{{theta|safe}}</b></h4>
+                <p class="card-text"><small class="text-muted">Theta (θ) is the rate of change between the option price
+                    and time, or time sensitivity. It indicates the amount an option's price would decrease as the
+                    expiration date draws nearer. Theta increases when options are at the money and decreases when
+                    options are in and out of the money.</small></p>
+            </div>
+        </div>
+        <div class="w-100 d-none d-md-block d-lg-none"><!-- wrap every 3 on md--></div>
+        <div class="card mb-4">
+            <img class="card-img-top img-fluid" src="/static/assets/img/greeks/vega.png" alt="Card image cap">
+            <div class="card-body text-center text-white">
+                <b class="text-white">{{vega|safe}}</b>
+                <p class="card-text"><small class="text-muted">Vega (ν) is the rate of change between an option's value
+                    and the underlying asset's implied volatility, the option's sensitivity to volatility. Vega
+                    indicates the amount an option's price changes given a 1% change in implied volatility. </small></p>
+            </div>
+        </div>
+        <div class="w-100 d-none d-sm-block d-md-none"><!-- wrap every 2 on sm--></div>
+        <div class="w-100 d-none d-lg-block d-xl-none"><!-- wrap every 4 on lg--></div>
+        <div class="card mb-4">
+            <img class="card-img-top img-fluid" src="/static/assets/img/greeks/gamma.png" alt="Card image cap">
+            <div class="card-body text-center text-white">
+                <b class="text-white">{{gamma|safe}}</b>
+                <p class="card-text"><small class="text-muted text-white">Gamma (γ) is the rate of change between an
+                    option's delta and the underlying asset's price, second-order price sensitivity. Gamma indicates the
+                    amount the delta would change given a $1 move in the underlying security.</small></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+{% endblock javascripts %}
