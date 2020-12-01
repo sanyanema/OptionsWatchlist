@@ -211,8 +211,16 @@ def contract(request, contract):
         return HttpResponse(html_template.render(context, request))
 
     amount = request.GET.get("quantity","")
-
+    transaction = Transaction(transaction_ID=,expiration_date=,contract_symbol=,stock=,purchase_price=,quantity=100)
+    transaction.save(force_insert=True)
+    transaction.full_clean()
+    account = Account.objects.get(user_id=request.user.get_username())
+    account.transaction.add(transaction)
+    account.save()
+    account.full_clean()
+    
     if request.GET.get('type', "") == "Buy":
+        transaction = 
         print("Bought")
         print(amount)
     elif request.GET.get('type', "") == "Sell":
