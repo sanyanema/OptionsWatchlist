@@ -118,20 +118,32 @@
         </div>
     </div>
 </div>
-<div class="button-container text-center" style="margin:auto;">
-    <form action="" method="post">
-        {% csrf_token %}
-        <input type="submit" id="buy" class="btn btn-success bg-success" formmethod="post" value="Buy"
-               style="color: black">
-    </form>
-
-    <form action="" method="post">
-        {% csrf_token %}
-        <input type="submit" id="sell" class="btn btn-success bg-danger" formmethod="post" value="Sell"
-               style="color: black">
-    </form>
+<div class="select2-container--classic">
+    <div class="row">
+        <div class="card text-center" style="width:50%">
+            <div class="card-header">
+                <h2 class="card-title text-center text-white align-content-center">Options Contracts</h2>
+                <br>
+                <form action="#" method="get" class="transactionForm" id="transactionForm">
+                    <label><input type="radio" name="type" value="Buy" style="margin-left:25px"/><h4
+                            style="margin-left:12px">
+                        Buy</h4>
+                    </label>
+                    <label><input type="radio" name="type" value="Sell" style="margin-left:41.5px"/>
+                        <h4 style="margin-left:30px">Sell</h4>
+                    </label>
+                    <select class="btn btn-secondary dropdown-toggle" name="quantity" id="quantity"
+                            style="margin-left: 50px; margin-top: -30px;">x
+                        <option value="1">1</option>
+                    </select>
+                    <button class="btn btn-primary btn-round" type="submit" style="float:right; margin-top: -3px">
+                        <i class="tim-icons icon-double-right"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
-
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->

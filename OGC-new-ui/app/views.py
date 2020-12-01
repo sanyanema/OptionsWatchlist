@@ -209,18 +209,17 @@ def contract(request, contract):
         context = {}
         html_template = loader.get_template('error-404.html')
         return HttpResponse(html_template.render(context, request))
-    
-    if 'Buy' in request.POST:
-        
-    elif 'Sell' in request.POST:
 
-    transaction = Transaction(transaction_ID=,expiration_date=,contract_symbol=,stock=,purchase_price=,quantity=100)
-    transaction.save(force_insert=True)
-    transaction.full_clean()
-    account = Account.objects.get(user_id=request.user.get_username())
-    account.transaction.add(transaction)
-    account.save()
-    account.full_clean()
+    amount = request.GET.get("quantity","")
+
+    if request.GET.get('type', "") == "Buy":
+        print("Bought")
+        print(amount)
+    elif request.GET.get('type', "") == "Sell":
+        print("sold")
+        print(amount)
+    else:
+        pass
 
     return render(request, "contract.html", {
         'contract' : contract,
@@ -229,7 +228,7 @@ def contract(request, contract):
         'rho': round(rho,5),
         'vega': round(vega,5),
         'theta': round(theta,5),
-        'IV' : ticker,
-        'name' : name,
-        'option':option
+        'IV': ticker,
+        'name': name,
+        'option': option
     })
