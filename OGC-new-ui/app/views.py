@@ -189,6 +189,7 @@ def maps(request, ticker):
 
 
 def contract(request, contract):
+    typ = ""
     try:
         option = options_info.getOptionInfoFromContract(contract)
         ticker = option['ticker']
@@ -203,45 +204,49 @@ def contract(request, contract):
         amount = request.GET.get("quantity","")
     
     
-        if request.GET.get('type', "") == "Buy":
-            transaction = Transaction(expiration_date=option['expirationDate'],stock=ticker,purchase_price=price,quantity=amount)
-            transaction.save(force_insert=True)
-            transaction.full_clean()
-            account = Account.objects.get(user_id=request.user.get_username())
-            account.transaction.add(transaction)
-            account.save()
-            account.full_clean()
-            print("Bought")
-            print(amount)
-        elif request.GET.get('type', "") == "Sell":
-            account = Account.objects.get(user_id=request.user.username)
-            transaction = account.transaction.objects.get(stock=ticker)
-            transaction.quantity = F('quantity') - amount
-            print("sold")
-            print(amount)
-        else:
-            pass
+        
         if optionType is "Call":
             delta, gamma, rho, vega, theta = greek_options.getGreeks(
                 greek_options.yFinanceToWallStreet(yfinance.Ticker(ticker).option_chain(date).calls, strike))
             dates = greek_options.dateConverter(date)
             call = Call(ticker,
-                        d=date[2], m=date[1], y=date[0],
+                        d=dates[2], m=dates[1], y=dates[0],
                         strike=strike, source='yahoo')
             price = call.price
+            typ = "Call"
         else:
             delta, gamma, rho, vega, theta = greek_options.getGreeks(
                 greek_options.yFinanceToWallStreet(yfinance.Ticker(ticker).option_chain(date).puts, strike))
             dates = greek_options.dateConverter(date)
             put = Put(ticker,
-                        d=date[2], m=date[1], y=date[0],
+                        d=dates[2], m=dates[1], y=dates[0],
                         strike=strike, source='yahoo')
             price = put.price
+            typ = "Buy"
     except:
         context = {}
         html_template = loader.get_template('error-404.html')
         return HttpResponse(html_template.render(context, request))
 
+    if request.GET.get('type', "") == "Buy":
+        # TODO type of option, strike
+        transaction = Transaction(expiration_date=date,stock=ticker,purchase_price=price,quantity=amount,typ=typ,strike=strike)
+        transaction.save(force_insert=True)
+        transaction.full_clean()
+        account = Account.objects.get(user_id=request.user.get_username())
+        account.transaction.add(transaction)
+        account.save()
+        account.full_clean()
+        print("Bought")
+        print(amount)
+    elif request.GET.get('type', "") == "Sell":
+        account = Account.objects.get(user_id=request.user.username)
+        transaction = account.transaction.objects.get(stock=ticker)
+        transaction.quantity = F('quantity') - amount
+        print("sold")
+        print(amount)
+    else:
+        pass
     
 
     return render(request, "contract.html", {
