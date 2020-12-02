@@ -1,9 +1,3 @@
-# -*- encoding: utf-8 -*-
-"""
-License: MIT
-Copyright (c) 2019 - present AppSeed.us
-"""
-
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template import loader
@@ -107,7 +101,7 @@ def tables(request, ticker):
     except:
         delta, gamma, rho, vega, theta = ["NA", "NA", "NA", "NA", "NA"]
 
-    return render(request, "ui-tables_tickers.html", {
+    return render(request, "options_stock.html", {
         'name': name,
         'ticker': ticker.upper(),
         'options': optionsData,
@@ -171,7 +165,7 @@ def maps(request, ticker):
     endingwatchlist = account.watchlist.split(',')
     isInWatchlist = ticker in endingwatchlist
 
-    return render(request, "ui-maps_tickers.html", {
+    return render(request, "stock.html", {
         'name': name,
         'price': stock.current_price,
         'day_range': stock.day_range,
