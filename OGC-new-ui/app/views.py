@@ -52,7 +52,7 @@ def pages(request):
 
 @csrf_protect
 @login_required(login_url="/login/")
-def tables(request, ticker):
+def options(request, ticker):
     try:
         stock = stock_info.StockInfo(ticker.upper())
     except:
@@ -122,7 +122,7 @@ def tables(request, ticker):
     })
 
 
-def maps(request, ticker):
+def stock(request, ticker):
     try:
         stock = stock_info.StockInfo(ticker.upper())
     except:

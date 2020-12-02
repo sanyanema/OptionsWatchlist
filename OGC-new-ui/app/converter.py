@@ -6,5 +6,3 @@ def convert(name1):
 		for rows in tickers:
 			if rows[1].replace(" ", "").lower() == name:
 				return rows[0]
-
-# print(convert("ZynerbaPharmaceuticals"))
