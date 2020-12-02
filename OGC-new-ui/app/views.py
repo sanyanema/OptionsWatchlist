@@ -27,7 +27,7 @@ def index(request):
     losers = trendingtickers.getBiggestLosers()
     account = Account.objects.get(user_id=request.user.get_username())
     watchlist = account.watchlist.split(',')
-    
+
     return render(request, "index.html", {'trending': trending,
                                           'gainers': gainers,
                                           'losers': losers,
@@ -59,7 +59,6 @@ def pages(request):
 @csrf_protect
 @login_required(login_url="/login/")
 def tables(request, ticker):
-
     try:
         stock = stock_info.StockInfo(ticker.upper())
     except:
@@ -85,7 +84,7 @@ def tables(request, ticker):
         columns=['Contract', 'Strike', 'Last Price', 'Implied Volatility', 'Expiration Date', 'Type Of Option'])
 
     # Differentiate based on radio input
-    expirationDate = request.GET.get('expirationDates','')
+    expirationDate = request.GET.get('expirationDates', '')
 
     if request.GET.get('type', "") == "Puts":
         options = options_info.findGreekData(options_info.getPuts(ticker, expirationDate))
@@ -151,7 +150,7 @@ def maps(request, ticker):
     startingwatchlist = account.watchlist.split(',')
     isInWatchlist = ticker in startingwatchlist
 
-	# Adding stock to watchlist functionality
+    # Adding stock to watchlist functionality
     if request.method == "GET":
         watchlistTicker = ticker
         account = Account.objects.get(user_id=request.user.get_username())
@@ -188,8 +187,9 @@ def maps(request, ticker):
         'inWatchlist': isInWatchlist
     })
 
+
 def contract(request, contract):
-    try: 
+    try:
         option = options_info.getOptionInfoFromContract(contract)
         ticker = option['ticker']
         date = option['expirationDate']
@@ -197,46 +197,62 @@ def contract(request, contract):
         strike = option['strike']
 
         index_number = re.search(r"\d", contract)
-        ticker = contract[0 : index_number.start()]
+        ticker = contract[0: index_number.start()]
         stock = stock_info.StockInfo(ticker)
         name = stock.name
-
+        amount = request.GET.get("quantity","")
+    
+    
+        if request.GET.get('type', "") == "Buy":
+            transaction = Transaction(expiration_date=option['expirationDate'],stock=ticker,purchase_price=price,quantity=amount)
+            transaction.save(force_insert=True)
+            transaction.full_clean()
+            account = Account.objects.get(user_id=request.user.get_username())
+            account.transaction.add(transaction)
+            account.save()
+            account.full_clean()
+            print("Bought")
+            print(amount)
+        elif request.GET.get('type', "") == "Sell":
+            account = Account.objects.get(user_id=request.user.username)
+            transaction = account.transaction.objects.get(stock=ticker)
+            transaction.quantity = F('quantity') - amount
+            print("sold")
+            print(amount)
+        else:
+            pass
         if optionType is "Call":
-            delta, gamma, rho, vega, theta = greek_options.getGreeks(greek_options.yFinanceToWallStreet(yfinance.Ticker(ticker).option_chain(date).calls, strike))
-        else: 
-            delta, gamma, rho, vega, theta = greek_options.getGreeks(greek_options.yFinanceToWallStreet(yfinance.Ticker(ticker).option_chain(date).puts, strike))
-    except: 
+            delta, gamma, rho, vega, theta = greek_options.getGreeks(
+                greek_options.yFinanceToWallStreet(yfinance.Ticker(ticker).option_chain(date).calls, strike))
+            dates = greek_options.dateConverter(date)
+            call = Call(ticker,
+                        d=date[2], m=date[1], y=date[0],
+                        strike=strike, source='yahoo')
+            price = call.price
+        else:
+            delta, gamma, rho, vega, theta = greek_options.getGreeks(
+                greek_options.yFinanceToWallStreet(yfinance.Ticker(ticker).option_chain(date).puts, strike))
+            dates = greek_options.dateConverter(date)
+            put = Put(ticker,
+                        d=date[2], m=date[1], y=date[0],
+                        strike=strike, source='yahoo')
+            price = put.price
+    except:
         context = {}
         html_template = loader.get_template('error-404.html')
         return HttpResponse(html_template.render(context, request))
 
-    amount = request.GET.get("quantity","")
-    transaction = Transaction(transaction_ID=,expiration_date=,contract_symbol=,stock=,purchase_price=,quantity=100)
-    transaction.save(force_insert=True)
-    transaction.full_clean()
-    account = Account.objects.get(user_id=request.user.get_username())
-    account.transaction.add(transaction)
-    account.save()
-    account.full_clean()
     
-    if request.GET.get('type', "") == "Buy":
-        transaction = 
-        print("Bought")
-        print(amount)
-    elif request.GET.get('type', "") == "Sell":
-        print("sold")
-        print(amount)
-    else:
-        pass
 
     return render(request, "contract.html", {
-        'contract' : contract,
-        'delta': round(delta,5),
-        'gamma': round(gamma,5),
-        'rho': round(rho,5),
-        'vega': round(vega,5),
-        'theta': round(theta,5),
+        'contract': contract,
+        'delta': round(delta, 5),
+        'gamma': round(gamma, 5),
+        'rho': round(rho, 5),
+        'vega': round(vega, 5),
+        'theta': round(theta, 5),
         'IV': ticker,
         'name': name,
-        'option': option
+        'option': option,
+        'price': price
     })
