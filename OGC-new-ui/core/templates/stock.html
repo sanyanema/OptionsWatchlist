@@ -10,36 +10,36 @@
 <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
 
 <!-- Stock Name -->
-<div row="class">
-    {% if inWatchlist %}
-    <div class="col" style="text-align:right; margin-top:0px">
-        <form>
-            <input type="submit" id="removeFromWatch" class="btn btn-success" formmethod="GET" value="Remove from Watchlist"
-                   style="color: black">
-        </form>
-    </div>
-    {% else %}
-    <div class="col" style="text-align:right; margin-top:0px">
-        <form>
-            <input type="submit" id="addtowatch" class="btn btn-success" formmethod="GET" value="Add to Watchlist"
-                   style="color: black">
-        </form>
-    </div>
-    {% endif %}
+<div>
     <div class="col" id="stock" style="display:inline; text-align: center">
         <a target="_blank" href='https://{{image |safe}}.com/'>
             <h1>
                 <img src="//logo.clearbit.com/{{image | safe}}.com" width=58px onerror="this.onerror=null;" alt="">
                 <u>{{name}} {{ticker}}</u>
                 <img src="//logo.clearbit.com/{{image | safe}}.com" width=58px onerror="this.onerror=null;" alt="">
-                <!-- <img src="https://eodhistoricaldata.com/img/logos/US/{{ticker | safe}}.png" width=58px> -->
             </h1>
         </a>
+
+        {% if inWatchlist %}
+        <div class="col">
+            <form>
+                <input type="submit" id="removeFromWatch" class="btn btn-success" formmethod="GET" value="Remove from Watchlist"
+                       style="color: black; margin-top: -30px">
+            </form>
+        </div>
+        {% else %}
+        <div class="col" >
+            <form>
+                <input type="submit" id="addtowatch" class="btn btn-success" formmethod="GET" value="Add to Watchlist"
+                       style="color: black; margin-top: -30px">
+            </form>
+        </div>
+        {% endif %}
     </div>
 </div>
 
 <!-- Searchbar to Choose Ticker -->
-<form role="search" id="form" style="margin-top:-15px">
+<form role="search" id="form" style="margin-top:-12px">
     <input class="form-control" type="search" id="query" name="q" placeholder="Search Ticker Symbol..."
            aria-label="Search through site content" style="width:90%; float:left;">
     <button class="btn btn-primary btn-round" onclick="loadDoc()" style="float:left; margin-left:1%; margin-top:-1.5px">
