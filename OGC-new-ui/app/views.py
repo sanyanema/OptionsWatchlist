@@ -178,7 +178,7 @@ def stock(request, ticker):
         'plot_html': plot_html,
         'image': image[0],
         'watchlist': watchlist,
-        'inWatchlist': isInWatchlist
+        'inWatchlist': isInWatchlist,
     })
 
 

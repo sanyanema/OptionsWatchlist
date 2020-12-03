@@ -1,9 +1,9 @@
-<!--
+
 {% extends 'layouts/base.html' %}
 
-{% block title %} UI Tables {% endblock %}
+{% block title %} {{ticker}} {% endblock %}
 
-<-- Specific Page CSS goes HERE  -->
+<!-- <-- Specific Page CSS goes HERE  --> -->
 {% block stylesheets %}
 <style type="text/css">
     .selected {
@@ -20,9 +20,9 @@
 <div id="stock" style="text-align:center; display:inline;">
     <a target="_blank" href='https://{{image |safe}}.com/'>
         <h1>
-            <img src="//logo.clearbit.com/{{image | safe}}.com" width=58px>
+            <img src="//logo.clearbit.com/{{image | safe}}.com" width=58px onerror="this.onerror=null;" alt="">
             <u>{{name}} {{ticker}}</u>
-            <img src="//logo.clearbit.com/{{image | safe}}.com" width=58px>
+            <img src="//logo.clearbit.com/{{image | safe}}.com" width=58px onerror="this.onerror=null;" alt="">
         </h1>
     </a>
     <br>
