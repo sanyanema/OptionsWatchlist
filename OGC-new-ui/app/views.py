@@ -6,7 +6,7 @@ from django import template
 import yfinance
 from django.views.decorators.csrf import csrf_protect
 from wallstreet import Call, Put
-from . import stock_info, options_info, greek_options, converter, trendingtickers
+from . import stock_info, options_info, greek_options, converter, trendingtickers, screener
 from django.contrib.auth.models import User
 from .models import Transaction, Account
 import json
@@ -139,6 +139,7 @@ def stock(request, ticker):
     image_draft = name.split()
     image = image_draft[0].split(".")
     current_user = request.user
+    undervalued_growth, day_gainer, day_loser, most_active, undervalued_large_cap, small_momentum = screener.screener(ticker)
 
     account = Account.objects.get(user_id=request.user.get_username())
     startingwatchlist = account.watchlist.split(',')
@@ -179,6 +180,12 @@ def stock(request, ticker):
         'image': image[0],
         'watchlist': watchlist,
         'inWatchlist': isInWatchlist,
+        'undervalued_growth' : undervalued_growth,
+        'day_gainer' : day_gainer,
+        'day_loser' : day_loser,
+        'most_active' : most_active,
+        "undervalued_large_cap" : undervalued_large_cap,
+        "small_momentum" : small_momentum,
     })
 
 

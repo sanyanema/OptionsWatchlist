@@ -74,11 +74,16 @@ def screener(ticker_input):
             if intraday_change > 5 and market_cap > 200000000 and market_cap < 2000000000:
                 screener_dict['small_momentum'] = True
 
-        
+    # return screener_dict
+    undervalued_growth = screener_dict['undervalued_growth']
+    day_gainer = screener_dict['day_gainer']
+    day_loser = screener_dict['day_loser']
+    most_active = screener_dict['most_active']
+    undervalued_large_cap = screener_dict['undervalued_large_cap']
+    small_momentum = screener_dict['small_momentum']
+    return undervalued_growth, day_gainer, day_loser, most_active, undervalued_large_cap, small_momentum
 
-    print(screener_dict)
-
-screener('EXPR')
-screener('GOOG')
-screener('AAPL')
-screener('MSFT')
+# print(screener('EXPR'))
+# print(screener('GOOG'))
+# print(screener('AAPL'))
+# print(screener('MSFT'))

@@ -54,13 +54,13 @@
 <!-- Include Plotly.js for graph -->
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
-<div id="price_graph" style="width:70%; float:left; height: 500px;">
+<div id="price_graph" style="width:70%; float:left; height: 450px;">
     {% autoescape off %}
     {{ plot_html }}
     {% endautoescape %}
 </div>
 <!-- Stock Info-->
-<div class="row" style="overflow:hidden; height:500px; width:30%; float:right;">
+<div class="row" style="overflow:auto; width:30%; height: 450px; float:right;">
     <div class="col-md-12">
         <div class="card ">
             <div class="card-header">
@@ -100,6 +100,30 @@
                                 <td>Industry</td>
                                 <td>{{ industry }}</td>
                             </tr>
+                            <tr>
+                                <td>Undervaued Growth</td>
+                                <td>{{ undervalued_growth }}</td>
+                            </tr>
+                            <tr>
+                                <td>Day Gainer</td>
+                                <td>{{ day_gainer }}</td>
+                            </tr>
+                            <tr>
+                                <td>Day Loser</td>
+                                <td>{{ day_loser }}</td>
+                            </tr>
+                            <tr>
+                                <td>Most Active</td>
+                                <td>{{ most_active }}</td>
+                            </tr>
+                            <tr>
+                                <td>Undervalued Large Cap</td>
+                                <td>{{ undervalued_large_cap }}</td>
+                            </tr>
+                            <tr>
+                                <td>Small Momentum</td>
+                                <td>{{ small_momentum }}</td>
+                            </tr>
                         </table>
                     </div>
                 </div>
@@ -107,7 +131,6 @@
         </div>
     </div>
 </div>
-
 
 {% endblock content %}
 
