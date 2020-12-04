@@ -16,8 +16,7 @@
             <div class="card-header ">
                 <div class="row">
                     <div class="col-sm-6 text-left">
-                        <h5 class="card-category">{{user}}</h5>
-                        <h2 class="card-title">Watchlist</h2>
+                        <h2 class="card-title">{{user}}'s Watchlist</h2>
                     </div>
                     <div class="col-sm-6">
                         <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
@@ -52,9 +51,9 @@
                 <table class="table tablesorter" id="">
                     <thead class=" text-primary">
                     <td><h6>Name</h6></td>
-                    {% for key in watchlist%}
+                    {% for key in watchlist %}
                     <tr class="text-success">
-                        <td>{{ key }}</td>
+                        <td>{{ key | upper }}</td>
                         {% endfor %}
                     </tr>
                     </thead>
@@ -162,7 +161,7 @@
                     <td><h6>Name</h6></td>
                     {% for key in watchlist%}
                     <tr class="text-success">
-                        <td>{{ key }}</td>
+                        <td>{{ key | upper }}</td>
                         {% endfor %}
                     </tr>
                     </thead>
