@@ -20,21 +20,78 @@
             </h1>
         </a>
 
+        <div class="btn-group dropdown">
+          <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false " style="color:black; height:45px; display:inline; text-align: left">
+            Screener Information
+          </button>
+          <div class="dropdown-menu bg-warning">
+            <!-- Dropdown menu links -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card bg-warning text-darker">
+                        <div class="card-header">
+                            <h4 class="card-title text-center text-justify ">Screener Information</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="screener">
+                                    <table class="table tablesorter text-center" id="">
+                                        <thead class=" text-primary">
+                                        </thead>
+                                        <tr>
+                                            <td>Undervaued Growth</td>
+                                            <td>{{ undervalued_growth }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Day Gainer</td>
+                                            <td>{{ day_gainer }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Day Loser</td>
+                                            <td>{{ day_loser }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Most Active</td>
+                                            <td>{{ most_active }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Undervalued Large Cap</td>
+                                            <td>{{ undervalued_large_cap }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Small Momentum</td>
+                                            <td>{{ small_momentum }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <a target="_blank" href='http://127.0.0.1:8000/options/{{ticker}}'>
+            <center><button class="btn btn-success" style="height:45px; margin-top:-74px;  display:inline;">
+                <b><p style="color:black; font-weight: 600;">Options for {{ticker}}</p></b>
+            </button></center>
+        </a>
+
         {% if inWatchlist %}
-        <div class="col">
-            <form>
-                <input type="submit" id="removeFromWatch" class="btn btn-success" formmethod="GET" value="Remove from Watchlist"
-                       style="color: black; margin-top: -30px">
+<!--         <div class="col" style="display:inline; text-align:right">
+ -->            <form>
+                <input type="submit" class="btn btn-info" id="removeFromWatch" formmethod="GET" value="Remove from  Watchlist"style="color: black; display:inline; height:45px; float:right; margin-top:-70px;">
             </form>
-        </div>
+<!--         </div> -->
         {% else %}
-        <div class="col" >
+<!--         <div class="col" style="display:inline; text-align:right"> -->
             <form>
-                <input type="submit" id="addtowatch" class="btn btn-success" formmethod="GET" value="Add to Watchlist"
-                       style="color: black; margin-top: -30px">
+                <input type="submit" class="btn btn-info" id="addtowatch" formmethod="GET" value="Add to Watchlist"
+                style="color: black; display:inline; height:45px; float:right; margin-top:-70px;">
             </form>
-        </div>
-        {% endif %}
+<!--         </div>
+ -->        {% endif %}
     </div>
 </div>
 
@@ -42,7 +99,7 @@
 <form role="search" id="form" style="margin-top:-12px">
     <input class="form-control" type="search" id="query" name="q" placeholder="Search Ticker Symbol..."
            aria-label="Search through site content" style="width:90%; float:left;">
-    <button class="btn btn-success btn-round" onclick="loadDoc()" style="float:left; margin-left:1%; margin-top:-1.5px">
+    <button class="btn btn-primary btn-round" onclick="loadDoc()" style="float:left; margin-left:1%; margin-top:-1.5px">
         <i class="tim-icons icon-zoom-split"></i>
         <path class="path1"
               d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z">
@@ -62,7 +119,7 @@
 <!-- Stock Info-->
 <div class="row" style="overflow:hidden; width:30%; height: 450px; float:right;">
     <div class="col-md-12">
-        <div class="card bg-info">
+        <div class="card bg-danger">
             <div class="card-header">
                 <h4 class="card-title text-center text-justify">Key Stock Data</h4>
             </div>
@@ -110,7 +167,7 @@
 
 <br style="clear:both"/><br><br>
 
-<div class="row" style="width:40%; height:375px; float:left; margin-left:4%">
+<!-- <div class="row" style="width:40%; height:375px; float:left; margin-left:4%">
     <div class="col-md-12">
         <div class="card bg-danger text-darker">
             <div class="card-header">
@@ -152,15 +209,15 @@
             </div>
         </div>
     </div>
-</div>
-<a target="_blank" href='http://127.0.0.1:8000/options/{{ticker}}'>
+</div> -->
+<!-- <a target="_blank" href='http://127.0.0.1:8000/options/{{ticker}}'>
     <button class="btn btn-success btn-round" style="float:right; height:375px; width: 48%; margin-right:4%;">
         <b><h1>Options for {{ticker}}</h1></b>
         <div style="font-size: 240px;">
             <i class="tim-icons icon-money-coins"></i>
         </div>
     </button>
-</a>
+</a> -->
 
 <br style="clear:both"/><br>
 
