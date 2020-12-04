@@ -6,7 +6,7 @@ from django import template
 import yfinance
 from django.views.decorators.csrf import csrf_protect
 from wallstreet import Call, Put
-from . import stock_info, options_info, greek_options, converter, trendingtickers, screener
+from . import stock_info, options_info, greek_options, converter, trendingtickers, screener, watchlistDisplay
 from django.contrib.auth.models import User
 from .models import Transaction, Account
 import json
@@ -21,11 +21,12 @@ def index(request):
     losers = trendingtickers.getBiggestLosers()
     account = Account.objects.get(user_id=request.user.get_username())
     watchlist = account.watchlist.split(',')
-
+    inform = watchlistDisplay.getWatchListInfo(watchlist)
     return render(request, "index.html", {'trending': trending,
                                           'gainers': gainers,
                                           'losers': losers,
-                                          'watchlist': watchlist})
+                                          'watchlist': watchlist,
+                                          'info': inform})
 
 
 @login_required(login_url="/login/")
