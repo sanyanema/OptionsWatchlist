@@ -22,45 +22,50 @@
 
         <div class="btn-group dropdown">
           <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false " style="color:black; height:45px; display:inline; text-align: left">
-            Screener Information
+            Key Stock Data
           </button>
           <div class="dropdown-menu bg-warning">
             <!-- Dropdown menu links -->
             <div class="row">
                 <div class="col-md-12">
                     <div class="card bg-warning text-darker">
+
                         <div class="card-header">
-                            <h4 class="card-title text-center text-justify ">Screener Information</h4>
+                            <h4 class="card-title text-center text-justify">Key Stock Data</h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <div id="screener">
+                                <div id="stock_info">
                                     <table class="table tablesorter text-center" id="">
                                         <thead class=" text-primary">
                                         </thead>
                                         <tr>
-                                            <td>Undervaued Growth</td>
-                                            <td>{{ undervalued_growth }}</td>
+                                            <td>Current Price</td>
+                                            <td>{{ price }}</td>
                                         </tr>
                                         <tr>
-                                            <td>Day Gainer</td>
-                                            <td>{{ day_gainer }}</td>
+                                            <td>Day's Range</td>
+                                            <td>{{ day_range }}</td>
                                         </tr>
                                         <tr>
-                                            <td>Day Loser</td>
-                                            <td>{{ day_loser }}</td>
+                                            <td>52 Week Range</td>
+                                            <td>{{ 52wk_range }}</td>
                                         </tr>
                                         <tr>
-                                            <td>Most Active</td>
-                                            <td>{{ most_active }}</td>
+                                            <td>Volume</td>
+                                            <td>{{ volume }}</td>
                                         </tr>
                                         <tr>
-                                            <td>Undervalued Large Cap</td>
-                                            <td>{{ undervalued_large_cap }}</td>
+                                            <td>EPS</td>
+                                            <td>{{ eps }}</td>
                                         </tr>
                                         <tr>
-                                            <td>Small Momentum</td>
-                                            <td>{{ small_momentum }}</td>
+                                            <td>Market Cap</td>
+                                            <td>{{ market_cap }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Industry</td>
+                                            <td>{{ industry }}</td>
                                         </tr>
                                     </table>
                                 </div>
@@ -120,47 +125,43 @@
 <div class="row" style="overflow:hidden; width:30%; height: 450px; float:right;">
     <div class="col-md-12">
         <div class="card bg-danger">
-            <div class="card-header">
-                <h4 class="card-title text-center text-justify">Key Stock Data</h4>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <div id="stock_info">
-                        <table class="table tablesorter text-center" id="">
-                            <thead class=" text-primary">
-                            </thead>
-                            <tr>
-                                <td>Current Price</td>
-                                <td>{{ price }}</td>
-                            </tr>
-                            <tr>
-                                <td>Day's Range</td>
-                                <td>{{ day_range }}</td>
-                            </tr>
-                            <tr>
-                                <td>52 Week Range</td>
-                                <td>{{ 52wk_range }}</td>
-                            </tr>
-                            <tr>
-                                <td>Volume</td>
-                                <td>{{ volume }}</td>
-                            </tr>
-                            <tr>
-                                <td>EPS</td>
-                                <td>{{ eps }}</td>
-                            </tr>
-                            <tr>
-                                <td>Market Cap</td>
-                                <td>{{ market_cap }}</td>
-                            </tr>
-                            <tr>
-                                <td>Industry</td>
-                                <td>{{ industry }}</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
+                        <div class="card-header">
+                            <h4 class="card-title text-center text-justify ">Screener Information</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="screener">
+                                    <table class="table tablesorter text-center" id="">
+                                        <thead class=" text-primary">
+                                        </thead>
+                                        <tr>
+                                            <td>Undervaued Growth</td>
+                                            <td>{{ undervalued_growth }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Day Gainer</td>
+                                            <td>{{ day_gainer }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Day Loser</td>
+                                            <td>{{ day_loser }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Most Active</td>
+                                            <td>{{ most_active }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Undervalued Large Cap</td>
+                                            <td>{{ undervalued_large_cap }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Small Momentum</td>
+                                            <td>{{ small_momentum }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
         </div>
     </div>
 </div>
