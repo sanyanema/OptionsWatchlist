@@ -84,18 +84,14 @@
         </a>
 
         {% if inWatchlist %}
-<!--         <div class="col" style="display:inline; text-align:right">
- -->            <form>
+            <form>
                 <input type="submit" class="btn btn-info" id="removeFromWatch" formmethod="GET" value="Remove from  Watchlist"style="color: black; display:inline; height:45px; float:right; margin-top:-70px;">
             </form>
-<!--         </div> -->
         {% else %}
-<!--         <div class="col" style="display:inline; text-align:right"> -->
             <form>
                 <input type="submit" class="btn btn-info" id="addtowatch" formmethod="GET" value="Add to Watchlist"
                 style="color: black; display:inline; height:45px; float:right; margin-top:-70px;">
             </form>
-<!--         </div>
  -->        {% endif %}
     </div>
 </div>
@@ -167,60 +163,6 @@
 </div>
 
 <br style="clear:both"/><br><br>
-
-<!-- <div class="row" style="width:40%; height:375px; float:left; margin-left:4%">
-    <div class="col-md-12">
-        <div class="card bg-danger text-darker">
-            <div class="card-header">
-                <h4 class="card-title text-center text-justify ">Screener Information</h4>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <div id="screener">
-                        <table class="table tablesorter text-center" id="">
-                            <thead class=" text-primary">
-                            </thead>
-                            <tr>
-                                <td>Undervaued Growth</td>
-                                <td>{{ undervalued_growth }}</td>
-                            </tr>
-                            <tr>
-                                <td>Day Gainer</td>
-                                <td>{{ day_gainer }}</td>
-                            </tr>
-                            <tr>
-                                <td>Day Loser</td>
-                                <td>{{ day_loser }}</td>
-                            </tr>
-                            <tr>
-                                <td>Most Active</td>
-                                <td>{{ most_active }}</td>
-                            </tr>
-                            <tr>
-                                <td>Undervalued Large Cap</td>
-                                <td>{{ undervalued_large_cap }}</td>
-                            </tr>
-                            <tr>
-                                <td>Small Momentum</td>
-                                <td>{{ small_momentum }}</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
-<!-- <a target="_blank" href='http://127.0.0.1:8000/options/{{ticker}}'>
-    <button class="btn btn-success btn-round" style="float:right; height:375px; width: 48%; margin-right:4%;">
-        <b><h1>Options for {{ticker}}</h1></b>
-        <div style="font-size: 240px;">
-            <i class="tim-icons icon-money-coins"></i>
-        </div>
-    </button>
-</a> -->
-
-<br style="clear:both"/><br>
 
 {% endblock content %}
 
