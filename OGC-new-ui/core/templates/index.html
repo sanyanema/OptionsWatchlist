@@ -12,7 +12,7 @@
 
 <div class="row">
     <div class="col-12">
-        <div class="card card-chart">
+        <div class="card">
             <div class="card-header ">
                 <div class="row">
                     <div class="col-sm-6 text-left">
@@ -45,20 +45,20 @@
                     </div>
                 </div>
             </div>
-        </div>
-       <div class="card-body text-left">
-            <div class="table-responsive">
-                <table class="table tablesorter" id="">
-                    <thead class=" text-primary">
-                    <td><h6>Name</h6></td>
-                    <td><h6>Price</h6></td>
-                    <td><h6>Change</h6></td>
-                    {% for key, value in info.items %}
-                    {% if value.change.color == "red"%}
+
+            <div class="card-body text-left">
+                <div class="table-responsive">
+                    <table class="table tablesorter" id="">
+                        <thead class=" text-primary">
+                        <td><h6>Name</h6></td>
+                        <td><h6>Price</h6></td>
+                        <td><h6>Change</h6></td>
+                        {% for key, value in info.items %}
+                        {% if value.change.color == "red"%}
                         <tr class="text-danger">
                             <td>{{ key }}</td>
                             <td>{{ value.price }}</td>
-                            <td>{{ value.change.percent }} </td>
+                            <td>{{ value.change.percent }}</td>
                             {% else %}
                         <tr class="text-success">
                             <td>{{ key }}</td>
@@ -66,9 +66,10 @@
                             <td>{{ value.change.percent }}</td>
                             {% endif %}
                             {% endfor %}
-                    </tr>
-                    </thead>
-                </table>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

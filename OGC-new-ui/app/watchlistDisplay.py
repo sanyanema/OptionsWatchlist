@@ -61,7 +61,7 @@ def AddColor(watchlist):
             value['change'] = {'color' : getColor(value['change'])}
     return colored_watchlist
             
-
-watchlist = ["aapl", "zm", 'googl']
-print(getWatchListInfo(watchlist))
+#
+# watchlist = ["aapl", "zm", 'googl']
+# print(getWatchListInfo(watchlist))
 
