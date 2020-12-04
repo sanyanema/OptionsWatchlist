@@ -54,11 +54,18 @@
                     <td><h6>Price</h6></td>
                     <td><h6>Change</h6></td>
                     {% for key, value in info.items %}
-                    <tr class="text-success">
-                        <td>{{ key }}</td>
-                        <td> {{value.price}}  </td>
-                        <td> {{ value.change }} </td>
-                        {% endfor %}
+                    {% if value.change.color == "red"%}
+                        <tr class="text-danger">
+                            <td>{{ key }}</td>
+                            <td>{{ value.price }}</td>
+                            <td>{{ value.change.percent }} </td>
+                            {% else %}
+                        <tr class="text-success">
+                            <td>{{ key }}</td>
+                            <td> {{ value.price }}</td>
+                            <td>{{ value.change.percent }}</td>
+                            {% endif %}
+                            {% endfor %}
                     </tr>
                     </thead>
                 </table>

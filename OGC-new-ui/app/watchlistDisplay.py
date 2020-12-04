@@ -34,7 +34,7 @@ def getWatchListInfo(watchlist):
                 info.append(total_info)
     info = [i.split("(")[1] for i in info] # getting only the change from all of the info
     info = [i.split(")")[0] for i in info]
-    watchlist_dict = {name[i]: {'change' : info[i], 'price' : price[i]} for i in range(len(info))} # creating dict to map from name to change 
+    watchlist_dict = {name[i]: {'change' : {'percent' : info[i], 'color' : getColor(info[i])}, 'price' : price[i]} for i in range(len(info))} # creating dict to map from name to change 
     
     return watchlist_dict
             
@@ -49,9 +49,16 @@ def AddColor(watchlist):
     colored_watchlist = dict()
     # format of each element
     # Apple : (-0.9, red)
-    for key in ticker_values.keys():
-        tickers_full[key] = {'change': ticker_values[key],
-                             'color': getColor(colored_watchlist[key])}
+    # for key, value in watchlist.items():
+    #     #print(value['change'])
+    #     for key1, value1 in value.items():
+    #         colored_watchlist[key1] = {'color' : getColor(value1),
+    #                                     'percent' : value[key1]}
+    for key, value in watchlist.items():
+        # value contains the dict of change and price
+        # want to change key == 'change' with change and color
+        for key1, value1 in value.items():
+            value['change'] = {'color' : getColor(value['change'])}
     return colored_watchlist
             
 
