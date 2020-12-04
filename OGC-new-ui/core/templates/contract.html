@@ -63,7 +63,7 @@
 
 
 <!--Greek Info-->
-<div class="container" style="margin-top: 7rem">
+<div class="container" style="margin-top: 2rem">
     <div class="card-deck">
         <div class="card mb-4">
             <img class="card-img-top img-fluid" src="/static/assets/img/greeks/delta.png" alt="Card image cap">
@@ -119,23 +119,22 @@
 </div>
 <div class="select2-container--classic">
     <div class="row">
-        <div class="card text-center" style="width:50%">
+        <div class="card text-center" style="width:50%; float:left; margin-left:3%">
             <div class="card-header">
                 <h2 class="card-title text-center text-white align-content-center">Options Contracts</h2>
                 <br>
                 <form action="#" method="get" class="transactionForm" id="transactionForm">
-                    <label><input type="radio" name="type" value="Buy" style="margin-left:25px"/><h4
-                            style="margin-left:12px">
-                        Buy</h4>
+                    <label><input type="radio" name="type" value="Buy" style=""/>
+                        <h4 style="">Buy</h4>
                     </label>
-                    <label><input type="radio" name="type" value="Sell" style="margin-left:41.5px"/>
+                    <label><input type="radio" name="type" value="Sell" style="margin-left:35px"/>
                         <h4 style="margin-left:30px">Sell</h4>
                     </label>
                     <select class="btn btn-secondary dropdown-toggle" name="quantity" id="quantity"
                             style="margin-left: 50px; margin-top: -30px;">x
                         <option value="1">1</option>
                     </select>
-                    <button class="btn btn-primary btn-round" type="submit" style="float:right; margin-top: -3px">
+                    <button class="btn btn-primary btn-round" type="submit" style="float:right; margin-top: -3px;">
                         <i class="tim-icons icon-double-right"></i>
                     </button>
                 </form>
@@ -143,6 +142,8 @@
         </div>
     </div>
 </div>
+
+<br style="clear:both"/>
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
