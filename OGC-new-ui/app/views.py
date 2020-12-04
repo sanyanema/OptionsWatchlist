@@ -150,7 +150,11 @@ def stock(request, ticker):
     if request.method == "GET":
         watchlistTicker = ticker
         account = Account.objects.get(user_id=request.user.get_username())
-        if watchlistTicker not in account.watchlist:
+        if account.watchlist is "":
+            setattr(account, 'watchlist', watchlistTicker)
+            watchlist = watchlistTicker
+            account.save()
+        elif watchlistTicker not in account.watchlist:
             ticker_list = account.watchlist.split(',')
             ticker_list.append(watchlistTicker)
             watchlist = ','.join(ticker_list)
