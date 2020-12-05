@@ -20,6 +20,13 @@ def index(request):
     gainers = trendingtickers.getBiggestGainers()
     losers = trendingtickers.getBiggestLosers()
     account = Account.objects.get(user_id=request.user.get_username())
+    # stocks_owned = { i.stock: i for i in account.transaction.objects.all() }.values()
+    # holdings = []
+    # for stock in stocks_owned:
+    #     transactions = account.transaction.objects.filter(stock=stock)
+    #     put_quant = sum([q for transactions.quantity if transactions.typ = "Buy"]) - sum([q for transactions.quantity if transactions.typ = ])
+    #     call_quant = q[]
+    # ticker, current price, Last price, percent change, quantity, percent in portfolio 
     watchlist = account.watchlist.split(',')
     inform = watchlistDisplay.getWatchListInfo(watchlist)
     return render(request, "index.html", {'trending': trending,
@@ -228,7 +235,7 @@ def contract(request, contract):
                         d=dates[2], m=dates[1], y=dates[0],
                         strike=strike, source='yahoo')
             price = put.price
-            typ = "Buy"
+            typ = "Put"
     except:
         context = {}
         html_template = loader.get_template('error-404.html')
@@ -246,21 +253,28 @@ def contract(request, contract):
         print("Bought")
         print(amount)
     elif request.GET.get('type', "") == "Sell":
-        account = Account.objects.get(user_id=request.user.username, typ=typ)
-        transactions = account.transaction.filter(stock=ticker)
+        account = Account.objects.get(user_id=request.user.username)
+        transactions = account.transaction.filter(stock=ticker, typ=typ)
+        
         try:
-            transactions[0].quantity = amount
+            transaction = transactions[0]
+            transaction.pk = None
+            
         except:
             # TODO: Change this to "you cannot sell because you do not own the stock"
             context = {}
             html_template = loader.get_template('error-404.html')
-            return HttpResponse(html_template.render(context, request))    
-        transactions[0].typ = typ
-        transaction = transactions[0]
-        transaction.pk = None
+            return HttpResponse(html_template.render(context, request)) 
         transaction.save(force_insert=True)
         transaction.full_clean()
+        transaction.quantity = int(amount) * -1
+        transaction.save()
+        transaction.full_clean()
+        #if account.balance < amount*  
+        # TODO: Any other fields in transaction to change transaction[0].
+        # TODO: Account balance changing
         account.transaction.add(transaction)
+        #account = F('balance') - price*amount
         account.save()
         account.full_clean()
         print("sold")
