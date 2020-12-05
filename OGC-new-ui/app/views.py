@@ -246,9 +246,23 @@ def contract(request, contract):
         print("Bought")
         print(amount)
     elif request.GET.get('type', "") == "Sell":
-        account = Account.objects.get(user_id=request.user.username)
-        transaction = account.transaction.objects.get(stock=ticker)
-        transaction.quantity = F('quantity') - amount
+        account = Account.objects.get(user_id=request.user.username, typ=typ)
+        transactions = account.transaction.filter(stock=ticker)
+        try:
+            transactions[0].quantity = amount
+        except:
+            # TODO: Change this to "you cannot sell because you do not own the stock"
+            context = {}
+            html_template = loader.get_template('error-404.html')
+            return HttpResponse(html_template.render(context, request))    
+        transactions[0].typ = typ
+        transaction = transactions[0]
+        transaction.pk = None
+        transaction.save(force_insert=True)
+        transaction.full_clean()
+        account.transaction.add(transaction)
+        account.save()
+        account.full_clean()
         print("sold")
         print(amount)
     else:
