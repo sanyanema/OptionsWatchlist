@@ -252,11 +252,7 @@ def contract(request, contract):
         transaction.save(force_insert=True)
         transaction.full_clean()
         account = Account.objects.get(user_id=request.user.get_username())
-        account.transaction.add(transaction)
-        account.save()
-        account.full_clean()
-        print("Bought")
-        print(amount)
+        account.balance = F('balance') - amount * price * 100
     elif request.GET.get('type', "") == "Sell":
         account = Account.objects.get(user_id=request.user.username)
         transactions = account.transaction.filter(contract_symbol=contract, typ=typ)
@@ -275,17 +271,14 @@ def contract(request, contract):
         transaction.quantity = int(amount) * -1
         transaction.save()
         transaction.full_clean()
-        #if account.balance < amount*  
-        # TODO: Any other fields in transaction to change transaction[0].
-        # TODO: Account balance changing
-        account.transaction.add(transaction)
-        #account = F('balance') - price*amount
-        account.save()
-        account.full_clean()
-        print("sold")
-        print(amount)
+        account.balance = F('balance') + amount * price * 100
     else:
         pass
+    account.save()
+    account.transaction.add(transaction)
+    account.save()
+    
+    account.full_clean()
     
 
     return render(request, "contract.html", {
