@@ -20,13 +20,17 @@ def index(request):
     gainers = trendingtickers.getBiggestGainers()
     losers = trendingtickers.getBiggestLosers()
     account = Account.objects.get(user_id=request.user.get_username())
+    # balance = account.balance
     # stocks_owned = { i.stock: i for i in account.transaction.objects.all() }.values()
-    # holdings = []
+    # holdings = dict()
     # for stock in stocks_owned:
+        
     #     transactions = account.transaction.objects.filter(stock=stock)
-    #     put_quant = sum([q for transactions.quantity if transactions.typ = "Buy"]) - sum([q for transactions.quantity if transactions.typ = ])
-    #     call_quant = q[]
+    #     put_quant = sum([q for transactions.quantity if transactions.typ = "Put"])
+    #     call_quant = sum([q for transactions.quantity if transactions.typ = "Call"])
+    #     holdings[stock] = {'put_quant':put_quant, 
     # ticker, current price, Last price, percent change, quantity, percent in portfolio 
+
     watchlist = account.watchlist.split(',')
     inform = watchlistDisplay.getWatchListInfo(watchlist)
     return render(request, "index.html", {'trending': trending,
@@ -203,6 +207,7 @@ def stock(request, ticker):
 
 def contract(request, contract):
     typ = ""
+    quantity = 0
     try:
         option = options_info.getOptionInfoFromContract(contract)
         ticker = option['ticker']
@@ -243,7 +248,7 @@ def contract(request, contract):
 
     if request.GET.get('type', "") == "Buy":
         # TODO type of option, strike
-        transaction = Transaction(expiration_date=date,stock=ticker,purchase_price=price,quantity=amount,typ=typ,strike=strike)
+        transaction = Transaction(expiration_date=date,contract_symbol=contract,purchase_price=price,quantity=amount,typ=typ,strike=strike)
         transaction.save(force_insert=True)
         transaction.full_clean()
         account = Account.objects.get(user_id=request.user.get_username())
@@ -254,10 +259,10 @@ def contract(request, contract):
         print(amount)
     elif request.GET.get('type', "") == "Sell":
         account = Account.objects.get(user_id=request.user.username)
-        transactions = account.transaction.filter(stock=ticker, typ=typ)
-        
+        transactions = account.transaction.filter(contract_symbol=contract, typ=typ)
         try:
             transaction = transactions[0]
+            quantity = sum([t.quantity for t in transactions if transactions.typ == typ])
             transaction.pk = None
             
         except:
@@ -293,5 +298,6 @@ def contract(request, contract):
         'IV': ticker,
         'name': name,
         'option': option,
-        'price': price
+        'price': price,
+        'quantity': quantity,
     })

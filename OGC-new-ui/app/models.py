@@ -7,8 +7,7 @@ class Transaction(models.Model):
     # transaction_ID = models.IntegerField()
     # expiration date, ticker. I can maybe get rid of stock ticker field.
     expiration_date = models.CharField(default="",max_length=200)
-    #contract_symbol = models.CharField(default="",max_length=200,unique=True)
-    stock = models.CharField(default="",max_length=200)
+    contract_symbol = models.CharField(default="",max_length=200)
     purchase_price = models.IntegerField(default=-999)
     quantity = models.IntegerField(default=100)
     closed = models.BooleanField(default=False)
@@ -16,7 +15,7 @@ class Transaction(models.Model):
     strike = models.IntegerField(default=-999)
 
     def __str__(self):
-        return self.stock
+        return self.contract_symbol
 class Account(models.Model):
     user_id = models.CharField(max_length=200,unique=True,null=True)
     balance = models.IntegerField(default=10000)
