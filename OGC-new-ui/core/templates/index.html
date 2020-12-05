@@ -74,6 +74,7 @@
         </div>
     </div>
 </div>
+
 <div class="row">
     <div class="col-lg-4" style="overflow:scroll; height: 350px;">
         <div class="card card-chart">
@@ -151,6 +152,284 @@
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header ">
+                <div class="row">
+                    <div class="col-sm-6 text-left">
+                        <h2 class="card-title">{{user}}'s Portfolio</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body text-left">
+                <div class="table-responsive">{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+
+{% block content %}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header ">
+                <div class="row">
+                    <div class="col-sm-6 text-left">
+                        <h2 class="card-title">{{user}}'s Watchlist</h2>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
+                            <label class="btn btn-sm btn-primary btn-simple active" id="0">
+                                <input type="radio" name="options" checked>
+                                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Accounts</span>
+                                <span class="d-block d-sm-none">
+                      <i class="tim-icons icon-single-02"></i>
+                    </span>
+                            </label>
+                            <label class="btn btn-sm btn-primary btn-simple" id="1">
+                                <input type="radio" class="d-none d-sm-none" name="options">
+                                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Purchases</span>
+                                <span class="d-block d-sm-none">
+                      <i class="tim-icons icon-gift-2"></i>
+                    </span>
+                            </label>
+                            <label class="btn btn-sm btn-primary btn-simple" id="2">
+                                <input type="radio" class="d-none" name="options">
+                                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Sessions</span>
+                                <span class="d-block d-sm-none">
+                      <i class="tim-icons icon-tap-02"></i>
+                    </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body text-left">
+                <div class="table-responsive">
+                    <table class="table tablesorter" id="">
+                        <thead class=" text-primary">
+                        <td><h6>Name</h6></td>
+                        <td><h6>Price</h6></td>
+                        <td><h6>Change</h6></td>
+                        {% for key, value in info.items %}
+                        {% if value.change.color == "red"%}
+                        <tr class="text-danger">
+                            <td>{{ key }}</td>
+                            <td>{{ value.price }}</td>
+                            <td>{{ value.change.percent }}</td>
+                            {% else %}
+                        <tr class="text-success">
+                            <td>{{ key }}</td>
+                            <td> {{ value.price }}</td>
+                            <td>{{ value.change.percent }}</td>
+                            {% endif %}
+                            {% endfor %}
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-4" style="overflow:scroll; height: 350px;">
+        <div class="card card-chart">
+            <div class="card-header">
+                <h3 class="text-sm-center" style="padding-top: 10px">Biggest Gainers</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table tablesorter" id="gainers">
+                        <thead class=" text-primary">
+                        <td><h6>Name</h6></td>
+                        <td><h6>Change</h6></td>
+                        {% for key, value in gainers.items %}
+                        <tr>
+                            <td class="text-success">{{ key }}</td>
+                            <td class="text-success">{{ value }}</td>
+                            {% endfor %}
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4" style="overflow:scroll; height: 350px;">
+        <div class="card card-chart">
+            <div class="card-header">
+                <h3 class="text-sm-center" style="padding-top: 10px">Biggest Losers</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table tablesorter" id="losers">
+                        <thead class=" text-primary">
+                        <td><h6>Name</h6></td>
+                        <td><h6>Change</h6></td>
+                        {% for key, value in losers.items %}
+                        <tr>
+                            <td class="text-danger">{{ key }}</td>
+                            <td class="text-danger">{{ value }}</td>
+                            {% endfor %}
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4" style="overflow:scroll; height: 350px;">
+        <div class="card card-chart">
+            <div class="card-header">
+                <h3 class="text-sm-center" style="padding-top: 10px">Trending</h3>
+            </div>
+            <div class="card-body text-left">
+                <div class="table-responsive">
+                    <table class="table tablesorter" id="">
+                        <thead class=" text-primary">
+                        <td><h6>Name</h6></td>
+                        <td><h6>Change</h6></td>
+                        {% for key, value in trending.items %}
+                        {% if value.color == "red"%}
+                        <tr class="text-danger">
+                            <td>{{ key }}</td>
+                            <td>{{ value.change }}</td>
+                            {% else %}
+                        <tr class="text-success">
+                            <td>{{ key }}</td>
+                            <td>{{ value.change }}</td>
+                            {% endif %}
+                            {% endfor %}
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header ">
+                <div class="row">
+                    <div class="col-sm-6 text-left">
+                        <h2 class="card-title">{{user}}'s Portfolio</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body text-left">
+                <div class="table-responsive">
+                    <table class="table tablesorter" id="">
+                        <thead class=" text-primary">
+                        <td><h6>Contract Symbol</h6></td>
+                        <td><h6>Current Price</h6></td>
+                        <td><h6>Purchase Price</h6></td>
+                        <td><h6>Profit/Loss</h6></td>
+                        <td><h6>% in Change</h6></td>
+                        <td><h6># Contracts</h6></td>
+
+                        <tr class="text-success">
+                            <td>AMZN201211P01740000</td>
+                            <td>.10</td>
+                            <td>.05</td>
+                            <td>1</td>
+                            <td>100%</td>
+                            <td>20</td>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- THIS IS THE EXTRA WATCHLIST TABLE -->
+<!-- <div class="col-lg-6 col-md-12">
+    <div class="card card-tasks">
+        <div class="card-header ">
+            <h6 class="title d-inline">Watchlist</h6>
+            <div class="dropdown">
+                <button type="button" class="btn btn-link dropdown-toggle btn-icon" data-toggle="dropdown">
+                    <i class="tim-icons icon-settings-gear-63"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="#pablo">Action</a>
+                    <a class="dropdown-item" href="#pablo">Another action</a>
+                    <a class="dropdown-item" href="#pablo">Something else</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body text-left">
+            <div class="table-responsive">
+                <table class="table tablesorter" id="">
+                    <thead class=" text-primary">
+                    <td><h6>Name</h6></td>
+                    <td><h6>Change</h6></td>
+                    <td><h6>Price</h6></td>
+                    {% for key in watchlist%}
+                    <tr class="text-success">
+                        <td>{{ key | upper }}</td>
+                        <td> will change </td>
+                        <td> will change </td>
+                        {% endfor %}
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+{% endblock %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+<script>
+    $(document).ready(function () {
+        // Javascript method's body can be found in assets/js/demos.js
+        demo.initDashboardPageCharts();
+    });
+</script>
+
+{% endblock javascripts %}
+
+                    <table class="table tablesorter" id="">
+                        <thead class=" text-primary">
+                        <td><h6>Contract Symbol</h6></td>
+                        <td><h6>Current Price</h6></td>
+                        <td><h6>Purchase Price</h6></td>
+                        <td><h6>Profit/Loss</h6></td>
+                        <td><h6>% in Change</h6></td>
+                        <td><h6># Contracts</h6></td>
+
+                        <tr class="text-success">
+                            <td>AMZN201211P01740000</td>
+                            <td>.10</td>
+                            <td>.05</td>
+                            <td>1</td>
+                            <td>100%</td>
+                            <td>20</td>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- THIS IS THE EXTRA WATCHLIST TABLE -->
 <!-- <div class="col-lg-6 col-md-12">
     <div class="card card-tasks">
