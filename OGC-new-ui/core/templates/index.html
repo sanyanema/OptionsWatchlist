@@ -7,7 +7,6 @@
 
 {% endblock stylesheets %}
 
-
 {% block content %}
 
 <div class="row">
@@ -74,6 +73,7 @@
         </div>
     </div>
 </div>
+
 <div class="row">
     <div class="col-lg-4" style="overflow:scroll; height: 350px;">
         <div class="card card-chart">
@@ -151,44 +151,50 @@
         </div>
     </div>
 </div>
-<!-- THIS IS THE EXTRA WATCHLIST TABLE -->
-<!-- <div class="col-lg-6 col-md-12">
-    <div class="card card-tasks">
-        <div class="card-header ">
-            <h6 class="title d-inline">Watchlist</h6>
-            <div class="dropdown">
-                <button type="button" class="btn btn-link dropdown-toggle btn-icon" data-toggle="dropdown">
-                    <i class="tim-icons icon-settings-gear-63"></i>
-                </button>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="#pablo">Action</a>
-                    <a class="dropdown-item" href="#pablo">Another action</a>
-                    <a class="dropdown-item" href="#pablo">Something else</a>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header ">
+                <div class="row">
+                    <div class="col-sm-6 text-left">
+                        <h2 class="card-title">{{user}}'s Portfolio</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body text-left">
+                <div class="table-responsive">
+                    <div class="card-body text-left">
+                        <div class="table-responsive">
+                            <table class="table tablesorter" id="">
+                                <thead class=" text-primary">
+                                <td><h6>Name</h6></td>
+                                <td><h6>Price</h6></td>
+                                <td><h6>Change</h6></td>
+                                {% for key, value in info.items %}
+                                {% if value.change.color == "red"%}
+                                <tr class="text-danger">
+                                    <td>{{ key }}</td>
+                                    <td>{{ value.price }}</td>
+                                    <td>{{ value.change.percent }}</td>
+                                    {% else %}
+                                <tr class="text-success">
+                                    <td>{{ key }}</td>
+                                    <td> {{ value.price }}</td>
+                                    <td>{{ value.change.percent }}</td>
+                                    {% endif %}
+                                    {% endfor %}
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="card-body text-left">
-            <div class="table-responsive">
-                <table class="table tablesorter" id="">
-                    <thead class=" text-primary">
-                    <td><h6>Name</h6></td>
-                    <td><h6>Change</h6></td>
-                    <td><h6>Price</h6></td>
-                    {% for key in watchlist%}
-                    <tr class="text-success">
-                        <td>{{ key | upper }}</td>
-                        <td> will change </td>
-                        <td> will change </td>
-                        {% endfor %}
-                    </tr>
-                    </thead>
-                </table>
-            </div>
-        </div>
     </div>
-</div> -->
-
-{% endblock %}
+</div>
+{% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
@@ -201,3 +207,4 @@
 </script>
 
 {% endblock javascripts %}
+

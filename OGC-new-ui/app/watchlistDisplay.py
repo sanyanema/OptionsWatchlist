@@ -57,4 +57,6 @@ def getColor(num):
 watchlist = ["aapl", "zm", 'googl']
 empty = []
 print(getWatchListInfo(watchlist))
+# watchlist = ["aapl", "zm", 'googl']
+# print(getWatchListInfo(watchlist))
 
