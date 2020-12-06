@@ -131,8 +131,7 @@
                         <h4 style="margin-left:30px">Sell</h4>
                     </label>
                     <select class="btn btn-secondary dropdown-toggle" name="quantity" id="quantity"
-                            style="margin-left: 50px; margin-top: -30px;">x
-                        <option value="1">1</option>
+                            style="margin-left: 50px; margin-top: -30px;">
                     </select>
                     <button class="btn btn-primary btn-round" type="submit" style="float:right; margin-top: -3px;">
                         <i class="tim-icons icon-double-right"></i>
@@ -143,9 +142,33 @@
     </div>
 </div>
 
+<h1>{{ quantity }}</h1>
+
 <br style="clear:both"/>
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
+<script>
+    var transaction;
+    $(function () {
+        $("input").click(function () {
+            transaction = this.value;
+            alert(transaction);
+            var selectElement = document.getElementById('quantity');
+            if (transaction == "Buy") {
+                for (var age = 1; age <= 10; age++) {
+                    selectElement.add(new Option(age));
+                }
+            }
+            else if (transaction == "Sell") {
+                for (var age = 1; age <= "{{ quantity }}"; age++) {
+                    selectElement.add(new Option(age));
+                }
+            }
+        })
+    })
+
+
+</script>
 {% endblock javascripts %}

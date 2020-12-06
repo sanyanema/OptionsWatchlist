@@ -22,7 +22,7 @@ def index(request):
     losers = trendingtickers.getBiggestLosers()
     account = Account.objects.get(user_id=request.user.get_username())
     balance = account.balance
-    contracts = { i.: i for i in account.transaction.objects.all() }.values()
+    #contracts = { i.: i for i in account.transaction.objects.all() }.values()
     holdings = dict()
     # for c in contracts:
     #     current_price = 
@@ -269,19 +269,18 @@ def contract(request, contract):
             context = {}
             html_template = loader.get_template('error-404.html')
             return HttpResponse(html_template.render(context, request))
+
     elif request.GET.get('type', "") == "Sell":
-        
         transactions = account.transaction.filter(contract_symbol=contract)
         try:
             transaction = transactions[0]
-            quantity = sum([t.quantity for t in transactions])
             transaction.pk = None
-            
+
         except:
             # TODO: Change this to "you cannot sell because you do not own the stock"
             context = {}
             html_template = loader.get_template('error-404.html')
-            return HttpResponse(html_template.render(context, request)) 
+            return HttpResponse(html_template.render(context, request))
         transaction.save(force_insert=True)
         transaction.full_clean()
         transaction.quantity = int(amount) * -1
@@ -290,6 +289,7 @@ def contract(request, contract):
         account.balance += int(price * float(int(amount)) * float(100))
         account.save()
         account.transaction.add(transaction)
+        quantity = sum([t.quantity for t in transactions])
     else:
         pass
     account.save()
