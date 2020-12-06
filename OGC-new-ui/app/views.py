@@ -9,6 +9,7 @@ from wallstreet import Call, Put
 from . import stock_info, options_info, greek_options, converter, trendingtickers, screener, watchlistDisplay
 from django.contrib.auth.models import User
 from .models import Transaction, Account
+from django.db.models import F
 import json
 import pandas as pd
 import re
@@ -246,15 +247,18 @@ def contract(request, contract):
         html_template = loader.get_template('error-404.html')
         return HttpResponse(html_template.render(context, request))
 
+    account = Account.objects.get(user_id=request.user.get_username())
     if request.GET.get('type', "") == "Buy":
         # TODO type of option, strike
         transaction = Transaction(expiration_date=date,contract_symbol=contract,purchase_price=price,quantity=amount,typ=typ,strike=strike)
         transaction.save(force_insert=True)
         transaction.full_clean()
-        account = Account.objects.get(user_id=request.user.get_username())
-        account.balance = F('balance') - amount * price * 100
+        loss = int(amount) * int(price * float(100))
+        account.balance = F('balance') - loss
+        account.save()
+        account.transaction.add(transaction)
     elif request.GET.get('type', "") == "Sell":
-        account = Account.objects.get(user_id=request.user.username)
+        
         transactions = account.transaction.filter(contract_symbol=contract, typ=typ)
         try:
             transaction = transactions[0]
@@ -271,13 +275,13 @@ def contract(request, contract):
         transaction.quantity = int(amount) * -1
         transaction.save()
         transaction.full_clean()
-        account.balance = F('balance') + amount * price * 100
+        gain = int(amount) * int(price * float(100))
+        account.balance = F('balance') + gain
+        account.save()
+        account.transaction.add(transaction)
     else:
         pass
     account.save()
-    account.transaction.add(transaction)
-    account.save()
-    
     account.full_clean()
     
 
