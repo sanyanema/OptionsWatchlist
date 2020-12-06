@@ -52,6 +52,6 @@ def getColor(num):
 
             
 
-watchlist = ["aapl", "zm", 'googl']
-print(getWatchListInfo(watchlist))
+# watchlist = ["aapl", "zm", 'googl']
+# print(getWatchListInfo(watchlist))
 

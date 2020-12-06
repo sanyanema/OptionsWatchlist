@@ -6,7 +6,7 @@ from django import template
 import yfinance
 from django.views.decorators.csrf import csrf_protect
 from wallstreet import Call, Put
-from . import stock_info, options_info, greek_options, converter, trendingtickers, screener, watchlistDisplay
+from . import stock_info, options_info, greek_options, converter, trendingtickers, screener, watchlistDisplay,volatility_analysis
 from django.contrib.auth.models import User
 from .models import Transaction, Account
 from django.db.models import F
@@ -294,8 +294,9 @@ def contract(request, contract):
         pass
     account.save()
     account.full_clean()
-    
-    print(price)
+
+    valuation = volatility_analysis.overorunder(ticker, date, optionType)[contract]
+
 
     return render(request, "contract.html", {
         'contract': contract,
@@ -309,4 +310,5 @@ def contract(request, contract):
         'option': option,
         'price': price,
         'quantity': quantity,
+        'valuation' : valuation
     })
