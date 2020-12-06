@@ -253,16 +253,15 @@ def contract(request, contract):
         transaction = Transaction(expiration_date=date,contract_symbol=contract,purchase_price=price,quantity=amount,typ=typ,strike=strike)
         transaction.save(force_insert=True)
         transaction.full_clean()
-        loss = int(amount) * int(price * float(100))
-        account.balance = F('balance') - loss
+        account.balance -= int(price * float(int(amount)) *float(100))
         account.save()
         account.transaction.add(transaction)
     elif request.GET.get('type', "") == "Sell":
         
-        transactions = account.transaction.filter(contract_symbol=contract, typ=typ)
+        transactions = account.transaction.filter(contract_symbol=contract)
         try:
             transaction = transactions[0]
-            quantity = sum([t.quantity for t in transactions if transactions.typ == typ])
+            quantity = sum([t.quantity for t in transactions])
             transaction.pk = None
             
         except:
@@ -275,8 +274,7 @@ def contract(request, contract):
         transaction.quantity = int(amount) * -1
         transaction.save()
         transaction.full_clean()
-        gain = int(amount) * int(price * float(100))
-        account.balance = F('balance') + gain
+        account.balance += int(price * float(int(amount)) * float(100))
         account.save()
         account.transaction.add(transaction)
     else:
@@ -284,6 +282,7 @@ def contract(request, contract):
     account.save()
     account.full_clean()
     
+    print(price)
 
     return render(request, "contract.html", {
         'contract': contract,
