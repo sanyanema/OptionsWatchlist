@@ -1,5 +1,5 @@
 import yfinance as yf
-from numpy import sqrt,mean,log,diff
+from numpy import sqrt,mean,log,diff,std
 from datetime import date
 
 #input: ticker, date (YYYY-MM-DD), type {all strings}
@@ -21,6 +21,12 @@ def overorunder(ticker, expiration_date, type):
 
     chain = tick.option_chain(expiration_date) #create option chain
 
+    #determine puts or calls
+    if type == 'puts':
+        options = chain.puts
+    elif type == 'calls':
+        options = chain.calls
+
     #date not in ticker.options, raise error
     try:
         expiration_date in tick.options
@@ -34,44 +40,39 @@ def overorunder(ticker, expiration_date, type):
     days_between = end_date - today
     difference = days_between.days
 
-    #calculate HV
-    period = str(difference) + 'd'
-    ticker_history = tick.history(period = period)
-    price_history = ticker_history["Close"].tail(difference).tolist()
-    r = diff(log(price_history))
-    r_mean = mean(r)
-    diff_square = [(r[i] - r_mean) ** 2 for i in range(0, len(r))]
-    std = sqrt(sum(diff_square) * (1.0 / (len(r) - 1)))
-    historical_vol = std * sqrt(difference)
+    ticker_history = tick.history(period = "1y")
+    #HV calculated over 2*period until option expieration to try to get rid of noise
+    price_history = ticker_history["Close"].tail(difference*2).tolist()
+    returns = []
+    #calculate daily returns over the period and then apply ln to normalize.
+    for i in range(1, len(price_history)):
+        returns.append(log(price_history[i]/price_history[i-1]))
 
-    #determine puts or calls
-    if type == 'puts':
-        options = chain.puts
-        print("options = puts")
-    elif type == 'calls':
-        options = chain.calls
-        print("options = calls")
+    avg_return = mean(returns)
+    #next two lines calculate standard deviation and them multiply by sqrt(period length)
+    diff_square = [(returns[i]-avg_return)**2 for i in range(0, len(returns))]
+    historical_vol = sqrt(sum(diff_square)*(1.0/(len(returns)-1))) * sqrt(len(price_history))
 
-    #create list of over/under valued for each options contract
-    valued = [None] * len(options.index)
-    implied_vol = options["impliedVolatility"]
+    #create dictionary of over/under valued for each options contract
+    valued = {}
+    #valued = [None] * len(options.index)
+    implied_vol = options['impliedVolatility']
+    contracts = options['contractSymbol']
 
+    #over or under valued if 0.5*HV > IV > 1.5*HV
+    #else: None
     for i in range(0, len(options.index)):
-        if int(implied_vol[i]) >= historical_vol:
-            valued[i] = "over"
-        elif int(implied_vol[i]) < historical_vol:
-            valued[i] = "under"
+        if float(implied_vol[i]) >= historical_vol + 0.5*historical_vol:
+            print(contracts[i])
+            print(str(float(implied_vol[i])) + ' >= ' + str(historical_vol + 0.5*historical_vol))
+            valued[contracts[i]] = 'Over'
+        elif float(implied_vol[i]) <= historical_vol - 0.5*historical_vol:
+            print(str(float(implied_vol[i])) + ' <= ' + str(historical_vol - 0.5*historical_vol))
+            valued[contracts[i]] = 'Under'
+        else:
+            valued[contracts[i]] = None
 
-    options['valued'] = valued #add list to options dataframe
+    return valued
 
-    contracts_and_valued = options[['contractSymbol', 'valued']].copy() #create dataframe of contracts and valued
 
-    #test code for printing just over or undervalued contracts
-    #for i in range(0, len(contracts_and_valued.index)):
-    #    if contracts_and_valued['valued'][i] == "over" :
-    #        tuple = (contracts_and_valued['contractSymbol'][i], contracts_and_valued['valued'][i])
-    #        print(tuple)
-
-    print(contracts_and_valued)
-
-overorunder('AMZN', '2020-11-27', 'calls')
+overorunder('GOOG', '2020-12-11', 'calls')
