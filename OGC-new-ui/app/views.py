@@ -9,6 +9,7 @@ from wallstreet import Call, Put
 from . import stock_info, options_info, greek_options, converter, trendingtickers, screener, watchlistDisplay
 from django.contrib.auth.models import User
 from .models import Transaction, Account
+from django.db.models import F
 import json
 import pandas as pd
 import re
@@ -20,6 +21,17 @@ def index(request):
     gainers = trendingtickers.getBiggestGainers()
     losers = trendingtickers.getBiggestLosers()
     account = Account.objects.get(user_id=request.user.get_username())
+    # balance = account.balance
+    # stocks_owned = { i.stock: i for i in account.transaction.objects.all() }.values()
+    # holdings = dict()
+    # for stock in stocks_owned:
+        
+    #     transactions = account.transaction.objects.filter(stock=stock)
+    #     put_quant = sum([q for transactions.quantity if transactions.typ = "Put"])
+    #     call_quant = sum([q for transactions.quantity if transactions.typ = "Call"])
+    #     holdings[stock] = {'put_quant':put_quant, 
+    # ticker, current price, Last price, percent change, quantity, percent in portfolio 
+
     watchlist = account.watchlist.split(',')
     inform = watchlistDisplay.getWatchListInfo(watchlist)
     return render(request, "index.html", {'trending': trending,
@@ -196,6 +208,7 @@ def stock(request, ticker):
 
 def contract(request, contract):
     typ = ""
+    quantity = 0
     try:
         option = options_info.getOptionInfoFromContract(contract)
         ticker = option['ticker']
@@ -228,31 +241,48 @@ def contract(request, contract):
                         d=dates[2], m=dates[1], y=dates[0],
                         strike=strike, source='yahoo')
             price = put.price
-            typ = "Buy"
+            typ = "Put"
     except:
         context = {}
         html_template = loader.get_template('error-404.html')
         return HttpResponse(html_template.render(context, request))
 
+    account = Account.objects.get(user_id=request.user.get_username())
     if request.GET.get('type', "") == "Buy":
         # TODO type of option, strike
-        transaction = Transaction(expiration_date=date,stock=ticker,purchase_price=price,quantity=amount,typ=typ,strike=strike)
+        transaction = Transaction(expiration_date=date,contract_symbol=contract,purchase_price=price,quantity=amount,typ=typ,strike=strike)
         transaction.save(force_insert=True)
         transaction.full_clean()
-        account = Account.objects.get(user_id=request.user.get_username())
-        account.transaction.add(transaction)
+        loss = int(amount) * int(price * float(100))
+        account.balance = F('balance') - loss
         account.save()
-        account.full_clean()
-        print("Bought")
-        print(amount)
+        account.transaction.add(transaction)
     elif request.GET.get('type', "") == "Sell":
-        account = Account.objects.get(user_id=request.user.username)
-        transaction = account.transaction.objects.get(stock=ticker)
-        transaction.quantity = F('quantity') - amount
-        print("sold")
-        print(amount)
+        
+        transactions = account.transaction.filter(contract_symbol=contract, typ=typ)
+        try:
+            transaction = transactions[0]
+            quantity = sum([t.quantity for t in transactions if transactions.typ == typ])
+            transaction.pk = None
+            
+        except:
+            # TODO: Change this to "you cannot sell because you do not own the stock"
+            context = {}
+            html_template = loader.get_template('error-404.html')
+            return HttpResponse(html_template.render(context, request)) 
+        transaction.save(force_insert=True)
+        transaction.full_clean()
+        transaction.quantity = int(amount) * -1
+        transaction.save()
+        transaction.full_clean()
+        gain = int(amount) * int(price * float(100))
+        account.balance = F('balance') + gain
+        account.save()
+        account.transaction.add(transaction)
     else:
         pass
+    account.save()
+    account.full_clean()
     
 
     return render(request, "contract.html", {
@@ -265,5 +295,6 @@ def contract(request, contract):
         'IV': ticker,
         'name': name,
         'option': option,
-        'price': price
+        'price': price,
+        'quantity': quantity,
     })
