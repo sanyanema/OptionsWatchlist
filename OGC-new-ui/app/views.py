@@ -24,12 +24,12 @@ def index(request):
     balance = account.balance
     contracts = { i.: i for i in account.transaction.objects.all() }.values()
     holdings = dict()
-    # for c in contracts:
-    #     current_price = 
-    #     last_price = 
-    #     quantity = 
-    #     percent =
-    #     holdings[c] = {'current_price':current_price, 'last_price':last_price, 'quantity':quantity, 'percent':percent, 'profit':profit}
+    for c in contracts:
+        current_price = 
+        last_price = 
+        quantity = 
+        percent = 
+        holdings[c] = {'current_price':current_price, 'last_price':last_price, 'quantity':quantity, 'percent':percent, 'profit':profit}
     #     transactions = account.transaction.objects.filter(stock=stock)
     #     put_quant = sum([q for transactions.quantity if transactions.typ = "Put"])
     #     call_quant = sum([q for transactions.quantity if transactions.typ = "Call"])
