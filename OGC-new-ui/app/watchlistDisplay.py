@@ -9,11 +9,13 @@ from bs4 import BeautifulSoup
 
 
 def getWatchListInfo(watchlist):
-    #info = dict()
+    temp = dict()
     name = []
     change = []
     price = []
     info = []
+    if (len(watchlist) == 0): # accounts for if the watchlist is empty 
+        return temp
     for stock in watchlist:
         if stock is not None:
             url = "https://finance.yahoo.com/quote/" + stock
@@ -53,5 +55,6 @@ def getColor(num):
             
 
 watchlist = ["aapl", "zm", 'googl']
+empty = []
 print(getWatchListInfo(watchlist))
 
