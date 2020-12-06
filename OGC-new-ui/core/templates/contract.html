@@ -20,7 +20,7 @@
 <div class="container">
     {% if valuation == "Over" %}
     <center>
-        <button type="button" style="margin-bottom: 2rem" class="btn btn-lg btn-danger" data-toggle="popover"
+        <button type="button" style="margin-bottom: 2rem" class="btn btn-lg btn-warning" data-toggle="popover"
                 title="Volatility Analysis"
                 data-content="Based on our volatility analysis, this option contract is overvalued">
             {{ contract | safe }}
@@ -31,11 +31,24 @@
             })
         </script>
     </center>
-    {% else %}
+    {% elif valuation == "Under" %}
     <center>
         <button type="button" style="margin-bottom: 2rem" class="btn btn-lg btn-success" data-toggle="popover"
                 title="Volatility Analysis"
                 data-content="Based on our volatility analysis, this option contract is undervalued">
+            {{ contract | safe }}
+        </button>
+        <script>
+            $(function () {
+                $('[data-toggle="popover"]').popover()
+            })
+        </script>
+    </center>
+    {% else %}
+     <center>
+        <button type="button" style="margin-bottom: 2rem" class="btn btn-lg btn-info" data-toggle="popover"
+                title="Volatility Analysis"
+                data-content="Based on our volatility analysis, this option contract is fairly values">
             {{ contract | safe }}
         </button>
         <script>

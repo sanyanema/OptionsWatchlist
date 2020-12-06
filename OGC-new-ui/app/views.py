@@ -166,7 +166,7 @@ def stock(request, ticker):
     if request.method == "GET":
         watchlistTicker = ticker
         account = Account.objects.get(user_id=request.user.get_username())
-        if account.watchlist is "":
+        if account.watchlist == "":
             setattr(account, 'watchlist', watchlistTicker)
             watchlist = watchlistTicker
             account.save()
@@ -228,7 +228,7 @@ def contract(request, contract):
     
     
         
-        if optionType is "Call":
+        if optionType == "Call":
             delta, gamma, rho, vega, theta = greek_options.getGreeks(
                 greek_options.yFinanceToWallStreet(yfinance.Ticker(ticker).option_chain(date).calls, strike))
             dates = greek_options.dateConverter(date)
@@ -296,7 +296,6 @@ def contract(request, contract):
     account.full_clean()
 
     valuation = volatility_analysis.overorunder(ticker, date, optionType)[contract]
-
 
     return render(request, "contract.html", {
         'contract': contract,
