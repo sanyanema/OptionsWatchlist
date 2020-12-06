@@ -45,7 +45,7 @@
         </script>
     </center>
     {% else %}
-     <center>
+    <center>
         <button type="button" style="margin-bottom: 2rem" class="btn btn-lg btn-info" data-toggle="popover"
                 title="Volatility Analysis"
                 data-content="Based on our volatility analysis, this option contract is fairly values">
@@ -154,38 +154,35 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-sm-6 align-self-center">
-        <div class="card">
-            <div class="card-body text-center">
-                <h1 href="#" class="btn-lg btn-primary btn-info" style="margin-top: 1rem">You own {{ quantity}} contracts</h1>
-                <h1 class="card-title"></h1>
-            </div>
-        </div>
-    </div>
+<center>
+    <h1 href="#" class="btn-lg btn-info" style="margin-top: 1rem"><b>You own {{ quantity}}
+        contracts</b></h1>
+    <h1 class="card-title"></h1>
+</center>
+<center>
     <div class="col-sm-6 my-auto">
         <div class="card">
             <div class="card-body">
-                    <form action="#" method="get" class="transactionForm" id="transactionForm">
-                        <label><input type="radio" name="type" value="Buy" style=""/>
-                            <h4 style="">Buy</h4>
-                        </label>
-                        <label><input type="radio" name="type" value="Sell" style="margin-left:35px"/>
-                            <h4 style="margin-left:30px; margin-top: 5px">Sell</h4>
-                        </label>
-                        <select class="btn btn-secondary dropdown-toggle" name="quantity" id="quantity"
-                                style="margin-left: 50px;">
-                        </select>
-                        <button class="btn btn-primary btn-round" type="submit"
-                                style="float:right">
-                            <i class="tim-icons icon-double-right"></i>
-                        </button>
-                    </form>
-                </div>
+                <form action="#" method="get" class="transactionForm" id="transactionForm">
+                    <label><input type="radio" name="type" value="Buy" style=""/>
+                        <h4 style="">Buy</h4>
+                    </label>
+                    <label><input type="radio" name="type" value="Sell" style="margin-left:35px"/>
+                        <h4 style="margin-left:30px; margin-top: 5px">Sell</h4>
+                    </label>
+                    <select class="btn btn-secondary dropdown-toggle" name="quantity" id="quantity"
+                            style="margin-left: 50px;">
+                    </select>
+                    <button class="btn btn-primary btn-round" type="submit"
+                            style="float:right">
+                        <i class="tim-icons icon-double-right"></i>
+                    </button>
+                </form>
             </div>
         </div>
     </div>
-</div>
+    </div>
+</center>
 
 
 <h1>{{ quantity }}</h1>
@@ -200,7 +197,6 @@
     $(function () {
         $("input").click(function () {
             transaction = this.value;
-            alert(transaction);
             var selectElement = document.getElementById('quantity');
             if (transaction == "Buy") {
                 for (var age = 1; age <= 10; age++) {
