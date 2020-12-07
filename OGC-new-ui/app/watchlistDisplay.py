@@ -34,8 +34,8 @@ def getWatchListInfo(watchlist):
             if total_info is not None:
                 total_info = total_info.get_text()
                 info.append(total_info)
-    print(info[0].split(")")[1]) # time the stock was updated
-    time = [info[0].split(")")[1]]
+    #print(info[0].split(")")[1]) # time the stock was updated
+    #time = [info[0].split(")")[1]]
     # for i in range(len(info)):
     #     time.append(info[i].split(")")[1])
     # print(time)
