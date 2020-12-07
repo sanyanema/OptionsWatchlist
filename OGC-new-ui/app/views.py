@@ -6,7 +6,7 @@ from django import template
 import yfinance
 from django.views.decorators.csrf import csrf_protect
 from wallstreet import Call, Put
-from . import stock_info, options_info, greek_options, converter, trendingtickers, screener, watchlistDisplay
+from . import stock_info, options_info, greek_options, converter, trendingtickers, screener, watchlistDisplay,volatility_analysis
 from django.contrib.auth.models import User
 from .models import Transaction, Account
 from django.db.models import F
@@ -167,7 +167,7 @@ def stock(request, ticker):
     if request.method == "GET":
         watchlistTicker = ticker
         account = Account.objects.get(user_id=request.user.get_username())
-        if account.watchlist is "":
+        if account.watchlist == "":
             setattr(account, 'watchlist', watchlistTicker)
             watchlist = watchlistTicker
             account.save()
@@ -229,7 +229,7 @@ def contract(request, contract):
     
     
         
-        if optionType is "Call":
+        if optionType == "Call":
             delta, gamma, rho, vega, theta = greek_options.getGreeks(
                 greek_options.yFinanceToWallStreet(yfinance.Ticker(ticker).option_chain(date).calls, strike))
             dates = greek_options.dateConverter(date)
@@ -295,8 +295,8 @@ def contract(request, contract):
         pass
     account.save()
     account.full_clean()
-    
-    print(price)
+
+    valuation = volatility_analysis.overorunder(ticker, date, optionType)[contract]
 
     return render(request, "contract.html", {
         'contract': contract,
@@ -310,4 +310,5 @@ def contract(request, contract):
         'option': option,
         'price': price,
         'quantity': quantity,
+        'valuation' : valuation
     })

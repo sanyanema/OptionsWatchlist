@@ -21,10 +21,11 @@ def overorunder(ticker, expiration_date, type):
 
     chain = tick.option_chain(expiration_date) #create option chain
 
+
     #determine puts or calls
-    if type == 'puts':
+    if type == 'Put':
         options = chain.puts
-    elif type == 'calls':
+    elif type == 'Call':
         options = chain.calls
 
     #date not in ticker.options, raise error
@@ -63,11 +64,8 @@ def overorunder(ticker, expiration_date, type):
     #else: None
     for i in range(0, len(options.index)):
         if float(implied_vol[i]) >= historical_vol + 0.5*historical_vol:
-            print(contracts[i])
-            print(str(float(implied_vol[i])) + ' >= ' + str(historical_vol + 0.5*historical_vol))
             valued[contracts[i]] = 'Over'
         elif float(implied_vol[i]) <= historical_vol - 0.5*historical_vol:
-            print(str(float(implied_vol[i])) + ' <= ' + str(historical_vol - 0.5*historical_vol))
             valued[contracts[i]] = 'Under'
         else:
             valued[contracts[i]] = None
@@ -75,4 +73,4 @@ def overorunder(ticker, expiration_date, type):
     return valued
 
 
-overorunder('GOOG', '2020-12-11', 'calls')
+# print(overorunder('GE', '2021-01-15', 'Put'))
