@@ -25,6 +25,8 @@ def index(request):
     contracts = {t.contract_symbol : t.contract_symbol for t in account.transaction.all() }.values()
     holdings = dict()
     total = 0
+    numCalls = 0
+    numPuts = 0
     for contract in contracts:
         transactions = account.transaction.filter(contract_symbol=contract)
         quantity = sum([t.quantity for t in transactions])
@@ -41,12 +43,14 @@ def index(request):
         name = stock.name
         price = 0
         if optionType == "Call":
+            numCalls += 1
             dates = greek_options.dateConverter(date)
             call = Call(ticker,
                         d=dates[2], m=dates[1], y=dates[0],
                         strike=strike, source='yahoo')
             price = call.price
         else:
+            numPuts += 1
             dates = greek_options.dateConverter(date)
             put = Put(ticker,
                         d=dates[2], m=dates[1], y=dates[0],
@@ -55,22 +59,27 @@ def index(request):
         current_price = price
         
         profit = sum([t.quantity * (current_price - t.purchase_price) for t in transactions])
-        initial_amount = sum([t.quantity * t.purchase_price for t in transactions])
-        percent_profit = round(profit / initial_amount * 100, 1)
         owned = quantity * current_price
         total += owned
-        holdings[contract] = {'current_price':current_price, 'quantity':quantity, 'portfolio_share':owned, 'profit':profit, 'percent_profit':percent_profit}
+        balance += total
+        holdings[contract] = {'current_price':current_price, 'quantity':quantity, 'portfolio_share':owned, 'profit':profit}
     watchlist = account.watchlist.split(',')
+    total_contracts = 0
     for holding in holdings:
-        holdings[holding]['portfolio_share'] = round(holdings[holding]['portfolio_share'] / total, 4) * 100
+        holdings[holding]['portfolio_share'] = round(holdings[holding]['portfolio_share'] / total, 6) * 100
+        total_contracts += holdings[holding]['quantity']
     inform = watchlistDisplay.getWatchListInfo(watchlist)
+    balance = round(balance, 2)
     return render(request, "index.html", {'trending': trending,
                                           'gainers': gainers,
                                           'losers': losers,
                                           'watchlist': watchlist,
                                           'info': inform,
                                           'holdings': holdings,
-                                          'balance': balance})
+                                          'balance': balance,
+                                          'contractTotal': total_contracts,
+                                          'numCalls' : numCalls,
+                                          'numPuts' : numPuts})
 
 
 @login_required(login_url="/login/")
