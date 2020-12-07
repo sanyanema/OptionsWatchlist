@@ -24,6 +24,7 @@ def index(request):
     balance = account.balance
     contracts = {t.contract_symbol : t.contract_symbol for t in account.transaction.all() }.values()
     holdings = dict()
+    total = 0
     for contract in contracts:
         option = options_info.getOptionInfoFromContract(contract)
         ticker = option['ticker']
@@ -34,6 +35,7 @@ def index(request):
         ticker = contract[0: index_number.start()]
         stock = stock_info.StockInfo(ticker)
         name = stock.name
+        price = 0
         if optionType == "Call":
             dates = greek_options.dateConverter(date)
             call = Call(ticker,
@@ -49,21 +51,25 @@ def index(request):
         current_price = price
         transactions = account.transaction.filter(contract_symbol=contract)
         quantity = sum([t.quantity for t in transactions])
+        profit = 0
         if transactions[0].typ == "Call":
-            profit = sum([t.quantity * (current_price - t.last_price) for t in transactions])
+            profit = sum([t.quantity * (current_price - t.purchase_price) for t in transactions])
         if transactions[0].typ == "Put":
-            profit = sum([t.quantity * (current_price - t.last_price) for t in transactions])
-        percent = quantity * current_price / (balance + sum([t.quantity * current_price for t in account.transaction.all()]))
-        holdings[contract] = {'current_price':current_price, 'quantity':quantity, 'percent':percent, 'profit':profit}
-
+            profit = sum([t.quantity * (current_price - t.purchase_price) for t in transactions])
+        owned = quantity * current_price
+        total += owned
+        holdings[contract] = {'current_price':current_price, 'quantity':quantity, 'percent':owned, 'profit':profit}
     watchlist = account.watchlist.split(',')
+    for holding in holdings:
+        holdings['percent'] = holdings['percent'] / total
     inform = watchlistDisplay.getWatchListInfo(watchlist)
     return render(request, "index.html", {'trending': trending,
                                           'gainers': gainers,
                                           'losers': losers,
                                           'watchlist': watchlist,
                                           'info': inform,
-                                          'holdings': holdings})
+                                          'holdings': holdings,
+                                          'total' : total})
 
 
 @login_required(login_url="/login/")
