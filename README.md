@@ -12,7 +12,7 @@ Group Members:
 * Joseph (jjkuang2)
 * Sanya (snema2)
 
-Product: An mock options portfolio website that allows registered users to add tickers to their own personalized watchlist, experiment with mock money to purchase options, access basic stock information, and view the volatility of thousands of tickers in hopes to help educate younger investors about options and how to profitably trade them.
+Product: A mock options portfolio website that allows registered users to add tickers to their own personalized watchlist, experiment with mock money to purchase options, access basic stock information, and view the volatility of thousands of tickers in hopes to help educate younger investors about options and how to profitably trade them.
 
 Features: 
 - Dashboard:
