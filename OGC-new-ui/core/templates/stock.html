@@ -1,0 +1,187 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} {{ticker}} {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<!-- For Stock Image -->
+<script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+
+<!-- Stock Name -->
+<div>
+    <div class="col" id="stock" style="display:inline; text-align: center">
+        <a target="_blank" href='https://{{image |safe}}.com/'>
+            <h1>
+                <img src="//logo.clearbit.com/{{image | safe}}.com" width=58px onerror="this.onerror=null;" alt="">
+                <u>{{name}} {{ticker}}</u>
+                <img src="//logo.clearbit.com/{{image | safe}}.com" width=58px onerror="this.onerror=null;" alt="">
+            </h1>
+        </a>
+
+        <div class="btn-group dropdown">
+          <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false " style="color:black; height:45px; display:inline; text-align: left">
+            Key Stock Data
+          </button>
+          <div class="dropdown-menu bg-warning">
+            <!-- Dropdown menu links -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card bg-warning text-darker">
+
+                        <div class="card-header">
+                            <h4 class="card-title text-center text-justify">Key Stock Data</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="stock_info">
+                                    <table class="table tablesorter text-center" id="">
+                                        <thead class=" text-primary">
+                                        </thead>
+                                        <tr>
+                                            <td>Current Price</td>
+                                            <td>{{ price }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Day's Range</td>
+                                            <td>{{ day_range }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>52 Week Range</td>
+                                            <td>{{ 52wk_range }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Volume</td>
+                                            <td>{{ volume }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>EPS</td>
+                                            <td>{{ eps }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Market Cap</td>
+                                            <td>{{ market_cap }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Industry</td>
+                                            <td>{{ industry }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <a target="_blank" href='http://127.0.0.1:8000/options/{{ticker}}'>
+            <center><button class="btn btn-success" style="height:45px; margin-top:-74px;  display:inline;">
+                <b><p style="color:black; font-weight: 600;">Options for {{ticker}}</p></b>
+            </button></center>
+        </a>
+
+        {% if inWatchlist %}
+            <form>
+                <input type="submit" class="btn btn-info" id="removeFromWatch" formmethod="GET" value="Remove from  Watchlist"style="color: black; display:inline; height:45px; float:right; margin-top:-70px;">
+            </form>
+        {% else %}
+            <form>
+                <input type="submit" class="btn btn-info" id="addtowatch" formmethod="GET" value="Add to Watchlist"
+                style="color: black; display:inline; height:45px; float:right; margin-top:-70px;">
+            </form>
+ -->        {% endif %}
+    </div>
+</div>
+
+<!-- Searchbar to Choose Ticker -->
+<form role="search" id="form" style="margin-top:-12px">
+    <input class="form-control" type="search" id="query" name="q" placeholder="Search Ticker Symbol..."
+           aria-label="Search through site content" style="width:90%; float:left;">
+    <button class="btn btn-primary btn-round" onclick="loadDoc()" style="float:left; margin-left:1%; margin-top:-1.5px">
+        <i class="tim-icons icon-zoom-split"></i>
+        <path class="path1"
+              d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z">
+        </path>
+    </button>
+</form>
+<br style="clear:both"/><br>
+
+<!-- Include Plotly.js for graph -->
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+<div id="price_graph" style="width:70%; float:left; height: 450px;">
+    {% autoescape off %}
+    {{ plot_html }}
+    {% endautoescape %}
+</div>
+<!-- Stock Info-->
+<div class="row" style="overflow:hidden; width:30%; height: 450px; float:right;">
+    <div class="col-md-12">
+        <div class="card bg-danger">
+                        <div class="card-header">
+                            <h4 class="card-title text-center text-justify ">Screener Information</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="screener">
+                                    <table class="table tablesorter text-center" id="">
+                                        <thead class=" text-primary">
+                                        </thead>
+                                        <tr>
+                                            <td>Undervaued Growth</td>
+                                            <td>{{ undervalued_growth }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Day Gainer</td>
+                                            <td>{{ day_gainer }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Day Loser</td>
+                                            <td>{{ day_loser }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Most Active</td>
+                                            <td>{{ most_active }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Undervalued Large Cap</td>
+                                            <td>{{ undervalued_large_cap }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Small Momentum</td>
+                                            <td>{{ small_momentum }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+        </div>
+    </div>
+</div>
+
+<br style="clear:both"/><br><br>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script>
+    const f = document.getElementById('form');
+    const q = document.getElementById('query')
+    const google = 'https://www.google.com/search?q=site%3A+';
+    const site = 'http://127.0.0.1:8000/stock_info/';
+
+    function submitted(event) {
+        event.preventDefault();
+        const url = site + q.value.replace(/\s+/g, ''); // const url = google + site + '+' + q.value;
+        const win = window.open(url, '_self');
+        win.focus();
+        // $route.reload();
+    }
+
+    f.addEventListener('submit', submitted);
+</script>
+{% endblock javascripts %}

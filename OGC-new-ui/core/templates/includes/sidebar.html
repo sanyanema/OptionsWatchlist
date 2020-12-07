@@ -1,0 +1,87 @@
+{% load static %}
+<div class="sidebar">
+  <div class="sidebar-wrapper">
+    
+
+
+    {% if user.is_authenticated %}
+    <div class="logo">
+      <a href="/" class="simple-text logo-normal">
+        <center>
+          <img src="{% static 'assets/img/logo.png' %}" alt="Home" width="70" height="37.5">
+        </center>
+      </a>
+    </div>
+    <ul class="nav">
+      <li class="active ">
+        <a href="/">
+          <i class="tim-icons icon-chart-pie-36"></i>
+          <p>Dashboard</p>
+        </a>
+      </li>
+      <!-- <li>
+        <a href="/portfolio.html">
+          <i class="tim-icons icon-atom"></i>
+          <p>Portfolio</p>
+        </a>
+      </li> -->
+      <li>
+        <a href="/stock_info.html">
+          <i class="tim-icons icon-calendar-60"></i>
+          <p>Stock Info</p>
+        </a>
+      </li>
+      <li>
+        <a href="/options.html">
+          <i class="tim-icons icon-money-coins"></i>
+          <p>Options</p>
+        </a>
+      </li>
+      <li>
+        <a href="/about_us.html">
+          <i class="tim-icons icon-badge"></i>
+          <p>About Us</p>
+        </a>
+      </li>
+      <!-- <li>
+        <a href="/help.html">
+          <i class="tim-icons icon-satisfied"></i>
+          <p>Help</p>
+        </a>
+      </li> -->
+      <!-- <li>
+        <a href="/ui-typography.html">
+          <i class="tim-icons icon-align-center"></i>
+          <p>Helpful Text Visual</p>
+        </a>
+      </li> -->
+<!--       <li>
+        <a href="/page-rtl-support.html">
+          <i class="tim-icons icon-world"></i>
+          <p>Don't Click</p>
+        </a>
+      </li> -->
+      <li>
+        <a href="/page-user.html">
+          <i class="tim-icons icon-single-02"></i>
+          <p>User Profile</p>
+        </a>
+      </li>
+      <li class="active-pro">
+        <a href="{% url 'logout' %}" >
+          <i class="tim-icons icon-user-run"></i>
+          <p>Logout</p>
+        </a>
+      </li>
+      <!-- <li class="active-pro">
+        <a target="_blank" 
+           href="https://www.creative-tim.com/product/black-dashboard-django">
+          <i class="tim-icons icon-spaceship"></i>
+          <p>See product</p>
+        </a>
+      </li> -->
+    </ul>
+    {% endif %}
+    
+  </div>
+</div>

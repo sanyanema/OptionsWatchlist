@@ -1,0 +1,271 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header ">
+                <div class="row">
+                    <div class="col-sm-6 text-left">
+                        <h2 class="card-title" id="title">Overview</h2>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
+                            <label class="btn btn-sm btn-primary btn-simple active" id="showOverview">
+                                <input type="radio" name="options" checked>
+                                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Overview</span>
+                                <span class="d-block d-sm-none">
+                      <i class="tim-icons icon-single-02"></i>
+                    </span>
+                            </label>
+                            <label class="btn btn-sm btn-primary btn-simple" id="showPortfolio">
+                                <input type="radio" class="d-none d-sm-none" name="options">
+                                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Portfolio</span>
+                                <span class="d-block d-sm-none">
+                      <i class="tim-icons icon-gift-2"></i>
+                    </span>
+                            </label>
+                            <label class="btn btn-sm btn-primary btn-simple" id="showWatchlist">
+                                <input type="radio" class="d-none" name="options">
+                                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Watchlist</span>
+                                <span class="d-block d-sm-none">
+                      <i class="tim-icons icon-tap-02"></i>
+                    </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body text-left">
+                <div class="table-responsive" style="display: none" id="watchlist">
+                    <table class="table tablesorter">
+                        <thead class=" text-primary">
+                        <td><h6>Name</h6></td>
+                        <td><h6>Price</h6></td>
+                        <td><h6>Change</h6></td>
+                        {% for key, value in info.items %}
+                        {% if value.change.color == "red"%}
+                        <tr class="text-danger">
+                            <td>{{ key }}</td>
+                            <td>{{ value.price }}</td>
+                            <td>{{ value.change.percent }}</td>
+                            {% else %}
+                        <tr class="text-success">
+                            <td>{{ key }}</td>
+                            <td> {{ value.price }}</td>
+                            <td>{{ value.change.percent }}</td>
+                            {% endif %}
+                            {% endfor %}
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="table-responsive" id="portfolio" style="display: none">
+                    <table class="table tablesorter">
+                        <thead class=" text-primary">
+                        <td><h6>Contract</h6></td>
+                        <td><h6>Current Price</h6></td>
+                        <td><h6>Profit</h6></td>
+                        <td><h6>Quantity</h6></td>
+                        <td><h6>% of Portfolio</h6></td>
+                        {% for key, value in holdings.items %}
+                        {% if value.profit >= 0 %}
+                        <tr class="text-success">
+                            <td>
+                                <a class="text-success" href="http://127.0.0.1:8000/contract/{{ key }}">{{ key }}</a>
+                            </td>
+                            <td>{{ value.current_price }}</td>
+                            <td>{{ value.profit }}</td>
+                            <td>{{ value.quantity }}</td>
+                            <td>{{ value.portfolio_share }}%</td>
+                            {% else %}
+                        <tr class="text-danger">
+                            <td><a class="text-danger" href="http://127.0.0.1:8000/contract/{{ key }}">{{ key
+                                }}</a></td>
+                            <td>{{ value.current_price }}</td>
+                            <td>{{ value.profit }}</td>
+                            <td>{{ value.quantity }}</td>
+                            <td>{{ value.portfolio_share }}%</td>
+                            {% endif %}
+                            {% endfor %}
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="card-deck" id="overview" style="display: block; width: 90%; margin: auto">
+                    <div class="row">
+                        <div class="card mb-4 text-success mb-3 bg-primary">
+                            <div class="card-body text-center">
+                                <h4 class="text-white">Net Worth</h4>
+                                <h4 class="card-text text-white"><b>{{ balance }}</b></h4>
+                            </div>
+                        </div>
+                        <div class="w-100 d-none d-sm-block d-md-none">
+                            <!-- wrap every 2 on sm-->
+                        </div>
+                        <div class="card mb-4 mb-3 bg-primary">
+                            <div class="card-body text-center text-white">
+                                <h4 class="text-white"># of Contracts </h4>
+                                <h4 class="card-text text-white"><b>{{ contractTotal }}</b></h4>
+                            </div>
+                        </div>
+                        <div class="w-100 d-none d-md-block d-lg-none">
+                            <!-- wrap every 3 on md-->
+                        </div>
+                        <div class="card mb-4 mb-3 bg-primary">
+                            <div class="card-body text-center text-white">
+                                <h4 class="text-white">Number of Calls</h4>
+                                <h4 class="card-text text-white"><b>{{ numCalls }}</b></h4>
+                            </div>
+                        </div>
+                        <div class="w-100 d-none d-sm-block d-md-none">
+                            <!-- wrap every 2 on sm-->
+                        </div>
+                        <div class="w-100 d-none d-lg-block d-xl-none">
+                            <!-- wrap every 4 on lg-->
+                        </div>
+                        <div class="card mb-4 mb-3 bg-primary">
+                            <div class="card-body text-center text-white ">
+                                <h4 class="text-white">Number of Puts</h4>
+                                <h4 class="card-text text-white"><b>{{ numPuts }}</b></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-4" style="overflow:scroll; height: 350px;">
+        <div class="card card-chart">
+            <div class="card-header">
+                <h3 class="text-sm-center" style="padding-top: 10px">Biggest Gainers</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table tablesorter" id="gainers">
+                        <thead class=" text-primary">
+                        <td><h6>Name</h6></td>
+                        <td><h6>Change</h6></td>
+                        {% for key, value in gainers.items %}
+                        <tr>
+                            <td class="text-success">{{ key }}</td>
+                            <td class="text-success">{{ value }}</td>
+                            {% endfor %}
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4" style="overflow:scroll; height: 350px;">
+        <div class="card card-chart">
+            <div class="card-header">
+                <h3 class="text-sm-center" style="padding-top: 10px">Biggest Losers</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table tablesorter" id="losers">
+                        <thead class=" text-primary">
+                        <td><h6>Name</h6></td>
+                        <td><h6>Change</h6></td>
+                        {% for key, value in losers.items %}
+                        <tr>
+                            <td class="text-danger">{{ key }}</td>
+                            <td class="text-danger">{{ value }}</td>
+                            {% endfor %}
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4" style="overflow:scroll; height: 350px;">
+        <div class="card card-chart">
+            <div class="card-header">
+                <h3 class="text-sm-center" style="padding-top: 10px">Trending</h3>
+            </div>
+            <div class="card-body text-left">
+                <div class="table-responsive">
+                    <table class="table tablesorter" id="">
+                        <thead class=" text-primary">
+                        <td><h6>Name</h6></td>
+                        <td><h6>Change</h6></td>
+                        {% for key, value in trending.items %}
+                        {% if value.color == "red"%}
+                        <tr class="text-danger">
+                            <td>{{ key }}</td>
+                            <td>{{ value.change }}</td>
+                            {% else %}
+                        <tr class="text-success">
+                            <td>{{ key }}</td>
+                            <td>{{ value.change }}</td>
+                            {% endif %}
+                            {% endfor %}
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+<script>
+    var portfolio = document.getElementById("portfolio");
+    var watchlist = document.getElementById("watchlist");
+    var overview = document.getElementById("overview");
+
+    var watchlistButton = document.getElementById("showWatchlist");
+    var portfolioButton = document.getElementById("showPortfolio");
+    var overviewButton = document.getElementById("showOverview");
+
+    var title = document.getElementById("title");
+
+    watchlistButton.onclick = function () {
+        watchlist.style.display = "table";
+        portfolio.style.display = "none";
+        overview.style.display = "none";
+        title.innerHTML = "{{ user }}'s Watchlist";
+    }
+    portfolioButton.onclick = function () {
+        watchlist.style.display = "none";
+        portfolio.style.display = "block";
+        overview.style.display = "none";
+        title.innerHTML = "{{ user }}'s Portfolio";
+    }
+    overviewButton.onclick = function () {
+        overview.style.display = "block";
+        watchlist.style.display = "none";
+        portfolio.style.display = "none";
+        title.innerHTML = "Overview";
+    }
+
+
+    $(document).ready(function () {
+        // Javascript method's body can be found in assets/js/demos.js
+        demo.initDashboardPageCharts();
+    });
+</script>
+
+{% endblock javascripts %}
+
+

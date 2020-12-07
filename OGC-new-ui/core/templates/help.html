@@ -1,0 +1,37 @@
+
+{% extends 'layouts/base.html' %}
+
+{% block title %} Help {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+{% load static %}
+
+<center><h1> Help </h1></center>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="text-primary">
+          <center>This page will contain key information on the 5 greeks that are useing in options pricing. In addition to that we will add detailed explanations of each of the pricing models used in thsi application to determine if a contract was over or under priced.</center>
+        </h3>
+        <div class="logo">
+          <a href="/" class="simple-text logo-normal">
+            <center>
+              <center><img src="{% static 'assets/img/help.gif' %}" alt="Home" width=80% height=23%></center>
+            </center>
+          </a>
+        </div>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

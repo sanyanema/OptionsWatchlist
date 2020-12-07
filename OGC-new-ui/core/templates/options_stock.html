@@ -1,0 +1,149 @@
+
+{% extends 'layouts/base.html' %}
+
+{% block title %} {{ticker}} {% endblock %}
+
+<!-- <-- Specific Page CSS goes HERE  --> -->
+{% block stylesheets %}
+<style type="text/css">
+    .selected {
+        background-color: #00cca4;
+    }
+</style>
+{% endblock stylesheets %}
+
+{% block content %}
+<!-- For Stock Image -->
+<script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+
+<!-- Stock Name -->
+<div id="stock" style="text-align:center; display:inline;">
+    <a target="_blank" href='https://{{image |safe}}.com/'>
+        <h1>
+            <img src="//logo.clearbit.com/{{image | safe}}.com" width=58px onerror="this.onerror=null;" alt="">
+            <u>{{name}} {{ticker}}</u>
+            <img src="//logo.clearbit.com/{{image | safe}}.com" width=58px onerror="this.onerror=null;" alt="">
+        </h1>
+    </a>
+    <br>
+</div>
+
+<center>
+    <a target="_blank" href='http://127.0.0.1:8000/stock_info/{{ticker}}'>
+        <button class="btn btn-success" style=" margin-top:-50px">
+            <b><p style="color:black; font-weight: 600;">Stock Information for {{ticker}}</p></b>
+        </button>
+    </a>
+</center>
+
+<!-- Searchbar to Choose Ticker -->
+<form role="search" id="form">
+    <input class="form-control" type="search" id="query" name="q" placeholder="Search Ticker Symbol..."
+           aria-label="Search through site content" style="width:90%; float:left;">
+    <button class="btn btn-primary btn-round" onclick="loadDoc()" style="float:left; margin-left:1%; margin-top:-1.5px">
+        <i class="tim-icons icon-zoom-split"></i>
+        <path class="path1"
+              d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z">
+        </path>
+    </button>
+</form>
+
+<br style="clear:both"/><br>
+
+<!-- Form to Choose Expiration Date and Type of Option -->
+<!-- Options -->
+<div class="row" style="overflow:auto; height:850px; width:80%; margin: auto">
+    <div class="col-md-12">
+        <div class="card ">
+            <div class="card-header">
+                <h2 class="card-title text-center align-content-center">Options Contracts</h2>
+                <br>
+                <form action="#" method="get" class="demoForm" id="demoForm">
+                    <label><input type="radio" name="type" value="Calls" style="margin-left:25px"/><h4 style="margin-left:12px">Calls</h4>
+                    </label>
+                    <label><input type="radio" name="type" value="Puts" style="margin-left:41.5px"/>
+                        <h4 style="margin-left:30px">Puts</h4>
+                    </label>
+                    <select class="btn btn-secondary dropdown-toggle" name="expirationDates" id="expirationDates"
+                            style="margin-left: 50px; margin-top: -30px;">
+                        {% for key in dates %}
+                        <option value="{{ key }}">{{ key }}</option>
+                        {% endfor %}
+                    </select>
+                    <button class="btn btn-primary btn-round" type="submit" style="float: right; margin-top: -3px">
+                        <i class="tim-icons icon-double-right"></i>
+                    </button>
+                </form>
+            </div>
+            <div class="card-body">
+                <div class="text-center">
+                    <table id="options" class="table tablesorter table-hover " style="color:white;">
+                        <thead class=" text-primary">
+                        <tr>
+                            <th><h6>Contract</h6></th>
+                            <th><h6>Strike</h6></th>
+                            <th><h6>Last Price</h6></th>
+                            <th><h6>Implied Volatility</h6></th>
+                            <th><h6>Expiration Date</h6></th>
+                            <th><h6>Type of Option</h6></th>
+                        </tr>
+                        </thead>
+                        {% for i in options %}
+                        <tr class="text-white">
+                            <td>{{ i.contractSymbol }}</td>
+                            <td>{{ i.strike }}</td>
+                            <td>{{ i.lastPrice }}</td>
+                            <td>{{ i.impliedVolatility }}</td>
+                            <td>{{ i.expirationDate }}</td>
+                            <td>{{ i.typeOfOption }}</td>
+                            {% endfor %}
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br style="clear:both"/><br>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script>
+    const f = document.getElementById('form');
+    const q = document.getElementById('query');
+    const google = 'https://www.google.com/search?q=site%3A+';
+    const site = 'http://127.0.0.1:8000/options/';
+
+    // document.getElementById("test").innerHTML = typeof q + " " + q;
+
+    function submitted(event) {
+        event.preventDefault();
+        const url = site + q.value.replace(/\s+/g, ''); // const url = google + site + '+' + q.value;
+        const win = window.open(url, '_self');
+        win.focus();
+        // $route.reload();
+    }
+
+    f.addEventListener('submit', submitted);
+
+    var contract = ""
+    // Highlights Rows
+    $("#options tr").click(function () {
+        $(this).addClass('selected').siblings().removeClass('selected');
+        contract = $(this).find('td:first').html();
+        getGreeks();
+    });
+
+    function getGreeks() {
+        const site = 'http://127.0.0.1:8000/contract/';
+        url = site + contract
+        const win = window.open(url, '_blank');
+        win.focus();
+    }
+
+</script>
+{% endblock javascripts %}
+-->

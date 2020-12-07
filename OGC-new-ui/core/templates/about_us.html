@@ -1,0 +1,82 @@
+
+{% extends 'layouts/base.html' %}
+
+{% block title %} About Us {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+{% load static %}
+
+<center><h1> About Us </h1></center>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <h3>
+          We are a group of aspiring computer scientists from the <a target="_blank" href='https://illinois.edu/'>Univeristy of Illinois at Urbana-Champaign (UIUC)</a> with an interest in finance. This website was developed by Anakin, Brian, Gabe, Suyash, Eshaan, Joseph, and Sanya. We also had the help of the best project manager JAMES! Our reason for creating OgC was because we had to have some project for our <a target="_blank" href='http://cs196.cs.illinois.edu/'>CS 196 class</a>, but more importantly because we wanted an easier way to access and interperet the different options for a given stock.
+        </h3>
+      </div>
+      <div class="logo">
+        <a href="/" class="simple-text logo-normal">
+          <center>
+            <center><img src="{% static 'assets/img/CS_196.png' %}" alt="Home" width=80% height=23%></center>
+          </center>
+        </a>
+      </div>
+      <br><br>
+    </div>
+  </div>
+</div>
+
+<center><h1> Contact </h1></center> 
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="Emails">
+          <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px">
+            Gabe Aaron: <a href="mailto:gaaron2@illinois.edu"><u>Gaaron2@illinois.edu</u></a>
+          </p>
+          <br>
+          <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px">
+            Suyash Agrawal: <a href="mailto:suyasha2@illinois.edu"><u>Suyasha2@illinois.edu</u></a>
+          </p>
+          <br>
+          <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px">
+            Eshaan Bhattad: <a href="mailto:eshaan2@illinois.edu"><u>Eshaan2@illinois.edu</u></a>
+          </p>
+          <br>
+          <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px">
+            Anakin Dey: <a href="mailto:anakind2@illinois.edu"><u>Anakind2@illinois.edu</u></a>
+          </p>
+          <br>
+          <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px"> 
+            James Fleming: <a href="mailto:jflemi9@illinois.edu"><u>Jflemi9@illinois.edu</u></a>
+          </p>
+          <br>
+          <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px">
+            Joseph Kuang: <a href="mailto:jjkuang2@illinois.edu"><u>Jjkuang2@illinois.edu</u></a>
+          </p>
+          <br>
+          <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px">
+            Sanya Nema: <a href="mailto:snema2@illinois.edu"><u>Snema2@illinois.edu</u></a>
+          </p>
+          <br>
+          <p style="color:#FAFAFA; font-size: 20px; padding-left: 50px">
+            Brian Yoon: <a href="mailto:briancy2@illinois.edu"><u>Briancy2@illinois.edu</u></a>
+          </p>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

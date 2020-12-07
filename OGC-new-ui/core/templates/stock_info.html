@@ -1,0 +1,156 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Stock Info {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+{% load static %}
+
+<h1>Please Search A Stock First To See The Price Chart Graph:</h1>
+
+<!-- Searchbar to Choose Ticker -->
+<form role="search" id="form">
+  <input class="form-control" type="search" id="query" name="q" placeholder="Search Ticker Symbol..." aria-label="Search through site content" style="width:90%; float:left;">
+  <button class="btn btn-primary btn-round" onclick="loadDoc()" style="float:left; margin-left:1%; margin-top:-1.5px">
+    <i class="tim-icons icon-zoom-split"></i>
+      <path class="path1" d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z">
+      </path>
+  </button>
+  
+</form>
+
+<br style="clear:both"/><br>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <center><h2 class="title">Creators' Top Picks</h2></center>
+      </div>
+      <div class="card-body all-icons">
+        <div class="row">
+          <div class="font-icon-list col-lg-2 col-md-3 col-sm-4 col-xs-6 col-xs-6">
+            <div class="font-icon-detail">
+              <a target="_blank" href="http://127.0.0.1:8000/stock_info/googl">
+                <img src="//logo.clearbit.com/google.com">
+                <p style="font-size: 20px">Google</p>
+              </a>
+            </div>
+          </div>
+          <div class="font-icon-list col-lg-2 col-md-3 col-sm-4 col-xs-6 col-xs-6">
+            <div class="font-icon-detail">
+              <a target="_blank" href="http://127.0.0.1:8000/stock_info/amzn">
+                <img src="//logo.clearbit.com/amazon.com">
+                <p style="font-size: 20px">Amazon</p>
+              </a>
+            </div>
+          </div>
+          <div class="font-icon-list col-lg-2 col-md-3 col-sm-4 col-xs-6 col-xs-6">
+            <div class="font-icon-detail">
+              <a target="_blank" href="http://127.0.0.1:8000/stock_info/fb">
+                <img src="//logo.clearbit.com/facebook.com">
+                <p style="font-size: 20px">Facebook</p>
+              </a>
+            </div>
+          </div>
+          <div class="font-icon-list col-lg-2 col-md-3 col-sm-4 col-xs-6 col-xs-6">
+            <div class="font-icon-detail">
+              <a target="_blank" href="http://127.0.0.1:8000/stock_info/aapl">
+                <img src="//logo.clearbit.com/apple.com">
+                <p style="font-size: 20px">Apple</p>
+              </a>
+            </div>
+          </div>
+          <div class="font-icon-list col-lg-2 col-md-3 col-sm-4 col-xs-6 col-xs-6">
+            <div class="font-icon-detail">
+              <a target="_blank" href="http://127.0.0.1:8000/stock_info/tsla">
+                <img src="//logo.clearbit.com/tesla.com">
+                <p style="font-size: 20px">Tesla</p>
+              </a>
+            </div>
+          </div>
+          <div class="font-icon-list col-lg-2 col-md-3 col-sm-4 col-xs-6 col-xs-6">
+            <div class="font-icon-detail">
+              <a target="_blank" href="http://127.0.0.1:8000/stock_info/nflx">
+               <img src="//logo.clearbit.com/netflix.com">
+                <p style="font-size: 20px">Netflix</p>
+              </a>
+            </div>
+          </div>
+          <div class="font-icon-list col-lg-2 col-md-3 col-sm-4 col-xs-6 col-xs-6">
+            <div class="font-icon-detail">
+              <a target="_blank" href="http://127.0.0.1:8000/stock_info/spot">
+                <img src="//logo.clearbit.com/spotify.com">
+                <p style="font-size: 20px">Spotify</p>
+              </a>
+            </div>
+          </div>
+          <div class="font-icon-list col-lg-2 col-md-3 col-sm-4 col-xs-6 col-xs-6">
+            <div class="font-icon-detail">
+              <a target="_blank" href="http://127.0.0.1:8000/stock_info/cmg">
+               <img src="//logo.clearbit.com/chipotle.com">
+               <p style="font-size: 20px">Chipotle</p>
+             </a>
+            </div>
+          </div>
+          <div class="font-icon-list col-lg-2 col-md-3 col-sm-4 col-xs-6 col-xs-6">
+            <div class="font-icon-detail">
+              <a target="_blank" href="http://127.0.0.1:8000/stock_info/msft">
+                <img src="//logo.clearbit.com/microsoft.com">
+                <p style="font-size: 20px">Microsoft</p>
+              </a>
+            </div>
+          </div>
+          <div class="font-icon-list col-lg-2 col-md-3 col-sm-4 col-xs-6 col-xs-6">
+            <div class="font-icon-detail">
+              <a target="_blank" href="http://127.0.0.1:8000/stock_info/nke">
+               <img src="//logo.clearbit.com/nike.com">
+               <p style="font-size: 20px">Nike</p>
+             </a>
+            </div>
+          </div>
+          <div class="font-icon-list col-lg-2 col-md-3 col-sm-4 col-xs-6 col-xs-6">
+            <div class="font-icon-detail">
+              <a target="_blank" href="http://127.0.0.1:8000/stock_info/vz">
+                <img src="//logo.clearbit.com/verizon.com">
+                <p style="font-size: 20px">Verizon</p>
+              </a>
+            </div>
+          </div>
+          <div class="font-icon-list col-lg-2 col-md-3 col-sm-4 col-xs-6 col-xs-6">
+            <div class="font-icon-detail">
+              <a target="_blank" href="http://127.0.0.1:8000/stock_info/dis">
+               <img src="//logo.clearbit.com/disney.com">
+               <p style="font-size: 20px">Disney</p>
+             </a>     
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+     
+<br style="clear:both"/><br>     
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script>
+  const f = document.getElementById('form');
+  const q = document.getElementById('query');
+  const site = 'http://127.0.0.1:8000/stock_info/';
+
+  function submitted(event) {
+    event.preventDefault();
+    const url = site + q.value.replace(/\s+/g, '');
+    const win = window.open(url, '_self');
+    win.focus();
+  }
+
+  f.addEventListener('submit', submitted);
+</script>
+{% endblock javascripts %}
