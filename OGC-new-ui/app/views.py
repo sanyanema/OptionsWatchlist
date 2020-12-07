@@ -51,14 +51,11 @@ def index(request):
         current_price = price
         transactions = account.transaction.filter(contract_symbol=contract)
         quantity = sum([t.quantity for t in transactions])
-        profit = 0
-        if transactions[0].typ == "Call":
-            profit = sum([t.quantity * (current_price - t.purchase_price) for t in transactions])
-        if transactions[0].typ == "Put":
-            profit = sum([t.quantity * (current_price - t.purchase_price) for t in transactions])
+        profit = sum([t.quantity * (current_price - t.purchase_price) for t in transactions])
+        percent_profit = profit / sum([t.quantity * t.purchase_price for t in transactions])
         owned = quantity * current_price
         total += owned
-        holdings[contract] = {'current_price':current_price, 'quantity':quantity, 'percent':owned, 'profit':profit}
+        holdings[contract] = {'current_price':current_price, 'quantity':quantity, 'percent':owned, 'profit':profit, 'percent_profit':percent_profit}
     watchlist = account.watchlist.split(',')
     for holding in holdings:
         holdings[holding]['percent'] = round(holdings[holding]['percent'] / total, 4) * 100
