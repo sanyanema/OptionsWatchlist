@@ -176,12 +176,12 @@
                                 <td><h6>% of Portfolio</h6></td>
                                 {% for key, value in holdings.items %}
                                 <tr class="text-danger">
-                                    <td>{{ key }}</td>
+                                    <td><a href = "http://127.0.0.1:8000/contract/{{ key }}">{{ key }}</a></td>
                                     <td>{{ value.current_price }}</td>
-                                    <td>{{ value.percent.nothing }}%</td>
+                                    <td>{{ value.percent_profit }}%</td>
                                     <td>{{ value.profit }}</td>
                                     <td>{{ value.quantity }}</td>
-                                    <td>{{ value.percent }}%</td>
+                                    <td>{{ value.portfolio_share }}%</td>
                                     {% endfor %}
                                 </tr>
                                 </thead>

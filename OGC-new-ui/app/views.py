@@ -52,13 +52,14 @@ def index(request):
         transactions = account.transaction.filter(contract_symbol=contract)
         quantity = sum([t.quantity for t in transactions])
         profit = sum([t.quantity * (current_price - t.purchase_price) for t in transactions])
-        percent_profit = profit / sum([t.quantity * t.purchase_price for t in transactions])
+        initial_amount = sum([t.quantity * t.purchase_price for t in transactions])
+        percent_profit = profit
         owned = quantity * current_price
         total += owned
-        holdings[contract] = {'current_price':current_price, 'quantity':quantity, 'percent':owned, 'profit':profit, 'percent_profit':percent_profit}
+        holdings[contract] = {'current_price':current_price, 'quantity':quantity, 'portfolio_share':owned, 'profit':profit, 'percent_profit':percent_profit}
     watchlist = account.watchlist.split(',')
     for holding in holdings:
-        holdings[holding]['percent'] = round(holdings[holding]['percent'] / total, 4) * 100
+        holdings[holding]['portfolio_share'] = round(holdings[holding]['portfolio_share'] / total, 4) * 100
     inform = watchlistDisplay.getWatchListInfo(watchlist)
     return render(request, "index.html", {'trending': trending,
                                           'gainers': gainers,
@@ -235,7 +236,7 @@ def stock(request, ticker):
 
 def contract(request, contract):
     typ = ""
-    quantity = 0
+
     try:
         option = options_info.getOptionInfoFromContract(contract)
         ticker = option['ticker']
@@ -319,7 +320,7 @@ def contract(request, contract):
     account.full_clean()
 
     valuation = volatility_analysis.overorunder(ticker, date, optionType)[contract]
-
+    quantity = sum([t.quantity for t in account.transaction.filter(contract_symbol=contract)])
     return render(request, "contract.html", {
         'contract': contract,
         'delta': round(delta, 5),
