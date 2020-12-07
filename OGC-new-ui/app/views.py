@@ -26,6 +26,10 @@ def index(request):
     holdings = dict()
     total = 0
     for contract in contracts:
+        transactions = account.transaction.filter(contract_symbol=contract)
+        quantity = sum([t.quantity for t in transactions])
+        if quantity == 0:
+            continue
         option = options_info.getOptionInfoFromContract(contract)
         ticker = option['ticker']
         date = option['expirationDate']
@@ -49,11 +53,10 @@ def index(request):
                         strike=strike, source='yahoo')
             price = put.price
         current_price = price
-        transactions = account.transaction.filter(contract_symbol=contract)
-        quantity = sum([t.quantity for t in transactions])
+        
         profit = sum([t.quantity * (current_price - t.purchase_price) for t in transactions])
         initial_amount = sum([t.quantity * t.purchase_price for t in transactions])
-        percent_profit = profit
+        percent_profit = round(profit / initial_amount * 100, 1)
         owned = quantity * current_price
         total += owned
         holdings[contract] = {'current_price':current_price, 'quantity':quantity, 'portfolio_share':owned, 'profit':profit, 'percent_profit':percent_profit}
@@ -66,7 +69,8 @@ def index(request):
                                           'losers': losers,
                                           'watchlist': watchlist,
                                           'info': inform,
-                                          'holdings': holdings})
+                                          'holdings': holdings,
+                                          'balance': balance})
 
 
 @login_required(login_url="/login/")
