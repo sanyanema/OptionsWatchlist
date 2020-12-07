@@ -61,7 +61,7 @@ def index(request):
         holdings[contract] = {'current_price':current_price, 'quantity':quantity, 'percent':owned, 'profit':profit}
     watchlist = account.watchlist.split(',')
     for holding in holdings:
-        holding['percent'] = round(holdin['percent'] / total, 4) * 100
+        holdings[holding]['percent'] = round(holdings[holding]['percent'] / total, 4) * 100
     inform = watchlistDisplay.getWatchListInfo(watchlist)
     return render(request, "index.html", {'trending': trending,
                                           'gainers': gainers,

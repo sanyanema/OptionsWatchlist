@@ -168,21 +168,20 @@
                         <div class="table-responsive">
                             <table class="table tablesorter" id="">
                                 <thead class=" text-primary">
-                                <td><h6>Name</h6></td>
-                                <td><h6>Price</h6></td>
+                                <td><h6>Contract</h6></td>
+                                <td><h6>Current Price</h6></td>
                                 <td><h6>Change</h6></td>
-                                {% for key, value in info.items %}
-                                {% if value.change.color == "red"%}
+                                <td><h6>Profit</h6></td>
+                                <td><h6>Quantity</h6></td>
+                                <td><h6>% of Portfolio</h6></td>
+                                {% for key, value in holdings.items %}
                                 <tr class="text-danger">
                                     <td>{{ key }}</td>
-                                    <td>{{ value.price }}</td>
-                                    <td>{{ value.change.percent }}</td>
-                                    {% else %}
-                                <tr class="text-success">
-                                    <td>{{ key }}</td>
-                                    <td> {{ value.price }}</td>
-                                    <td>{{ value.change.percent }}</td>
-                                    {% endif %}
+                                    <td>{{ value.current_price }}</td>
+                                    <td>{{ value.percent.nothing }}%</td>
+                                    <td>{{ value.profit }}</td>
+                                    <td>{{ value.quantity }}</td>
+                                    <td>{{ value.percent }}%</td>
                                     {% endfor %}
                                 </tr>
                                 </thead>
