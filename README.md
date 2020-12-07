@@ -14,6 +14,9 @@ Group Members:
 
 Product: A mock options portfolio website that allows registered users to add tickers to their own personalized watchlist, experiment with mock money to purchase options, access basic stock information, and view the volatility of thousands of tickers in hopes to help educate younger investors about options and how to profitably trade them.
 
+For this project, we used a template for their CSS elements. That template can be found at the repository below:
+https://github.com/creativetimofficial/argon-dashboard-django
+
 Features: 
 - Dashboard:
 	- Personal Watchlist
