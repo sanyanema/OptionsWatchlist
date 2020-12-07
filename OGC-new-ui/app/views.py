@@ -22,20 +22,40 @@ def index(request):
     losers = trendingtickers.getBiggestLosers()
     account = Account.objects.get(user_id=request.user.get_username())
     balance = account.balance
-    contracts = {t.contract_symbol : t.contract_symbol for t in account.transaction.objects.all() }.values()
+    contracts = {t.contract_symbol : t.contract_symbol for t in account.transaction.all() }.values()
     holdings = dict()
-    for c in contracts:
-        current_price = 
-        transaction = account.transaction.get(contract_symbol=c)
-        last_price = transaction.purchase_price
+    total_share = sum([t.quantity * current_price for t in account.transaction.all()])
+    for contract in contracts:
+        option = options_info.getOptionInfoFromContract(contract)
+        ticker = option['ticker']
+        date = option['expirationDate']
+        optionType = option['type']
+        strike = option['strike']
+        index_number = re.search(r"\d", contract)
+        ticker = contract[0: index_number.start()]
+        stock = stock_info.StockInfo(ticker)
+        name = stock.name
+        if optionType == "Call":
+            dates = greek_options.dateConverter(date)
+            call = Call(ticker,
+                        d=dates[2], m=dates[1], y=dates[0],
+                        strike=strike, source='yahoo')
+            price = call.price
+        else:
+            dates = greek_options.dateConverter(date)
+            put = Put(ticker,
+                        d=dates[2], m=dates[1], y=dates[0],
+                        strike=strike, source='yahoo')
+            price = put.price
+        current_price = price
+        transactions = account.transaction.filter(contract_symbol=contract)
         quantity = sum([t.quantity for t in transactions])
-        percent = 
-        holdings[c] = {'current_price':current_price, 'last_price':last_price, 'quantity':quantity, 'percent':percent, 'profit':profit}
-    #     transactions = account.transaction.objects.filter(stock=stock)
-    #     put_quant = sum([q for transactions.quantity if transactions.typ = "Put"])
-    #     call_quant = sum([q for transactions.quantity if transactions.typ = "Call"])
-    #     holdings[stock] = {'put_quant':put_quant, 
-    # ticker, current price, Last price, percent change, quantity, percent in portfolio 
+        if transactions[0].typ == "Call":
+            profit = sum([t.quantity * (current_price - t.last_price) for t in transactions])
+        if transactions[0].typ == "Put":
+            profit = sum([t.quantity * (current_price - t.last_price) for t in transactions])
+        percent = quantity * current_price / (balance + total_share)
+        holdings[contract] = {'current_price':current_price, 'last_price':last_price, 'quantity':quantity, 'percent':percent, 'profit':profit}
 
     watchlist = account.watchlist.split(',')
     inform = watchlistDisplay.getWatchListInfo(watchlist)
@@ -43,7 +63,8 @@ def index(request):
                                           'gainers': gainers,
                                           'losers': losers,
                                           'watchlist': watchlist,
-                                          'info': inform})
+                                          'info': inform,
+                                          'holdings': holdings})
 
 
 @login_required(login_url="/login/")
