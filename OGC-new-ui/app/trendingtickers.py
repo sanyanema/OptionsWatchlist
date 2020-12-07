@@ -22,7 +22,6 @@ def getTrendingTickers():
         companies.append(name)
     
     change = soup.find('tbody', {'class': ''}).findAll('td', {'class': "data-col5 Ta(end) Pstart(20px)"})
-    print(change)
     # print(change[11])
     amounts = []
     for percent in change:
@@ -130,6 +129,6 @@ def getBiggestLosers():
 
 # print(getBiggestLosers())
 # print(getBiggestGainers())
-print(getTrendingTickers())
+# print(getTrendingTickers())
 
 # print(tickers_full)
