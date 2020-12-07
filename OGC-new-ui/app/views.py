@@ -24,7 +24,6 @@ def index(request):
     balance = account.balance
     contracts = {t.contract_symbol : t.contract_symbol for t in account.transaction.all() }.values()
     holdings = dict()
-    total_share = sum([t.quantity * current_price for t in account.transaction.all()])
     for contract in contracts:
         option = options_info.getOptionInfoFromContract(contract)
         ticker = option['ticker']
@@ -54,8 +53,8 @@ def index(request):
             profit = sum([t.quantity * (current_price - t.last_price) for t in transactions])
         if transactions[0].typ == "Put":
             profit = sum([t.quantity * (current_price - t.last_price) for t in transactions])
-        percent = quantity * current_price / (balance + total_share)
-        holdings[contract] = {'current_price':current_price, 'last_price':last_price, 'quantity':quantity, 'percent':percent, 'profit':profit}
+        percent = quantity * current_price / (balance + sum([t.quantity * current_price for t in account.transaction.all()]))
+        holdings[contract] = {'current_price':current_price, 'quantity':quantity, 'percent':percent, 'profit':profit}
 
     watchlist = account.watchlist.split(',')
     inform = watchlistDisplay.getWatchListInfo(watchlist)
