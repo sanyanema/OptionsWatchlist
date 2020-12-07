@@ -22,12 +22,13 @@ def index(request):
     losers = trendingtickers.getBiggestLosers()
     account = Account.objects.get(user_id=request.user.get_username())
     balance = account.balance
-    #contracts = { i.: i for i in account.transaction.objects.all() }.values()
+    contracts = {t.contract_symbol : t.contract_symbol for t in account.transaction.objects.all() }.values()
     holdings = dict()
     for c in contracts:
         current_price = 
-        last_price = 
-        quantity = 
+        transaction = account.transaction.get(contract_symbol=c)
+        last_price = transaction.purchase_price
+        quantity = sum([t.quantity for t in transactions])
         percent = 
         holdings[c] = {'current_price':current_price, 'last_price':last_price, 'quantity':quantity, 'percent':percent, 'profit':profit}
     #     transactions = account.transaction.objects.filter(stock=stock)
