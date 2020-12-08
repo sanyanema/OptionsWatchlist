@@ -1,9 +1,3 @@
-#from .models import Transaction, Account
-
-#https://finance.yahoo.com/quote/aapl
-
-#instead of aapl do 
-
 import requests
 from bs4 import BeautifulSoup
 
@@ -34,11 +28,6 @@ def getWatchListInfo(watchlist):
             if total_info is not None:
                 total_info = total_info.get_text()
                 info.append(total_info)
-    #print(info[0].split(")")[1]) # time the stock was updated
-    #time = [info[0].split(")")[1]]
-    # for i in range(len(info)):
-    #     time.append(info[i].split(")")[1])
-    # print(time)
     info = [i.split("(")[1] for i in info] # getting only the change from all of the info
     info = [i.split(")")[0] for i in info]
     watchlist_dict = {name[i]: {'change' : {'percent' : info[i], 'color' : getColor(info[i])}, 'price' : price[i]} for i in range(len(info))} # creating dict to map from name to change 
@@ -53,10 +42,4 @@ def getColor(num):
 
 
             
-
-watchlist = ["aapl", "zm", 'googl']
-empty = []
-print(getWatchListInfo(watchlist))
-# watchlist = ["aapl", "zm", 'googl']
-# print(getWatchListInfo(watchlist))
 
