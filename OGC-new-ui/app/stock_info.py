@@ -181,10 +181,3 @@ class StockInfo:
         plot_html = fig.to_html(full_html=False, include_plotlyjs=False)
 
         return plot_html
-
-
-# example code
-# stock = StockInfo("ZM")
-
-# html = stock.plot_hist()
-# print(len(html))
