@@ -12,3 +12,4 @@ whitenoise
 yfinance
 plotly
 wallstreet
+pandas
