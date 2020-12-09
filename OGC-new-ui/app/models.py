@@ -18,7 +18,7 @@ class Transaction(models.Model):
         return self.contract_symbol
 class Account(models.Model):
     user_id = models.CharField(max_length=200,unique=True,null=True)
-    balance = models.IntegerField(default=10000)
+    balance = models.IntegerField(default=1000000)
     transaction = models.ManyToManyField(Transaction, related_name="transaction", null=True, blank=True)
     watchlist = models.TextField(default="", blank=True)
     # needs fixes
