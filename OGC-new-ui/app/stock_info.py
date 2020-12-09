@@ -85,7 +85,6 @@ class StockInfo:
         """
         function creates FigureWidget showing candlestick and moving average plots of desired stock
         :return: void
-        # TODO: return figure object?
         """
         hist = self.get_hist()
 
