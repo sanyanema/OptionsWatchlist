@@ -200,7 +200,7 @@ def stock(request, ticker):
     isInWatchlist = ticker in startingwatchlist
 
     # Adding stock to watchlist functionality
-    if request.method == "GET":
+    if request.GET.get("watchlist") is not None:
         watchlistTicker = ticker
         account = Account.objects.get(user_id=request.user.get_username())
         if account.watchlist == "":
@@ -236,7 +236,6 @@ def stock(request, ticker):
         'ticker': ticker.upper(),
         'plot_html': plot_html,
         'image': image[0],
-        'watchlist': watchlist,
         'inWatchlist': isInWatchlist,
         'undervalued_growth' : undervalued_growth,
         'day_gainer' : day_gainer,

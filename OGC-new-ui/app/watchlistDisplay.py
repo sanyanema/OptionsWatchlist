@@ -51,12 +51,3 @@ def getColor(num):
     elif "+" in num:
         return "green"
 
-
-            
-
-watchlist = ["aapl", "zm", 'googl']
-empty = []
-print(getWatchListInfo(watchlist))
-# watchlist = ["aapl", "zm", 'googl']
-# print(getWatchListInfo(watchlist))
-
