@@ -58,7 +58,7 @@ def index(request):
             price = put.price
         current_price = price
         
-        profit = sum([t.quantity * (current_price - t.purchase_price) for t in transactions])
+        profit = round(sum([t.quantity * (current_price - t.purchase_price) for t in transactions]),2)
         owned = quantity * current_price
         total += owned
         balance += total
@@ -66,7 +66,7 @@ def index(request):
     watchlist = account.watchlist.split(',')
     total_contracts = 0
     for holding in holdings:
-        holdings[holding]['portfolio_share'] = round(holdings[holding]['portfolio_share'] / total, 6) * 100
+        holdings[holding]['portfolio_share'] = round(holdings[holding]['portfolio_share'] / total * 100, 2)
         total_contracts += holdings[holding]['quantity']
     inform = watchlistDisplay.getWatchListInfo(watchlist)
     balance = round(balance, 2)

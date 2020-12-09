@@ -9,3 +9,7 @@ dj-database-url
 python-decouple
 gunicorn
 whitenoise
+yfinance
+plotly
+wallstreet
+pandas

@@ -55,12 +55,12 @@
                         {% for key, value in info.items %}
                         {% if value.change.color == "red"%}
                         <tr class="text-danger">
-                            <td>{{ key }}</td>
+                            <td><a class="text-danger" href="http://127.0.0.1:8000/stock_info/{{ key }}">{{ value.name }}</a></td>
                             <td>{{ value.price }}</td>
                             <td>{{ value.change.percent }}</td>
                             {% else %}
                         <tr class="text-success">
-                            <td>{{ key }}</td>
+                            <td><a class="text-success" href="http://127.0.0.1:8000/stock_info/{{ key }}">{{ value.name }}</a></td>
                             <td> {{ value.price }}</td>
                             <td>{{ value.change.percent }}</td>
                             {% endif %}

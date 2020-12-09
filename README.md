@@ -12,7 +12,10 @@ Group Members:
 * Joseph (jjkuang2)
 * Sanya (snema2)
 
-Product: An options pricing website that allows registered users to add tickers to their own personalized watchlist, experiment with mock money to purchase options, access basic stock information, and view the volatility of thousands of tickers.
+Product: A mock options portfolio website that allows registered users to add tickers to their own personalized watchlist, experiment with mock money to purchase options, access basic stock information, and view the volatility of thousands of tickers in hopes to help educate younger investors about options and how to profitably trade them.
+
+For this project, we used a template for their CSS elements. That template can be found at the repository below:
+https://github.com/creativetimofficial/argon-dashboard-django
 
 Features: 
 - Dashboard:
@@ -38,8 +41,9 @@ Features:
 	- Hyperlink on each Option that Opens the Option's Contract Page
 - Contract Page:
 	- Basic Option Information
-	- 5 Unique Greeks for the Option
+	- Greeks information for the Option
 	- Form to Buy/Sell an Option Contract
+	- Built in Volatility analysis to determine whether a contract is overvalued, undervalued, or fair.
 - About Us Page:
 	- Information About Us
 	- Contact Information

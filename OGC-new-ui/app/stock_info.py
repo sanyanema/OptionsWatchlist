@@ -85,7 +85,6 @@ class StockInfo:
         """
         function creates FigureWidget showing candlestick and moving average plots of desired stock
         :return: void
-        # TODO: return figure object?
         """
         hist = self.get_hist()
 
@@ -181,10 +180,3 @@ class StockInfo:
         plot_html = fig.to_html(full_html=False, include_plotlyjs=False)
 
         return plot_html
-
-
-# example code
-# stock = StockInfo("ZM")
-
-# html = stock.plot_hist()
-# print(len(html))
