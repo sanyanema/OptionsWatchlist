@@ -10,3 +10,5 @@ python-decouple
 gunicorn
 whitenoise
 yfinance
+plotly
+wallstreet
